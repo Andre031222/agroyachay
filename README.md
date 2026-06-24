@@ -17,6 +17,13 @@
   <a href="https://github.com/Andre031222/agrocommish"><img src="https://img.shields.io/badge/Companion-AgroCommish-8E24AA?style=for-the-badge&logo=github&logoColor=white"></a>
 </p>
 
+<p>
+  <a href="https://github.com/Andre031222/agroyachay/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/Andre031222/agroyachay/ci.yml?style=flat-square&label=CI"></a>
+  <img src="https://img.shields.io/badge/Python-3.9%2B-64748b?style=flat-square&logo=python&logoColor=white">
+  <img src="https://img.shields.io/badge/React-18-38bdf8?style=flat-square&logo=react&logoColor=white">
+  <img src="https://img.shields.io/badge/PostgreSQL-14%2B-336791?style=flat-square&logo=postgresql&logoColor=white">
+</p>
+
 <p align="center">
   <em>
     <b>AgroYachay</b> (<i>yachay</i> — &ldquo;knowledge&rdquo; in Quechua) turns low-cost
@@ -135,6 +142,21 @@ ESP32 (DHT11 + FC-28)  ──WiFi/HTTP(JSON)──►  Flask 3 backend  ──�
   Axios REST client.
 - **External services** — Groq LLM API (intelligence layer) and OpenWeather API
   (current conditions and forecast).
+
+---
+
+## Screenshots
+
+<div align="center">
+<img src="docs/img/dashboard.png" width="82%" alt="Real-time monitoring dashboard"/>
+<br/><sub><b>Real-time monitoring</b> — live air/soil series, KPI cards and threshold alerts</sub>
+<br/><br/>
+<img src="docs/img/pest-diagnosis.png" width="82%" alt="LLM pest/disease diagnosis"/>
+<br/><sub><b>LLM pest/disease diagnosis</b> — structured verdict + Peru-specific management plan</sub>
+<br/><br/>
+<img src="docs/img/yield-prediction.png" width="82%" alt="Yield and revenue estimation"/>
+<br/><sub><b>Yield &amp; revenue estimation</b> — projected tonnage, expected revenue and confidence</sub>
+</div>
 
 ---
 
