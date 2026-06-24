@@ -7,7 +7,7 @@
 
 # AgroYachay
 
-### Open-source IoT &amp; Large-Language-Model platform for climate-smart decision support in smallholder Andean agriculture
+### Open-source IoT &amp; Large-Language-Model platform that turns farm telemetry into agronomic and economic decisions for Andean smallholders
 
 <p>
   <a href="https://doi.org/10.5281/zenodo.20829993"><img src="https://img.shields.io/badge/DOI-10.5281%2Fzenodo.20829993-1d4ed8?style=for-the-badge"></a>
@@ -242,7 +242,7 @@ If you use this software, please cite:
              Quispe Vargas, Renato and Iba{\~n}ez Quispe, Vladimiro and
              Torres Cruz, Fred},
   title   = {AgroYachay: An open-source IoT and large-language-model platform
-             for climate-smart decision support in smallholder Andean agriculture},
+             that turns farm telemetry into agronomic and economic decisions for Andean smallholders},
   year    = {2026},
   version = {1.0.0},
   doi     = {10.5281/zenodo.20829993},
