@@ -1,15 +1,57 @@
-# AgroYachay: An Open-Source IoT and Large-Language-Model Platform for Climate-Smart Decision Support in Smallholder Andean Agriculture
+<!-- ============================================================
+     HERO HEADER
+     ============================================================ -->
+<div align="center">
 
-**Status:** Manuscript in preparation for SoftwareX (Elsevier)
-**License:** [MIT](LICENSE)
-**Live demo:** [agroyachay.ginit.dev](https://agroyachay.ginit.dev)
-**Companion tool:** [AgroCommish](https://github.com/Andre031222/agrocommish) — ESP32 commissioning ([DOI 10.5281/zenodo.20655610](https://doi.org/10.5281/zenodo.20655610))
+<img src="https://raw.githubusercontent.com/Andre031222/agroyachay/main/frontend/public/favicon-512.png" height="100" alt="AgroYachay logo"/>
 
-[![DOI](https://img.shields.io/badge/DOI-pending-1d4ed8?style=flat-square)](https://doi.org/10.5281/zenodo.XXXXXXX)
-[![License: MIT](https://img.shields.io/badge/License-MIT-15803d?style=flat-square)](LICENSE)
-[![Python 3.9+](https://img.shields.io/badge/Python-3.9%2B-64748b?style=flat-square)](https://www.python.org/)
-[![React 18](https://img.shields.io/badge/React-18-38bdf8?style=flat-square)](https://react.dev/)
-[![PostgreSQL 14+](https://img.shields.io/badge/PostgreSQL-14%2B-336791?style=flat-square)](https://www.postgresql.org/)
+# AgroYachay
+
+### Open-source IoT &amp; Large-Language-Model platform for climate-smart decision support in smallholder Andean agriculture
+
+<p>
+  <a href="https://doi.org/10.5281/zenodo.20829993"><img src="https://img.shields.io/badge/DOI-10.5281%2Fzenodo.20829993-1d4ed8?style=for-the-badge"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-2E7D32?style=for-the-badge"></a>
+  <a href="https://agroyachay.ginit.dev"><img src="https://img.shields.io/badge/Live%20Demo-agroyachay.ginit.dev-0F2444?style=for-the-badge&logo=googlechrome&logoColor=white"></a>
+  <img src="https://img.shields.io/badge/SoftwareX-in%20preparation-616161?style=for-the-badge">
+  <a href="https://github.com/Andre031222/agrocommish"><img src="https://img.shields.io/badge/Companion-AgroCommish-8E24AA?style=for-the-badge&logo=github&logoColor=white"></a>
+</p>
+
+<p align="center">
+  <em>
+    <b>AgroYachay</b> (<i>yachay</i> — &ldquo;knowledge&rdquo; in Quechua) turns low-cost
+    <b>ESP32</b> telemetry into agronomic and economic decisions for Andean smallholders:<br>
+    real-time monitoring, <b>LLM</b> pest diagnosis, conversational agronomy, and
+    yield-&amp;-revenue forecasting &mdash; in a trilingual
+    <b>Spanish / Quechua / Aymara</b> interface.
+  </em>
+</p>
+
+<p align="center">
+  <a href="https://github.com/Andre031222/agroyachay">
+    <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=600&size=18&duration=2800&pause=900&color=2E7D32&center=true&vCenter=true&width=820&lines=ESP32+telemetry+-%3E+agronomic+%26+economic+decisions;LLM+vision+-%3E+pest+%2F+disease+diagnosis+with+local+treatments;transparent+yield+%26+revenue+estimation;trilingual+UI+-%3E+Spanish+%2F+Quechua+%2F+Aymara;cloud+counterpart+of+AgroCommish">
+  </a>
+</p>
+
+</div>
+
+---
+
+## Tech stack
+
+<div align="center">
+  <img height="46" alt="Python"     src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg">
+  <img height="46" alt="Flask"      src="https://raw.githubusercontent.com/devicons/devicon/master/icons/flask/flask-original.svg">
+  <img height="46" alt="PostgreSQL" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original.svg">
+  <img height="46" alt="React"      src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg">
+  <img height="46" alt="JavaScript" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg">
+  <img height="46" alt="TailwindCSS" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/tailwindcss/tailwindcss-original.svg">
+  <img height="46" alt="Vite"       src="https://raw.githubusercontent.com/devicons/devicon/master/icons/vitejs/vitejs-original.svg">
+  <img height="46" alt="Arduino"    src="https://raw.githubusercontent.com/devicons/devicon/master/icons/arduino/arduino-original.svg">
+  &nbsp;
+  <img src="https://img.shields.io/badge/Groq_LLM-F55036?style=flat-square&logo=groq&logoColor=white">
+  <img src="https://img.shields.io/badge/OpenWeather-EB6E4B?style=flat-square&logo=openweathermap&logoColor=white">
+</div>
 
 ---
 
@@ -36,21 +78,21 @@ between raw telemetry and a decision a smallholder can act on. A node reporting
 whether to irrigate today, whether the leaf spots on a plant are late blight, or
 whether the season will pay for its inputs.
 
-**AgroYachay** (*yachay*: "knowledge" in Quechua) closes that loop. It is an
-open-source web platform that turns low-cost ESP32 telemetry into actionable
-agronomic and economic decisions for Andean smallholders. ESP32 nodes streaming
-air temperature/humidity (DHT11) and soil moisture (FC-28) feed a Flask/PostgreSQL
-backend and a React dashboard with threshold alerts. A large-language-model layer
-(Groq) adds image-based pest/disease diagnosis with locally available treatments,
-a context-aware conversational agronomic assistant, and forecast-driven activity
-planning. A transparent factor model couples crop phenology, climate and parcel
-area with regional market prices to estimate yield, revenue and confidence, and
-the system exports PDF/Excel reports. The interface is trilingual (Spanish,
-Quechua, Aymara).
+**AgroYachay** closes that loop. It is an open-source web platform that turns
+low-cost ESP32 telemetry into actionable agronomic and economic decisions for
+Andean smallholders. ESP32 nodes streaming air temperature/humidity (DHT11) and
+soil moisture (FC-28) feed a Flask/PostgreSQL backend and a React dashboard with
+threshold alerts. A large-language-model layer (Groq) adds image-based
+pest/disease diagnosis with locally available treatments, a context-aware
+conversational agronomic assistant, and forecast-driven activity planning. A
+transparent factor model couples crop phenology, climate and parcel area with
+regional market prices to estimate yield, revenue and confidence, and the system
+exports PDF/Excel reports. The interface is trilingual (Spanish, Quechua, Aymara).
 
-AgroYachay is the cloud counterpart of the **AgroCommish** commissioning tool,
-which manufactures and provisions the ESP32 nodes; together they form an open,
-reproducible *device-to-decision* pipeline for low-resource agriculture.
+AgroYachay is the cloud counterpart of the **[AgroCommish](https://github.com/Andre031222/agrocommish)**
+commissioning tool, which manufactures and provisions the ESP32 nodes; together
+they form an open, reproducible *device-to-decision* pipeline for low-resource
+agriculture.
 
 ---
 
@@ -63,7 +105,7 @@ reproducible *device-to-decision* pipeline for low-resource agriculture.
 | LLM pest/disease diagnosis | Upload a leaf photo → vision LLM returns a structured verdict (disease, confidence, severity) and a Peru-specific management plan with product doses and an organic alternative |
 | Conversational agronomy | Context-aware assistant answers free-form questions conditioned on the farmer's crops, region and latest sensor values |
 | Forecast planning | Turns current conditions and the 5-day OpenWeather forecast into a risk level, weekly activity plan and optimal-day recommendations |
-| Yield & revenue estimation | Transparent multiplicative factor model (climate × phenology × area) × regional price → projected tonnage, expected revenue and a confidence score; no training data required |
+| Yield &amp; revenue estimation | Transparent multiplicative factor model (climate × phenology × area) × regional price → projected tonnage, expected revenue and a confidence score; no training data required |
 | Reporting | Executive, crop-status, financial and climate-impact reports as styled PDF (ReportLab) and Excel (OpenPyXL) |
 | Trilingual UI | Runtime locale dictionaries for Spanish (`es`), Quechua (`qu`) and Aymara (`ay`) |
 | Security | JWT auth (Flask-JWT-Extended) with bcrypt hashing and optional Google OAuth |
@@ -100,24 +142,24 @@ ESP32 (DHT11 + FC-28)  ──WiFi/HTTP(JSON)──►  Flask 3 backend  ──�
 
 ```text
 .
-├── backend/                     # Flask 3 + SQLAlchemy + PostgreSQL
-│   ├── main.py                  # app entry point (WSGI: main:app)
-│   ├── controllers/             # auth, sensores, cultivos, plagas, clima, asistente, superadmin
+├── backend/                      # Flask 3 + SQLAlchemy + PostgreSQL
+│   ├── main.py                   # app entry point (WSGI: main:app)
+│   ├── controllers/              # auth, sensores, cultivos, plagas, clima, asistente, superadmin
 │   ├── app/
-│   │   ├── routes/              # prediccion, asesoria, informes, insumos, marketplace
-│   │   ├── models/              # SQLAlchemy models
-│   │   ├── services/            # groq_service, weather_service, ml_prediccion
-│   │   └── utils/               # PDF/Excel reports, email
-│   ├── migrations/              # SQL schema + advanced-features migrations
-│   ├── scripts/setup_postgres.py# one-shot DB bootstrap (tables, indexes, admin)
-│   ├── tests/                   # pytest suite
+│   │   ├── routes/               # prediccion, asesoria, informes, insumos, marketplace
+│   │   ├── models/               # SQLAlchemy models
+│   │   ├── services/             # groq_service, weather_service, ml_prediccion
+│   │   └── utils/                # PDF/Excel reports, email
+│   ├── migrations/               # SQL schema + advanced-features migrations
+│   ├── scripts/setup_postgres.py # one-shot DB bootstrap (tables, indexes, admin)
+│   ├── tests/                    # pytest suite
 │   └── requirements.txt
-├── frontend/                    # React 18 + Vite + Tailwind
-│   ├── src/                     # components, pages, context, locales (es/qu/ay)
+├── frontend/                     # React 18 + Vite + Tailwind
+│   ├── src/                      # components, pages, context, locales (es/qu/ay)
 │   ├── public/
 │   └── package.json
-├── arduino/                     # ESP32 firmware (companion: AgroCommish)
-├── HARDWARE_SETUP.md            # wiring (ESP32 + DHT11 + FC-28)
+├── arduino/                      # ESP32 firmware (companion: AgroCommish)
+├── HARDWARE_SETUP.md             # wiring (ESP32 + DHT11 + FC-28)
 ├── CITATION.cff
 └── LICENSE
 ```
@@ -140,7 +182,7 @@ cp .env.example .env                              # then fill in DB + API keys
 # Set ADMIN_EMAIL / ADMIN_PASSWORD first; otherwise a random password is printed.
 python scripts/setup_postgres.py
 
-python main.py                                     # serves on http://localhost:5000
+python main.py                                    # serves on http://localhost:5000
 ```
 
 Required environment variables (see [`backend/.env.example`](backend/.env.example)):
@@ -172,12 +214,8 @@ Wiring is documented in [`HARDWARE_SETUP.md`](HARDWARE_SETUP.md).
 ## Tests
 
 ```bash
-cd backend
-pip install pytest
-python -m pytest          # 15 tests
-
-cd ../frontend
-npm run test:run          # 13 tests (Vitest)
+cd backend && python -m pytest          # 15 tests
+cd ../frontend && npm run test:run      # 13 tests (Vitest)
 ```
 
 ---
@@ -186,8 +224,8 @@ npm run test:run          # 13 tests (Vitest)
 
 | Project | Role | Reference |
 | --- | --- | --- |
-| **AgroCommish** | Manufactures and commissions ESP32 sensor nodes (detect → flash → provision → verify → activate) | [DOI 10.5281/zenodo.20655610](https://doi.org/10.5281/zenodo.20655610) |
-| **AgroYachay** (this repo) | Cloud decision platform: monitoring, LLM agronomy, yield/revenue, reports | this repository |
+| **[AgroCommish](https://github.com/Andre031222/agrocommish)** | Manufactures and commissions ESP32 sensor nodes (detect → flash → provision → verify → activate) | [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.20655610-1d4ed8?style=flat-square)](https://doi.org/10.5281/zenodo.20655610) |
+| **AgroYachay** (this repo) | Cloud decision platform: monitoring, LLM agronomy, yield/revenue, reports | [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.20829993-1d4ed8?style=flat-square)](https://doi.org/10.5281/zenodo.20829993) |
 
 Together they form a complete open device-to-decision pipeline on commodity
 hardware, with no per-seat licensing.
@@ -207,6 +245,7 @@ If you use this software, please cite:
              for climate-smart decision support in smallholder Andean agriculture},
   year    = {2026},
   version = {1.0.0},
+  doi     = {10.5281/zenodo.20829993},
   url     = {https://github.com/Andre031222/agroyachay}
 }
 ```
@@ -219,3 +258,7 @@ Citation metadata is also available in [`CITATION.cff`](CITATION.cff)
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
+
+<div align="center">
+<sub>Built for Andean smallholder agriculture · Universidad Nacional del Altiplano (UNAP), Puno, Peru</sub>
+</div>
