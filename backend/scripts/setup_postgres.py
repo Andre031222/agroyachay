@@ -99,6 +99,7 @@ def crear_tablas():
                 usuario_id INTEGER NOT NULL REFERENCES usuarios(id) ON DELETE CASCADE,
                 nombre VARCHAR(100) NOT NULL,
                 tipo_cultivo VARCHAR(100) NOT NULL,
+                variedad VARCHAR(100),
                 area_hectareas DECIMAL(10,2),
                 ubicacion VARCHAR(255),
                 fecha_siembra DATE,
