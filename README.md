@@ -233,6 +233,14 @@ Wiring is documented in [`HARDWARE_SETUP.md`](HARDWARE_SETUP.md).
 
 ---
 
+### Production deployment
+
+For a production setup (Gunicorn + Nginx + PostgreSQL, same-origin, HTTPS), see
+**[`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md)** — the guide behind the live demo at
+[agroyachay.ginit.dev](https://agroyachay.ginit.dev).
+
+---
+
 ## Tests
 
 ```bash
