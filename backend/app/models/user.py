@@ -17,6 +17,7 @@ class Usuario(db.Model):
     dni              = db.Column(db.String(20))
     username         = db.Column(db.String(100))
     google_id        = db.Column(db.String(255))
+    google_avatar    = db.Column(db.Text)
     region           = db.Column(db.String(100))
     provincia        = db.Column(db.String(100))
     ultimo_acceso    = db.Column(db.DateTime)

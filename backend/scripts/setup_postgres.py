@@ -85,6 +85,7 @@ def crear_tablas():
                 activo BOOLEAN NOT NULL DEFAULT TRUE,
                 google_id VARCHAR(255) UNIQUE,
                 avatar TEXT,
+                google_avatar TEXT,
                 fecha_registro TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
                 ultimo_acceso TIMESTAMP
             )
