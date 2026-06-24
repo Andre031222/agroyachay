@@ -1,0 +1,241 @@
+@font-face {
+  font-family: 'Geist';
+  src: url('../fonts/Geist-Variable.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Geist Mono';
+  src: url('../fonts/GeistMono-Variable.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.safe-area-pb {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+:root {
+  --font-sans: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'Geist Mono', 'Menlo', 'Consolas', monospace;
+
+  --text-display: clamp(2.5rem, 5vw, 4rem);
+  --text-h1:      clamp(1.875rem, 3.5vw, 3rem);
+  --text-h2:      clamp(1.5rem, 2.5vw, 2rem);
+  --text-h3:      1.25rem;
+  --text-body:    1rem;
+  --text-sm:      0.875rem;
+  --text-xs:      0.75rem;
+  --text-2xs:     0.6875rem;
+
+  --weight-regular:   400;
+  --weight-medium:    500;
+  --weight-semibold:  600;
+  --weight-bold:      700;
+  --weight-extrabold: 800;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+  font-weight: var(--weight-regular);
+  line-height: 1.6;
+  letter-spacing: -0.01em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f9fafb;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dark body {
+  background-color: #111827;
+  color: #f3f4f6;
+}
+
+code, kbd, pre, samp {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  letter-spacing: 0;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 100px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #374151;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #4b5563;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.shimmer {
+  animation: shimmer 2s infinite;
+  background: linear-gradient(to right, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%);
+  background-size: 1000px 100%;
+}
+
+.glass-effect {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.card-hover {
+  transition: all 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.btn-primary {
+  @apply bg-emerald-600 text-white px-6 py-3 rounded-xl font-semibold
+         hover:bg-emerald-700 active:scale-95 transition-all duration-200
+         shadow-sm hover:shadow-md;
+}
+
+.btn-secondary {
+  @apply bg-white text-emerald-700 border-2 border-emerald-600
+         px-6 py-3 rounded-xl font-semibold hover:bg-emerald-600
+         hover:text-white active:scale-95 transition-all duration-200;
+}
+
+.input-field {
+  @apply w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-xl
+         bg-white dark:bg-gray-900
+         focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20
+         focus:outline-none transition-colors;
+}
+
+.section-title {
+  @apply text-h2 font-semibold text-gray-900 dark:text-white mb-6;
+}
+
+:root {
+  --transition-speed: 0.3s;
+}
+
+.dark {
+  --tw-prose-body: #e5e7eb;
+  --tw-prose-headings: #f9fafb;
+}
+
+.dark .glass-effect {
+  background: rgba(31, 41, 55, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(75, 85, 99, 0.3);
+}
+
+.dark .card-hover:hover {
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5),
+              0 0 20px rgba(99, 102, 241, 0.3);
+}
+
+.dark .shimmer {
+  background: linear-gradient(to right, #1f2937 0%, #374151 20%, #1f2937 40%, #1f2937 100%);
+  background-size: 1000px 100%;
+}
+
+@keyframes dark-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(99, 102, 241, 0);
+  }
+}
+
+.dark .pulse-dark {
+  animation: dark-pulse 2s infinite;
+}
+
+.dark .glow-effect {
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.5),
+              0 0 40px rgba(99, 102, 241, 0.3),
+              0 0 60px rgba(99, 102, 241, 0.1);
+}
+
+.dark input:focus,
+.dark textarea:focus,
+.dark select:focus {
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3);
+}
+
+.dark code {
+  background-color: #1f2937;
+  color: #a5b4fc;
+  padding: 0.2em 0.4em;
+  border-radius: 0.25rem;
+}
+
+.dark ::selection {
+  background-color: rgba(99, 102, 241, 0.4);
+  color: #ffffff;
+}
+
+.dark ::placeholder {
+  color: #6b7280;
+  opacity: 1;
+}
+
+.dark .shadow-glow {
+  box-shadow: 0 0 15px rgba(99, 102, 241, 0.4);
+}
+
+.dark .shadow-glow-green {
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
+}
+
+/* Bordes reducidos en todo el panel autenticado (DashboardLayout).
+   1) Reduce cualquier esquina redondeada a 2px. */
+.panel-tight [class*="rounded"] {
+  border-radius: 0.125rem !important;
+}
+/* 2) Restaura los elementos circulares/píldora (íconos, badges, dots,
+      indicador del Sidebar) — la regla posterior gana por orden. */
+.panel-tight [class*="rounded-full"],
+.panel-tight [class*="rounded-r-full"],
+.panel-tight [class*="rounded-l-full"],
+.panel-tight [class*="rounded-t-full"],
+.panel-tight [class*="rounded-b-full"] {
+  border-radius: 9999px !important;
+}

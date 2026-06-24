@@ -1,0 +1,43 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "AgroYachay: An open-source IoT and large-language-model platform for climate-smart decision support in smallholder Andean agriculture"
+type: software
+version: 1.0.0
+date-released: 2026-06-24
+license: MIT
+repository-code: "https://github.com/Andre031222/agroyachay"
+doi: "10.5281/zenodo.XXXXXXX"
+authors:
+  - family-names: "Vilca Solorzano"
+    given-names: "Richar Andre"
+    email: "andrevilcasolorzano@gmail.com"
+    orcid: "https://orcid.org/0009-0003-2385-5263"
+    affiliation: "Universidad Nacional del Altiplano, Puno, Peru"
+  - family-names: "Yana Yucra"
+    given-names: "Dina Maribel"
+    email: "maribelbel201314@gmail.com"
+    orcid: "https://orcid.org/0009-0003-6218-2735"
+    affiliation: "Universidad Nacional del Altiplano, Puno, Peru"
+  - family-names: "Quispe Vargas"
+    given-names: "Renato"
+    email: "72535253@est.unap.edu.pe"
+    orcid: "https://orcid.org/0009-0005-2367-7852"
+    affiliation: "Universidad Nacional del Altiplano, Puno, Peru"
+  - family-names: "Ibañez Quispe"
+    given-names: "Vladimiro"
+    email: "vibanez@unap.edu.pe"
+    orcid: "https://orcid.org/0000-0002-0277-4945"
+    affiliation: "Universidad Nacional del Altiplano, Puno, Peru"
+  - family-names: "Torres Cruz"
+    given-names: "Fred"
+    email: "ftorres@unap.edu.pe"
+    orcid: "https://orcid.org/0000-0003-0834-6834"
+    affiliation: "Universidad Nacional del Altiplano, Puno, Peru"
+keywords:
+  - agricultural IoT
+  - large language models
+  - precision agriculture
+  - crop yield prediction
+  - decision support system
+  - Andean smallholder farming
+  - ESP32

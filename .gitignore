@@ -1,0 +1,68 @@
+# Sensibles
+.env
+.env.*
+!.env.example
+
+# Asistentes / herramientas locales (no se publican)
+.claude/
+.pytest_cache/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+ENV/
+env/
+*.egg-info/
+dist/
+build/
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnp/
+.pnp.js
+coverage/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Uploads y artefactos generados
+uploads/plagas/*.jpg
+uploads/plagas/*.png
+uploads/plagas/*.jpeg
+uploads/informes/*.pdf
+uploads/informes/*.xlsx
+uploads/temp_charts/
+
+# Logs
+logs/
+*.log
+
+# Base de datos local (solo archivos locales, no el esquema)
+*.db
+*.sqlite
+*.sqlite3
+
+# Runtime uploads (fotos subidas, informes generados)
+backend/uploads/*
+!backend/uploads/plagas/
+!backend/uploads/informes/
+backend/uploads/plagas/*
+backend/uploads/informes/*
+!backend/uploads/**/.gitkeep
