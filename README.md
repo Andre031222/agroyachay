@@ -7,7 +7,7 @@
 
 # AgroYachay
 
-### Open-source IoT &amp; Large-Language-Model platform that turns farm telemetry into agronomic and economic decisions for Andean smallholders
+### Open-source IoT &amp; Large-Language-Model platform supporting agronomic and economic decision-making for Andean smallholders
 
 <p>
   <a href="https://doi.org/10.5281/zenodo.20829993"><img src="https://img.shields.io/badge/DOI-10.5281%2Fzenodo.20829993-1d4ed8?style=for-the-badge"></a>
@@ -70,6 +70,7 @@
 | Dina Maribel Yana-Yucra | Universidad Nacional del Altiplano de Puno, Peru |
 | Renato Quispe-Vargas | Universidad Nacional del Altiplano de Puno, Peru |
 | Vladimiro Ibañez-Quispe | Universidad Nacional del Altiplano de Puno, Peru |
+| Eduardo Leuman Fuentes-Navarro | Universidad Nacional Agraria La Molina, Lima, Peru |
 | Fred Torres-Cruz | Universidad Nacional del Altiplano de Puno, Peru |
 
 **Faculty:** Ingeniería Estadística e Informática — Universidad Nacional del Altiplano (UNAP), Puno, Peru
@@ -270,9 +271,9 @@ If you use this software, please cite:
 @software{vilca2026agroyachay,
   author  = {Vilca Solorzano, Richar Andre and Yana Yucra, Dina Maribel and
              Quispe Vargas, Renato and Iba{\~n}ez Quispe, Vladimiro and
-             Torres Cruz, Fred},
+             Fuentes Navarro, Eduardo Leuman and Torres Cruz, Fred},
   title   = {AgroYachay: An open-source IoT and large-language-model platform
-             that turns farm telemetry into agronomic and economic decisions for Andean smallholders},
+             supporting agronomic and economic decision-making for Andean smallholders},
   year    = {2026},
   version = {1.0.0},
   doi     = {10.5281/zenodo.20829993},
