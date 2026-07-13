@@ -66,12 +66,11 @@
 
 | Name | Institution |
 | --- | --- |
+| Fred Torres-Cruz | Universidad Nacional del Altiplano de Puno; Universidad Nacional Agraria La Molina, Lima, Peru |
 | Richar Andre Vilca-Solorzano | Universidad Nacional del Altiplano de Puno, Peru |
 | Dina Maribel Yana-Yucra | Universidad Nacional del Altiplano de Puno, Peru |
-| Renato Quispe-Vargas | Universidad Nacional del Altiplano de Puno, Peru |
 | Vladimiro Ibañez-Quispe | Universidad Nacional del Altiplano de Puno, Peru |
 | Eduardo Leuman Fuentes-Navarro | Universidad Nacional Agraria La Molina, Lima, Peru |
-| Fred Torres-Cruz | Universidad Nacional del Altiplano de Puno, Peru |
 
 **Faculty:** Ingeniería Estadística e Informática — Universidad Nacional del Altiplano (UNAP), Puno, Peru
 
@@ -269,9 +268,9 @@ If you use this software, please cite:
 
 ```bibtex
 @software{vilca2026agroyachay,
-  author  = {Vilca Solorzano, Richar Andre and Yana Yucra, Dina Maribel and
-             Quispe Vargas, Renato and Iba{\~n}ez Quispe, Vladimiro and
-             Fuentes Navarro, Eduardo Leuman and Torres Cruz, Fred},
+  author  = {Torres Cruz, Fred and Vilca Solorzano, Richar Andre and
+             Yana Yucra, Dina Maribel and Iba{\~n}ez Quispe, Vladimiro and
+             Fuentes Navarro, Eduardo Leuman},
   title   = {AgroYachay: An open-source IoT and large-language-model platform
              supporting agronomic and economic decision-making for Andean smallholders},
   year    = {2026},
