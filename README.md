@@ -66,7 +66,7 @@
 
 | Name | Institution |
 | --- | --- |
-| Fred Torres-Cruz | Universidad Nacional del Altiplano de Puno; Universidad Nacional Agraria La Molina, Lima, Peru |
+| Fred Torres-Cruz | Universidad Nacional Agraria La Molina, Lima, Peru |
 | Richar Andre Vilca-Solorzano | Universidad Nacional del Altiplano de Puno, Peru |
 | Dina Maribel Yana-Yucra | Universidad Nacional del Altiplano de Puno, Peru |
 | Vladimiro Ibañez-Quispe | Universidad Nacional del Altiplano de Puno, Peru |
