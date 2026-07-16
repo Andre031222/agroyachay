@@ -10,7 +10,7 @@
 ### Open-source IoT &amp; Large-Language-Model platform supporting agronomic and economic decision-making for Andean smallholders
 
 <p>
-  <a href="https://doi.org/10.5281/zenodo.20829993"><img src="https://img.shields.io/badge/DOI-10.5281%2Fzenodo.20829993-1d4ed8?style=for-the-badge"></a>
+  <a href="https://doi.org/10.5281/zenodo.20829992"><img src="https://img.shields.io/badge/DOI-10.5281%2Fzenodo.20829992-1d4ed8?style=for-the-badge"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-2E7D32?style=for-the-badge"></a>
   <a href="https://agroyachay.ginit.dev"><img src="https://img.shields.io/badge/Live%20Demo-agroyachay.ginit.dev-0F2444?style=for-the-badge&logo=googlechrome&logoColor=white"></a>
   <img src="https://img.shields.io/badge/SoftwareX-in%20preparation-616161?style=for-the-badge">
@@ -253,7 +253,7 @@ cd ../frontend && npm run test:run      # 13 tests (Vitest)
 | Project | Role | Reference |
 | --- | --- | --- |
 | **[AgroCommish](https://github.com/Andre031222/agrocommish)** | Manufactures and commissions ESP32 sensor nodes (detect → flash → provision → verify → activate) | [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.20655610-1d4ed8?style=flat-square)](https://doi.org/10.5281/zenodo.20655610) |
-| **AgroYachay** (this repo) | Cloud decision platform: monitoring, LLM agronomy, yield/revenue, reports | [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.20829993-1d4ed8?style=flat-square)](https://doi.org/10.5281/zenodo.20829993) |
+| **AgroYachay** (this repo) | Cloud decision platform: monitoring, LLM agronomy, yield/revenue, reports | [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.20829992-1d4ed8?style=flat-square)](https://doi.org/10.5281/zenodo.20829992) |
 
 Together they form a complete open device-to-decision pipeline on commodity
 hardware, with no per-seat licensing.
@@ -273,7 +273,7 @@ If you use this software, please cite:
              supporting agronomic and economic decision-making for Andean smallholders},
   year    = {2026},
   version = {1.0.1},
-  doi     = {10.5281/zenodo.20829993},
+  doi     = {10.5281/zenodo.20829992},
   url     = {https://github.com/Andre031222/agroyachay}
 }
 ```
