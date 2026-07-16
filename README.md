@@ -64,15 +64,13 @@
 
 ## Authors
 
-| Name | Institution |
+| Name | Affiliation |
 | --- | --- |
-| Fred Torres-Cruz | Universidad Nacional Agraria La Molina, Lima, Peru |
-| Richar Andre Vilca-Solorzano | Universidad Nacional del Altiplano de Puno, Peru |
-| Dina Maribel Yana-Yucra | Universidad Nacional del Altiplano de Puno, Peru |
-| Vladimiro Ibañez-Quispe | Universidad Nacional del Altiplano de Puno, Peru |
-| Eduardo Leuman Fuentes-Navarro | Universidad Nacional Agraria La Molina, Lima, Peru |
-
-**Faculty:** Ingeniería Estadística e Informática — Universidad Nacional del Altiplano (UNAP), Puno, Peru
+| Fred Torres-Cruz | Doctoral Program in Sustainable Agriculture, Universidad Nacional Agraria La Molina, Lima, Peru |
+| Richar Andre Vilca-Solorzano <sub>✉ corresponding</sub> | Department of Statistical and Informatics Engineering, Universidad Nacional del Altiplano (UNAP), Puno, Peru |
+| Dina Maribel Yana-Yucra | Department of Statistical and Informatics Engineering, Universidad Nacional del Altiplano (UNAP), Puno, Peru |
+| Vladimiro Ibañez-Quispe | Department of Statistical and Informatics Engineering, Universidad Nacional del Altiplano (UNAP), Puno, Peru |
+| Eduardo Leuman Fuentes-Navarro | Faculty of Animal Science, Universidad Nacional Agraria La Molina, Lima, Peru |
 
 ---
 
@@ -274,7 +272,7 @@ If you use this software, please cite:
   title   = {AgroYachay: An open-source IoT and large-language-model platform
              supporting agronomic and economic decision-making for Andean smallholders},
   year    = {2026},
-  version = {1.0.0},
+  version = {1.0.1},
   doi     = {10.5281/zenodo.20829993},
   url     = {https://github.com/Andre031222/agroyachay}
 }

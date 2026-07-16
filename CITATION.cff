@@ -2,8 +2,8 @@ cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
 title: "AgroYachay: An open-source IoT and large-language-model platform supporting agronomic and economic decision-making for Andean smallholders"
 type: software
-version: 1.0.0
-date-released: 2026-06-24
+version: 1.0.1
+date-released: 2026-07-15
 license: MIT
 repository-code: "https://github.com/Andre031222/agroyachay"
 doi: "10.5281/zenodo.20829993"
@@ -12,7 +12,7 @@ authors:
     given-names: "Fred"
     email: "20260957@lamolina.pe"
     orcid: "https://orcid.org/0000-0003-0834-6834"
-    affiliation: "Universidad Nacional Agraria La Molina, Lima, Peru"
+    affiliation: "Doctoral Program in Sustainable Agriculture, Universidad Nacional Agraria La Molina, Lima, Peru"
   - family-names: "Vilca Solorzano"
     given-names: "Richar Andre"
     email: "andrevilcasolorzano@gmail.com"
@@ -32,7 +32,7 @@ authors:
     given-names: "Eduardo Leuman"
     email: "efuentes@lamolina.edu.pe"
     orcid: "https://orcid.org/0000-0001-9351-9853"
-    affiliation: "Universidad Nacional Agraria La Molina, Lima, Peru"
+    affiliation: "Faculty of Animal Science, Universidad Nacional Agraria La Molina, Lima, Peru"
 keywords:
   - agricultural IoT
   - large language models
