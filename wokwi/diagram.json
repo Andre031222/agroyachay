@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "author": "R. Andre Vilca Solorzano",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 0, "left": 0, "attrs": {} },
+    { "type": "wokwi-dht22", "id": "dht", "top": -110, "left": 200,
+      "attrs": { "temperature": "17", "humidity": "68" } },
+    { "type": "wokwi-potentiometer", "id": "soil", "top": 90, "left": 200,
+      "attrs": { "value": "1600" } },
+    { "type": "wokwi-led", "id": "led", "top": -60, "left": -100, "attrs": { "color": "green" } },
+    { "type": "wokwi-resistor", "id": "r1", "top": -60, "left": -160, "attrs": { "value": "220" } }
+  ],
+  "connections": [
+    [ "dht:VCC", "esp:3V3", "red", [] ],
+    [ "dht:GND", "esp:GND.1", "black", [] ],
+    [ "dht:SDA", "esp:15", "green", [] ],
+
+    [ "soil:VCC", "esp:3V3", "red", [] ],
+    [ "soil:GND", "esp:GND.2", "black", [] ],
+    [ "soil:SIG", "esp:34", "blue", [] ],
+
+    [ "esp:2", "r1:1", "yellow", [] ],
+    [ "r1:2", "led:A", "yellow", [] ],
+    [ "led:C", "esp:GND.3", "black", [] ]
+  ],
+  "dependencies": {}
+}

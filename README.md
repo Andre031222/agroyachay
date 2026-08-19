@@ -87,9 +87,11 @@ whether the season will pay for its inputs.
 low-cost ESP32 telemetry into actionable agronomic and economic decisions for
 Andean smallholders. ESP32 nodes streaming air temperature/humidity (DHT11) and
 soil moisture (FC-28) feed a Flask/PostgreSQL backend and a React dashboard with
-threshold alerts. A large-language-model layer (Groq) adds image-based
-pest/disease diagnosis with locally available treatments, a context-aware
-conversational agronomic assistant, and forecast-driven activity planning. A
+threshold alerts. Pest/disease diagnosis runs **on-device** through a
+self-hosted open vision model (qwen2.5-VL via Ollama), so images are never sent
+to a third-party API; a cloud text LLM adds a context-aware conversational
+agronomic assistant and forecast-driven activity planning, with locally
+available treatments. A
 transparent factor model couples crop phenology, climate and parcel area with
 regional market prices to estimate yield, revenue and confidence, and the system
 exports PDF/Excel reports. The interface is trilingual (Spanish, Quechua, Aymara).
@@ -138,8 +140,9 @@ ESP32 (DHT11 + FC-28)  ──WiFi/HTTP(JSON)──►  Flask 3 backend  ──�
   15 normalised tables.
 - **Frontend** — React 18 SPA (~13,000 LOC) with Tailwind CSS, Recharts and an
   Axios REST client.
-- **External services** — Groq LLM API (intelligence layer) and OpenWeather API
-  (current conditions and forecast).
+- **Intelligence layer** — self-hosted open vision model (Ollama) for pest
+  diagnosis (on-device, private) plus a cloud text LLM; OpenWeather API for
+  current conditions and forecast.
 
 ---
 
@@ -242,9 +245,18 @@ For a production setup (Gunicorn + Nginx + PostgreSQL, same-origin, HTTPS), see
 ## Tests
 
 ```bash
-cd backend && python -m pytest          # 15 tests
+cd backend && python -m pytest          # 26 tests (hardware-free)
 cd ../frontend && npm run test:run      # 13 tests (Vitest)
 ```
+
+---
+
+## Documentation
+
+- [`HARDWARE_SETUP.md`](HARDWARE_SETUP.md) — wiring, firmware, calibration ([Spanish](HARDWARE_SETUP.es.md))
+- [`docs/API.md`](docs/API.md) — REST API reference
+- [`wokwi/README.md`](wokwi/README.md) — run the sensing node in the browser, **no hardware needed**
+- [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) — production deployment guide
 
 ---
 

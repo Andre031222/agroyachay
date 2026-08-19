@@ -1,18 +1,20 @@
 # Hardware Setup — ESP32 + DHT11 + FC-28
 
+> Spanish version: [`HARDWARE_SETUP.es.md`](HARDWARE_SETUP.es.md)
+
 ---
 
-## Componentes
+## Components
 
-| Componente | Modelo | Funcion |
+| Component | Model | Function |
 |---|---|---|
-| Microcontrolador | ESP32 DevKit v1 | Procesa sensores y envia datos por WiFi |
-| Sensor aire | DHT11 | Temperatura 0-50 C, humedad 20-90% RH |
-| Sensor suelo | FC-28 + LM393 | Humedad del suelo por conductividad |
+| Microcontroller | ESP32 DevKit v1 | Reads sensors and sends data over WiFi |
+| Air sensor | DHT11 | Temperature 0–50 °C, humidity 20–90% RH |
+| Soil sensor | FC-28 + LM393 | Soil moisture by conductivity |
 
 ---
 
-## Conexiones
+## Wiring
 
 ```
 DHT11
@@ -22,63 +24,64 @@ DHT11
 
 FC-28
   VCC  -> 3.3V
-  AO   -> GPIO 34  (ADC, solo entrada)
+  AO   -> GPIO 34  (ADC, input only)
   GND  -> GND
 
-LED integrado -> GPIO 2
-Boton BOOT    -> GPIO 0
+Built-in LED -> GPIO 2
+BOOT button  -> GPIO 0
 ```
 
-Usar siempre 3.3V. El ESP32 no tolera 5V en sus pines GPIO.
+Always use 3.3 V. The ESP32 GPIO pins are not 5 V tolerant.
 
 ---
 
 ## Firmware
 
-Archivo: `arduino/agrovision_provisioning/agrovision_provisioning.ino`
+File: `arduino/agrovision_provisioning/agrovision_provisioning.ino`
 
-Librerias necesarias (instalar desde el Gestor de librerias de Arduino IDE):
+Required libraries (install from the Arduino IDE Library Manager):
 - ArduinoJson 6.x
 - DHT sensor library (Adafruit)
-- Adafruit Unified Sensor (se instala como dependencia)
+- Adafruit Unified Sensor (installed as a dependency)
 
-Configuracion de compilacion:
-- Placa: ESP32 Dev Module
+Build configuration:
+- Board: ESP32 Dev Module
 - Upload Speed: 921600
 - Flash Size: 4MB
 - Partition Scheme: Default
 
 ---
 
-## Primer arranque
+## First boot
 
-1. El ESP32 crea una red WiFi abierta `AgroVision-Setup-XXXX`
-2. Conectar el celular o PC a esa red
-3. El portal de configuracion abre en `http://192.168.4.1`
-4. Seleccionar la red WiFi, ingresar contrasena y la URL del servidor
-5. El ESP32 guarda las credenciales en NVS y se reinicia
-6. Comienza a enviar lecturas cada 10 segundos
-
----
-
-## Reset de fabrica
-
-Mantener presionado el boton BOOT 5 segundos. El LED parpadeara 5 veces y el ESP32 borrara las credenciales y volvera al modo Setup.
+1. The ESP32 creates an open WiFi network `AgroVision-Setup-XXXX`.
+2. Connect a phone or PC to that network.
+3. The configuration portal opens at `http://192.168.4.1`.
+4. Select the WiFi network, enter its password and the server URL.
+5. The ESP32 stores the credentials in NVS and reboots.
+6. It starts sending readings every 10 seconds.
 
 ---
 
-## Indicadores LED (GPIO 2)
+## Factory reset
 
-| Patron | Significado |
+Hold the BOOT button for 5 seconds. The LED blinks 5 times, the ESP32 clears the
+stored credentials and returns to Setup mode.
+
+---
+
+## LED indicators (GPIO 2)
+
+| Pattern | Meaning |
 |---|---|
-| Parpadeo muy rapido (~150ms) | Modo Setup activo |
-| Parpadeo lento (~500ms) | Intentando conectar al WiFi |
-| 1 parpadeo corto cada 10s | Enviando datos correctamente |
-| 3 parpadeos rapidos | Error al enviar datos |
+| Very fast blink (~150 ms) | Setup mode active |
+| Slow blink (~500 ms) | Trying to connect to WiFi |
+| One short blink every 10 s | Sending data correctly |
+| Three fast blinks | Error while sending data |
 
 ---
 
-## Formato JSON enviado al backend
+## JSON payload sent to the backend
 
 ```json
 {
@@ -90,78 +93,82 @@ Mantener presionado el boton BOOT 5 segundos. El LED parpadeara 5 veces y el ESP
 }
 ```
 
-Endpoint receptor: `POST /api/sensores/lectura`
+Receiving endpoint: `POST /api/sensores/lectura`
 
 ---
 
-## Calibracion DHT11
+## DHT11 calibration
 
-El DHT11 no es calibrable por software mas alla de un offset fijo. Si el valor real difiere del sensor, ajustar en el firmware:
+The DHT11 cannot be calibrated in software beyond a fixed offset. If the true
+value differs from the sensor reading, adjust it in the firmware:
 
 ```cpp
 temp    = dht.readTemperature() - 2.0;
 humAire = dht.readHumidity()   - 5.0;
 ```
 
-Verificar lecturas abriendo el Monitor Serie (115200 baudios). El ESP32 imprime:
+Check the readings by opening the Serial Monitor (115200 baud). The ESP32 prints:
 ```
 [DATA] Temp=24.0 C  HumAire=65%  HumSuelo=23%
 ```
 
 ---
 
-## Calibracion FC-28
+## FC-28 calibration
 
-El FC-28 lee conductividad del suelo. Mas humedad = mayor voltaje = mayor valor ADC (0-4095).
+The FC-28 reads soil conductivity. More moisture = higher voltage = higher ADC
+value (0–4095).
 
-Constantes en el firmware:
+Constants in the firmware:
 ```cpp
 #define SOIL_DRY   50
 #define SOIL_WET  3200
 ```
 
-Para calibrar:
-1. Dejar el sensor en el aire — anotar el `raw ADC` del Monitor Serie — poner `SOIL_DRY = valor + 20`
-2. Sumergir las puntas en agua (no el modulo) — anotar el `raw ADC` — poner `SOIL_WET = valor - 50`
-3. Recompilar y flashear
+To calibrate:
+1. Leave the sensor in the air — note the `raw ADC` from the Serial Monitor — set
+   `SOIL_DRY = value + 20`.
+2. Dip the probe tips in water (not the module) — note the `raw ADC` — set
+   `SOIL_WET = value - 50`.
+3. Recompile and flash.
 
 ---
 
-## Provisioning por USB
+## USB provisioning
 
-Permite configurar el ESP32 desde el panel web sin abrir Arduino IDE.
+Lets you configure the ESP32 from the web panel without opening the Arduino IDE.
 
-Requisito en el backend: `pip install pyserial`
+Backend requirement: `pip install pyserial`
 
-Flujo:
-1. Conectar el ESP32 por USB al PC donde corre el backend
-2. Ir a Dispositivos en el panel web
-3. Clic en "Conectar nuevo dispositivo"
-4. Seleccionar el puerto COM detectado
-5. El sistema escanea redes WiFi y configura el ESP32 automaticamente
+Flow:
+1. Connect the ESP32 by USB to the PC running the backend.
+2. Go to Devices in the web panel.
+3. Click "Connect new device".
+4. Select the detected COM port.
+5. The system scans WiFi networks and configures the ESP32 automatically.
 
 ---
 
-## Red y firewall
+## Network and firewall
 
-El ESP32 y el servidor deben estar en la misma red WiFi.
+The ESP32 and the server must be on the same WiFi network.
 
-Si el ESP32 no puede conectar en Windows:
+If the ESP32 cannot connect on Windows:
 ```
 netsh advfirewall firewall add rule name="AgroYachay" dir=in action=allow protocol=TCP localport=5000
 ```
 
 ---
 
-## Endpoints de sensores
+## Sensor endpoints
 
-| Metodo | Ruta | Descripcion |
+| Method | Route | Description |
 |---|---|---|
-| POST | /api/sensores/lectura | Recibe lecturas del ESP32 |
-| GET | /api/sensores/mis-dispositivos | Sensores del usuario |
-| GET | /api/sensores/pendientes | Sensores sin cultivo asignado |
-| GET | /api/sensores/esp32/:id/estado | Estado y ultimas lecturas |
-| POST | /api/sensores/:id/vincular | Asigna sensor a un cultivo |
-| POST | /api/sensores/:id/desvincular | Libera el sensor |
-| GET | /api/serial/detectar | Lista puertos COM disponibles |
-| POST | /api/serial/configurar | Envia config WiFi al ESP32 por USB |
+| POST | /api/sensores/lectura | Receives ESP32 readings |
+| GET | /api/sensores/mis-dispositivos | User's sensors |
+| GET | /api/sensores/pendientes | Sensors with no crop assigned |
+| GET | /api/sensores/esp32/:id/estado | Status and latest readings |
+| POST | /api/sensores/:id/vincular | Links a sensor to a crop |
+| POST | /api/sensores/:id/desvincular | Unlinks the sensor |
+| GET | /api/serial/detectar | Lists available COM ports |
+| POST | /api/serial/configurar | Sends WiFi config to the ESP32 over USB |

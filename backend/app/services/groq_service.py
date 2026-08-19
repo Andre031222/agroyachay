@@ -1,11 +1,21 @@
 import os
+import re
 import json
 import base64
+import urllib.request
 from groq import Groq
 
 GROQ_API_KEY  = os.getenv('GROQ_API_KEY', '')
 MODEL         = 'llama-3.3-70b-versatile'
-MODEL_VISION  = 'meta-llama/llama-4-scout-17b-16e-instruct'
+MODEL_VISION  = 'meta-llama/llama-4-scout-17b-16e-instruct'  # legacy Groq vision (deprecated upstream)
+
+# Motor de visión para diagnóstico de plagas/enfermedades:
+#   'ollama' -> modelo abierto local (privado, reproducible, sin dependencia externa)
+#   'groq'   -> API en la nube (heredado)
+# El texto (asistente, clima, recomendaciones) sigue usando Groq.
+VISION_ENGINE       = os.getenv('VISION_ENGINE', 'ollama')
+OLLAMA_URL          = os.getenv('OLLAMA_URL', 'http://127.0.0.1:11434')
+OLLAMA_VISION_MODEL = os.getenv('OLLAMA_VISION_MODEL', 'qwen2.5vl:3b')
 
 SISTEMA_AGROYACHAY = """Eres AgroIA, el asistente de inteligencia artificial de AgroYachay,
 un sistema de gestión agrícola para agricultores peruanos. Tu especialidad es la agricultura
@@ -17,6 +27,39 @@ Limita tu respuesta a lo solicitado sin información irrelevante."""
 
 def _cliente():
     return Groq(api_key=GROQ_API_KEY)
+
+
+def _vision_ollama(b64: str, prompt: str) -> str:
+    """Diagnóstico por visión con modelo abierto local (Ollama)."""
+    payload = json.dumps({
+        'model':   OLLAMA_VISION_MODEL,
+        'prompt':  prompt,
+        'images':  [b64],
+        'stream':  False,
+        'options': {'temperature': 0.1},
+    }).encode('utf-8')
+    req = urllib.request.Request(
+        f'{OLLAMA_URL}/api/generate', data=payload,
+        headers={'Content-Type': 'application/json'})
+    with urllib.request.urlopen(req, timeout=180) as r:
+        return json.load(r).get('response', '').strip()
+
+
+def _vision_groq(b64: str, mime: str, prompt: str) -> str:
+    """Diagnóstico por visión con Groq (heredado)."""
+    response = _cliente().chat.completions.create(
+        model=MODEL_VISION,
+        messages=[{
+            'role': 'user',
+            'content': [
+                {'type': 'image_url', 'image_url': {'url': f'data:{mime};base64,{b64}'}},
+                {'type': 'text',      'text': prompt},
+            ],
+        }],
+        temperature=0.1,
+        max_tokens=600,
+    )
+    return response.choices[0].message.content.strip()
 
 
 def detectar_plaga_vision(image_path: str, cultivo: str = '') -> dict:
@@ -50,27 +93,18 @@ Reglas:
 - severidad: "leve", "moderada" o "severa"
 - Responde SOLO el JSON, sin texto adicional"""
 
-        cliente = _cliente()
-        response = cliente.chat.completions.create(
-            model=MODEL_VISION,
-            messages=[{
-                'role': 'user',
-                'content': [
-                    {'type': 'image_url', 'image_url': {'url': f'data:{mime};base64,{b64}'}},
-                    {'type': 'text',      'text': prompt},
-                ],
-            }],
-            temperature=0.1,
-            max_tokens=600,
-        )
+        if VISION_ENGINE == 'ollama':
+            texto = _vision_ollama(b64, prompt)
+        else:
+            texto = _vision_groq(b64, mime, prompt)
 
-        texto = response.choices[0].message.content.strip()
+        # Extraer el objeto JSON aunque el modelo lo envuelva en ``` o texto extra.
         if texto.startswith('```'):
             texto = texto.split('```')[1]
             if texto.startswith('json'):
                 texto = texto[4:]
-
-        resultado = json.loads(texto)
+        m = re.search(r'\{.*\}', texto, re.DOTALL)
+        resultado = json.loads(m.group(0) if m else texto)
         resultado.setdefault('is_healthy', False)
         resultado.setdefault('confianza',  70)
         resultado.setdefault('severidad',  'moderada')
