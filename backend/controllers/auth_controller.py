@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify, send_from_directory
+from flask import Blueprint, request, jsonify, send_from_directory, current_app
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 import datetime
 import glob
@@ -72,6 +72,7 @@ def login():
         if not password_match:
             cursor.close()
             connection.close()
+            current_app.audit('login_failed', f"email={username}")
             return jsonify({
                 'success': False,
                 'message': 'Credenciales inválidas'
@@ -97,6 +98,7 @@ def login():
         cursor.close()
         connection.close()
 
+        current_app.audit('login_success', f"user_id={user['id']}")
         return jsonify({
             'success': True,
             'message': 'Login exitoso',

@@ -1,7 +1,11 @@
 import os
-from flask import Flask, jsonify
+import logging
+from logging.handlers import RotatingFileHandler
+from flask import Flask, jsonify, request
 from flask_cors import CORS
 from flask_compress import Compress
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -9,9 +13,54 @@ load_dotenv()
 app = Flask(__name__)
 Compress(app)
 
+# Detrás del proxy inverso: usar la IP real del cliente (X-Forwarded-For / X-Real-IP)
+# para el rate limiting y la auditoría.
+if os.getenv('TRUST_PROXY', 'true').lower() == 'true':
+    from werkzeug.middleware.proxy_fix import ProxyFix
+    app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1)
+
+# Registro de auditoría de eventos de seguridad (auth y acciones de admin).
+_audit_dir = os.getenv('AUDIT_LOG_DIR', os.path.dirname(os.path.abspath(__file__)))
+os.makedirs(_audit_dir, exist_ok=True)
+audit_logger = logging.getLogger('agroyachay.audit')
+if not audit_logger.handlers:
+    audit_logger.setLevel(logging.INFO)
+    _h = RotatingFileHandler(os.path.join(_audit_dir, 'audit.log'),
+                             maxBytes=2_000_000, backupCount=5, encoding='utf-8')
+    _h.setFormatter(logging.Formatter('%(asctime)s %(message)s'))
+    audit_logger.addHandler(_h)
+
+
+def audit(event, detail=''):
+    try:
+        ip = get_remote_address()
+    except Exception:
+        ip = '-'
+    audit_logger.info('event=%s ip=%s detail=%s', event, ip, detail)
+
+
+app.audit = audit
+
+# Rate limiting de la API (protección anti fuerza bruta y abuso).
+limiter = Limiter(
+    key_func=get_remote_address,
+    app=app,
+    default_limits=[os.getenv('RATE_LIMIT_DEFAULT', '300 per minute')],
+    storage_uri=os.getenv('RATE_LIMIT_STORAGE', 'memory://'),
+    strategy='fixed-window',
+)
+app.limiter = limiter
+
 @app.after_request
 def set_security_headers(response):
     response.headers['Cross-Origin-Opener-Policy'] = 'same-origin-allow-popups'
+    response.headers['X-Content-Type-Options'] = 'nosniff'
+    response.headers['X-Frame-Options'] = 'DENY'
+    response.headers['Referrer-Policy'] = 'strict-origin-when-cross-origin'
+    response.headers['Permissions-Policy'] = 'geolocation=(self), camera=(), microphone=()'
+    # HSTS solo tiene sentido sobre HTTPS (lo sirve el proxy en producción).
+    if os.getenv('ENABLE_HSTS', 'false').lower() == 'true':
+        response.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'
     return response
 
 _default_origins = [
@@ -113,6 +162,9 @@ from app.routes.prediccion import prediccion_bp
 from app.routes.asesoria import asesoria_bp
 from app.routes.marketplace import marketplace_bp
 from app.routes.informes import informes_bp
+
+# Límite más estricto en autenticación (anti fuerza bruta).
+limiter.limit(os.getenv('RATE_LIMIT_AUTH', '20 per minute'))(auth_bp)
 
 app.register_blueprint(auth_bp, url_prefix='/api/auth')
 app.register_blueprint(clima_bp, url_prefix='/api/clima')

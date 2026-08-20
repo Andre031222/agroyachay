@@ -24,3 +24,4 @@ groq==1.2.0
 httpx==0.28.1
 pyserial==3.5
 gunicorn==21.2.0
+Flask-Limiter==4.1.1
