@@ -25,13 +25,14 @@ export const Ic = {
   arrowL: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>,
 };
 
-export function tiempoRelativo(isoStr) {
-  if (!isoStr) return 'Sin datos';
-  const diff = (Date.now() - new Date(isoStr).getTime()) / 1000;
-  if (diff < 60) return `hace ${Math.round(diff)}s`;
-  if (diff < 3600) return `hace ${Math.round(diff / 60)}min`;
-  if (diff < 86400) return `hace ${Math.round(diff / 3600)}h`;
-  return `hace ${Math.round(diff / 86400)}d`;
+export function tiempoRelativo(isoStr, locale = 'es-PE', fallback = '—') {
+  if (!isoStr) return fallback;
+  const seconds = (Date.now() - new Date(isoStr).getTime()) / 1000;
+  const formatter = new Intl.RelativeTimeFormat(locale, { numeric: 'auto', style: 'narrow' });
+  if (seconds < 60) return formatter.format(-Math.round(seconds), 'second');
+  if (seconds < 3600) return formatter.format(-Math.round(seconds / 60), 'minute');
+  if (seconds < 86400) return formatter.format(-Math.round(seconds / 3600), 'hour');
+  return formatter.format(-Math.round(seconds / 86400), 'day');
 }
 
 export function rssiToIcon(rssi) {

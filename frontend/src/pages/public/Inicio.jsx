@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { WaveCanvas } from './Landing';
 import { useSystemConfig } from '../../hooks/useSystemConfig';
+import { useLanguage } from '../../context/LanguageContext';
 
 const I = {
   plant:  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22V12M12 12C12 12 7 9 7 5a5 5 0 0 1 10 0c0 4-5 7-5 7z"/><path d="M9 17c-2 0-4-1-4-3s2-3 4-3"/></svg>,
@@ -20,22 +21,19 @@ const I = {
   users:  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>,
 };
 
-const FEATURES = [
-  { icon: I.plant,  title: 'Gestión de Cultivos',       desc: '10 tipos de cultivo, ciclo completo planificado→cosechado, historial de actividades e insumos con costos reales.' },
-  { icon: I.sensor, title: 'Monitoreo IoT ESP32',        desc: 'Temperatura, humedad de aire y suelo cada 10 s. Buffer offline automático. Alertas por umbrales configurables.' },
-  { icon: I.cloud,  title: 'Clima + Plan Semanal IA',    desc: 'OpenWeather + Groq analiza tu parcela y genera recomendaciones de riego, alerta de helada y actividades del día.' },
-  { icon: I.bug,    title: 'Detección de Plagas',        desc: 'Foto desde campo → Plant.id identifica la enfermedad → Groq devuelve plan con urgencia, productos y dosis exactas.' },
-  { icon: I.chart,  title: 'Predicción de Cosecha',      desc: 'scikit-learn estima rendimiento kg/ha y rentabilidad proyectada con base en tus datos reales de sensores.' },
-  { icon: I.store,  title: 'Marketplace de Insumos',     desc: 'Semillas, fertilizantes y equipos con enlace directo a MercadoLibre y Amazon. Sin comisiones ni intermediarios.' },
-  { icon: I.report, title: 'Informes PDF y Excel',       desc: '4 tipos: Ejecutivo, Cultivos, Financiero, Climático. Gráficos generados con datos reales de tus sensores.' },
-  { icon: I.ai,     title: 'Asistente AgroIA',           desc: 'Chat libre con Llama 3.3 70B vía Groq. Responde sobre riego, plagas, siembra con contexto de tu campo actual.' },
+const FEATURE_ICONS = [I.plant, I.sensor, I.cloud, I.bug, I.chart, I.store, I.report, I.ai];
+const STEP_NUMBERS = ['01', '02', '03', '04'];
+const STAT_ICONS = [I.shield, I.zap, I.bar, I.users];
+const STAT_GRADIENTS = [
+  'from-emerald-500 to-green-600',
+  'from-green-500 to-teal-500',
+  'from-teal-500 to-cyan-500',
+  'from-cyan-500 to-blue-500',
 ];
-
-const HOW = [
-  { n: '01', title: 'Registra tu parcela', desc: 'Define cultivo, área y coordenadas. El sistema prepara sensores, umbrales y módulos relevantes.' },
-  { n: '02', title: 'Conecta el ESP32',    desc: 'Firmware incluido. El sensor envía datos cada 10 s y opera en modo offline con sincronización automática.' },
-  { n: '03', title: 'Recibe análisis IA',  desc: 'Groq cruza clima, sensores y cultivos para darte recomendaciones específicas de tu campo en tiempo real.' },
-  { n: '04', title: 'Genera informes',     desc: 'PDF/Excel con gráficos reales, análisis financiero y proyección de cosecha. Descarga inmediata.' },
+const DEMO_METRICS = [
+  { key: 'temperature', value: '14.2°C', subKey: 'normal',   color: 'text-emerald-600 dark:text-emerald-400', bg: 'bg-emerald-50 dark:bg-emerald-900/30', icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/></svg> },
+  { key: 'airHumidity', value: '68%',    subKey: 'optimal',  color: 'text-blue-600 dark:text-blue-400',       bg: 'bg-blue-50 dark:bg-blue-900/30',       icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg> },
+  { key: 'soil',        value: '42%',    subKey: 'irrigate', color: 'text-amber-600 dark:text-amber-400',     bg: 'bg-amber-50 dark:bg-amber-900/30',     icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M3 6h18M3 12h18M3 18h18"/></svg> },
 ];
 
 const Fade = ({ children, delay = 0, fromRight = false }) => {
@@ -58,6 +56,7 @@ const Fade = ({ children, delay = 0, fromRight = false }) => {
 const Inicio = ({ onNavigate }) => {
   const navigate = useNavigate();
   const { config } = useSystemConfig();
+  const { t, tList } = useLanguage();
   const videoRef = useRef(null);
 
   useEffect(() => {
@@ -107,7 +106,6 @@ const Inicio = ({ onNavigate }) => {
           <source data-src="/videos/bg.mp4"  type="video/mp4" />
         </video>
 
-        {/* Overlay stack: tint + emerald wash + bottom fade */}
         <div className="absolute inset-0 bg-[#04140d]/55 dark:bg-[#04140d]/70" />
         <div aria-hidden className="pointer-events-none absolute -top-40 -left-32 w-[34rem] h-[34rem] rounded-full bg-emerald-500/20 blur-[120px]" />
         <div aria-hidden className="pointer-events-none absolute bottom-[-12rem] right-[-8rem] w-[38rem] h-[38rem] rounded-full bg-teal-400/15 blur-[140px]" />
@@ -118,9 +116,9 @@ const Inicio = ({ onNavigate }) => {
 
             <div className="animate-slide-up">
               <h1 className="font-display text-display tracking-tightest mb-6 text-white">
-                Control total de tu{' '}
+                {t('home.heroTitleBefore')}{' '}
                 <span className="text-emerald-300">{config.hero_title}</span>{' '}
-                desde cualquier lugar
+                {t('home.heroTitleAfter')}
               </h1>
 
               <p className="text-body-lg text-emerald-50/75 max-w-lg mb-9">
@@ -137,7 +135,7 @@ const Inicio = ({ onNavigate }) => {
                 </button>
                 <button onClick={() => onNavigate('servicios')}
                   className="inline-flex items-center justify-center h-12 px-8 rounded-full ring-1 ring-white/25 text-white text-sm font-semibold backdrop-blur-md hover:bg-white/10 hover:ring-white/40 transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.98]">
-                  Ver el sistema
+                  {t('home.viewSystem')}
                 </button>
               </div>
 
@@ -151,37 +149,32 @@ const Inicio = ({ onNavigate }) => {
             <div className="hidden lg:block animate-fade-in">
               <div className="relative">
                 <div aria-hidden className="absolute -inset-6 bg-emerald-400/15 rounded-2xl blur-[80px]" />
-                {/* Double-bezel card */}
                 <div className="relative rounded-2xl p-1.5 bg-white/60 dark:bg-white/[0.05] ring-1 ring-black/5 dark:ring-white/10 shadow-[0_30px_70px_-28px_rgba(16,185,129,0.45)]">
                   <div className="rounded-[calc(1rem-0.375rem)] bg-white dark:bg-gray-900/90 p-6 space-y-4 shadow-[inset_0_1px_1px_rgba(255,255,255,0.6)] dark:shadow-[inset_0_1px_1px_rgba(255,255,255,0.08)]">
                   <div className="flex items-center justify-between">
                     <div>
-                      <div className="text-[10px] uppercase text-gray-400 dark:text-gray-500 font-medium">Parcela Principal</div>
-                      <div className="mt-1 font-semibold tracking-tight text-gray-900 dark:text-white">Cultivo de Papa — 2.5 ha</div>
+                      <div className="text-[10px] uppercase text-gray-400 dark:text-gray-500 font-medium">{t('home.demoCard.parcel')}</div>
+                      <div className="mt-1 font-semibold tracking-tight text-gray-900 dark:text-white">{t('home.demoCard.crop')}</div>
                     </div>
                     <span className="flex items-center gap-1.5 text-xs font-semibold text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-500/10 ring-1 ring-emerald-500/15 px-3 py-1 rounded-full">
                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                      Activo
+                      {t('home.demoCard.active')}
                     </span>
                   </div>
 
                   <div className="grid grid-cols-3 gap-3">
-                    {[
-                      { label: 'Temperatura', value: '14.2°C', sub: 'Normal', color: 'text-emerald-600 dark:text-emerald-400', bg: 'bg-emerald-50 dark:bg-emerald-900/30', icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/></svg> },
-                      { label: 'Humedad Aire', value: '68%',   sub: 'Óptimo',  color: 'text-blue-600 dark:text-blue-400',       bg: 'bg-blue-50 dark:bg-blue-900/30',       icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg> },
-                      { label: 'Suelo',       value: '42%',   sub: 'Regar',   color: 'text-amber-600 dark:text-amber-400',     bg: 'bg-amber-50 dark:bg-amber-900/30',     icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M3 6h18M3 12h18M3 18h18"/></svg> },
-                    ].map(s => (
-                      <div key={s.label} className={`${s.bg} rounded-2xl p-3 ring-1 ring-black/5 dark:ring-white/10`}>
-                        <div className={`mb-1 ${s.color}`}>{s.icon}</div>
-                        <div className={`text-lg font-semibold ${s.color}`}>{s.value}</div>
-                        <div className="text-[10px] text-gray-500 dark:text-gray-400 font-medium">{s.label}</div>
-                        <div className={`text-[10px] font-bold ${s.color}`}>{s.sub}</div>
+                    {DEMO_METRICS.map(metric => (
+                      <div key={metric.key} className={`${metric.bg} rounded-2xl p-3 ring-1 ring-black/5 dark:ring-white/10`}>
+                        <div className={`mb-1 ${metric.color}`}>{metric.icon}</div>
+                        <div className={`text-lg font-semibold ${metric.color}`}>{metric.value}</div>
+                        <div className="text-[10px] text-gray-500 dark:text-gray-400 font-medium">{t(`home.demoCard.${metric.key}`)}</div>
+                        <div className={`text-[10px] font-bold ${metric.color}`}>{t(`home.demoCard.${metric.subKey}`)}</div>
                       </div>
                     ))}
                   </div>
 
                   <div>
-                    <div className="text-xs text-gray-400 dark:text-gray-400 mb-2 flex justify-between"><span>Temperatura — últimas 8 lecturas</span><span className="text-emerald-600 dark:text-emerald-400 font-medium">ESP32_01</span></div>
+                    <div className="text-xs text-gray-400 dark:text-gray-400 mb-2 flex justify-between"><span>{t('home.demoCard.chartTitle')}</span><span className="text-emerald-600 dark:text-emerald-400 font-medium">ESP32_01</span></div>
                     <div className="flex items-end gap-1.5 h-12">
                       {[62, 75, 68, 80, 71, 85, 78, 90].map((h, i) => (
                         <div key={i}
@@ -194,9 +187,9 @@ const Inicio = ({ onNavigate }) => {
 
                   <div className="rounded-2xl p-1 bg-gradient-to-br from-emerald-500 to-teal-500">
                     <div className="rounded-[calc(1rem-0.25rem)] bg-gradient-to-r from-emerald-500 to-teal-500 p-3 text-white">
-                      <div className="text-[10px] font-bold uppercase opacity-80 mb-1">AgroIA recomienda</div>
+                      <div className="text-[10px] font-bold uppercase opacity-80 mb-1">{t('home.demoCard.aiRecommends')}</div>
                       <div className="text-xs font-medium leading-relaxed">
-                        Humedad de suelo en 42% — programar riego esta tarde. Pronóstico: cielo despejado, T máx 17°C.
+                        {t('home.demoCard.aiMessage')}
                       </div>
                     </div>
                   </div>
@@ -224,12 +217,12 @@ const Inicio = ({ onNavigate }) => {
           </Fade>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {FEATURES.map(({ icon, title, desc }, i) => (
+            {tList('home.features').map(({ title, desc }, i) => (
               <Fade key={title} delay={i * 60}>
                 <div className="group h-full rounded-2xl p-1.5 bg-white/60 dark:bg-white/[0.04] ring-1 ring-black/5 dark:ring-white/10 transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:-translate-y-1 hover:ring-emerald-500/30">
                   <div className="h-full rounded-[calc(1rem-0.375rem)] bg-white dark:bg-gray-900/90 p-6 shadow-[inset_0_1px_1px_rgba(255,255,255,0.6)] dark:shadow-[inset_0_1px_1px_rgba(255,255,255,0.08)]">
                     <div className="w-12 h-12 rounded-2xl bg-emerald-50 dark:bg-emerald-500/10 ring-1 ring-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-5 transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:bg-emerald-500 group-hover:text-white group-hover:ring-emerald-500/40">
-                      {icon}
+                      {FEATURE_ICONS[i]}
                     </div>
                     <h3 className="font-semibold tracking-tight text-gray-900 dark:text-white mb-2 text-sm leading-snug">{title}</h3>
                     <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">{desc}</p>
@@ -250,14 +243,13 @@ const Inicio = ({ onNavigate }) => {
             <Fade>
               <div>
                 <h2 className="text-h2 font-semibold tracking-tight text-gray-900 dark:text-white mb-4">
-                  ESP32 que funciona<br />hasta sin señal
+                  {t('home.esp32TitleLine1')}<br />{t('home.esp32TitleLine2')}
                 </h2>
                 <p className="text-gray-500 dark:text-gray-400 mb-6 leading-relaxed">
-                  El ESP32 con DHT11 y FC-28 mide temperatura, humedad del aire y humedad del suelo cada 10 segundos.
-                  Sin WiFi guarda 10 lecturas en buffer y las sincroniza al reconectar. El firmware es tuyo, open-source en Arduino C++.
+                  {t('home.esp32Description')}
                 </p>
                 <ul className="space-y-3">
-                  {['Lecturas cada 10 s — temperatura + humedad aire + suelo', 'Buffer offline de 10 registros automático', 'Alertas por umbrales configurables por parcela', 'NTP UTC-5, timestamps reales para Perú'].map(item => (
+                  {tList('home.esp32Points').map(item => (
                     <li key={item} className="flex items-start gap-2.5 text-sm text-gray-600 dark:text-gray-300">
                       <span className="shrink-0 mt-0.5 w-5 h-5 rounded-full bg-emerald-500/15 ring-1 ring-emerald-500/25 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">{I.check}</span>
                       {item}
@@ -275,15 +267,15 @@ const Inicio = ({ onNavigate }) => {
                   <span className="w-2.5 h-2.5 rounded-full bg-green-500" />
                   <span className="ml-2">agroyachay_esp32.ino</span>
                 </div>
-                <p className="text-gray-500">// Lectura cada 10 s</p>
+                <p className="text-gray-500">{t('home.codeReading')}</p>
                 <p>float temp = dht.<span className="text-yellow-300">readTemperature</span>();</p>
                 <p>float hum  = dht.<span className="text-yellow-300">readHumidity</span>();</p>
                 <p>int soil = <span className="text-blue-300">analogRead</span>(<span className="text-orange-300">34</span>);</p>
-                <p className="mt-2 text-gray-500">// POST al backend</p>
+                <p className="mt-2 text-gray-500">{t('home.codePost')}</p>
                 <p>String json = <span className="text-amber-300">"&#123;"</span></p>
                 <p className="pl-4"><span className="text-amber-300">"temp:"</span> + temp +</p>
                 <p className="pl-4"><span className="text-amber-300">", hum:"</span> + hum + <span className="text-amber-300">"&#125;"</span>;</p>
-                <p className="mt-2 text-gray-500">// Si sin WiFi → buffer local</p>
+                <p className="mt-2 text-gray-500">{t('home.codeBuffer')}</p>
                 <p><span className="text-blue-300">if</span> (!wifi) buffer.<span className="text-yellow-300">push</span>(json);</p>
               </div>
               </div>
@@ -293,14 +285,10 @@ const Inicio = ({ onNavigate }) => {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <Fade fromRight>
               <div className="order-2 lg:order-1 space-y-4">
-                {[
-                  { q: '¿Cuándo riego?',      a: 'Humedad suelo en 42% y sin lluvia prevista 3 días. Riego mañana temprano, 45 min por goteo.' },
-                  { q: '¿Qué detectó la IA?', a: 'Phytophthora infestans (tizón tardío) — confianza 87%. Urgencia: 24h. Aplica Metalaxil 1.5 g/L.' },
-                  { q: 'Plan esta semana',     a: 'Lun: fertilizar. Mié: riego. Jue: día óptimo para fumigación (viento <10 km/h, sin lluvia).' },
-                ].map(msg => (
+                {tList('home.chat').map(msg => (
                   <div key={msg.q} className="rounded-[1.75rem] p-1.5 bg-white/60 dark:bg-white/[0.04] ring-1 ring-black/5 dark:ring-white/10">
                     <div className="rounded-[calc(1.75rem-0.375rem)] bg-white dark:bg-gray-900/90 p-4 shadow-[inset_0_1px_1px_rgba(255,255,255,0.6)] dark:shadow-[inset_0_1px_1px_rgba(255,255,255,0.08)]">
-                      <div className="text-[10px] uppercase font-medium text-gray-400 dark:text-gray-500 mb-1">Agricultor</div>
+                      <div className="text-[10px] uppercase font-medium text-gray-400 dark:text-gray-500 mb-1">{t('home.farmer')}</div>
                       <div className="text-sm font-semibold tracking-tight text-gray-900 dark:text-white mb-3">{msg.q}</div>
                       <div className="text-[10px] uppercase font-medium text-emerald-600 dark:text-emerald-400 mb-1">AgroIA</div>
                       <div className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">{msg.a}</div>
@@ -312,13 +300,13 @@ const Inicio = ({ onNavigate }) => {
             <Fade delay={100} fromRight={false}>
               <div className="order-1 lg:order-2">
                 <h2 className="text-h2 font-semibold tracking-tight text-gray-900 dark:text-white mb-4">
-                  IA que conoce<br />tu campo real
+                  {t('home.aiTitleLine1')}<br />{t('home.aiTitleLine2')}
                 </h2>
                 <p className="text-gray-500 dark:text-gray-400 mb-6 leading-relaxed">
-                  Groq llama-3.3-70b responde consultas agrícolas con contexto de tus cultivos activos, región, datos de sensores y pronóstico del día. No es un chatbot genérico — sabe que tienes Papa en Puno y que el suelo está al 42%.
+                  {t('home.aiDescription')}
                 </p>
                 <ul className="space-y-3">
-                  {['Análisis climático con riesgo y alerta fitosanitaria', 'Plan de manejo de plagas con productos y dosis', 'Planificación semanal de actividades por pronóstico', 'Chat libre: cualquier consulta agronómica'].map(item => (
+                  {tList('home.aiPoints').map(item => (
                     <li key={item} className="flex items-start gap-2.5 text-sm text-gray-600 dark:text-gray-300">
                       <span className="shrink-0 mt-0.5 w-5 h-5 rounded-full bg-emerald-500/15 ring-1 ring-emerald-500/25 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">{I.check}</span>
                       {item}
@@ -337,15 +325,15 @@ const Inicio = ({ onNavigate }) => {
         <div className="max-w-7xl mx-auto">
           <Fade>
             <div className="text-center mb-16">
-              <h2 className="text-h2 font-semibold tracking-tight text-gray-900 dark:text-white">En 4 pasos, control total</h2>
+              <h2 className="text-h2 font-semibold tracking-tight text-gray-900 dark:text-white">{t('home.howTitle')}</h2>
             </div>
           </Fade>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {HOW.map((step, i) => (
-              <Fade key={step.n} delay={i * 80}>
+            {tList('home.how').map((step, i) => (
+              <Fade key={step.title} delay={i * 80}>
                 <div className="relative">
-                  <div className="font-display text-5xl font-semibold text-emerald-200/70 dark:text-emerald-500/20 leading-none mb-3">{step.n}</div>
+                  <div className="font-display text-5xl font-semibold text-emerald-200/70 dark:text-emerald-500/20 leading-none mb-3">{STEP_NUMBERS[i]}</div>
                   <div className="w-8 h-1 bg-emerald-500 rounded-full mb-4" />
                   <h3 className="font-semibold tracking-tight text-gray-900 dark:text-white mb-2">{step.title}</h3>
                   <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">{step.desc}</p>
@@ -364,14 +352,14 @@ const Inicio = ({ onNavigate }) => {
             <Fade>
               <div>
                 <h2 className="text-h2 font-semibold tracking-tight text-gray-900 dark:text-white mb-6">
-                  Una plataforma completa,<br />no una app simple
+                  {t('home.platformTitleLine1')}<br />{t('home.platformTitleLine2')}
                 </h2>
                 <p className="text-gray-500 dark:text-gray-400 mb-8 leading-relaxed">
-                  30+ endpoints REST, 14 tablas en PostgreSQL, autenticación JWT, generación de informes server-side, websockets para sensores en tiempo real y módulo de IA con contexto personalizado.
+                  {t('home.platformDescription')}
                 </p>
                 <button onClick={() => onNavigate('acerca')}
                   className="group inline-flex items-center gap-2 text-sm font-semibold text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 transition-colors">
-                  Ver detalles técnicos
+                  {t('home.technicalDetails')}
                   <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-emerald-500/15 ring-1 ring-emerald-500/20 transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-0.5">{I.arrow}</span>
                 </button>
               </div>
@@ -379,15 +367,10 @@ const Inicio = ({ onNavigate }) => {
 
             <Fade fromRight delay={100}>
               <div className="grid grid-cols-2 gap-4">
-                {[
-                  { icon: I.shield, val: '14',    label: 'Tablas PostgreSQL', bg: 'from-emerald-500 to-green-600' },
-                  { icon: I.zap,    val: '30+',   label: 'Endpoints REST',    bg: 'from-green-500 to-teal-500' },
-                  { icon: I.bar,    val: '4',     label: 'Tipos de informe',  bg: 'from-teal-500 to-cyan-500' },
-                  { icon: I.users,  val: '7',     label: 'Áreas de asesoría', bg: 'from-cyan-500 to-blue-500' },
-                ].map(stat => (
-                  <div key={stat.label} className={`bg-gradient-to-br ${stat.bg} rounded-[1.5rem] p-5 text-white ring-1 ring-white/10`}>
-                    <div className="mb-3 opacity-80">{stat.icon}</div>
-                    <div className="font-display text-3xl font-semibold mb-1">{stat.val}</div>
+                {tList('home.stats').map((stat, i) => (
+                  <div key={stat.label} className={`bg-gradient-to-br ${STAT_GRADIENTS[i]} rounded-[1.5rem] p-5 text-white ring-1 ring-white/10`}>
+                    <div className="mb-3 opacity-80">{STAT_ICONS[i]}</div>
+                    <div className="font-display text-3xl font-semibold mb-1">{stat.value}</div>
                     <div className="text-xs opacity-80 font-medium">{stat.label}</div>
                   </div>
                 ))}
@@ -406,22 +389,22 @@ const Inicio = ({ onNavigate }) => {
         <div className="relative max-w-3xl mx-auto text-center">
           <Fade>
             <h2 className="font-display text-h1 font-bold tracking-tight mb-6">
-              Conecta tu primer sensor<br />en menos de 10 minutos
+              {t('home.ctaTitleLine1')}<br />{t('home.ctaTitleLine2')}
             </h2>
             <p className="text-emerald-100/75 text-body-lg mb-10">
-              Sin tarjeta de crédito. Sin instalación. Crea tu cuenta, agrega tu parcela y el ESP32 empieza a enviar datos de inmediato.
+              {t('home.ctaDescription')}
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <button onClick={() => navigate('/register')}
                 className="group relative inline-flex items-center justify-center h-12 pl-8 pr-16 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-semibold transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.98] shadow-[0_18px_40px_-12px_rgba(16,185,129,0.7)]">
-                Crear cuenta gratis
+                {t('home.ctaPrimary')}
                 <span className="absolute right-1.5 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/15 flex items-center justify-center transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-0.5">
                   {I.arrow}
                 </span>
               </button>
               <button onClick={() => onNavigate('contactos')}
                 className="inline-flex items-center justify-center h-12 px-10 rounded-full ring-1 ring-white/25 text-white text-sm font-semibold backdrop-blur-md hover:bg-white/10 hover:ring-white/40 transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.98]">
-                Solicitar demo
+                {t('home.ctaSecondary')}
               </button>
             </div>
           </Fade>

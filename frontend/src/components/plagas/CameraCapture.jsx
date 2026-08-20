@@ -1,3 +1,4 @@
+import { useLanguage } from '../../context/LanguageContext';
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { notify } from '../../utils/swal';
 
@@ -34,6 +35,7 @@ export default function CameraCapture({ onCapture, onClose }) {
   const streamRef  = useRef(null);
 
   const [ready,        setReady]        = useState(false);
+  const { t } = useLanguage();
   const [facingMode,   setFacingMode]   = useState('environment');
   const [captured,     setCaptured]     = useState(null);
   const [capturedBlob, setCapturedBlob] = useState(null);
@@ -72,8 +74,8 @@ export default function CameraCapture({ onCapture, onClose }) {
       }
     } catch (err) {
       const msg = err.name === 'NotAllowedError'
-        ? 'Permiso de cámara denegado. Habilítalo en la configuración del navegador.'
-        : 'No se pudo acceder a la cámara.';
+        ? t('camera.permissionDenied')
+        : t('camera.unavailable');
       setError(msg);
     }
   }, [stopStream]);
@@ -157,7 +159,7 @@ export default function CameraCapture({ onCapture, onClose }) {
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="flex flex-col items-center gap-3">
                   <div className="w-8 h-8 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                  <p className="text-white/70 text-sm">Iniciando cámara…</p>
+                  <p className="text-white/70 text-sm">{t('camera.starting')}</p>
                 </div>
               </div>
             )}
@@ -170,7 +172,7 @@ export default function CameraCapture({ onCapture, onClose }) {
                       <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
                     </svg>
                   </div>
-                  <p className="text-white font-semibold text-sm mb-1">Sin acceso a la cámara</p>
+                  <p className="text-white font-semibold text-sm mb-1">{t('camera.noAccess')}</p>
                   <p className="text-white/60 text-xs">{error}</p>
                 </div>
               </div>
@@ -179,7 +181,7 @@ export default function CameraCapture({ onCapture, onClose }) {
             <div className="absolute top-4 right-4">
               {ready && (
                 <p className="text-white/60 text-xs text-center">
-                  {facingMode === 'environment' ? 'Cámara trasera' : 'Cámara frontal'}
+                  {facingMode === 'environment' ? t('camera.backCamera') : t('camera.frontCamera')}
                 </p>
               )}
             </div>
@@ -187,7 +189,7 @@ export default function CameraCapture({ onCapture, onClose }) {
             {ready && (
               <div className="absolute bottom-24 left-0 right-0 flex justify-center">
                 <p className="text-white/50 text-xs bg-black/30 px-3 py-1 rounded-full">
-                  Centra la planta o insecto en el encuadre
+                  {t('camera.framingHint')}
                 </p>
               </div>
             )}
@@ -195,7 +197,7 @@ export default function CameraCapture({ onCapture, onClose }) {
         ) : (
           <img
             src={captured}
-            alt="Captura"
+            alt={t('camera.capture')}
             className="w-full h-full object-contain bg-black"
           />
         )}
@@ -225,7 +227,7 @@ export default function CameraCapture({ onCapture, onClose }) {
               onClick={flipCamera}
               disabled={!hasMultiple}
               className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 disabled:opacity-30 transition-colors touch-manipulation"
-              title="Cambiar cámara"
+              title={t('camera.switchCamera')}
             >
               <IcFlip />
             </button>
@@ -236,14 +238,14 @@ export default function CameraCapture({ onCapture, onClose }) {
               onClick={retake}
               className="flex items-center gap-2 px-5 py-3 rounded-2xl bg-white/10 text-white font-semibold text-sm hover:bg-white/20 transition-colors touch-manipulation"
             >
-              <IcRetake /> Repetir
+              <IcRetake /> {t('camera.retake')}
             </button>
 
             <button
               onClick={confirmCapture}
               className="flex items-center gap-2 px-6 py-3 rounded-2xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-sm shadow-lg shadow-emerald-500/30 transition-colors touch-manipulation"
             >
-              <IcCheck /> Usar foto
+              <IcCheck /> {t('camera.usePhoto')}
             </button>
           </>
         )}

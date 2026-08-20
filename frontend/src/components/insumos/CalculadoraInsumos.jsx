@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { insumosAPI } from '../../services/api';
 import { CULTIVOS_PUNO } from '../../utils/constants';
+import { useLanguage } from '../../context/LanguageContext';
 import { formatCurrency } from '../../utils/helpers';
 import { notify } from '../../utils/swal';
 import {
@@ -44,7 +45,6 @@ const COLORS     = ['#10b981', '#3b82f6', '#8b5cf6'];
 const INP        = 'w-full h-9 px-3 text-sm rounded-xl bg-gray-50/80 dark:bg-white/[0.04] ring-1 ring-black/5 dark:ring-white/10 text-gray-900 dark:text-white transition-all duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] focus:outline-none focus:ring-2 focus:ring-emerald-500/60 focus:bg-white dark:focus:bg-white/[0.06]';
 const AREA_STEPS = [0.1, 0.5, 1, 2, 5, 10, 20, 50];
 
-// Presentational double-bezel card wrapper (consistent with Auth)
 const Bezel = ({ className = '', children }) => (
   <div className="rounded-2xl p-1.5 ring-1 ring-black/5 dark:ring-white/10 bg-white/60 dark:bg-white/[0.03]">
     <div className={`rounded-[calc(1rem-0.375rem)] bg-white dark:bg-gray-900 ${className}`}>
@@ -64,6 +64,7 @@ const SectionLabel = ({ icon, children, extra }) => (
 );
 
 const CalculadoraInsumos = () => {
+  const { t } = useLanguage();
   const [form, setForm]         = useState({ tipo_cultivo: '', variedad: '', area_hectareas: 1 });
   const [resultado, setResultado] = useState(null);
   const [loading, setLoading]   = useState(false);
@@ -78,13 +79,13 @@ const CalculadoraInsumos = () => {
   const areaAcres = (form.area_hectareas * 2.47105).toFixed(2);
   const areaPct   = Math.min(100, (form.area_hectareas / 50) * 100);
   const parcelaCat =
-    form.area_hectareas < 1  ? 'Parcela pequeña'  :
-    form.area_hectareas < 5  ? 'Parcela mediana'  :
-    form.area_hectareas < 20 ? 'Parcela grande'   : 'Producción industrial';
+    form.area_hectareas < 1  ? t('inputs.parcelSmall') :
+    form.area_hectareas < 5  ? t('inputs.parcelMedium') :
+    form.area_hectareas < 20 ? t('inputs.parcelLarge') : t('inputs.parcelIndustrial');
 
   const handleCalcular = async (e) => {
     e.preventDefault();
-    if (!form.tipo_cultivo) { notify.warning('Selecciona un cultivo'); return; }
+    if (!form.tipo_cultivo) { notify.warning(t('inputs.selectCrop')); return; }
     setLoading(true);
     try {
       const res = await insumosAPI.calcularInsumos({
@@ -92,9 +93,9 @@ const CalculadoraInsumos = () => {
         area_hectareas: form.area_hectareas,
       });
       setResultado(res.data.data);
-      notify.success('Cálculo completado');
+      notify.success(t('inputs.done'));
     } catch (err) {
-      notify.error('Error al calcular: ' + (err.response?.data?.message || err.message));
+      notify.error(`${t('inputs.calcError')}: ${err.response?.data?.message || err.message}`);
     } finally {
       setLoading(false);
     }
@@ -125,21 +126,21 @@ const CalculadoraInsumos = () => {
       <div className="flex items-center justify-between gap-4 flex-wrap">
         <div>
           <h1 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 dark:text-white">
-            Calculadora de Insumos
+            {t('inputs.title')}
           </h1>
           <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
-            Fertilización NPK optimizada · Puno 3800–4500 msnm
+            {t('inputs.subtitle')}
           </p>
         </div>
         {resultado && (
           <div className="flex items-center gap-2">
             <button onClick={handlePrint}
               className="flex items-center gap-1.5 h-9 px-4 rounded-full bg-white dark:bg-white/[0.04] ring-1 ring-black/5 dark:ring-white/10 text-xs font-semibold text-gray-600 dark:text-gray-300 transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:ring-emerald-500/40 active:scale-[0.97] touch-manipulation">
-              {Ic.print} Imprimir
+              {Ic.print} {t('inputs.print')}
             </button>
             <button onClick={handleReset}
               className="flex items-center gap-1.5 h-9 px-4 rounded-full bg-white dark:bg-white/[0.04] ring-1 ring-black/5 dark:ring-white/10 text-xs font-semibold text-gray-600 dark:text-gray-300 transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:ring-emerald-500/40 active:scale-[0.97] touch-manipulation">
-              {Ic.reset} Nuevo cálculo
+              {Ic.reset} {t('inputs.newCalculation')}
             </button>
           </div>
         )}
@@ -149,7 +150,7 @@ const CalculadoraInsumos = () => {
         <form onSubmit={handleCalcular} className="space-y-7">
 
           <div>
-            <SectionLabel icon={Ic.leaf}>Tipo de cultivo</SectionLabel>
+            <SectionLabel icon={Ic.leaf}>{t('inputs.cropType')}</SectionLabel>
             <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-8 gap-2">
               {Object.entries(CULTIVOS_PUNO).map(([key, c]) => (
                 <button key={key} type="button"
@@ -162,7 +163,7 @@ const CalculadoraInsumos = () => {
                   <span className="text-2xl leading-none">{c.icon}</span>
                   <span className={`text-[10px] font-bold truncate w-full text-center px-1 ${
                     form.tipo_cultivo === key ? 'text-emerald-700 dark:text-emerald-400' : 'text-gray-600 dark:text-gray-400'
-                  }`}>{c.nombre}</span>
+                  }`}>{t(`cropTypes.${key}.name`)}</span>
                 </button>
               ))}
             </div>
@@ -172,10 +173,10 @@ const CalculadoraInsumos = () => {
             <div className="flex items-start gap-4 bg-emerald-50 dark:bg-emerald-900/20 ring-1 ring-emerald-300/30 dark:ring-emerald-800/40 rounded-2xl px-4 py-3.5">
               <span className="text-3xl leading-none shrink-0">{cultivo.icon}</span>
               <div className="min-w-0">
-                <p className="font-bold text-sm text-gray-900 dark:text-white">{cultivo.nombre}</p>
-                <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{cultivo.descripcion}</p>
+                <p className="font-bold text-sm text-gray-900 dark:text-white">{t(`cropTypes.${form.tipo_cultivo}.name`)}</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{t(`cropTypes.${form.tipo_cultivo}.description`)}</p>
                 <p className="text-xs text-emerald-600 dark:text-emerald-400 mt-1 flex items-center gap-1">
-                  {Ic.pin} Altitud óptima: {cultivo.altitud}
+                  {Ic.pin} {t('inputs.optimalAltitude')}: {cultivo.altitud}
                 </p>
               </div>
             </div>
@@ -185,9 +186,9 @@ const CalculadoraInsumos = () => {
             <div>
               <SectionLabel
                 icon={Ic.target}
-                extra={<span className="font-normal normal-case tracking-normal text-gray-400">(opcional)</span>}
+                extra={<span className="font-normal normal-case tracking-normal text-gray-400">{t('inputs.optional')}</span>}
               >
-                Variedad
+                {t('inputs.variety')}
               </SectionLabel>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
                 {cultivo.variedades.map(v => (
@@ -203,7 +204,7 @@ const CalculadoraInsumos = () => {
                     </p>
                     <div className="flex items-center gap-3 text-xs text-gray-500 dark:text-gray-400">
                       <span className="flex items-center gap-1">{Ic.trend} {v.rendimiento}</span>
-                      <span className="flex items-center gap-1">{Ic.clock} {v.ciclo}</span>
+                      <span className="flex items-center gap-1">{Ic.clock} {v.ciclo} {t('units.days')}</span>
                     </div>
                   </button>
                 ))}
@@ -212,10 +213,10 @@ const CalculadoraInsumos = () => {
           )}
 
           <div>
-            <SectionLabel icon={Ic.expand}>Área de cultivo</SectionLabel>
+            <SectionLabel icon={Ic.expand}>{t('inputs.cropArea')}</SectionLabel>
             <div className="bg-gray-50/80 dark:bg-white/[0.04] ring-1 ring-black/5 dark:ring-white/10 rounded-2xl p-4 space-y-4">
               <div className="flex items-center justify-between">
-                <span className="text-sm text-gray-600 dark:text-gray-400">Hectáreas</span>
+                <span className="text-sm text-gray-600 dark:text-gray-400">{t('inputs.hectares')}</span>
                 <div className="flex items-baseline gap-1.5">
                   <span className="font-display text-3xl font-bold tracking-tight text-gray-900 dark:text-white">{form.area_hectareas.toFixed(2)}</span>
                   <span className="text-sm text-gray-400">ha</span>
@@ -257,8 +258,8 @@ const CalculadoraInsumos = () => {
               <div className="grid grid-cols-3 gap-2">
                 {[
                   { label: 'm²',   value: areaM2   },
-                  { label: 'topos',value: areaTopos },
-                  { label: 'acres',value: areaAcres },
+                  { label: t('inputs.topos'), value: areaTopos },
+                  { label: t('inputs.acres'), value: areaAcres },
                 ].map(({ label, value }) => (
                   <div key={label} className="bg-white dark:bg-gray-900 ring-1 ring-black/5 dark:ring-white/10 rounded-xl py-2 text-center">
                     <p className="font-display text-base font-bold tracking-tight text-gray-900 dark:text-white">{value}</p>
@@ -272,7 +273,7 @@ const CalculadoraInsumos = () => {
           <button type="submit" disabled={loading || !form.tipo_cultivo}
             className="group w-full h-12 rounded-full bg-emerald-600 hover:bg-emerald-500 disabled:opacity-50 text-white font-semibold text-sm transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.98] flex items-center justify-center gap-2.5 touch-manipulation">
             {loading
-              ? <><span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> Calculando…</>
+              ? <><span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> {t('inputs.calculating')}</>
               : <>
                   {Ic.calc} Calcular fertilizantes óptimos
                   <span className="flex items-center justify-center w-6 h-6 rounded-full bg-white/20 transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-0.5">
@@ -290,10 +291,10 @@ const CalculadoraInsumos = () => {
             <div className="flex items-center justify-between gap-4 flex-wrap mb-5">
               <div>
                 <h3 className="font-display text-lg font-bold tracking-tight text-gray-900 dark:text-white">
-                  Plan de fertilización — {resultado.tipo_cultivo}
+                  {t('inputs.fertilisationPlan')} — {t(`cropTypes.${resultado.tipo_cultivo}.name`)}
                 </h3>
                 <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                  {resultado.area_hectareas} ha{variedad ? ` · ${variedad.nombre}` : ''}
+                  {resultado.area_hectareas} {t('units.hectares')}{variedad ? ` · ${variedad.nombre}` : ''}
                 </p>
               </div>
               <div className="flex items-center gap-2 bg-emerald-50 dark:bg-emerald-900/20 ring-1 ring-emerald-300/30 dark:ring-emerald-800/40 rounded-full px-4 py-2">
@@ -301,15 +302,15 @@ const CalculadoraInsumos = () => {
                 <span className="font-display text-sm font-bold tracking-tight text-emerald-700 dark:text-emerald-400">
                   {formatCurrency(resultado.costo_total)}
                 </span>
-                <span className="text-[10px] text-gray-400">inversión total</span>
+                <span className="text-[10px] text-gray-400">{t('inputs.totalInvestment')}</span>
               </div>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               {[
-                { label:'Nitrógeno (N)',   kg: resultado.requerimientos.nitrogeno.cantidad_kg, costo: resultado.requerimientos.nitrogeno.costo, color:'bg-emerald-500', light:'bg-emerald-50 dark:bg-emerald-900/20 ring-emerald-300/30 dark:ring-emerald-800/40', text:'text-emerald-700 dark:text-emerald-400' },
-                { label:'Fósforo (P₂O₅)', kg: resultado.requerimientos.fosforo.cantidad_kg,   costo: resultado.requerimientos.fosforo.costo,   color:'bg-sky-500',     light:'bg-sky-50 dark:bg-sky-900/20 ring-sky-300/30 dark:ring-sky-800/40',             text:'text-sky-700 dark:text-sky-400'         },
-                { label:'Potasio (K₂O)',   kg: resultado.requerimientos.potasio.cantidad_kg,   costo: resultado.requerimientos.potasio.costo,   color:'bg-violet-500',  light:'bg-violet-50 dark:bg-violet-900/20 ring-violet-300/30 dark:ring-violet-800/40', text:'text-violet-700 dark:text-violet-400'   },
+                { label:t('inputs.nitrogen'), kg: resultado.requerimientos.nitrogeno.cantidad_kg, costo: resultado.requerimientos.nitrogeno.costo, color:'bg-emerald-500', light:'bg-emerald-50 dark:bg-emerald-900/20 ring-emerald-300/30 dark:ring-emerald-800/40', text:'text-emerald-700 dark:text-emerald-400' },
+                { label:t('inputs.phosphorus'), kg: resultado.requerimientos.fosforo.cantidad_kg,   costo: resultado.requerimientos.fosforo.costo,   color:'bg-sky-500',     light:'bg-sky-50 dark:bg-sky-900/20 ring-sky-300/30 dark:ring-sky-800/40',             text:'text-sky-700 dark:text-sky-400'         },
+                { label:t('inputs.potassium'), kg: resultado.requerimientos.potasio.cantidad_kg,   costo: resultado.requerimientos.potasio.costo,   color:'bg-violet-500',  light:'bg-violet-50 dark:bg-violet-900/20 ring-violet-300/30 dark:ring-violet-800/40', text:'text-violet-700 dark:text-violet-400'   },
               ].map(({ label, kg, costo, color, light, text }) => (
                 <div key={label} className="rounded-[1.25rem] p-1 ring-1 ring-black/5 dark:ring-white/10 bg-white/60 dark:bg-white/[0.03]">
                   <div className={`rounded-[calc(1.25rem-0.25rem)] ring-1 p-4 ${light}`}>
@@ -330,14 +331,14 @@ const CalculadoraInsumos = () => {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
             <Bezel className="p-5 sm:p-6">
-              <SectionLabel icon={Ic.trend}>Distribución NPK (kg)</SectionLabel>
+              <SectionLabel icon={Ic.trend}>{t('inputs.npkDistribution')}</SectionLabel>
               <ResponsiveContainer width="100%" height={220}>
                 <BarChart data={npkData} barCategoryGap="35%" margin={{ top:4, right:4, left:-20, bottom:0 }}>
                   <CartesianGrid strokeDasharray="3 3" stroke="#f3f4f6" className="dark:[&>line]:stroke-gray-800" vertical={false} />
                   <XAxis dataKey="nombre" tick={{ fontSize:11, fontWeight:700, fill:'#9ca3af' }} axisLine={false} tickLine={false} />
                   <YAxis tick={{ fontSize:10, fontWeight:600, fill:'#9ca3af' }} axisLine={false} tickLine={false} />
                   <Tooltip content={<ChartTip />} />
-                  <Bar dataKey="cantidad" name="Cantidad (kg)" radius={[6,6,0,0]}>
+                  <Bar dataKey="cantidad" name={t('inputs.quantityKg')} radius={[6,6,0,0]}>
                     {npkData.map((_, i) => <Cell key={i} fill={COLORS[i]} />)}
                   </Bar>
                 </BarChart>
@@ -345,7 +346,7 @@ const CalculadoraInsumos = () => {
             </Bezel>
 
             <Bezel className="p-5 sm:p-6">
-              <SectionLabel icon={Ic.target}>Proporción NPK</SectionLabel>
+              <SectionLabel icon={Ic.target}>{t('inputs.npkProportion')}</SectionLabel>
               <ResponsiveContainer width="100%" height={220}>
                 <PieChart>
                   <Pie data={pieData} cx="50%" cy="50%" outerRadius={85} innerRadius={35} dataKey="value"
@@ -368,12 +369,12 @@ const CalculadoraInsumos = () => {
           </div>
 
           <Bezel className="p-5 sm:p-6">
-            <SectionLabel icon={Ic.trend}>Proyección de beneficios</SectionLabel>
+            <SectionLabel icon={Ic.trend}>{t('inputs.benefits')}</SectionLabel>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               {[
-                { value: formatCurrency(resultado.beneficios.ahorro_estimado),           label:'Ahorro estimado',        sub:'Reducción de costos hasta 25%', color:'text-emerald-600 dark:text-emerald-400', bg:'bg-emerald-50 dark:bg-emerald-900/20 ring-emerald-300/30 dark:ring-emerald-800/40' },
-                { value: `+${resultado.beneficios.aumento_rendimiento_porcentaje}%`,      label:'Aumento de rendimiento', sub:'Incremento hasta 15%',          color:'text-sky-600 dark:text-sky-400',         bg:'bg-sky-50 dark:bg-sky-900/20 ring-sky-300/30 dark:ring-sky-800/40'                 },
-                { value: resultado.beneficios.mejora_calidad,                             label:'Calidad del producto',   sub:'Producto premium garantizado',  color:'text-violet-600 dark:text-violet-400',   bg:'bg-violet-50 dark:bg-violet-900/20 ring-violet-300/30 dark:ring-violet-800/40'     },
+                { value: formatCurrency(resultado.beneficios.ahorro_estimado),           label:t('inputs.estimatedSaving'), sub:t('inputs.estimatedSavingHint'), color:'text-emerald-600 dark:text-emerald-400', bg:'bg-emerald-50 dark:bg-emerald-900/20 ring-emerald-300/30 dark:ring-emerald-800/40' },
+                { value: `+${resultado.beneficios.aumento_rendimiento_porcentaje}%`,      label:t('inputs.yieldIncrease'), sub:t('inputs.yieldIncreaseHint'), color:'text-sky-600 dark:text-sky-400',         bg:'bg-sky-50 dark:bg-sky-900/20 ring-sky-300/30 dark:ring-sky-800/40'                 },
+                { value: resultado.beneficios.mejora_calidad,                             label:t('inputs.productQuality'), sub:t('inputs.productQualityHint'), color:'text-violet-600 dark:text-violet-400',   bg:'bg-violet-50 dark:bg-violet-900/20 ring-violet-300/30 dark:ring-violet-800/40'     },
               ].map(({ value, label, sub, color, bg }) => (
                 <div key={label} className={`rounded-2xl ring-1 p-4 ${bg}`}>
                   <p className={`font-display text-2xl font-bold leading-tight tracking-tight mb-1 ${color}`}>{value}</p>
@@ -385,7 +386,7 @@ const CalculadoraInsumos = () => {
           </Bezel>
 
           <Bezel className="p-5 sm:p-6">
-            <SectionLabel icon={Ic.bulb}>Recomendaciones de aplicación</SectionLabel>
+            <SectionLabel icon={Ic.bulb}>{t('inputs.applicationTips')}</SectionLabel>
             <div className="space-y-2">
               {resultado.recomendaciones.map((rec, i) => (
                 <div key={i} className="flex items-start gap-3 bg-sky-50 dark:bg-sky-900/20 ring-1 ring-sky-300/30 dark:ring-sky-800/40 rounded-2xl px-4 py-3">
@@ -400,11 +401,11 @@ const CalculadoraInsumos = () => {
 
           <div className="rounded-2xl bg-gray-50/80 dark:bg-white/[0.03] ring-1 ring-dashed ring-black/10 dark:ring-white/10 px-4 py-3.5 flex items-center justify-between gap-4 flex-wrap">
             <p className="text-xs text-gray-400 dark:text-gray-500">
-              Cálculos basados en recomendaciones técnicas del INIA y condiciones del Altiplano puneño.
+              {t('inputs.disclaimer')}
             </p>
             <button onClick={handleReset}
               className="flex items-center gap-1.5 text-xs font-semibold text-emerald-600 dark:text-emerald-400 hover:underline shrink-0 touch-manipulation">
-              {Ic.reset} Nuevo cálculo
+              {Ic.reset} {t('inputs.newCalculation')}
             </button>
           </div>
         </>

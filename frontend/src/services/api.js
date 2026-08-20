@@ -16,6 +16,10 @@ api.interceptors.request.use(
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
+    const language = localStorage.getItem('agroyachay-language');
+    if (language) {
+      config.headers['Accept-Language'] = language;
+    }
     return config;
   },
   (error) => Promise.reject(error)

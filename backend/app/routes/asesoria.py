@@ -1,9 +1,10 @@
-from flask import Blueprint, request, jsonify
+from flask import current_app, Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from app.models import db
 from app.models.sensor import Asesoria
 from app.models.user import Usuario
 from app.services.groq_service import consulta_agricola
+from ..i18n import translate as _
 
 asesoria_bp = Blueprint('asesoria', __name__)
 
@@ -42,13 +43,13 @@ def solicitar_asesoria():
         prioridad            = data.get('prioridad', 'Media')
 
         if not tipo_asesoria:
-            return jsonify({'success': False, 'message': 'Tipo de asesoría requerido'}), 400
+            return jsonify({'success': False, 'message': _('tipo_de_asesoria_requerido')}), 400
         if not descripcion_problema:
-            return jsonify({'success': False, 'message': 'Descripción del problema requerida'}), 400
+            return jsonify({'success': False, 'message': _('descripcion_del_problema_requerida')}), 400
 
         usuario = Usuario.query.get(user_id)
         if not usuario:
-            return jsonify({'success': False, 'message': 'Usuario no encontrado'}), 404
+            return jsonify({'success': False, 'message': _('usuario_no_encontrado')}), 404
 
         respuesta_ia = _groq_respuesta(
             tipo_asesoria, descripcion_problema, prioridad,
@@ -70,13 +71,14 @@ def solicitar_asesoria():
 
         return jsonify({
             'success': True,
-            'message': 'Solicitud enviada y respondida por AgroIA' if respuesta_ia else 'Solicitud enviada. Un experto te responderá pronto.',
+            'message': _('solicitud_enviada_y_respondida_por_agroia') if respuesta_ia else 'Solicitud enviada. Un experto te responderá pronto.',
             'data':    asesoria.to_dict(),
         }), 201
 
-    except Exception as e:
+    except Exception:
         db.session.rollback()
-        return jsonify({'success': False, 'message': 'Error interno del servidor'}), 500
+        current_app.logger.exception('Error en asesoria')
+        return jsonify({'success': False, 'message': _('error_interno_del_servidor')}), 500
 
 
 @asesoria_bp.route('/mis-solicitudes', methods=['GET'])
@@ -91,7 +93,7 @@ def mis_asesorias():
         asesorias = query.order_by(Asesoria.fecha_solicitud.desc()).all()
         return jsonify({'success': True, 'data': [a.to_dict() for a in asesorias]}), 200
     except Exception:
-        return jsonify({'success': False, 'message': 'Error interno del servidor'}), 500
+        return jsonify({'success': False, 'message': _('error_interno_del_servidor')}), 500
 
 
 @asesoria_bp.route('/<int:asesoria_id>', methods=['GET'])
@@ -101,10 +103,10 @@ def detalle_asesoria(asesoria_id):
         user_id  = int(get_jwt_identity())
         asesoria = Asesoria.query.filter_by(id=asesoria_id, usuario_id=user_id).first()
         if not asesoria:
-            return jsonify({'success': False, 'message': 'Asesoría no encontrada'}), 404
+            return jsonify({'success': False, 'message': _('asesoria_no_encontrada')}), 404
         return jsonify({'success': True, 'data': asesoria.to_dict()}), 200
     except Exception:
-        return jsonify({'success': False, 'message': 'Error interno del servidor'}), 500
+        return jsonify({'success': False, 'message': _('error_interno_del_servidor')}), 500
 
 
 @asesoria_bp.route('/especialidades', methods=['GET'])

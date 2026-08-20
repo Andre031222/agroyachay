@@ -3,7 +3,8 @@ from flask import Blueprint, request, jsonify, make_response
 import requests
 from datetime import datetime
 import time
-from app.services.groq_service import analizar_clima_agricola, analizar_pronostico_agricola
+from app.services.groq_service import MODEL, analizar_clima_agricola, analizar_pronostico_agricola
+from app.i18n import translate as _
 
 clima_bp = Blueprint('clima', __name__)
 
@@ -74,11 +75,11 @@ def get_clima_actual():
         else:
             return jsonify({
                 'success': False,
-                'message': 'Error al obtener datos del clima'
+                'message': _('error_al_obtener_datos_del_clima')
             }), 500
 
     except Exception as e:
-        return jsonify({'success': False, 'message': 'Error interno del servidor'}), 500
+        return jsonify({'success': False, 'message': _('error_interno_del_servidor')}), 500
 
 
 @clima_bp.route('/pronostico', methods=['GET'])
@@ -129,11 +130,11 @@ def get_pronostico():
         else:
             return jsonify({
                 'success': False,
-                'message': 'Error al obtener pronóstico'
+                'message': _('error_al_obtener_pronostico')
             }), 500
 
     except Exception as e:
-        return jsonify({'success': False, 'message': 'Error interno del servidor'}), 500
+        return jsonify({'success': False, 'message': _('error_interno_del_servidor')}), 500
 
 
 @clima_bp.route('/alertas', methods=['GET'])
@@ -141,7 +142,7 @@ def get_alertas():
     try:
         return jsonify({'success': True, 'data': []}), 200
     except Exception as e:
-        return jsonify({'success': False, 'message': 'Error interno del servidor'}), 500
+        return jsonify({'success': False, 'message': _('error_interno_del_servidor')}), 500
 
 
 @clima_bp.route('/analisis-ia', methods=['POST'])
@@ -172,7 +173,7 @@ def analisis_clima_ia():
                     'descripcion': raw['weather'][0]['description']
                 }
             else:
-                return jsonify({'success': False, 'message': 'No se pudo obtener el clima actual'}), 502
+                return jsonify({'success': False, 'message': _('no_se_pudo_obtener_el_clima')}), 502
 
         resultado = analizar_clima_agricola(clima_data, cultivos)
 
@@ -183,11 +184,11 @@ def analisis_clima_ia():
             'success': True,
             'clima': clima_data,
             'analisis_ia': resultado['analisis'],
-            'modelo': 'llama-3.3-70b-versatile'
+            'modelo': MODEL
         }), 200
 
     except Exception as e:
-        return jsonify({'success': False, 'message': 'Error interno del servidor'}), 500
+        return jsonify({'success': False, 'message': _('error_interno_del_servidor')}), 500
 
 
 @clima_bp.route('/plan-semanal', methods=['POST'])
@@ -206,7 +207,7 @@ def plan_semanal_ia():
         }
         resp = requests.get(url, params=params, timeout=8)
         if resp.status_code != 200:
-            return jsonify({'success': False, 'message': 'No se pudo obtener el pronóstico'}), 502
+            return jsonify({'success': False, 'message': _('no_se_pudo_obtener_el_pronostico')}), 502
 
         pronostico = []
         for item in resp.json()['list']:
@@ -227,8 +228,8 @@ def plan_semanal_ia():
             'success': True,
             'plan_semanal': resultado['plan'],
             'pronostico_base': pronostico[:8],
-            'modelo': 'llama-3.3-70b-versatile'
+            'modelo': MODEL
         }), 200
 
     except Exception as e:
-        return jsonify({'success': False, 'message': 'Error interno del servidor'}), 500
+        return jsonify({'success': False, 'message': _('error_interno_del_servidor')}), 500

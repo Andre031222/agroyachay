@@ -2,6 +2,7 @@ from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required
 from app.models.sensor import ProductoMarketplace
 from app.services.marketplace_scraper import MarketplaceService
+from ..i18n import translate as _
 
 marketplace_bp = Blueprint('marketplace', __name__)
 
@@ -77,7 +78,7 @@ def buscar_productos():
     except Exception as e:
         return jsonify({
             'success': False,
-            'message': 'Error interno del servidor'
+            'message': _('error_interno_del_servidor')
         }), 500
 
 @marketplace_bp.route('/producto/<int:producto_id>', methods=['GET'])
@@ -89,7 +90,7 @@ def detalle_producto(producto_id):
         if not producto:
             return jsonify({
                 'success': False,
-                'message': 'Producto no encontrado'
+                'message': _('producto_no_encontrado')
             }), 404
 
         return jsonify({
@@ -100,7 +101,7 @@ def detalle_producto(producto_id):
     except Exception as e:
         return jsonify({
             'success': False,
-            'message': 'Error interno del servidor'
+            'message': _('error_interno_del_servidor')
         }), 500
 
 @marketplace_bp.route('/categorias', methods=['GET'])
@@ -123,7 +124,7 @@ def categorias():
     except Exception as e:
         return jsonify({
             'success': False,
-            'message': 'Error interno del servidor'
+            'message': _('error_interno_del_servidor')
         }), 500
 
 @marketplace_bp.route('/plataformas', methods=['GET'])
@@ -146,7 +147,7 @@ def plataformas():
     except Exception as e:
         return jsonify({
             'success': False,
-            'message': 'Error interno del servidor'
+            'message': _('error_interno_del_servidor')
         }), 500
 
 @marketplace_bp.route('/recomendaciones', methods=['GET'])
@@ -165,7 +166,7 @@ def recomendaciones():
     except Exception as e:
         return jsonify({
             'success': False,
-            'message': 'Error interno del servidor'
+            'message': _('error_interno_del_servidor')
         }), 500
 
 @marketplace_bp.route('/destacados', methods=['GET'])
@@ -184,5 +185,5 @@ def productos_destacados():
     except Exception as e:
         return jsonify({
             'success': False,
-            'message': 'Error interno del servidor'
+            'message': _('error_interno_del_servidor')
         }), 500

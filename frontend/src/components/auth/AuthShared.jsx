@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { authAPI } from '../../services/api';
 import { notify } from '../../utils/swal';
+import { useLanguage } from '../../context/LanguageContext';
 
 export const fieldClass =
   'w-full h-11 px-3.5 rounded-xl text-sm transition-all duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] ' +
@@ -42,13 +43,10 @@ const Check = () => (
   </svg>
 );
 
-const SHOWCASE_POINTS = [
-  'Sensores ESP32 en tiempo real',
-  'Detección de plagas con IA',
-  'Predicción de cosecha y clima',
-];
+export const AuthShowcase = ({ title, subtitle }) => {
+  const { t, tList } = useLanguage();
 
-export const AuthShowcase = ({ eyebrow, title, subtitle }) => (
+  return (
   <div className="relative hidden lg:flex flex-col justify-between overflow-hidden bg-[#04140d] px-12 py-14 text-white">
     <div aria-hidden className="pointer-events-none absolute -top-32 -left-24 w-[28rem] h-[28rem] rounded-full bg-emerald-500/25 blur-[120px]" />
     <div aria-hidden className="pointer-events-none absolute bottom-[-10rem] right-[-6rem] w-[32rem] h-[32rem] rounded-full bg-teal-400/15 blur-[140px]" />
@@ -65,7 +63,7 @@ export const AuthShowcase = ({ eyebrow, title, subtitle }) => (
       <p className="mt-5 text-base leading-relaxed text-emerald-100/70">{subtitle}</p>
 
       <ul className="mt-9 space-y-3">
-        {SHOWCASE_POINTS.map((point) => (
+        {tList('auth.showcasePoints').map((point) => (
           <li key={point} className="flex items-center gap-3 text-sm text-emerald-50/90">
             <span className="flex items-center justify-center w-7 h-7 rounded-full bg-emerald-500/15 ring-1 ring-emerald-300/20 text-emerald-300">
               <Check />
@@ -76,17 +74,21 @@ export const AuthShowcase = ({ eyebrow, title, subtitle }) => (
       </ul>
     </div>
 
-    <p className="relative text-xs text-emerald-100/40">Puno, Perú · Altiplano andino · {new Date().getFullYear()}</p>
+    <p className="relative text-xs text-emerald-100/40">
+      {t('auth.showcaseFooter', { year: new Date().getFullYear() })}
+    </p>
   </div>
-);
+  );
+};
 
 export const NameStep = ({ user, onConfirm }) => {
+  const { t } = useLanguage();
   const [nombre, setNombre] = useState(user?.nombre || '');
   const [saving, setSaving] = useState(false);
 
   const handleConfirm = async () => {
     if (!nombre.trim() || nombre.trim().length < 2) {
-      notify.error('Escribe al menos 2 caracteres');
+      notify.error(t('auth.nameTooShort'));
       return;
     }
     setSaving(true);
@@ -94,7 +96,7 @@ export const NameStep = ({ user, onConfirm }) => {
       await authAPI.updateName(nombre.trim());
       onConfirm(nombre.trim());
     } catch {
-      notify.error('No se pudo guardar el nombre');
+      notify.error(t('auth.nameSaveError'));
     } finally {
       setSaving(false);
     }
@@ -118,7 +120,7 @@ export const NameStep = ({ user, onConfirm }) => {
               </svg>
             </div>
           )}
-          <h2 className="text-lg font-semibold tracking-tight text-gray-900 dark:text-white mb-1">¿Cómo te llamamos?</h2>
+          <h2 className="text-lg font-semibold tracking-tight text-gray-900 dark:text-white mb-1">{t('auth.nameQuestion')}</h2>
           <p className="text-sm text-gray-500 dark:text-gray-400 mb-5">
             <span className="font-medium text-gray-700 dark:text-gray-300">{user?.email}</span>
           </p>
@@ -127,7 +129,7 @@ export const NameStep = ({ user, onConfirm }) => {
             value={nombre}
             onChange={e => setNombre(e.target.value)}
             onKeyDown={e => e.key === 'Enter' && handleConfirm()}
-            placeholder="Tu nombre"
+            placeholder={t('auth.namePlaceholder')}
             autoFocus
             className={fieldClass + ' mb-4'}
           />
@@ -137,7 +139,7 @@ export const NameStep = ({ user, onConfirm }) => {
             disabled={saving}
             className="w-full h-11 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-semibold transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.98] disabled:opacity-60 flex items-center justify-center gap-2"
           >
-            {saving ? <><Spinner /> Guardando…</> : 'Ir al panel'}
+            {saving ? <><Spinner /> {t('auth.saving')}</> : t('auth.goToDashboard')}
           </button>
         </div>
       </div>

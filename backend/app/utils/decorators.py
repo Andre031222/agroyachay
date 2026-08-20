@@ -2,6 +2,7 @@ from functools import wraps
 from flask import jsonify
 from flask_jwt_extended import verify_jwt_in_request, get_jwt_identity
 from app.models.user import Usuario
+from ..i18n import translate as _
 
 def token_required(f):
     @wraps(f)
@@ -12,7 +13,7 @@ def token_required(f):
         except Exception:
             return jsonify({
                 'success': False,
-                'message': 'Token inválido o expirado'
+                'message': _('token_invalido_o_expirado')
             }), 401
     return decorated
 

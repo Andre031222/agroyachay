@@ -1,10 +1,11 @@
 import os
-from flask import Blueprint, request, jsonify, make_response
+from flask import current_app, Blueprint, request, jsonify, make_response
 from werkzeug.utils import secure_filename
 from datetime import datetime
 from app.services.plantid_service import PlantIDService
-from app.services.groq_service import consejo_plaga, detectar_plaga_vision
+from app.services.groq_service import MODEL, consejo_plaga, detectar_plaga_vision
 from db import get_db_connection
+from app.i18n import translate as _
 
 plagas_bp = Blueprint('plagas', __name__)
 
@@ -21,14 +22,14 @@ def detectar_plaga():
     connection = None
     try:
         if 'imagen' not in request.files:
-            return jsonify({'success': False, 'message': 'No se proporcionó imagen'}), 400
+            return jsonify({'success': False, 'message': _('no_se_proporciono_imagen')}), 400
 
         file = request.files['imagen']
         _cid = request.form.get('cultivo_id')
         cultivo_id = int(_cid) if _cid and _cid.strip() else None
 
         if file.filename == '':
-            return jsonify({'success': False, 'message': 'Nombre de archivo vacío'}), 400
+            return jsonify({'success': False, 'message': _('nombre_de_archivo_vacio')}), 400
 
         if file and allowed_file(file.filename):
             os.makedirs(UPLOAD_FOLDER, exist_ok=True)
@@ -39,7 +40,7 @@ def detectar_plaga():
             resultado = PlantIDService.identify_disease(filepath)
 
             if not resultado:
-                return jsonify({'success': False, 'message': 'No se pudo analizar la imagen'}), 500
+                return jsonify({'success': False, 'message': _('no_se_pudo_analizar_la_imagen')}), 500
 
             connection = get_db_connection()
             cursor = connection.cursor()
@@ -82,7 +83,7 @@ def detectar_plaga():
 
             return jsonify({
                 'success': True,
-                'message': 'Detección completada y guardada',
+                'message': _('deteccion_completada_y_guardada'),
                 'data': {
                     'id': deteccion_id,
                     'cultivo_id': cultivo_id,
@@ -99,12 +100,12 @@ def detectar_plaga():
                 }
             }), 201
 
-        return jsonify({'success': False, 'message': 'Tipo de archivo no permitido'}), 400
+        return jsonify({'success': False, 'message': _('tipo_de_archivo_no_permitido')}), 400
 
     except Exception as e:
         if connection:
             connection.rollback()
-        return jsonify({'success': False, 'message': 'Error interno del servidor'}), 500
+        return jsonify({'success': False, 'message': _('error_interno_del_servidor')}), 500
 
     finally:
         if connection:
@@ -116,7 +117,7 @@ def detectar_con_groq():
     connection = None
     try:
         if 'imagen' not in request.files:
-            return jsonify({'success': False, 'message': 'No se proporcionó imagen'}), 400
+            return jsonify({'success': False, 'message': _('no_se_proporciono_imagen')}), 400
 
         file = request.files['imagen']
         _cid = request.form.get('cultivo_id')
@@ -124,7 +125,7 @@ def detectar_con_groq():
         cultivo_nombre = request.form.get('cultivo_nombre', '')
 
         if not file.filename:
-            return jsonify({'success': False, 'message': 'Archivo vacío'}), 400
+            return jsonify({'success': False, 'message': _('archivo_vacio')}), 400
 
         if file and allowed_file(file.filename):
             os.makedirs(UPLOAD_FOLDER, exist_ok=True)
@@ -135,7 +136,8 @@ def detectar_con_groq():
             vision_result = detectar_plaga_vision(filepath, cultivo_nombre)
 
             if not vision_result['success']:
-                return jsonify({'success': False, 'message': f"Error de IA: {vision_result['error']}"}), 503
+                current_app.logger.warning('Vision service failed: %s', vision_result['error'])
+                return jsonify({'success': False, 'message': _('servicio_vision_no_disponible')}), 503
 
             r = vision_result['resultado']
             nombre_plaga = r.get('nombre', 'Desconocido')
@@ -172,7 +174,7 @@ def detectar_con_groq():
 
             return jsonify({
                 'success': True,
-                'message': 'Detección completada con Groq Vision',
+                'message': _('deteccion_completada_con_groq_vision'),
                 'data': {
                     'id':           row['id'],
                     'cultivo_id':   cultivo_id,
@@ -190,12 +192,12 @@ def detectar_con_groq():
                 }
             }), 201
 
-        return jsonify({'success': False, 'message': 'Tipo de archivo no permitido'}), 400
+        return jsonify({'success': False, 'message': _('tipo_de_archivo_no_permitido')}), 400
 
     except Exception as e:
         if connection:
             connection.rollback()
-        return jsonify({'success': False, 'message': 'Error interno del servidor'}), 500
+        return jsonify({'success': False, 'message': _('error_interno_del_servidor')}), 500
     finally:
         if connection:
             connection.close()
@@ -242,7 +244,7 @@ def biblioteca_plagas():
         resp.headers['Cache-Control'] = 'public, max-age=3600'
         return resp
     except Exception as e:
-        return jsonify({'success': False, 'message': 'Error interno del servidor'}), 500
+        return jsonify({'success': False, 'message': _('error_interno_del_servidor')}), 500
 
 
 @plagas_bp.route('/detecciones', methods=['GET'])
@@ -277,7 +279,7 @@ def get_detecciones():
     except Exception as e:
         return jsonify({
             'success': False,
-            'message': 'Error obteniendo detecciones'
+            'message': _('error_obteniendo_detecciones')
         }), 500
 
 
@@ -313,7 +315,7 @@ def get_detecciones_cultivo(cultivo_id):
     except Exception as e:
         return jsonify({
             'success': False,
-            'message': 'Error obteniendo detecciones'
+            'message': _('error_obteniendo_detecciones')
         }), 500
 
 
@@ -322,7 +324,7 @@ def consejo_ia():
     try:
         data = request.get_json()
         if not data or not data.get('nombre_plaga'):
-            return jsonify({'success': False, 'message': 'El campo "nombre_plaga" es requerido'}), 400
+            return jsonify({'success': False, 'message': _('el_campo_nombre_plaga_es_requerido')}), 400
 
         resultado = consejo_plaga(data)
 
@@ -332,8 +334,8 @@ def consejo_ia():
         return jsonify({
             'success': True,
             'data': resultado['consejo'],
-            'modelo': 'llama-3.3-70b-versatile'
+            'modelo': MODEL
         }), 200
 
     except Exception as e:
-        return jsonify({'success': False, 'message': 'Error interno del servidor'}), 500
+        return jsonify({'success': False, 'message': _('error_interno_del_servidor')}), 500

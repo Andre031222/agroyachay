@@ -3,13 +3,13 @@ export const CULTIVOS_PUNO = {
     nombre: 'Papa',
     descripcion: 'Principal cultivo de la región',
     variedades: [
-      { nombre: 'Canchan', rendimiento: '25-30 t/ha', ciclo: '150-180 días' },
-      { nombre: 'Perricholi', rendimiento: '28-32 t/ha', ciclo: '140-170 días' },
-      { nombre: 'Yungay', rendimiento: '30-35 t/ha', ciclo: '150-180 días' },
-      { nombre: 'Única', rendimiento: '22-28 t/ha', ciclo: '140-160 días' },
-      { nombre: 'Amarilla', rendimiento: '20-25 t/ha', ciclo: '150-170 días' },
-      { nombre: 'Huayro', rendimiento: '18-22 t/ha', ciclo: '160-180 días' },
-      { nombre: 'Peruanita', rendimiento: '25-30 t/ha', ciclo: '150-175 días' }
+      { nombre: 'Canchan', rendimiento: '25-30 t/ha', ciclo: '150-180' },
+      { nombre: 'Perricholi', rendimiento: '28-32 t/ha', ciclo: '140-170' },
+      { nombre: 'Yungay', rendimiento: '30-35 t/ha', ciclo: '150-180' },
+      { nombre: 'Única', rendimiento: '22-28 t/ha', ciclo: '140-160' },
+      { nombre: 'Amarilla', rendimiento: '20-25 t/ha', ciclo: '150-170' },
+      { nombre: 'Huayro', rendimiento: '18-22 t/ha', ciclo: '160-180' },
+      { nombre: 'Peruanita', rendimiento: '25-30 t/ha', ciclo: '150-175' }
     ],
     icon: '🥔',
     altitud: '3800-4200 msnm'
@@ -18,11 +18,11 @@ export const CULTIVOS_PUNO = {
     nombre: 'Quinua',
     descripcion: 'Superalimento andino de alto valor',
     variedades: [
-      { nombre: 'Blanca de Juli', rendimiento: '1.5-2.5 t/ha', ciclo: '150-180 días' },
-      { nombre: 'Pasankalla', rendimiento: '1.2-1.8 t/ha', ciclo: '160-190 días' },
-      { nombre: 'Kancolla', rendimiento: '1.8-2.5 t/ha', ciclo: '150-170 días' },
-      { nombre: 'Salcedo INIA', rendimiento: '2.0-3.0 t/ha', ciclo: '160-180 días' },
-      { nombre: 'Illpa INIA', rendimiento: '2.5-3.5 t/ha', ciclo: '150-170 días' }
+      { nombre: 'Blanca de Juli', rendimiento: '1.5-2.5 t/ha', ciclo: '150-180' },
+      { nombre: 'Pasankalla', rendimiento: '1.2-1.8 t/ha', ciclo: '160-190' },
+      { nombre: 'Kancolla', rendimiento: '1.8-2.5 t/ha', ciclo: '150-170' },
+      { nombre: 'Salcedo INIA', rendimiento: '2.0-3.0 t/ha', ciclo: '160-180' },
+      { nombre: 'Illpa INIA', rendimiento: '2.5-3.5 t/ha', ciclo: '150-170' }
     ],
     icon: '🌾',
     altitud: '3800-4000 msnm'
@@ -31,9 +31,9 @@ export const CULTIVOS_PUNO = {
     nombre: 'Cañihua',
     descripcion: 'Grano andino resistente a heladas',
     variedades: [
-      { nombre: 'Cupi', rendimiento: '0.8-1.2 t/ha', ciclo: '140-160 días' },
-      { nombre: 'Illpa INIA', rendimiento: '1.0-1.5 t/ha', ciclo: '150-170 días' },
-      { nombre: 'Ramis', rendimiento: '0.9-1.3 t/ha', ciclo: '145-165 días' }
+      { nombre: 'Cupi', rendimiento: '0.8-1.2 t/ha', ciclo: '140-160' },
+      { nombre: 'Illpa INIA', rendimiento: '1.0-1.5 t/ha', ciclo: '150-170' },
+      { nombre: 'Ramis', rendimiento: '0.9-1.3 t/ha', ciclo: '145-165' }
     ],
     icon: '🌱',
     altitud: '3800-4500 msnm'
@@ -42,9 +42,9 @@ export const CULTIVOS_PUNO = {
     nombre: 'Habas',
     descripcion: 'Leguminosa de grano',
     variedades: [
-      { nombre: 'Blanca grande', rendimiento: '2.5-3.5 t/ha', ciclo: '180-210 días' },
-      { nombre: 'Verde criolla', rendimiento: '2.0-3.0 t/ha', ciclo: '170-200 días' },
-      { nombre: 'Morada', rendimiento: '2.2-3.2 t/ha', ciclo: '175-205 días' }
+      { nombre: 'Blanca grande', rendimiento: '2.5-3.5 t/ha', ciclo: '180-210' },
+      { nombre: 'Verde criolla', rendimiento: '2.0-3.0 t/ha', ciclo: '170-200' },
+      { nombre: 'Morada', rendimiento: '2.2-3.2 t/ha', ciclo: '175-205' }
     ],
     icon: '🫘',
     altitud: '3200-3800 msnm'
@@ -53,9 +53,9 @@ export const CULTIVOS_PUNO = {
     nombre: 'Cebada',
     descripcion: 'Cereal para grano y forraje',
     variedades: [
-      { nombre: 'Centenario', rendimiento: '2.0-3.0 t/ha', ciclo: '150-180 días' },
-      { nombre: 'INIA 420', rendimiento: '2.5-3.5 t/ha', ciclo: '140-170 días' },
-      { nombre: 'Zapata', rendimiento: '2.2-3.2 t/ha', ciclo: '145-175 días' }
+      { nombre: 'Centenario', rendimiento: '2.0-3.0 t/ha', ciclo: '150-180' },
+      { nombre: 'INIA 420', rendimiento: '2.5-3.5 t/ha', ciclo: '140-170' },
+      { nombre: 'Zapata', rendimiento: '2.2-3.2 t/ha', ciclo: '145-175' }
     ],
     icon: '🌾',
     altitud: '3500-4000 msnm'
@@ -64,9 +64,9 @@ export const CULTIVOS_PUNO = {
     nombre: 'Avena Forrajera',
     descripcion: 'Forraje para ganado',
     variedades: [
-      { nombre: 'Mantaro 15', rendimiento: '25-35 t/ha', ciclo: '120-150 días' },
-      { nombre: 'Tayko', rendimiento: '30-40 t/ha', ciclo: '130-160 días' },
-      { nombre: 'Vilcanota', rendimiento: '28-38 t/ha', ciclo: '125-155 días' }
+      { nombre: 'Mantaro 15', rendimiento: '25-35 t/ha', ciclo: '120-150' },
+      { nombre: 'Tayko', rendimiento: '30-40 t/ha', ciclo: '130-160' },
+      { nombre: 'Vilcanota', rendimiento: '28-38 t/ha', ciclo: '125-155' }
     ],
     icon: '🌾',
     altitud: '3200-4000 msnm'
@@ -75,8 +75,8 @@ export const CULTIVOS_PUNO = {
     nombre: 'Tarwi (Chocho)',
     descripcion: 'Leguminosa de alto valor proteico',
     variedades: [
-      { nombre: 'Altagracia', rendimiento: '1.5-2.5 t/ha', ciclo: '180-210 días' },
-      { nombre: 'Yunguyo', rendimiento: '1.8-2.8 t/ha', ciclo: '170-200 días' }
+      { nombre: 'Altagracia', rendimiento: '1.5-2.5 t/ha', ciclo: '180-210' },
+      { nombre: 'Yunguyo', rendimiento: '1.8-2.8 t/ha', ciclo: '170-200' }
     ],
     icon: '🫛',
     altitud: '3200-3800 msnm'
@@ -85,9 +85,9 @@ export const CULTIVOS_PUNO = {
     nombre: 'Oca',
     descripcion: 'Tubérculo andino tradicional',
     variedades: [
-      { nombre: 'Amarilla', rendimiento: '8-12 t/ha', ciclo: '180-210 días' },
-      { nombre: 'Rosada', rendimiento: '7-11 t/ha', ciclo: '185-215 días' },
-      { nombre: 'Blanca', rendimiento: '9-13 t/ha', ciclo: '175-205 días' }
+      { nombre: 'Amarilla', rendimiento: '8-12 t/ha', ciclo: '180-210' },
+      { nombre: 'Rosada', rendimiento: '7-11 t/ha', ciclo: '185-215' },
+      { nombre: 'Blanca', rendimiento: '9-13 t/ha', ciclo: '175-205' }
     ],
     icon: '🥔',
     altitud: '3500-4200 msnm'

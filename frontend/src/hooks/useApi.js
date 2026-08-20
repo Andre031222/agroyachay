@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { notify } from '../utils/swal';
+import { translateKey } from '../utils/i18nBridge';
 
 export const useApi = (apiFunction, params = null, dependencies = []) => {
   const [data, setData]       = useState(null);
@@ -14,7 +15,7 @@ export const useApi = (apiFunction, params = null, dependencies = []) => {
       setData(response.data.data || response.data);
     } catch (err) {
       setError(err);
-      notify.error(err.response?.data?.message || 'Error al cargar datos');
+      notify.error(err.response?.data?.message || translateKey('common.loadError'));
     } finally {
       setLoading(false);
     }

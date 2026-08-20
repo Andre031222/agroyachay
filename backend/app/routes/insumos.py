@@ -1,4 +1,5 @@
 from flask import Blueprint, request, jsonify
+from ..i18n import translate as _
 
 insumos_bp = Blueprint('insumos', __name__)
 
@@ -8,13 +9,13 @@ def get_insumos_cultivo(cultivo_id):
         return jsonify({
             'success': True,
             'data': [],
-            'message': 'Endpoint en desarrollo'
+            'message': _('endpoint_en_desarrollo')
         }), 200
 
     except Exception as e:
         return jsonify({
             'success': False,
-            'message': 'Error interno del servidor'
+            'message': _('error_interno_del_servidor')
         }), 500
 
 @insumos_bp.route('/', methods=['POST'])
@@ -24,14 +25,14 @@ def agregar_insumo():
 
         return jsonify({
             'success': True,
-            'message': 'Insumo agregado exitosamente',
+            'message': _('insumo_agregado_exitosamente'),
             'data': data
         }), 201
 
     except Exception as e:
         return jsonify({
             'success': False,
-            'message': 'Error interno del servidor'
+            'message': _('error_interno_del_servidor')
         }), 500
 
 @insumos_bp.route('/calcular', methods=['POST'])
@@ -106,7 +107,7 @@ def calcular_insumos():
     except Exception as e:
         return jsonify({
             'success': False,
-            'message': 'Error interno del servidor'
+            'message': _('error_interno_del_servidor')
         }), 500
 
 @insumos_bp.route('/estadisticas/<int:cultivo_id>', methods=['GET'])
@@ -123,5 +124,5 @@ def estadisticas_insumos(cultivo_id):
     except Exception as e:
         return jsonify({
             'success': False,
-            'message': 'Error interno del servidor'
+            'message': _('error_interno_del_servidor')
         }), 500

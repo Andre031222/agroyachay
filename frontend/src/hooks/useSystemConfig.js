@@ -1,21 +1,22 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { publicConfigAPI } from '../services/api';
+import { useLanguage } from '../context/LanguageContext';
 
 const CACHE_TTL = 10 * 60 * 1000;
 
 export const DEFAULT_CONFIG = {
   site_name: 'AgroYachay',
-  site_tagline: 'Agricultura Inteligente',
-  hero_title: 'campo agrícola',
-  hero_description: 'IoT, inteligencia artificial y análisis predictivo en una sola plataforma. Diseñado para zonas remotas del Perú donde el agricultor opera solo.',
-  hero_cta: 'Comenzar gratis',
-  ecosystem_title: 'Todo lo que necesitas en una plataforma',
-  ecosystem_description: '8 módulos integrados que se alimentan entre sí. Los datos del sensor mejoran la predicción, el clima informa las alertas, la IA conecta todo.',
+  site_tagline: '',
+  hero_title: '',
+  hero_description: '',
+  hero_cta: '',
+  ecosystem_title: '',
+  ecosystem_description: '',
   announcement_enabled: 'false',
   announcement_text: '',
   announcement_color: '#10b981',
   nav_items: '[]',
-  footer_description: 'Plataforma agrícola con IoT, inteligencia artificial y análisis predictivo. Diseñada para zonas remotas del Perú donde el agricultor trabaja solo y necesita control total de su campo.',
+  footer_description: '',
   footer_institution: '',
   footer_contact: 'mvladimir290@gmail.com',
   footer_copyright: '',
@@ -24,7 +25,7 @@ export const DEFAULT_CONFIG = {
   social_instagram: '',
   social_linkedin: '',
   maintenance_mode: 'false',
-  maintenance_message: 'El sistema está en mantenimiento. Por favor intente más tarde.',
+  maintenance_message: '',
   ga4_id: '',
   logo: '',
   favicon: '',
@@ -32,10 +33,22 @@ export const DEFAULT_CONFIG = {
   cover_image: '',
 };
 
+const TRANSLATABLE_KEYS = [
+  'site_tagline',
+  'hero_title',
+  'hero_description',
+  'hero_cta',
+  'ecosystem_title',
+  'ecosystem_description',
+  'footer_description',
+  'maintenance_message',
+];
+
 let _cache = null;
 let _cacheTs = 0;
 
 export function useSystemConfig() {
+  const { t } = useLanguage();
   const [config, setConfig] = useState({ ...DEFAULT_CONFIG });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -77,6 +90,14 @@ export function useSystemConfig() {
     setConfig({ ...DEFAULT_CONFIG });
   };
 
+  const localizedConfig = useMemo(() => {
+    const merged = { ...config };
+    for (const key of TRANSLATABLE_KEYS) {
+      if (!merged[key]) merged[key] = t(`siteDefaults.${key}`);
+    }
+    return merged;
+  }, [config, t]);
+
   const bool = (key) => config[key] === 'true' || config[key] === true;
   const json = (key) => {
     try { return JSON.parse(config[key] || '[]'); }
@@ -85,7 +106,7 @@ export function useSystemConfig() {
   const imageUrl = (key) =>
     config[key] ? publicConfigAPI.imageUrl(key) : null;
 
-  return { config, loading, error, refresh, bool, json, imageUrl };
+  return { config: localizedConfig, loading, error, refresh, bool, json, imageUrl };
 }
 
 export function invalidateSystemConfigCache() {

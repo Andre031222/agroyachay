@@ -1,4 +1,5 @@
 import Swal from 'sweetalert2';
+import { translateKey } from './i18nBridge';
 
 const theme = () => {
   const dark = document.documentElement.classList.contains('dark');
@@ -23,14 +24,14 @@ export const notify = {
   info:    (title) => Toast.fire({ icon: 'info',    title, ...theme() }),
 };
 
-export async function confirmAction({ title, text, confirmText = 'Confirmar', danger = false }) {
+export async function confirmAction({ title, text, confirmText, danger = false }) {
   const result = await Swal.fire({
     title,
     text,
     icon: danger ? 'warning' : 'question',
     showCancelButton: true,
-    confirmButtonText: confirmText,
-    cancelButtonText: 'Cancelar',
+    confirmButtonText: confirmText || translateKey('common.confirm'),
+    cancelButtonText: translateKey('common.cancel'),
     reverseButtons: true,
     confirmButtonColor: danger ? '#ef4444' : '#10b981',
     cancelButtonColor:  '#6b7280',

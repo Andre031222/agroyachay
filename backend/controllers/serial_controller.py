@@ -2,6 +2,7 @@ from flask import Blueprint, request, jsonify
 import json
 import time
 import socket
+from app.i18n import translate as _
 
 try:
     import serial
@@ -79,7 +80,7 @@ def detectar():
     if not SERIAL_AVAILABLE:
         return jsonify({
             'success': False,
-            'message': 'pyserial no está instalado. Ejecuta: pip install pyserial'
+            'message': _('pyserial_no_esta_instalado_ejecuta_pip')
         }), 500
 
     puertos = []
@@ -108,12 +109,12 @@ def detectar():
 @serial_bp.route('/identificar', methods=['POST'])
 def identificar():
     if not SERIAL_AVAILABLE:
-        return jsonify({'success': False, 'message': 'pyserial no instalado'}), 500
+        return jsonify({'success': False, 'message': _('pyserial_no_instalado')}), 500
 
     data = request.get_json(silent=True) or {}
     port = data.get('port', '').strip()
     if not port:
-        return jsonify({'success': False, 'message': 'Falta el campo "port"'}), 400
+        return jsonify({'success': False, 'message': _('falta_el_campo_port')}), 400
 
     try:
         ser = _abrir_puerto(port, timeout=5.0, boot_wait=0.5)
@@ -132,18 +133,18 @@ def identificar():
     except TimeoutError as e:
         return jsonify({'success': False, 'message': str(e)}), 408
     except Exception as e:
-        return jsonify({'success': False, 'message': 'Error interno del servidor'}), 500
+        return jsonify({'success': False, 'message': _('error_interno_del_servidor')}), 500
 
 
 @serial_bp.route('/scan-wifi', methods=['POST'])
 def scan_wifi():
     if not SERIAL_AVAILABLE:
-        return jsonify({'success': False, 'message': 'pyserial no instalado'}), 500
+        return jsonify({'success': False, 'message': _('pyserial_no_instalado')}), 500
 
     data = request.get_json(silent=True) or {}
     port = data.get('port', '').strip()
     if not port:
-        return jsonify({'success': False, 'message': 'Falta el campo "port"'}), 400
+        return jsonify({'success': False, 'message': _('falta_el_campo_port')}), 400
 
     try:
         ser = _abrir_puerto(port, timeout=16.0, boot_wait=0.3)
@@ -162,13 +163,13 @@ def scan_wifi():
     except TimeoutError as e:
         return jsonify({'success': False, 'message': str(e)}), 408
     except Exception as e:
-        return jsonify({'success': False, 'message': 'Error interno del servidor'}), 500
+        return jsonify({'success': False, 'message': _('error_interno_del_servidor')}), 500
 
 
 @serial_bp.route('/configurar', methods=['POST'])
 def configurar():
     if not SERIAL_AVAILABLE:
-        return jsonify({'success': False, 'message': 'pyserial no instalado'}), 500
+        return jsonify({'success': False, 'message': _('pyserial_no_instalado')}), 500
 
     data = request.get_json(silent=True) or {}
     port = data.get('port', '').strip()
@@ -177,11 +178,11 @@ def configurar():
     server_url = data.get('server_url', '').strip()
 
     if not port:
-        return jsonify({'success': False, 'message': 'Falta el campo "port"'}), 400
+        return jsonify({'success': False, 'message': _('falta_el_campo_port')}), 400
     if not ssid:
-        return jsonify({'success': False, 'message': 'Falta el campo "ssid"'}), 400
+        return jsonify({'success': False, 'message': _('falta_el_campo_ssid')}), 400
     if not server_url:
-        return jsonify({'success': False, 'message': 'Falta el campo "server_url"'}), 400
+        return jsonify({'success': False, 'message': _('falta_el_campo_server_url')}), 400
 
     try:
         ser = _abrir_puerto(port, timeout=8.0, boot_wait=0.3)
@@ -200,7 +201,7 @@ def configurar():
             return jsonify({
                 'success': True,
                 'device_id': resultado.get('device_id', ''),
-                'message': 'ESP32 configurado correctamente. Conectándose a WiFi...',
+                'message': _('esp32_configurado_correctamente_conectandose_a_wifi'),
             })
         else:
             return jsonify({'success': False, 'message': resultado.get('error', 'Error al configurar')}), 400
@@ -210,7 +211,7 @@ def configurar():
     except TimeoutError as e:
         return jsonify({'success': False, 'message': str(e)}), 408
     except Exception as e:
-        return jsonify({'success': False, 'message': 'Error interno del servidor'}), 500
+        return jsonify({'success': False, 'message': _('error_interno_del_servidor')}), 500
 
 
 @serial_bp.route('/server-info', methods=['GET'])

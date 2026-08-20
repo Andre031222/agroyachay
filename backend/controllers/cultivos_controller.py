@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required, get_jwt_identity, verify_jwt_in_request
 from db import get_db_connection
+from app.i18n import translate as _
 
 cultivos_bp = Blueprint('cultivos', __name__)
 
@@ -48,7 +49,7 @@ def list_cultivos():
 
         return jsonify({'success': True, 'data': cultivos}), 200
     except Exception:
-        return jsonify({'success': False, 'message': 'Error obteniendo cultivos'}), 500
+        return jsonify({'success': False, 'message': _('error_obteniendo_cultivos')}), 500
 
 
 @cultivos_bp.route('', methods=['POST'])
@@ -70,7 +71,7 @@ def create_cultivo():
         descripcion  = (data.get('descripcion') or data.get('notas') or '').strip()
 
         if not nombre or not tipo_cultivo:
-            return jsonify({'success': False, 'message': 'Nombre y tipo de cultivo son requeridos'}), 400
+            return jsonify({'success': False, 'message': _('nombre_y_tipo_de_cultivo_son')}), 400
 
         conn = get_db_connection()
         cur  = conn.cursor()
@@ -90,7 +91,7 @@ def create_cultivo():
 
         return jsonify({
             'success': True,
-            'message': 'Cultivo creado',
+            'message': _('cultivo_creado'),
             'data': {
                 'id':          row['id'],
                 'usuario_id':  uid,
@@ -107,7 +108,7 @@ def create_cultivo():
             }
         }), 201
     except Exception:
-        return jsonify({'success': False, 'message': 'Error creando cultivo'}), 500
+        return jsonify({'success': False, 'message': _('error_creando_cultivo')}), 500
 
 
 @cultivos_bp.route('/<int:cultivo_id>', methods=['GET'])
@@ -128,7 +129,7 @@ def get_cultivo(cultivo_id):
         cur.close(); conn.close()
 
         if not row:
-            return jsonify({'success': False, 'message': 'Cultivo no encontrado'}), 404
+            return jsonify({'success': False, 'message': _('cultivo_no_encontrado')}), 404
 
         c = dict(row)
         for f in ('fecha_siembra', 'fecha_cosecha_estimada', 'fecha_creacion'):
@@ -138,7 +139,7 @@ def get_cultivo(cultivo_id):
             c['area'] = c['area_hectareas']
         return jsonify({'success': True, 'data': c}), 200
     except Exception:
-        return jsonify({'success': False, 'message': 'Error obteniendo cultivo'}), 500
+        return jsonify({'success': False, 'message': _('error_obteniendo_cultivo')}), 500
 
 
 @cultivos_bp.route('/<int:cultivo_id>', methods=['PUT'])
@@ -166,7 +167,7 @@ def update_cultivo(cultivo_id):
                 vals.append(val)
 
         if not sets:
-            return jsonify({'success': False, 'message': 'Sin campos para actualizar'}), 400
+            return jsonify({'success': False, 'message': _('sin_campos_para_actualizar')}), 400
 
         sets.append('fecha_actualizacion = CURRENT_TIMESTAMP')
         vals.extend([cultivo_id, uid])
@@ -179,10 +180,10 @@ def update_cultivo(cultivo_id):
         cur.close(); conn.close()
 
         if not updated:
-            return jsonify({'success': False, 'message': 'Cultivo no encontrado'}), 404
-        return jsonify({'success': True, 'message': 'Cultivo actualizado'}), 200
+            return jsonify({'success': False, 'message': _('cultivo_no_encontrado')}), 404
+        return jsonify({'success': True, 'message': _('cultivo_actualizado')}), 200
     except Exception:
-        return jsonify({'success': False, 'message': 'Error actualizando cultivo'}), 500
+        return jsonify({'success': False, 'message': _('error_actualizando_cultivo')}), 500
 
 
 @cultivos_bp.route('/<int:cultivo_id>', methods=['DELETE'])
@@ -198,10 +199,10 @@ def delete_cultivo(cultivo_id):
         cur.close(); conn.close()
 
         if not deleted:
-            return jsonify({'success': False, 'message': 'Cultivo no encontrado'}), 404
-        return jsonify({'success': True, 'message': 'Cultivo eliminado'}), 200
+            return jsonify({'success': False, 'message': _('cultivo_no_encontrado')}), 404
+        return jsonify({'success': True, 'message': _('cultivo_eliminado')}), 200
     except Exception:
-        return jsonify({'success': False, 'message': 'Error eliminando cultivo'}), 500
+        return jsonify({'success': False, 'message': _('error_eliminando_cultivo')}), 500
 
 
 @cultivos_bp.route('/tipos', methods=['GET'])
@@ -233,7 +234,7 @@ def estadisticas_cultivos():
         cur.close(); conn.close()
         return jsonify({'success': True, 'data': {'total_cultivos': total, 'area_total_hectareas': area_total, 'por_estado': por_estado, 'por_tipo': por_tipo}}), 200
     except Exception:
-        return jsonify({'success': False, 'message': 'Error obteniendo estadísticas'}), 500
+        return jsonify({'success': False, 'message': _('error_obteniendo_estadisticas')}), 500
 
 
 @cultivos_bp.route('/<int:cultivo_id>', methods=['OPTIONS'])

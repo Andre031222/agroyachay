@@ -1,4 +1,5 @@
-from flask import Blueprint, request, jsonify, send_file
+import unicodedata
+from flask import current_app, Blueprint, request, jsonify, send_file
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from app.models import db
 from app.models.cultivo import Cultivo, ActividadCultivo, Insumo
@@ -21,10 +22,25 @@ from app.utils.pdf_reports_advanced import generar_dashboard_ejecutivo_pdf_avanz
 from datetime import datetime
 import os
 import json
+from ..i18n import translate as _
 
 informes_bp = Blueprint('informes', __name__)
 
 REPORTS_FOLDER = 'uploads/informes'
+
+REPORT_TYPES = {
+    'dashboard ejecutivo': 'Dashboard Ejecutivo',
+    'estado de cultivos': 'Estado de Cultivos',
+    'analisis financiero': 'Análisis Financiero',
+    'impacto climatico': 'Impacto Climático',
+}
+
+
+def _normalize_report_type(value):
+    plain = unicodedata.normalize('NFD', str(value or '').strip().lower())
+    plain = ''.join(ch for ch in plain if unicodedata.category(ch) != 'Mn')
+    return REPORT_TYPES.get(plain)
+
 
 @informes_bp.route('/generar', methods=['POST'])
 @jwt_required()
@@ -33,14 +49,20 @@ def generar_informe():
         user_id = int(get_jwt_identity())
         data = request.get_json()
 
-        tipo_informe = data.get('tipo_informe')
-        formato = data.get('formato', 'PDF')
+        tipo_informe = _normalize_report_type(data.get('tipo_informe'))
+        formato = 'Excel' if str(data.get('formato', 'PDF')).upper() == 'EXCEL' else 'PDF'
         parametros = data.get('parametros', {})
+
+        if not data.get('tipo_informe'):
+            return jsonify({
+                'success': False,
+                'message': _('tipo_de_informe_requerido')
+            }), 400
 
         if not tipo_informe:
             return jsonify({
                 'success': False,
-                'message': 'Tipo de informe requerido'
+                'message': _('tipo_de_informe_no_valido')
             }), 400
 
         os.makedirs(REPORTS_FOLDER, exist_ok=True)
@@ -62,7 +84,7 @@ def generar_informe():
             else:
                 return jsonify({
                     'success': False,
-                    'message': 'Tipo de informe no válido'
+                    'message': _('tipo_de_informe_no_valido')
                 }), 400
         else:
             if tipo_informe == 'Dashboard Ejecutivo':
@@ -76,7 +98,7 @@ def generar_informe():
             else:
                 return jsonify({
                     'success': False,
-                    'message': 'Tipo de informe no válido'
+                    'message': _('tipo_de_informe_no_valido')
                 }), 400
 
         informe = Informe(
@@ -92,7 +114,7 @@ def generar_informe():
 
         return jsonify({
             'success': True,
-            'message': 'Informe generado exitosamente',
+            'message': _('informe_generado_exitosamente'),
             'data': {
                 'informe_id': informe.id,
                 'url': informe.archivo_url,
@@ -100,11 +122,12 @@ def generar_informe():
             }
         }), 201
 
-    except Exception as e:
+    except Exception:
         db.session.rollback()
+        current_app.logger.exception('Error generando informe %s (%s)', tipo_informe, formato)
         return jsonify({
             'success': False,
-            'message': 'Error interno del servidor'
+            'message': _('error_interno_del_servidor')
         }), 500
 
 @informes_bp.route('/mis-informes', methods=['GET'])
@@ -124,7 +147,7 @@ def mis_informes():
     except Exception as e:
         return jsonify({
             'success': False,
-            'message': 'Error interno del servidor'
+            'message': _('error_interno_del_servidor')
         }), 500
 
 @informes_bp.route('/descargar/<int:informe_id>', methods=['GET'])
@@ -137,7 +160,7 @@ def descargar_informe(informe_id):
         if not informe:
             return jsonify({
                 'success': False,
-                'message': 'Informe no encontrado'
+                'message': _('informe_no_encontrado')
             }), 404
 
         filepath = informe.archivo_url.lstrip('/')
@@ -145,7 +168,7 @@ def descargar_informe(informe_id):
         if not os.path.exists(filepath):
             return jsonify({
                 'success': False,
-                'message': 'Archivo no encontrado'
+                'message': _('archivo_no_encontrado')
             }), 404
 
         return send_file(filepath, as_attachment=True)
@@ -153,7 +176,7 @@ def descargar_informe(informe_id):
     except Exception as e:
         return jsonify({
             'success': False,
-            'message': 'Error interno del servidor'
+            'message': _('error_interno_del_servidor')
         }), 500
 
 @informes_bp.route('/estadisticas', methods=['GET'])
@@ -198,7 +221,7 @@ def estadisticas_informes():
     except Exception as e:
         return jsonify({
             'success': False,
-            'message': 'Error interno del servidor'
+            'message': _('error_interno_del_servidor')
         }), 500
 
 

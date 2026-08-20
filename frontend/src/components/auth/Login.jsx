@@ -3,7 +3,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useGoogleLogin } from '@react-oauth/google';
 import { useAuth } from '../../hooks/useAuth';
 import ThemeToggle from '../common/ThemeToggle';
+import LanguageSelector from '../common/LanguageSelector';
 import { notify } from '../../utils/swal';
+import { useLanguage } from '../../context/LanguageContext';
 import { NameStep, GoogleIcon, Spinner, EyeOpen, EyeClose, fieldClass } from './AuthShared';
 
 const Login = () => {
@@ -13,6 +15,7 @@ const Login = () => {
   const [loading, setLoading]       = useState(false);
   const [nameStep, setNameStep]     = useState(null);
   const { login, loginWithGoogle }  = useAuth();
+  const { t } = useLanguage();
   const navigate = useNavigate();
 
   const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -35,13 +38,13 @@ const Login = () => {
           if (r.isNewUser) {
             setNameStep(r.user);
           } else {
-            notify.success('¡Bienvenido de nuevo!');
+            notify.success(t('auth.welcomeBack'));
             navigate('/dashboard', { replace: true });
           }
         }
       } finally { setLoading(false); }
     },
-    onError: () => notify.error('No se pudo conectar con Google'),
+    onError: () => notify.error(t('auth.googleError')),
   });
 
   return (
@@ -51,14 +54,15 @@ const Login = () => {
         <NameStep
           user={nameStep}
           onConfirm={(nombre) => {
-            notify.success(`¡Bienvenido, ${nombre}!`);
+            notify.success(t('auth.welcomeNamed', { name: nombre }));
             navigate('/dashboard', { replace: true });
           }}
         />
       )}
 
-      <div className="absolute top-5 right-5">
-        <ThemeToggle />
+      <div className="absolute top-5 right-5 flex items-center gap-1 rounded-full p-1 bg-white/70 dark:bg-white/[0.04] ring-1 ring-black/5 dark:ring-white/10">
+        <ThemeToggle size="sm" />
+        <LanguageSelector />
       </div>
 
       <div className="w-full max-w-[380px] animate-slide-up">
@@ -67,7 +71,7 @@ const Login = () => {
           <img src="/logo-oscuro-crop.png" alt="AgroYachay" className="h-12 w-12 object-contain mb-3 dark:hidden" />
           <img src="/logo-claro-crop.png"  alt="AgroYachay" className="h-12 w-12 object-contain mb-3 hidden dark:block" />
           <h1 className="text-lg font-semibold tracking-tight text-gray-900 dark:text-white">AgroYachay</h1>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mt-0.5">Inicia sesión en tu cuenta</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400 mt-0.5">{t('auth.signInToAccount')}</p>
         </div>
 
         <div className="rounded-2xl bg-white dark:bg-gray-900 ring-1 ring-black/5 dark:ring-white/10 p-7">
@@ -79,45 +83,45 @@ const Login = () => {
             className="w-full h-11 flex items-center justify-center gap-3 rounded-xl ring-1 ring-black/8 dark:ring-white/12 text-sm font-medium text-gray-700 dark:text-gray-100 bg-white dark:bg-white/[0.04] hover:bg-gray-50 dark:hover:bg-white/[0.08] transition-colors active:scale-[0.99] disabled:opacity-50"
           >
             {loading ? <Spinner /> : <GoogleIcon />}
-            Continuar con Google
+            {t('auth.continueWithGoogle')}
           </button>
 
           <div className="flex items-center gap-3 my-5">
             <div className="flex-1 h-px bg-gray-200 dark:bg-white/10" />
-            <span className="text-xs text-gray-400 dark:text-gray-500">o con email</span>
+            <span className="text-xs text-gray-400 dark:text-gray-500">{t('auth.orWithEmail')}</span>
             <div className="flex-1 h-px bg-gray-200 dark:bg-white/10" />
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label htmlFor="identifier" className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1.5">Email o usuario</label>
+              <label htmlFor="identifier" className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1.5">{t('auth.emailOrUsername')}</label>
               <input
                 id="identifier" type="text" name="identifier" value={formData.identifier}
-                onChange={handleChange} placeholder="tu@email.com" required
+                onChange={handleChange} placeholder={t('auth.emailPlaceholder')} required
                 className={fieldClass}
               />
             </div>
 
             <div>
               <div className="flex justify-between items-center mb-1.5">
-                <label htmlFor="password" className="text-xs font-medium text-gray-500 dark:text-gray-400">Contraseña</label>
+                <label htmlFor="password" className="text-xs font-medium text-gray-500 dark:text-gray-400">{t('auth.password')}</label>
                 <label className="flex items-center gap-1.5 cursor-pointer select-none">
                   <input
                     type="checkbox" checked={rememberMe}
                     onChange={e => setRememberMe(e.target.checked)}
                     className="w-3.5 h-3.5 rounded accent-emerald-500 cursor-pointer"
                   />
-                  <span className="text-xs text-gray-400 dark:text-gray-500">Recordarme</span>
+                  <span className="text-xs text-gray-400 dark:text-gray-500">{t('auth.rememberMe')}</span>
                 </label>
               </div>
               <div className="relative">
                 <input
                   id="password" type={showPwd ? 'text' : 'password'} name="password"
                   value={formData.password} onChange={handleChange}
-                  placeholder="••••••••" required
+                  placeholder={t('auth.passwordPlaceholder')} required
                   className={fieldClass + ' pr-11'}
                 />
-                <button type="button" onClick={() => setShowPwd(!showPwd)} aria-label="Mostrar u ocultar contraseña"
+                <button type="button" onClick={() => setShowPwd(!showPwd)} aria-label={t('auth.togglePassword')}
                   className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-emerald-500 transition-colors">
                   {showPwd ? <EyeClose /> : <EyeOpen />}
                 </button>
@@ -126,20 +130,20 @@ const Login = () => {
 
             <button type="submit" disabled={loading}
               className="w-full h-11 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-semibold transition-colors active:scale-[0.99] disabled:opacity-60 flex items-center justify-center gap-2">
-              {loading ? <><Spinner /> Ingresando…</> : 'Entrar'}
+              {loading ? <><Spinner /> {t('auth.signingIn')}</> : t('auth.signIn')}
             </button>
           </form>
         </div>
 
         <p className="mt-6 text-center text-sm text-gray-500 dark:text-gray-400">
-          ¿No tienes cuenta?{' '}
+          {t('auth.noAccountQuestion')}{' '}
           <Link to="/register" className="font-medium text-emerald-600 dark:text-emerald-400 hover:text-emerald-500 transition-colors">
-            Regístrate gratis
+            {t('auth.registerFree')}
           </Link>
         </p>
         <p className="mt-3 text-center">
           <Link to="/" className="text-xs text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
-            ← Volver al inicio
+            {t('auth.backToHome')}
           </Link>
         </p>
       </div>

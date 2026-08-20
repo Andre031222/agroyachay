@@ -1,29 +1,12 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { climaAPI } from '../../services/api';
 import { notify } from '../../utils/swal';
+import { useLanguage } from '../../context/LanguageContext';
+import { weatherLabel, WEATHER_EMOJI } from '../../utils/weather';
 import {
   AreaChart, Area, BarChart, Bar,
   XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
 } from 'recharts';
-
-const WEATHER_LABELS = {
-  'clear sky': 'Despejado', 'few clouds': 'Pocas nubes',
-  'scattered clouds': 'Nublado parcial', 'broken clouds': 'Nublado parcial',
-  'overcast clouds': 'Nublado', 'light rain': 'Lluvia ligera',
-  'moderate rain': 'Lluvia', 'heavy intensity rain': 'Lluvia intensa',
-  'thunderstorm': 'Tormenta', 'snow': 'Nieve', 'mist': 'Neblina',
-  'fog': 'Niebla', 'haze': 'Bruma', 'drizzle': 'Llovizna',
-};
-
-const WEATHER_EMOJI = {
-  '01d': '☀️', '01n': '🌙', '02d': '⛅', '02n': '☁️',
-  '03d': '☁️', '03n': '☁️', '04d': '☁️', '04n': '☁️',
-  '09d': '🌧️', '09n': '🌧️', '10d': '🌦️', '10n': '🌧️',
-  '11d': '⛈️', '11n': '⛈️', '13d': '❄️', '13n': '❄️',
-  '50d': '🌫️', '50n': '🌫️',
-};
-
-const DAYS  = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
 
 const Ic = {
   drop:    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="w-4 h-4"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>,
@@ -64,6 +47,7 @@ const StatBox = ({ icon, label, value, unit, color }) => (
 );
 
 const ClimaWidget = () => {
+  const { t, tList, intlLocale } = useLanguage();
   const [clima,    setClima]    = useState(null);
   const [forecast, setForecast] = useState([]);
   const [loading,  setLoading]  = useState(true);
@@ -102,9 +86,9 @@ const ClimaWidget = () => {
       }));
       setForecast(days);
     } catch {
-      notify.error('Error al cargar el clima');
+      notify.error(t('weather.loadError'));
     } finally { setLoading(false); }
-  }, []);
+  }, [t]);
 
   const detectLocation = useCallback(() => {
     if (!navigator.geolocation) {
@@ -118,14 +102,14 @@ const ClimaWidget = () => {
         try {
           const res = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json&accept-language=es`);
           const d = await res.json();
-          const city = d.address.city || d.address.town || d.address.village || d.address.state || 'Tu ubicación';
+          const city = d.address.city || d.address.town || d.address.village || d.address.state || t('weather.yourLocation');
           localStorage.setItem('userLocation', JSON.stringify({ lat, lon, ciudad: city }));
           setCiudad(city);
           setCoords({ lat, lon });
           fetchData(lat, lon, city);
-          notify.success(`Ubicación: ${city}`);
+          notify.success(t('weather.locationSet', { city }));
         } catch {
-          fetchData(lat, lon, 'Tu ubicación');
+          fetchData(lat, lon, t('weather.yourLocation'));
         } finally { setLocating(false); }
       },
       () => {
@@ -149,26 +133,26 @@ const ClimaWidget = () => {
   }, []);
 
   const dayLabel = (i, fecha) => {
-    if (i === 0) return 'Hoy';
-    if (i === 1) return 'Mañana';
-    return DAYS[new Date(fecha).getDay()];
+    if (i === 0) return t('weather.today');
+    if (i === 1) return t('weather.tomorrow');
+    return tList('weather.weekdays')[new Date(fecha).getDay()];
   };
 
   if (loading || locating) {
     return (
       <div className="flex min-h-[300px] flex-col items-center justify-center gap-3 p-6">
         <div className="h-8 w-8 animate-spin rounded-full border-2 border-emerald-500 border-t-transparent" />
-        <p className="text-sm text-gray-400 dark:text-gray-500">{locating ? 'Detectando ubicación…' : 'Cargando clima…'}</p>
+        <p className="text-sm text-gray-400 dark:text-gray-500">{locating ? t('weather.detecting') : t('weather.loading')}</p>
       </div>
     );
   }
 
   if (!clima) return null;
 
-  const desc = WEATHER_LABELS[clima.descripcion?.toLowerCase()] ?? clima.descripcion ?? '—';
+  const desc = weatherLabel(t, clima.descripcion);
   const emoji = WEATHER_EMOJI[clima.icono] || '🌡️';
-  const amanecer = clima.amanecer ? new Date(clima.amanecer).toLocaleTimeString('es-PE', { hour: '2-digit', minute: '2-digit' }) : '—';
-  const atardecer = clima.atardecer ? new Date(clima.atardecer).toLocaleTimeString('es-PE', { hour: '2-digit', minute: '2-digit' }) : '—';
+  const amanecer = clima.amanecer ? new Date(clima.amanecer).toLocaleTimeString(intlLocale, { hour: '2-digit', minute: '2-digit' }) : '—';
+  const atardecer = clima.atardecer ? new Date(clima.atardecer).toLocaleTimeString(intlLocale, { hour: '2-digit', minute: '2-digit' }) : '—';
 
   const chartData = forecast.map((d, i) => ({
     dia: dayLabel(i, d.fecha),
@@ -179,8 +163,6 @@ const ClimaWidget = () => {
 
   return (
     <div className="min-h-full space-y-4 bg-gray-50 dark:bg-gray-950 p-4 sm:p-6">
-
-      {/* Hero clima — panel oscuro double-bezel con orbe mesh */}
       <div className="rounded-2xl bg-white/10 dark:bg-white/5 p-1.5 ring-1 ring-black/5 dark:ring-white/15">
         <div className="relative overflow-hidden rounded-[calc(1rem-0.375rem)] bg-[#04140d] p-5 text-white sm:p-7">
           <div aria-hidden className="pointer-events-none absolute -top-28 -left-20 h-[24rem] w-[24rem] rounded-full bg-emerald-500/25 blur-[120px]" />
@@ -193,13 +175,13 @@ const ClimaWidget = () => {
                 {ciudad}
               </span>
               <p className="mt-2.5 text-xs capitalize text-emerald-100/60">
-                {new Date().toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long' })}
+                {new Date().toLocaleDateString(intlLocale, { weekday: 'long', day: 'numeric', month: 'long' })}
               </p>
             </div>
             <button
               onClick={() => { localStorage.removeItem('userLocation'); detectLocation(); }}
               className="rounded-full p-2 text-emerald-100/60 ring-1 ring-white/10 transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:text-white hover:ring-white/25 active:scale-90 touch-manipulation"
-              title="Actualizar ubicación"
+              title={t('weather.refreshLocation')}
             >
               {Ic.refresh}
             </button>
@@ -213,37 +195,37 @@ const ClimaWidget = () => {
                   {Math.round(clima.temperatura)}°
                 </span>
                 {clima.sensacion_termica != null && (
-                  <span className="text-sm text-emerald-100/60">Sensación {Math.round(clima.sensacion_termica)}°</span>
+                  <span className="text-sm text-emerald-100/60">{t('weather.feelsLike')} {Math.round(clima.sensacion_termica)}°</span>
                 )}
               </div>
               <p className="mt-1.5 text-base font-semibold text-emerald-50/90">{desc}</p>
               {forecast[0] && (
                 <p className="mt-0.5 text-xs text-emerald-100/50">
-                  Máx {forecast[0].tempMax}° · Mín {forecast[0].tempMin}°
+                  {t('weather.maxMin', { max: forecast[0].tempMax, min: forecast[0].tempMin })}
                 </p>
               )}
             </div>
           </div>
 
           <div className="relative grid grid-cols-2 gap-2 sm:grid-cols-4">
-            <StatBoxDark icon={Ic.drop}  label="Humedad"   value={clima.humedad ?? '—'}  unit="%"     color="text-sky-300" />
-            <StatBoxDark icon={Ic.wind}  label="Viento"    value={clima.velocidad_viento != null ? Math.round(clima.velocidad_viento) : '—'} unit=" km/h" color="text-teal-300" />
-            <StatBoxDark icon={Ic.gauge} label="Presión"   value={clima.presion ?? '—'}  unit=" hPa"  color="text-violet-300" />
-            <StatBoxDark icon={Ic.therm} label="Sensación" value={clima.sensacion_termica != null ? Math.round(clima.sensacion_termica) : '—'} unit="°" color="text-orange-300" />
+            <StatBoxDark icon={Ic.drop}  label={t('dashboard.humidity')}   value={clima.humedad ?? '—'}  unit="%"     color="text-sky-300" />
+            <StatBoxDark icon={Ic.wind}  label={t('dashboard.wind')}    value={clima.velocidad_viento != null ? Math.round(clima.velocidad_viento) : '—'} unit=" km/h" color="text-teal-300" />
+            <StatBoxDark icon={Ic.gauge} label={t('weather.pressure')}   value={clima.presion ?? '—'}  unit=" hPa"  color="text-violet-300" />
+            <StatBoxDark icon={Ic.therm} label={t('weather.feelsLike')} value={clima.sensacion_termica != null ? Math.round(clima.sensacion_termica) : '—'} unit="°" color="text-orange-300" />
           </div>
 
           <div className="relative mt-2 grid grid-cols-2 gap-2">
             <div className="flex items-center gap-2.5 rounded-2xl bg-white/[0.06] px-4 py-3 ring-1 ring-white/10">
               <span className="text-amber-300">{Ic.sun}</span>
               <div>
-                <p className="text-[10px] font-medium uppercase tracking-[0.14em] text-amber-200/80">Amanecer</p>
+                <p className="text-[10px] font-medium uppercase tracking-[0.14em] text-amber-200/80">{t('weather.sunrise')}</p>
                 <p className="font-display text-sm font-bold tracking-tight text-white">{amanecer}</p>
               </div>
             </div>
             <div className="flex items-center gap-2.5 rounded-2xl bg-white/[0.06] px-4 py-3 ring-1 ring-white/10">
               <span className="text-orange-300">{Ic.moon}</span>
               <div>
-                <p className="text-[10px] font-medium uppercase tracking-[0.14em] text-orange-200/80">Atardecer</p>
+                <p className="text-[10px] font-medium uppercase tracking-[0.14em] text-orange-200/80">{t('weather.sunset')}</p>
                 <p className="font-display text-sm font-bold tracking-tight text-white">{atardecer}</p>
               </div>
             </div>
@@ -255,8 +237,8 @@ const ClimaWidget = () => {
         <div className="rounded-2xl bg-white/10 dark:bg-white/5 p-1.5 ring-1 ring-black/5 dark:ring-white/10">
           <div className="rounded-[calc(1rem-0.375rem)] bg-white dark:bg-gray-900 p-5 sm:p-6">
             <div className="mb-4 flex items-center justify-between">
-              <h3 className="font-display text-sm font-bold tracking-tight text-gray-900 dark:text-white">Pronóstico 7 días</h3>
-              <span className="rounded-full bg-emerald-500/10 px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-[0.18em] text-emerald-600 ring-1 ring-emerald-500/20 dark:text-emerald-400">Semana</span>
+              <h3 className="font-display text-sm font-bold tracking-tight text-gray-900 dark:text-white">{t('weather.forecast7days')}</h3>
+              <span className="rounded-full bg-emerald-500/10 px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-[0.18em] text-emerald-600 ring-1 ring-emerald-500/20 dark:text-emerald-400">{t('weather.week')}</span>
             </div>
             <div className="flex snap-x snap-mandatory gap-2.5 overflow-x-auto pb-1">
               {forecast.map((d, i) => (
@@ -290,8 +272,8 @@ const ClimaWidget = () => {
 
           <div className="rounded-2xl bg-white/10 dark:bg-white/5 p-1.5 ring-1 ring-black/5 dark:ring-white/10">
             <div className="rounded-[calc(1rem-0.375rem)] bg-white dark:bg-gray-900 p-5 sm:p-6">
-              <span className="inline-block rounded-full bg-rose-500/10 px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-[0.18em] text-rose-600 ring-1 ring-rose-500/20 dark:text-rose-400">Temperatura</span>
-              <p className="mb-4 mt-2 text-xs text-gray-400 dark:text-gray-500">Máxima y mínima semanal · °C</p>
+              <span className="inline-block rounded-full bg-rose-500/10 px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-[0.18em] text-rose-600 ring-1 ring-rose-500/20 dark:text-rose-400">{t('weather.temperature')}</span>
+              <p className="mb-4 mt-2 text-xs text-gray-400 dark:text-gray-500">{t('weather.temperatureChart')}</p>
               <ResponsiveContainer width="100%" height={180}>
                 <AreaChart data={chartData} margin={{ top: 4, right: 4, left: -20, bottom: 0 }}>
                   <defs>
@@ -317,8 +299,8 @@ const ClimaWidget = () => {
 
           <div className="rounded-2xl bg-white/10 dark:bg-white/5 p-1.5 ring-1 ring-black/5 dark:ring-white/10">
             <div className="rounded-[calc(1rem-0.375rem)] bg-white dark:bg-gray-900 p-5 sm:p-6">
-              <span className="inline-block rounded-full bg-sky-500/10 px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-[0.18em] text-sky-600 ring-1 ring-sky-500/20 dark:text-sky-400">Humedad</span>
-              <p className="mb-4 mt-2 text-xs text-gray-400 dark:text-gray-500">Promedio diario semanal · %</p>
+              <span className="inline-block rounded-full bg-sky-500/10 px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-[0.18em] text-sky-600 ring-1 ring-sky-500/20 dark:text-sky-400">{t('weather.humidity')}</span>
+              <p className="mb-4 mt-2 text-xs text-gray-400 dark:text-gray-500">{t('weather.humidityChart')}</p>
               <ResponsiveContainer width="100%" height={180}>
                 <BarChart data={chartData} margin={{ top: 4, right: 4, left: -20, bottom: 0 }}>
                   <CartesianGrid strokeDasharray="3 3" stroke="#f3f4f6" className="dark:[&>line]:stroke-gray-800" />

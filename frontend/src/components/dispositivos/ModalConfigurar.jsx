@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { dispositivosAPI } from '../../services/api';
 import { Ic } from './dispositivosIcons';
 import { fieldClass } from '../auth/AuthShared';
+import { useLanguage } from '../../context/LanguageContext';
 
 export default function ModalConfigurar({ sensor, onClose, onSuccess }) {
+  const { t } = useLanguage();
   const [nombre, setNombre] = useState(sensor.nombre || '');
   const [ubicacion, setUbicacion] = useState(sensor.ubicacion || '');
   const [estado, setEstado] = useState(sensor.estado || 'activo');
@@ -16,13 +18,13 @@ export default function ModalConfigurar({ sensor, onClose, onSuccess }) {
     try {
       const res = await dispositivosAPI.configurar(sensor.id, { nombre, ubicacion, estado });
       if (res.data.success) {
-        onSuccess('Dispositivo actualizado correctamente');
+        onSuccess(t('devices.updated'));
         onClose();
       } else {
-        setError(res.data.message || 'Error al guardar');
+        setError(res.data.message || t('devices.saveError'));
       }
     } catch {
-      setError('Error de conexión');
+      setError(t('devices.connectionError'));
     } finally {
       setLoading(false);
     }
@@ -35,7 +37,7 @@ export default function ModalConfigurar({ sensor, onClose, onSuccess }) {
         <div className="flex items-center justify-between px-6 py-4 border-b border-black/5 dark:border-white/10">
           <div className="flex items-center gap-2.5">
             <span className="flex items-center justify-center w-8 h-8 rounded-full bg-emerald-50 dark:bg-emerald-500/10 ring-1 ring-emerald-500/20 dark:ring-emerald-400/20 text-emerald-500">{Ic.edit}</span>
-            <h3 className="font-semibold tracking-tight text-gray-900 dark:text-white text-sm">Configurar dispositivo</h3>
+            <h3 className="font-semibold tracking-tight text-gray-900 dark:text-white text-sm">{t('devices.configureDeviceTitle')}</h3>
           </div>
           <button onClick={onClose} className="flex items-center justify-center w-8 h-8 rounded-full text-gray-400 hover:bg-gray-50 dark:hover:bg-white/[0.06] hover:text-gray-600 dark:hover:text-gray-200 transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]">{Ic.x}</button>
         </div>
@@ -47,7 +49,7 @@ export default function ModalConfigurar({ sensor, onClose, onSuccess }) {
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1.5">Nombre</label>
+            <label className="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1.5">{t('devices.name')}</label>
             <input
               type="text"
               value={nombre}
@@ -57,26 +59,26 @@ export default function ModalConfigurar({ sensor, onClose, onSuccess }) {
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1.5">Ubicación</label>
+            <label className="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1.5">{t('devices.location')}</label>
             <input
               type="text"
               value={ubicacion}
               onChange={e => setUbicacion(e.target.value)}
-              placeholder="Ej: Parcela norte, fila 3"
+              placeholder={t('devices.configLocationPlaceholder')}
               className={fieldClass}
             />
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1.5">Estado</label>
+            <label className="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1.5">{t('devices.state')}</label>
             <select
               value={estado}
               onChange={e => setEstado(e.target.value)}
               className={fieldClass}
             >
-              <option value="activo">Activo</option>
-              <option value="inactivo">Inactivo</option>
-              <option value="mantenimiento">En mantenimiento</option>
+              <option value="activo">{t('devices.status.activo')}</option>
+              <option value="inactivo">{t('devices.status.inactivo')}</option>
+              <option value="mantenimiento">{t('devices.status.mantenimiento')}</option>
             </select>
           </div>
 
@@ -89,7 +91,7 @@ export default function ModalConfigurar({ sensor, onClose, onSuccess }) {
 
         <div className="flex gap-3 px-6 py-4 border-t border-black/5 dark:border-white/10">
           <button onClick={onClose} className="flex-1 h-11 px-4 text-sm font-medium rounded-full ring-1 ring-black/5 dark:ring-white/10 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-white/[0.06] transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.98]">
-            Cancelar
+            {t('common.cancel')}
           </button>
           <button
             onClick={handleGuardar}
@@ -97,7 +99,7 @@ export default function ModalConfigurar({ sensor, onClose, onSuccess }) {
             className="flex-1 h-11 px-4 text-sm font-semibold rounded-full bg-emerald-600 hover:bg-emerald-500 text-white transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.98] disabled:opacity-60 flex items-center justify-center gap-2"
           >
             {loading ? <span className="w-4 h-4 border-2 border-white/50 border-t-white rounded-full animate-spin" /> : Ic.check}
-            {loading ? 'Guardando...' : 'Guardar'}
+            {loading ? t('account.saving') : t('common.save')}
           </button>
         </div>
       </div>

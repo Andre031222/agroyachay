@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { CULTIVOS_PUNO } from '../../utils/constants';
+import { useLanguage } from '../../context/LanguageContext';
 import { formatCurrency } from '../../utils/helpers';
 import { notify } from '../../utils/swal';
 import { cultivosAPI, asistenteAPI } from '../../services/api';
@@ -88,7 +89,7 @@ const generarPrediccion = (tipoCultivo, variedad, areaha) => {
     const d = new Date();
     d.setMonth(d.getMonth() - (5 - i));
     const v = 0.88 + i * 0.025 + (tipoCultivo.length % 3) * 0.01;
-    return { mes: d.toLocaleDateString('es-PE', { month:'short' }), rendimiento: parseFloat((rendPorHa * v).toFixed(2)) };
+    return { mes: d.toLocaleDateString(intlLocale, { month:'short' }), rendimiento: parseFloat((rendPorHa * v).toFixed(2)) };
   });
 
   return {
@@ -106,9 +107,9 @@ const generarPrediccion = (tipoCultivo, variedad, areaha) => {
     },
     tendencia,
     escenarios: [
-      { nombre:'Pesimista', rend: parseFloat((rendTotal * 0.75).toFixed(2)), ingreso: ingreso * 0.75, color:'#ef4444' },
-      { nombre:'Probable',  rend: parseFloat(rendTotal.toFixed(2)),           ingreso,               color:'#10b981' },
-      { nombre:'Optimista', rend: parseFloat((rendTotal * 1.20).toFixed(2)), ingreso: ingreso * 1.20, color:'#3b82f6' },
+      { nombre:t('prediction.scenarioPessimistic'), rend: parseFloat((rendTotal * 0.75).toFixed(2)), ingreso: ingreso * 0.75, color:'#ef4444' },
+      { nombre:t('prediction.scenarioLikely'), rend: parseFloat(rendTotal.toFixed(2)),           ingreso,               color:'#10b981' },
+      { nombre:t('prediction.scenarioOptimistic'), rend: parseFloat((rendTotal * 1.20).toFixed(2)), ingreso: ingreso * 1.20, color:'#3b82f6' },
     ],
   };
 };
@@ -127,6 +128,7 @@ const formatAnalisis = (text) => {
 };
 
 const PrediccionCosecha = () => {
+  const { t, intlLocale } = useLanguage();
   const [tab, setTab]                   = useState('calculadora');
   const [step, setStep]                 = useState('form');
   const [cultivos, setCultivos]         = useState([]);
@@ -181,8 +183,8 @@ Explicación.`,
   }, []);
 
   const handlePredecir = async () => {
-    if (!form.tipo_cultivo) { notify.warning('Selecciona un cultivo'); return; }
-    if (!form.variedad)     { notify.warning('Selecciona una variedad'); return; }
+    if (!form.tipo_cultivo) { notify.warning(t('prediction.selectCrop')); return; }
+    if (!form.variedad)     { notify.warning(t('prediction.selectVariety')); return; }
     setLoading(true);
     try {
       await new Promise(r => setTimeout(r, 350));
@@ -190,10 +192,10 @@ Explicación.`,
       setPrediccion(pred);
       setGroqAnalisis(null);
       setStep('result');
-      notify.success('Predicción generada');
+      notify.success(t('prediction.generated'));
       callGroqAnalisis(pred, form.tipo_cultivo, form.variedad, form.area);
     } catch {
-      notify.error('Error al generar predicción');
+      notify.error(t('prediction.generateError'));
     } finally {
       setLoading(false);
     }
@@ -214,16 +216,16 @@ Explicación.`,
       <div className="flex items-end justify-between gap-4 animate-slide-up">
         <div>
           <h1 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 dark:text-white">
-            Predicción de Cosecha
+            {t('prediction.title')}
           </h1>
           <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
-            Análisis predictivo + AgroIA · Región de Puno
+            {t('prediction.subtitle')}
           </p>
         </div>
         {step === 'result' && (
           <button onClick={resetForm}
             className="group flex items-center gap-2 h-10 pl-4 pr-1.5 rounded-full bg-gray-50/80 dark:bg-white/[0.04] ring-1 ring-black/5 dark:ring-white/10 text-xs font-semibold text-gray-600 dark:text-gray-300 hover:ring-emerald-500/40 transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.98] touch-manipulation shrink-0">
-            Nueva predicción
+            {t('prediction.newPrediction')}
             <span className="flex items-center justify-center w-7 h-7 rounded-full bg-emerald-600 text-white transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:rotate-180">
               {Ic.reset}
             </span>
@@ -233,17 +235,17 @@ Explicación.`,
 
       <div className="inline-flex gap-1 p-1 rounded-full bg-gray-50/80 dark:bg-white/[0.04] ring-1 ring-black/5 dark:ring-white/10 w-fit">
         {[
-          { id:'calculadora', label:'Calculadora',  icon: Ic.chart   },
-          { id:'historial',   label:'Mis cultivos', icon: Ic.history },
-        ].map(t => (
-          <button key={t.id} onClick={() => { setTab(t.id); if (t.id === 'calculadora') setStep('form'); }}
+          { id:'calculadora', label:t('prediction.tabCalculator'), icon: Ic.chart },
+          { id:'historial',   label:t('prediction.tabHistory'), icon: Ic.history },
+        ].map(item => (
+          <button key={item.id} onClick={() => { setTab(item.id); if (item.id === 'calculadora') setStep('form'); }}
             className={`flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-bold transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] touch-manipulation ${
-              tab === t.id
+              tab === item.id
                 ? 'bg-white dark:bg-white/[0.08] text-gray-900 dark:text-white ring-1 ring-emerald-500/30'
                 : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200'
             }`}>
-            {t.icon}
-            <span className="hidden sm:inline">{t.label}</span>
+            {item.icon}
+            <span className="hidden sm:inline">{item.label}</span>
           </button>
         ))}
       </div>
@@ -254,7 +256,7 @@ Explicación.`,
 
           <div>
             <p className="text-[11px] font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-[0.18em] mb-3 flex items-center gap-2">
-              {Ic.leaf} Tipo de cultivo
+              {Ic.leaf} {t('prediction.cropType')}
             </p>
             <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-8 gap-2">
               {Object.entries(CULTIVOS_PUNO).map(([key, c]) => (
@@ -268,7 +270,7 @@ Explicación.`,
                   <span className="text-2xl leading-none">{c.icon}</span>
                   <span className={`text-[10px] font-bold truncate w-full text-center px-1 ${
                     form.tipo_cultivo === key ? 'text-emerald-700 dark:text-emerald-400' : 'text-gray-600 dark:text-gray-400'
-                  }`}>{c.nombre}</span>
+                  }`}>{t(`cropTypes.${key}.name`)}</span>
                 </button>
               ))}
             </div>
@@ -279,15 +281,15 @@ Explicación.`,
               <div className="flex items-start gap-3 bg-emerald-50 dark:bg-emerald-900/20 ring-1 ring-emerald-500/20 rounded-2xl px-4 py-3.5 animate-slide-up">
                 <span className="text-3xl leading-none shrink-0">{cultivoSel.icon}</span>
                 <div className="min-w-0">
-                  <p className="font-bold text-sm text-gray-900 dark:text-white">{cultivoSel.nombre}</p>
-                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{cultivoSel.descripcion}</p>
+                  <p className="font-bold text-sm text-gray-900 dark:text-white">{t(`cropTypes.${form.tipo_cultivo}.name`)}</p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{t(`cropTypes.${form.tipo_cultivo}.description`)}</p>
                   <p className="text-xs text-emerald-600 dark:text-emerald-400 mt-1 flex items-center gap-1">{Ic.sun} {cultivoSel.altitud}</p>
                 </div>
               </div>
 
               <div>
                 <p className="text-[11px] font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-[0.18em] mb-3 flex items-center gap-2">
-                  {Ic.target} Variedad
+                  {Ic.target} {t('prediction.variety')}
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
                   {cultivoSel.variedades.map(v => (
@@ -303,7 +305,7 @@ Explicación.`,
                       </p>
                       <div className="flex items-center gap-3 text-xs text-gray-500 dark:text-gray-400">
                         <span className="flex items-center gap-1">{Ic.trend} {v.rendimiento}</span>
-                        <span className="flex items-center gap-1">{Ic.clock} {v.ciclo}</span>
+                        <span className="flex items-center gap-1">{Ic.clock} {v.ciclo} {t('units.days')}</span>
                       </div>
                     </button>
                   ))}
@@ -314,11 +316,11 @@ Explicación.`,
 
           <div>
             <p className="text-[11px] font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-[0.18em] mb-3 flex items-center gap-2">
-              {Ic.map} Área de cultivo
+              {Ic.map} {t('prediction.cropArea')}
             </p>
             <div className="bg-gray-50/80 dark:bg-white/[0.04] ring-1 ring-black/5 dark:ring-white/10 rounded-2xl p-4 space-y-3.5">
               <div className="flex items-end justify-between">
-                <span className="text-sm text-gray-500 dark:text-gray-400">Hectáreas</span>
+                <span className="text-sm text-gray-500 dark:text-gray-400">{t('prediction.hectares')}</span>
                 <span className="font-display text-3xl font-bold tracking-tight text-gray-900 dark:text-white">{form.area} <span className="text-base text-emerald-600 dark:text-emerald-400">ha</span></span>
               </div>
               <div className="relative h-2 rounded-full bg-gray-200 dark:bg-white/10">
@@ -349,9 +351,9 @@ Explicación.`,
           <button onClick={handlePredecir} disabled={loading || !form.tipo_cultivo || !form.variedad}
             className="group w-full h-12 flex items-center justify-center gap-2.5 pl-5 pr-2 bg-emerald-600 hover:bg-emerald-500 disabled:opacity-50 text-white font-semibold text-sm rounded-full transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.98] touch-manipulation">
             {loading
-              ? <><div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> Analizando…</>
+              ? <><div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> {t('prediction.analysing')}</>
               : <>
-                  Generar predicción con IA
+                  {t('prediction.generate')}
                   <span className="flex items-center justify-center w-8 h-8 rounded-full bg-white/15 transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-1">
                     <Arrow />
                   </span>
@@ -367,21 +369,21 @@ Explicación.`,
           <div className="bg-white dark:bg-gray-900 rounded-2xl ring-1 ring-black/5 dark:ring-white/10 p-4 sm:p-5 flex items-center gap-4 flex-wrap">
             <span className="text-3xl leading-none">{CULTIVOS_PUNO[form.tipo_cultivo]?.icon}</span>
             <div className="flex-1 min-w-0">
-              <p className="font-display text-lg font-bold tracking-tight text-gray-900 dark:text-white">{form.tipo_cultivo} · {form.variedad}</p>
-              <p className="text-xs text-gray-400 dark:text-gray-500">{form.area} ha · Predicción generada ahora</p>
+              <p className="font-display text-lg font-bold tracking-tight text-gray-900 dark:text-white">{t(`cropTypes.${form.tipo_cultivo}.name`)} · {form.variedad}</p>
+              <p className="text-xs text-gray-400 dark:text-gray-500">{form.area} {t('units.hectares')} · {t('prediction.generated')}</p>
             </div>
             <div className="flex items-center gap-1.5 bg-violet-50 dark:bg-violet-900/20 ring-1 ring-violet-500/20 rounded-full px-3 py-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-violet-500" />
-              <span className="text-xs font-bold text-violet-700 dark:text-violet-400">{prediccion.confianza_prediccion}% confianza</span>
+              <span className="text-xs font-bold text-violet-700 dark:text-violet-400">{prediccion.confianza_prediccion}% {t('prediction.confidence')}</span>
             </div>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 px-0">
             {[
-              { icon:Ic.trend,  label:'Rendimiento total',   value:`${prediccion.rendimiento_estimado}`, unit:'ton',     color:'bg-emerald-500', accent:true },
-              { icon:Ic.leaf,   label:'Por hectárea',         value:`${prediccion.rendimiento_por_hectarea}`, unit:'t/ha',color:'bg-sky-500'     },
-              { icon:Ic.dollar, label:'Precio de mercado',    value:formatCurrency(prediccion.precio_mercado), unit:'por kg', color:'bg-amber-500' },
-              { icon:Ic.dollar, label:'Ingreso estimado',     value:formatCurrency(prediccion.ingreso_estimado), unit:'total', color:'bg-violet-500', accent:true },
+              { icon:Ic.trend,  label:t('prediction.totalYield'), value:`${prediccion.rendimiento_estimado}`, unit:t('units.tons'), color:'bg-emerald-500', accent:true },
+              { icon:Ic.leaf,   label:t('prediction.perHectare'), value:`${prediccion.rendimiento_por_hectarea}`, unit:t('units.tonsPerHa'), color:'bg-sky-500' },
+              { icon:Ic.dollar, label:t('prediction.marketPrice'), value:formatCurrency(prediccion.precio_mercado), unit:t('prediction.perKg'), color:'bg-amber-500' },
+              { icon:Ic.dollar, label:t('prediction.estimatedIncome'), value:formatCurrency(prediccion.ingreso_estimado), unit:t('prediction.total'), color:'bg-violet-500', accent:true },
             ].map(({ icon, label, value, unit, color, accent }) => (
               <div key={label} className={`rounded-[1.5rem] p-1 ${accent ? 'bg-emerald-500/15 ring-1 ring-emerald-500/20' : 'bg-white/60 dark:bg-white/[0.04] ring-1 ring-black/5 dark:ring-white/10'}`}>
                 <div className="rounded-[calc(1.5rem-0.25rem)] bg-white dark:bg-gray-900 ring-1 ring-black/5 dark:ring-white/5 p-4 h-full">
@@ -427,7 +429,7 @@ Explicación.`,
                   <XAxis dataKey="mes" tick={{ fontSize:11, fontWeight:600, fill:'#9ca3af' }} axisLine={false} tickLine={false} />
                   <YAxis tick={{ fontSize:10, fontWeight:600, fill:'#9ca3af' }} axisLine={false} tickLine={false} />
                   <Tooltip content={<ChartTip />} />
-                  <Area type="monotone" dataKey="rendimiento" stroke="#10b981" strokeWidth={2.5} fill="url(#gPred)" name="t/ha" dot={false} />
+                  <Area type="monotone" dataKey="rendimiento" stroke="#10b981" strokeWidth={2.5} fill="url(#gPred)" name={t('units.tonsPerHa')} dot={false} />
                 </AreaChart>
               </ResponsiveContainer>
             </div>
@@ -442,7 +444,7 @@ Explicación.`,
                   <XAxis dataKey="nombre" tick={{ fontSize:11, fontWeight:700, fill:'#9ca3af' }} axisLine={false} tickLine={false} />
                   <YAxis tick={{ fontSize:10, fontWeight:600, fill:'#9ca3af' }} axisLine={false} tickLine={false} />
                   <Tooltip content={<ChartTip />} />
-                  <Bar dataKey="rend" name="Toneladas" radius={[6,6,0,0]}>
+                  <Bar dataKey="rend" name={t('prediction.tons')} radius={[6,6,0,0]}>
                     {prediccion.escenarios.map((e, i) => <Cell key={i} fill={e.color} />)}
                   </Bar>
                 </BarChart>
@@ -483,14 +485,14 @@ Explicación.`,
             <div className="flex items-center gap-2.5 mb-4">
               <div className="w-8 h-8 bg-violet-500 rounded-xl flex items-center justify-center text-white">{Ic.brain}</div>
               <div>
-                <h4 className="text-sm font-bold tracking-tight text-gray-900 dark:text-white">Recomendaciones AgroIA</h4>
+                <h4 className="text-sm font-bold tracking-tight text-gray-900 dark:text-white">{t('prediction.aiRecommendations')}</h4>
                 <p className="text-[10px] text-gray-400">Groq · llama-3.3-70b-versatile</p>
               </div>
             </div>
             {groqLoading ? (
               <div className="flex items-center gap-3 bg-violet-50 dark:bg-violet-900/20 ring-1 ring-violet-500/20 rounded-2xl px-4 py-4">
                 <div className="w-4 h-4 border-2 border-violet-500 border-t-transparent rounded-full animate-spin" />
-                <span className="text-sm text-violet-700 dark:text-violet-400 font-medium">AgroIA generando recomendaciones…</span>
+                <span className="text-sm text-violet-700 dark:text-violet-400 font-medium">{t('prediction.aiGenerating')}</span>
               </div>
             ) : analisisLines.length > 0 ? (
               <div className="space-y-3">
@@ -537,12 +539,12 @@ Explicación.`,
           {cultivos.length === 0 ? (
             <div className="bg-white dark:bg-gray-900 rounded-2xl ring-1 ring-black/5 dark:ring-white/10 py-14 flex flex-col items-center gap-3">
               <div className="w-12 h-12 bg-gray-100 dark:bg-white/[0.06] rounded-2xl flex items-center justify-center text-gray-400">{Ic.history}</div>
-              <p className="text-sm font-bold text-gray-600 dark:text-gray-400">Sin cultivos registrados</p>
-              <p className="text-xs text-gray-400 dark:text-gray-500">Registra cultivos en la sección Cultivos para ver predicciones aquí</p>
+              <p className="text-sm font-bold text-gray-600 dark:text-gray-400">{t('prediction.noCrops')}</p>
+              <p className="text-xs text-gray-400 dark:text-gray-500">{t('prediction.noCropsHint')}</p>
             </div>
           ) : (
             <>
-              <p className="text-xs text-gray-400 dark:text-gray-500 px-1">Predicciones rápidas basadas en tus cultivos registrados</p>
+              <p className="text-xs text-gray-400 dark:text-gray-500 px-1">{t('prediction.quickHint')}</p>
               {cultivos.map(c => {
                 const v = c.variedad && c.tipo_cultivo && CULTIVOS_PUNO[c.tipo_cultivo]
                   ? CULTIVOS_PUNO[c.tipo_cultivo].variedades.find(x => x.nombre === c.variedad)
@@ -554,25 +556,25 @@ Explicación.`,
                       <div>
                         <p className="font-bold text-sm text-gray-900 dark:text-white">{c.nombre}</p>
                         <p className="text-xs text-gray-400 dark:text-gray-500">
-                          {c.tipo_cultivo}{c.variedad ? ` · ${c.variedad}` : ''} · {c.area_hectareas || 0} ha
+                          {t(`cropTypes.${c.tipo_cultivo}.name`)}{c.variedad ? ` · ${c.variedad}` : ''} · {c.area_hectareas || 0} {t('units.hectares')}
                         </p>
                       </div>
                       {quick ? (
                         <div className="flex items-center gap-4 text-xs">
                           <div className="text-right">
-                            <p className="font-black text-emerald-600 dark:text-emerald-400">{quick.rendimiento_estimado} ton</p>
-                            <p className="text-gray-400">rendimiento est.</p>
+                            <p className="font-black text-emerald-600 dark:text-emerald-400">{quick.rendimiento_estimado} {t('units.tons')}</p>
+                            <p className="text-gray-400">{t('prediction.estimatedYieldShort')}</p>
                           </div>
                           <div className="text-right">
                             <p className="font-black text-violet-600 dark:text-violet-400">{formatCurrency(quick.ingreso_estimado)}</p>
-                            <p className="text-gray-400">ingreso est.</p>
+                            <p className="text-gray-400">{t('prediction.estimatedIncomeShort')}</p>
                           </div>
                         </div>
                       ) : (
                         <button
                           onClick={() => { setTab('calculadora'); setForm({ tipo_cultivo: c.tipo_cultivo || '', variedad: c.variedad || '', area: c.area_hectareas || 1 }); setStep('form'); }}
                           className="text-xs font-semibold text-emerald-600 dark:text-emerald-400 hover:underline touch-manipulation">
-                          Ir a calculadora
+                          {t('prediction.goToCalculator')}
                         </button>
                       )}
                     </div>

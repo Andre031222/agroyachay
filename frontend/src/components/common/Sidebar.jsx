@@ -85,7 +85,7 @@ const Sidebar = () => {
           <p className="font-semibold text-sm text-gray-900 dark:text-white leading-none tracking-tight">AgroYachay</p>
           <div className="flex items-center gap-1.5 mt-1">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0" />
-            <p className="text-[10px] uppercase tracking-[0.18em] text-emerald-600 dark:text-emerald-400 font-medium leading-none">IoT Agriculture</p>
+            <p className="text-[10px] uppercase tracking-[0.18em] text-emerald-600 dark:text-emerald-400 font-medium leading-none">{t('sidebar.brandTagline')}</p>
           </div>
         </div>
       </div>
@@ -114,7 +114,7 @@ const Sidebar = () => {
               }`}>
                 {isSuperAdmin ? Ic.shield : Ic.users}
               </span>
-              <span className="truncate">{isSuperAdmin ? 'SuperAdmin' : 'Admin'}</span>
+              <span className="truncate">{isSuperAdmin ? t('sidebar.superAdmin') : t('sidebar.admin')}</span>
               {isSuperAdmin && (
                 <span className="ml-auto shrink-0 text-[9px] font-semibold tracking-wide px-1.5 py-0.5 rounded-md bg-purple-100 dark:bg-purple-500/15 text-purple-600 dark:text-purple-300 ring-1 ring-purple-500/15">
                   SA
@@ -158,17 +158,17 @@ const Sidebar = () => {
             )}
             <div className="flex-1 min-w-0 text-left">
               <p className="text-xs font-semibold tracking-tight text-gray-900 dark:text-white truncate leading-tight">
-                {user?.nombre || 'Usuario'}
+                {user?.nombre || t('common.user')}
               </p>
               <p className="text-[10px] text-gray-400 dark:text-gray-500 leading-tight mt-0.5 group-hover:text-emerald-500 transition-colors duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]">
-                Mi perfil
+                {t('sidebar.myProfile')}
               </p>
             </div>
           </button>
 
           <button
             onClick={() => { logout(); navigate('/'); }}
-            title="Cerrar sesion"
+            title={t('sidebar.logout')}
             className="shrink-0 p-2 rounded-xl text-gray-400 dark:text-gray-500 hover:bg-red-50 dark:hover:bg-red-500/10 hover:text-red-500 dark:hover:text-red-400 transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.96] touch-manipulation"
           >
             {Ic.logout}

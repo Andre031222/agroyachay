@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { serialAPI } from '../../services/api';
+import { useLanguage } from '../../context/LanguageContext';
 import { Ic, rssiToIcon, rssiToColor } from './dispositivosIcons';
 import { fieldClass } from '../auth/AuthShared';
 
 export default function ModalUSBWizard({ onClose, onDone }) {
+  const { t } = useLanguage();
   const [paso, setPaso] = useState(1);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -64,14 +66,14 @@ export default function ModalUSBWizard({ onClose, onDone }) {
       setTodosLos(todos || []);
       if (puertos && puertos.length === 1) setPuertoSel(puertos[0].port);
     } catch (e) {
-      setErr(e.response?.data?.message || 'No se pudo conectar con el backend');
+      setErr(e.response?.data?.message || t('usbWizard.backendError'));
     } finally {
       setLoading(false);
     }
   };
 
   const identificar = async () => {
-    if (!puertoSel) { setError('Selecciona un puerto primero'); return; }
+    if (!puertoSel) { setError(t('usbWizard.selectPortFirst')); return; }
     setLoading(true);
     setError('');
     try {
@@ -82,10 +84,10 @@ export default function ModalUSBWizard({ onClose, onDone }) {
         setFirmwareVer(d.firmware || '');
         setPaso(2);
       } else {
-        setErr(d.message || 'Error al identificar el dispositivo');
+        setErr(d.message || t('usbWizard.identifyError'));
       }
     } catch (e) {
-      setErr(e.response?.data?.message || 'Error de conexión. Verifica que el ESP32 esté en modo Setup.');
+      setErr(e.response?.data?.message || t('usbWizard.connectionErrorSetup'));
     } finally {
       setLoading(false);
     }
@@ -103,10 +105,10 @@ export default function ModalUSBWizard({ onClose, onDone }) {
         setRedes(sorted);
         if (sorted.length > 0) setRedSel(sorted[0].ssid);
       } else {
-        setErr(d.message || 'Error al escanear redes WiFi');
+        setErr(d.message || t('usbWizard.scanError'));
       }
     } catch (e) {
-      setErr(e.response?.data?.message || 'Error al escanear. Verifica conexión USB.');
+      setErr(e.response?.data?.message || t('usbWizard.scanUsbError'));
     } finally {
       setLoading(false);
     }
@@ -117,8 +119,8 @@ export default function ModalUSBWizard({ onClose, onDone }) {
   }, [paso]);
 
   const configurar = async () => {
-    if (!redSel) { setError('Selecciona una red WiFi'); return; }
-    if (!serverUrl) { setError('La URL del servidor es requerida'); return; }
+    if (!redSel) { setError(t('usbWizard.selectNetwork')); return; }
+    if (!serverUrl) { setError(t('usbWizard.serverUrlRequired')); return; }
     setLoading(true);
     setError('');
     try {
@@ -134,10 +136,10 @@ export default function ModalUSBWizard({ onClose, onDone }) {
         setPaso(4);
         setTimeout(() => { onDone(); onClose(); }, 8000);
       } else {
-        setErr(d.message || 'Error al configurar el ESP32');
+        setErr(d.message || t('usbWizard.configError'));
       }
     } catch (e) {
-      setErr(e.response?.data?.message || 'Error al enviar configuración al ESP32.');
+      setErr(e.response?.data?.message || t('usbWizard.sendConfigError'));
     } finally {
       setLoading(false);
     }
@@ -153,7 +155,7 @@ export default function ModalUSBWizard({ onClose, onDone }) {
         <div className="flex items-center justify-between px-6 py-4 border-b border-black/5 dark:border-white/10 shrink-0">
           <div className="flex items-center gap-2.5">
             <span className="flex items-center justify-center w-8 h-8 rounded-full bg-emerald-50 dark:bg-emerald-500/10 ring-1 ring-emerald-500/20 dark:ring-emerald-400/20 text-emerald-500">{Ic.usb}</span>
-            <h3 className="font-semibold tracking-tight text-gray-900 dark:text-white text-sm">Conectar nuevo dispositivo por USB</h3>
+            <h3 className="font-semibold tracking-tight text-gray-900 dark:text-white text-sm">{t('usbWizard.title')}</h3>
           </div>
           <button onClick={onClose} className="flex items-center justify-center w-8 h-8 rounded-full text-gray-400 hover:bg-gray-50 dark:hover:bg-white/[0.06] hover:text-gray-600 dark:hover:text-gray-200 transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]">{Ic.x}</button>
         </div>
@@ -170,7 +172,7 @@ export default function ModalUSBWizard({ onClose, onDone }) {
                   {paso > n ? Ic.check : n}
                 </div>
                 <span className={`text-[10px] font-semibold whitespace-nowrap ${paso >= n ? 'text-emerald-600 dark:text-emerald-300' : 'text-gray-400'}`}>
-                  {n === 1 ? 'Detectar' : n === 2 ? 'Verificar' : n === 3 ? 'WiFi' : 'Configurar'}
+                  {n === 1 ? t('usbWizard.stepDetect') : n === 2 ? t('usbWizard.stepVerify') : n === 3 ? t('usbWizard.stepWifi') : t('usbWizard.stepConfigure')}
                 </span>
               </div>
               {n < 4 && (
@@ -185,9 +187,9 @@ export default function ModalUSBWizard({ onClose, onDone }) {
           {paso === 1 && (
             <div className="space-y-4">
               <div className="bg-emerald-50/60 dark:bg-emerald-500/[0.07] ring-1 ring-emerald-500/15 dark:ring-emerald-400/15 rounded-2xl px-4 py-3">
-                <p className="text-xs font-semibold text-emerald-700 dark:text-emerald-300 mb-1">Antes de continuar</p>
+                <p className="text-xs font-semibold text-emerald-700 dark:text-emerald-300 mb-1">{t('usbWizard.beforeYouStart')}</p>
                 <p className="text-xs text-emerald-700/80 dark:text-emerald-200/70">
-                  Conecta tu ESP32 al PC por USB. El LED debe parpadear muy rápido (modo Setup). Si no, mantén BOOT 5s para resetear.
+                  {t('usbWizard.beforeYouStartText')}
                 </p>
               </div>
 
@@ -197,16 +199,16 @@ export default function ModalUSBWizard({ onClose, onDone }) {
                 className="w-full flex items-center justify-center gap-2 h-11 px-4 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-semibold transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.98] disabled:opacity-60"
               >
                 {loading ? <span className="w-4 h-4 border-2 border-white/50 border-t-white rounded-full animate-spin" /> : Ic.usb}
-                {loading ? 'Buscando...' : 'Buscar dispositivo USB'}
+                {loading ? t('usbWizard.searching') : t('usbWizard.searchDevice')}
               </button>
 
               {puertosList !== null && (
                 <div>
                   {listaPuertos.length === 0 ? (
                     <div className="text-center py-4">
-                      <p className="text-sm font-semibold text-gray-500 dark:text-gray-400">No se encontraron dispositivos ESP32</p>
+                      <p className="text-sm font-semibold text-gray-500 dark:text-gray-400">{t('usbWizard.noDevices')}</p>
                       <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">
-                        Verifica que el cable USB transmita datos (no solo carga) y que el driver CP210x esté instalado.
+                        {t('usbWizard.noDevicesHint')}
                       </p>
                       {!mostrarTodos && todosLos.length > 0 && (
                         <button onClick={() => setMostrarTodos(true)} className="mt-2 text-xs text-emerald-500 underline">
@@ -217,7 +219,7 @@ export default function ModalUSBWizard({ onClose, onDone }) {
                   ) : (
                     <div className="space-y-2">
                       <p className="text-xs font-semibold text-gray-500 dark:text-gray-400">
-                        {puertosList.length} dispositivo{puertosList.length > 1 ? 's' : ''} encontrado{puertosList.length > 1 ? 's' : ''}:
+                        {t('usbWizard.devicesFound', { count: puertosList.length })}
                       </p>
                       {listaPuertos.map((p) => (
                         <button
@@ -238,7 +240,7 @@ export default function ModalUSBWizard({ onClose, onDone }) {
                       ))}
                       {!mostrarTodos && todosLos.length > listaPuertos.length && (
                         <button onClick={() => setMostrarTodos(true)} className="text-xs text-gray-400 underline mt-1">
-                          Ver también otros puertos ({todosLos.length - listaPuertos.length} más)
+                          {t('usbWizard.showOtherPorts', { count: todosLos.length - listaPuertos.length })}
                         </button>
                       )}
                     </div>
@@ -261,21 +263,21 @@ export default function ModalUSBWizard({ onClose, onDone }) {
                   {Ic.cpu}
                 </div>
                 <div>
-                  <p className="text-xs text-emerald-600 dark:text-emerald-300 font-semibold mb-0.5">ESP32 detectado</p>
+                  <p className="text-xs text-emerald-600 dark:text-emerald-300 font-semibold mb-0.5">{t('usbWizard.deviceDetected')}</p>
                   <p className="font-mono font-bold tracking-tight text-gray-900 dark:text-white text-base">{deviceId}</p>
-                  {firmwareVer && <p className="text-xs text-gray-400 mt-0.5">Firmware v{firmwareVer} — Modo Setup activo</p>}
+                  {firmwareVer && <p className="text-xs text-gray-400 mt-0.5">{t('usbWizard.firmwareInfo', { version: firmwareVer })}</p>}
                 </div>
               </div>
 
               <div className="bg-amber-50 dark:bg-amber-500/10 ring-1 ring-amber-500/20 dark:ring-amber-400/20 rounded-2xl px-3 py-2.5 flex items-start gap-2">
                 <span className="text-amber-500 shrink-0 mt-0.5">{Ic.alert}</span>
                 <p className="text-xs text-amber-700 dark:text-amber-300">
-                  El LED está parpadeando rápido: el ESP32 está listo para recibir configuración WiFi.
+                  {t('usbWizard.ledBlinking')}
                 </p>
               </div>
 
               <p className="text-xs text-gray-500 dark:text-gray-400">
-                Puerto seleccionado: <strong className="font-mono text-gray-700 dark:text-gray-300">{puertoSel}</strong>
+                {t('usbWizard.selectedPort')} <strong className="font-mono text-gray-700 dark:text-gray-300">{puertoSel}</strong>
               </p>
             </div>
           )}
@@ -285,13 +287,13 @@ export default function ModalUSBWizard({ onClose, onDone }) {
               {loading && redes.length === 0 ? (
                 <div className="flex flex-col items-center justify-center py-8 gap-3">
                   <div className="w-8 h-8 border-2 border-emerald-500 border-t-transparent rounded-full animate-spin" />
-                  <p className="text-sm text-gray-500 dark:text-gray-400">Escaneando redes WiFi... (puede tardar ~5-10s)</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">{t('usbWizard.scanningWifi')}</p>
                 </div>
               ) : redes.length > 0 ? (
                 <>
                   <div>
                     <p className="text-xs font-semibold text-gray-600 dark:text-gray-300 mb-2">
-                      Redes disponibles ({redes.filter(r => r.ssid).length})
+                      {t('usbWizard.availableNetworks', { count: redes.filter(r => r.ssid).length })}
                       <button onClick={escanearWifi} disabled={loading} className="ml-2 text-emerald-500 hover:text-emerald-600 disabled:opacity-50">
                         <span className={loading ? 'inline-block animate-spin' : ''}>{Ic.refresh}</span>
                       </button>
@@ -319,14 +321,14 @@ export default function ModalUSBWizard({ onClose, onDone }) {
 
                   <div>
                     <label className="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1.5">
-                      Contraseña WiFi {redes.find(r => r.ssid === redSel)?.secure && <span className="text-red-400">*</span>}
+                      {t('usbWizard.wifiPassword')} {redes.find(r => r.ssid === redSel)?.secure && <span className="text-red-400">*</span>}
                     </label>
                     <div className="relative">
                       <input
                         type={showPass ? 'text' : 'password'}
                         value={wifiPass}
                         onChange={e => setWifiPass(e.target.value)}
-                        placeholder="Contraseña de la red seleccionada"
+                        placeholder={t('usbWizard.passwordPlaceholder')}
                         autoComplete="off"
                         className={fieldClass + ' pr-10'}
                       />
@@ -346,12 +348,12 @@ export default function ModalUSBWizard({ onClose, onDone }) {
                   <div>
                     <div className="flex items-center justify-between mb-1.5">
                       <label className="text-xs font-semibold text-gray-600 dark:text-gray-300">
-                        Servidor AgroYachay
+                        {t('usbWizard.server')}
                       </label>
                       {loadingServer
-                        ? <span className="text-xs text-gray-400 animate-pulse">Detectando IPs...</span>
+                        ? <span className="text-xs text-gray-400 animate-pulse">{t('usbWizard.detectingIps')}</span>
                         : <span className="text-xs text-emerald-600 dark:text-emerald-300 font-medium">
-                            {serverOptions.length} interfaz{serverOptions.length !== 1 ? 'ces' : ''} detectada{serverOptions.length !== 1 ? 's' : ''}
+                            {t('usbWizard.interfacesDetected', { count: serverOptions.length })}
                           </span>
                       }
                     </div>
@@ -389,14 +391,14 @@ export default function ModalUSBWizard({ onClose, onDone }) {
                       className={fieldClass + ' font-mono text-xs'}
                     />
                     <p className="text-xs text-gray-400 mt-1">
-                      {serverManual ? 'Usando URL manual.' : 'Selección automática. Escribe para sobreescribir.'}
+                      {serverManual ? t('usbWizard.manualUrl') : t('usbWizard.autoSelection')}
                     </p>
                   </div>
                 </>
               ) : (
                 <div className="text-center py-4">
-                  <p className="text-sm text-gray-500">No se encontraron redes WiFi.</p>
-                  <button onClick={escanearWifi} className="mt-2 text-sm text-emerald-500 underline">Reintentar escaneo</button>
+                  <p className="text-sm text-gray-500">{t('usbWizard.noNetworks')}</p>
+                  <button onClick={escanearWifi} className="mt-2 text-sm text-emerald-500 underline">{t('usbWizard.retryScan')}</button>
                 </div>
               )}
 
@@ -416,19 +418,19 @@ export default function ModalUSBWizard({ onClose, onDone }) {
                 </svg>
               </div>
               <div>
-                <p className="font-semibold tracking-tight text-gray-900 dark:text-white text-base">ESP32 configurado</p>
+                <p className="font-semibold tracking-tight text-gray-900 dark:text-white text-base">{t('usbWizard.configured')}</p>
                 <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
                   El dispositivo se está conectando a <strong className="text-gray-700 dark:text-gray-300">{redSel}</strong>...
                 </p>
               </div>
               <div className="bg-emerald-50 dark:bg-emerald-500/10 ring-1 ring-emerald-500/20 dark:ring-emerald-400/20 rounded-2xl px-4 py-3 w-full">
                 <p className="text-xs text-emerald-700 dark:text-emerald-300">
-                  En unos segundos aparecerá como <strong>Pendiente</strong> en este panel. La lista se actualizará automáticamente.
+                  {t('usbWizard.willAppearPending')} <strong>{t('usbWizard.pending')}</strong> {t('usbWizard.willAppearPendingRest')}
                 </p>
               </div>
               <div className="flex items-center gap-2 text-gray-400">
                 <span className="w-4 h-4 border-2 border-gray-300 border-t-emerald-400 rounded-full animate-spin" />
-                <span className="text-xs">Esperando conexión del ESP32...</span>
+                <span className="text-xs">{t('usbWizard.waitingConnection')}</span>
               </div>
             </div>
           )}
@@ -436,7 +438,7 @@ export default function ModalUSBWizard({ onClose, onDone }) {
           {paso === 4 && !configurado && (
             <div className="flex flex-col items-center justify-center py-8 gap-3">
               <div className="w-8 h-8 border-2 border-emerald-500 border-t-transparent rounded-full animate-spin" />
-              <p className="text-sm text-gray-500">Enviando configuración al ESP32...</p>
+              <p className="text-sm text-gray-500">{t('usbWizard.sendingConfig')}</p>
             </div>
           )}
         </div>
@@ -448,13 +450,13 @@ export default function ModalUSBWizard({ onClose, onDone }) {
               disabled={loading}
               className="flex items-center gap-1.5 h-11 px-4 text-sm font-medium rounded-full ring-1 ring-black/5 dark:ring-white/10 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-white/[0.06] transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.98] disabled:opacity-50"
             >
-              {Ic.arrowL} Atrás
+              {Ic.arrowL} {t('usbWizard.back')}
             </button>
           )}
 
           {paso === 1 && (
             <button onClick={onClose} className="flex-1 h-11 px-4 text-sm font-medium rounded-full ring-1 ring-black/5 dark:ring-white/10 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-white/[0.06] transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.98]">
-              Cancelar
+              {t('common.cancel')}
             </button>
           )}
 
@@ -465,7 +467,7 @@ export default function ModalUSBWizard({ onClose, onDone }) {
               className="group/nav flex-1 flex items-center justify-center gap-2 h-11 px-4 text-sm font-semibold rounded-full bg-emerald-600 hover:bg-emerald-500 text-white transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.98] disabled:opacity-50"
             >
               {loading ? <span className="w-4 h-4 border-2 border-white/50 border-t-white rounded-full animate-spin" /> : null}
-              {loading ? 'Verificando...' : 'Verificar dispositivo'}
+              {loading ? t('usbWizard.verifying') : t('usbWizard.verifyDevice')}
               {!loading && <span className="flex items-center justify-center w-5 h-5 rounded-full bg-white/20 transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover/nav:translate-x-0.5"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" className="w-3 h-3"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>}
             </button>
           )}
@@ -476,7 +478,7 @@ export default function ModalUSBWizard({ onClose, onDone }) {
               disabled={loading}
               className="group/nav flex-1 flex items-center justify-center gap-2 h-11 px-4 text-sm font-semibold rounded-full bg-emerald-600 hover:bg-emerald-500 text-white transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.98] disabled:opacity-50"
             >
-              Seleccionar red WiFi
+              {t('usbWizard.selectWifi')}
               <span className="flex items-center justify-center w-5 h-5 rounded-full bg-white/20 transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover/nav:translate-x-0.5"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" className="w-3 h-3"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
             </button>
           )}
@@ -488,13 +490,13 @@ export default function ModalUSBWizard({ onClose, onDone }) {
               className="flex-1 flex items-center justify-center gap-2 h-11 px-4 text-sm font-semibold rounded-full bg-emerald-600 hover:bg-emerald-500 text-white transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.98] disabled:opacity-50"
             >
               {loading ? <span className="w-4 h-4 border-2 border-white/50 border-t-white rounded-full animate-spin" /> : Ic.wifi}
-              {loading ? 'Configurando...' : 'Configurar y conectar'}
+              {loading ? t('usbWizard.configuring') : t('usbWizard.configureAndConnect')}
             </button>
           )}
 
           {paso === 4 && (
             <button onClick={onClose} className="flex-1 h-11 px-4 text-sm font-medium rounded-full ring-1 ring-black/5 dark:ring-white/10 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-white/[0.06] transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.98]">
-              Cerrar
+              {t('common.close')}
             </button>
           )}
         </div>

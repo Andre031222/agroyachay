@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { dispositivosAPI } from '../../services/api';
+import { useLanguage } from '../../context/LanguageContext';
 import {
   AreaChart, Area,
   XAxis, YAxis, CartesianGrid, Tooltip,
@@ -77,17 +78,17 @@ const Ic = {
 
 const SENSOR_CFG = {
   temperatura_aire: {
-    label:'Temperatura del Aire', unit:'°C', decimals:1,
+    labelKey:'sensors.airTemperature', unit:'°C', decimals:1,
     minC:8,  min:20, max:28, maxC:35,
     icon: Ic.therm,  iconBg:'bg-orange-500', iconClr:'text-orange-500',
   },
   humedad_aire: {
-    label:'Humedad del Aire', unit:'%', decimals:0,
+    labelKey:'sensors.airHumidity', unit:'%', decimals:0,
     minC:25, min:50, max:80, maxC:95,
     icon: Ic.drop,   iconBg:'bg-sky-500',    iconClr:'text-sky-500',
   },
   humedad_suelo: {
-    label:'Humedad del Suelo', unit:'%', decimals:0,
+    labelKey:'sensors.soilHumidity', unit:'%', decimals:0,
     minC:20, min:50, max:80, maxC:95,
     icon: Ic.sprout, iconBg:'bg-emerald-500',iconClr:'text-emerald-500',
   },
@@ -103,13 +104,14 @@ const getEstado = (tipo, val) => {
 };
 
 const ESTADO = {
-  normal:   { label:'Óptimo',         dot:'bg-emerald-500', badge:'bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 ring-emerald-500/15', iconBg:'bg-emerald-500', dotColor:'bg-emerald-500' },
-  warning:  { label:'Fuera de rango', dot:'bg-amber-400',   badge:'bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-300 ring-amber-500/20',           iconBg:'bg-amber-400',   dotColor:'bg-amber-400'   },
-  critical: { label:'Nivel crítico',  dot:'bg-red-500',     badge:'bg-red-50 dark:bg-red-500/10 text-red-700 dark:text-red-300 ring-red-500/20',                     iconBg:'bg-red-500',     dotColor:'bg-red-500'     },
-  nodata:   { label:'Sin datos',      dot:'bg-gray-300',    badge:'bg-gray-50 dark:bg-white/[0.04] text-gray-400 ring-black/5 dark:ring-white/10',                   iconBg:'bg-gray-300',    dotColor:'bg-gray-400'    },
+  normal:   { labelKey:'sensors.states.normal', dot:'bg-emerald-500', badge:'bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 ring-emerald-500/15', iconBg:'bg-emerald-500', dotColor:'bg-emerald-500' },
+  warning:  { labelKey:'sensors.states.warning', dot:'bg-amber-400',   badge:'bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-300 ring-amber-500/20',           iconBg:'bg-amber-400',   dotColor:'bg-amber-400'   },
+  critical: { labelKey:'sensors.states.critical', dot:'bg-red-500',     badge:'bg-red-50 dark:bg-red-500/10 text-red-700 dark:text-red-300 ring-red-500/20',                     iconBg:'bg-red-500',     dotColor:'bg-red-500'     },
+  nodata:   { labelKey:'sensors.states.nodata', dot:'bg-gray-300',    badge:'bg-gray-50 dark:bg-white/[0.04] text-gray-400 ring-black/5 dark:ring-white/10',                   iconBg:'bg-gray-300',    dotColor:'bg-gray-400'    },
 };
 
 const SensoresDashboard = () => {
+  const { t, intlLocale } = useLanguage();
   const [dispositivos, setDispositivos] = useState([]);
   const [devicesReady, setDevicesReady] = useState(false);
   const [sensorActivo, setSensorActivo] = useState(null);
@@ -155,7 +157,7 @@ const SensoresDashboard = () => {
         (lRes.data.lecturas || []).forEach(l => {
           if (!map[l.timestamp]) {
             map[l.timestamp] = {
-              time: new Date(l.timestamp).toLocaleTimeString('es-PE', { hour:'2-digit', minute:'2-digit', second:'2-digit' }),
+              time: new Date(l.timestamp).toLocaleTimeString(intlLocale, { hour:'2-digit', minute:'2-digit', second:'2-digit' }),
               ts: l.timestamp,
             };
           }
@@ -202,7 +204,7 @@ const SensoresDashboard = () => {
     <div className="px-4 sm:p-6 p-6 bg-gray-50 dark:bg-gray-950 min-h-full flex items-center justify-center">
       <div className="flex flex-col items-center gap-3 animate-slide-up">
         <div className="w-9 h-9 border-2 border-emerald-500 border-t-transparent rounded-full animate-spin" />
-        <p className="text-sm text-gray-500 dark:text-gray-400">Cargando dispositivos...</p>
+        <p className="text-sm text-gray-500 dark:text-gray-400">{t('sensors.loadingDevices')}</p>
       </div>
     </div>
   );
@@ -214,16 +216,16 @@ const SensoresDashboard = () => {
           <div className="w-16 h-16 rounded-full bg-emerald-50 dark:bg-emerald-500/10 ring-1 ring-emerald-500/15 flex items-center justify-center mx-auto mb-5 text-emerald-600 dark:text-emerald-400">
             {Ic.cpu}
           </div>
-          <h2 className="mt-4 font-display text-2xl font-semibold tracking-tight text-gray-900 dark:text-white mb-2">Sin dispositivos vinculados</h2>
+          <h2 className="mt-4 font-display text-2xl font-semibold tracking-tight text-gray-900 dark:text-white mb-2">{t('sensors.noDevices')}</h2>
           <p className="text-sm text-gray-500 dark:text-gray-400 mb-6 leading-relaxed">
-            Vincula tu sensor ESP32 a un cultivo para comenzar a ver temperatura, humedad del aire y humedad del suelo en tiempo real.
+            {t('sensors.noDevicesHint')}
           </p>
 
           <div className="grid grid-cols-3 gap-3 mb-6">
             {[
-              { icon: Ic.therm,  label:'Temperatura', color:'bg-orange-50 dark:bg-orange-500/10 ring-orange-500/15 text-orange-500' },
-              { icon: Ic.drop,   label:'H. Aire',     color:'bg-sky-50 dark:bg-sky-500/10 ring-sky-500/15 text-sky-500'            },
-              { icon: Ic.sprout, label:'H. Suelo',    color:'bg-emerald-50 dark:bg-emerald-500/10 ring-emerald-500/15 text-emerald-500' },
+              { icon: Ic.therm,  label:t('sensors.temperature'), color:'bg-orange-50 dark:bg-orange-500/10 ring-orange-500/15 text-orange-500' },
+              { icon: Ic.drop,   label:t('sensors.airHumidityShort'), color:'bg-sky-50 dark:bg-sky-500/10 ring-sky-500/15 text-sky-500'            },
+              { icon: Ic.sprout, label:t('sensors.soilHumidityShort'), color:'bg-emerald-50 dark:bg-emerald-500/10 ring-emerald-500/15 text-emerald-500' },
             ].map((s, i) => (
               <div key={i} className={`flex flex-col items-center gap-2 py-3.5 rounded-2xl ring-1 ${s.color}`}>
                 {s.icon}
@@ -235,7 +237,7 @@ const SensoresDashboard = () => {
           <Link to="/dispositivos"
             className="inline-flex items-center gap-2 px-5 h-11 bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-semibold rounded-full transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.98] touch-manipulation">
             {Ic.link}
-            Vincular dispositivo ESP32
+            {t('sensors.linkDevice')}
           </Link>
         </div>
       </div>
@@ -247,7 +249,7 @@ const SensoresDashboard = () => {
 
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
-          <h1 className="font-display text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">Monitoreo IoT</h1>
+          <h1 className="font-display text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">{t('sensors.title')}</h1>
           {dispositivos.length > 1 ? (
             <select
               value={sensorActivo?.id || ''}
@@ -272,7 +274,7 @@ const SensoresDashboard = () => {
           {lastUpdate && (
             <span className="hidden sm:flex items-center gap-1.5 text-[10px] text-gray-400">
               {Ic.clock}
-              {lastUpdate.toLocaleTimeString('es-PE', { hour:'2-digit', minute:'2-digit', second:'2-digit' })}
+              {lastUpdate.toLocaleTimeString(intlLocale, { hour:'2-digit', minute:'2-digit', second:'2-digit' })}
             </span>
           )}
           <button onClick={() => setAutoRefresh(a => !a)}
@@ -282,17 +284,17 @@ const SensoresDashboard = () => {
                 : 'bg-white dark:bg-white/[0.04] ring-black/5 dark:ring-white/10 text-gray-500 dark:text-gray-400'
             }`}>
             <span className={autoRefresh ? 'animate-spin' : ''}>{Ic.refresh}</span>
-            Auto {autoRefresh ? 'ON' : 'OFF'}
+            {t('sensors.auto')} {autoRefresh ? 'ON' : 'OFF'}
           </button>
           <button onClick={fetchData} disabled={loadingData}
             className="flex items-center gap-1.5 h-9 px-3.5 bg-white dark:bg-white/[0.04] ring-1 ring-black/5 dark:ring-white/10 rounded-full text-xs font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-white/[0.08] disabled:opacity-50 transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.98] touch-manipulation">
-            {Ic.refresh} Actualizar
+            {Ic.refresh} {t('sensors.refresh')}
           </button>
         </div>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        {sensorCards.map(({ tipo, val, icon, iconBg, unit, decimals, label, minC, min, max, maxC }) => {
+        {sensorCards.map(({ tipo, val, icon, iconBg, unit, decimals, labelKey, minC, min, max, maxC }) => {
           const estado = getEstado(tipo, val);
           const ep     = ESTADO[estado];
           return (
@@ -309,7 +311,7 @@ const SensoresDashboard = () => {
                 </div>
                 <span className={`flex items-center gap-1 text-[10px] font-medium px-2.5 py-1 rounded-full ring-1 ${ep.badge}`}>
                   <span className={`w-1.5 h-1.5 rounded-full ${ep.dot} ${estado === 'critical' ? 'animate-pulse' : ''}`} />
-                  {ep.label}
+                  {t(ep.labelKey)}
                 </span>
               </div>
 
@@ -319,7 +321,7 @@ const SensoresDashboard = () => {
                 </span>
                 <span className="text-base font-semibold text-gray-400">{unit}</span>
               </div>
-              <p className="text-xs font-medium text-gray-500 dark:text-gray-400">{label}</p>
+              <p className="text-xs font-medium text-gray-500 dark:text-gray-400">{t(labelKey)}</p>
 
               {minC != null && (
                 <div className="mt-3.5 mb-2">
@@ -329,15 +331,15 @@ const SensoresDashboard = () => {
               {minC != null && (
                 <div className="flex items-center justify-between mt-2.5">
                   <div className="text-center">
-                    <p className="text-[9px] text-gray-400">Mín. crítico</p>
+                    <p className="text-[9px] text-gray-400">{t('sensors.criticalMin')}</p>
                     <p className="text-[10px] font-semibold text-red-500">{minC}{unit}</p>
                   </div>
                   <div className="text-center">
-                    <p className="text-[9px] text-emerald-600 dark:text-emerald-400 font-medium">Óptimo</p>
+                    <p className="text-[9px] text-emerald-600 dark:text-emerald-400 font-medium">{t('sensors.optimal')}</p>
                     <p className="text-[10px] font-semibold text-emerald-600 dark:text-emerald-400">{min}–{max}{unit}</p>
                   </div>
                   <div className="text-center">
-                    <p className="text-[9px] text-gray-400">Máx. crítico</p>
+                    <p className="text-[9px] text-gray-400">{t('sensors.criticalMax')}</p>
                     <p className="text-[10px] font-semibold text-red-500">{maxC}{unit}</p>
                   </div>
                 </div>
@@ -353,23 +355,23 @@ const SensoresDashboard = () => {
         <div className="flex items-center justify-between px-5 pt-4 pb-0 border-b border-black/5 dark:border-white/10">
           <div className="flex gap-0.5">
             {[
-              { id:'temperatura', label:'Temperatura',   icon: Ic.therm    },
-              { id:'humedad',     label:'Humedad',       icon: Ic.drop     },
-              { id:'todos',       label:'Completo',      icon: Ic.activity },
-            ].map(t => (
-              <button key={t.id} onClick={() => setActiveChart(t.id)}
+              { id:'temperatura', label:t('sensors.tabTemperature'), icon: Ic.therm },
+              { id:'humedad',     label:t('sensors.tabHumidity'), icon: Ic.drop },
+              { id:'todos',       label:t('sensors.tabAll'), icon: Ic.activity },
+            ].map(tab => (
+              <button key={tab.id} onClick={() => setActiveChart(tab.id)}
                 className={`flex items-center gap-1.5 px-3 py-2.5 text-xs font-medium border-b-2 transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] touch-manipulation ${
-                  activeChart === t.id
+                  activeChart === tab.id
                     ? 'border-emerald-500 text-emerald-700 dark:text-emerald-300'
                     : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
                 }`}>
-                {t.icon}
-                <span className="hidden sm:inline">{t.label}</span>
+                {tab.icon}
+                <span className="hidden sm:inline">{tab.label}</span>
               </button>
             ))}
           </div>
           <span className="text-[10px] text-gray-400 pb-2 pr-1">
-            {hasData ? `${lecturas.length} lecturas` : 'Sin datos'}
+            {hasData ? t('sensors.readingsCount', { count: lecturas.length }) : t('sensors.noData')}
           </span>
         </div>
 
@@ -379,9 +381,9 @@ const SensoresDashboard = () => {
               <div className="w-12 h-12 bg-gray-50 dark:bg-white/[0.04] ring-1 ring-black/5 dark:ring-white/10 rounded-full flex items-center justify-center mb-3 text-gray-400">
                 {Ic.activity}
               </div>
-              <p className="text-sm font-medium text-gray-600 dark:text-gray-300 mb-1">Sin lecturas disponibles</p>
+              <p className="text-sm font-medium text-gray-600 dark:text-gray-300 mb-1">{t('sensors.noReadings')}</p>
               <p className="text-xs text-gray-400 dark:text-gray-500">
-                {connected ? 'Esperando primera lectura del sensor...' : 'Conecta el ESP32 al hotspot configurado'}
+                {connected ? t('sensors.waitingFirstReading') : t('sensors.connectHotspot')}
               </p>
             </div>
           ) : (
@@ -393,14 +395,14 @@ const SensoresDashboard = () => {
                       <div className="w-7 h-7 bg-orange-500 rounded-full ring-1 ring-black/5 dark:ring-white/10 flex items-center justify-center text-white">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="w-3.5 h-3.5"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/></svg>
                       </div>
-                      <span className="text-xs font-medium text-gray-700 dark:text-gray-300">Temperatura del Aire (°C)</span>
+                      <span className="text-xs font-medium text-gray-700 dark:text-gray-300">{t('sensors.airTemperatureChart')}</span>
                     </div>
                   )}
                   {activeChart === 'temperatura' && (
                     <div className="flex items-center gap-4 mb-3 flex-wrap">
-                      <div className="flex items-center gap-1.5"><span className="w-3 h-0.5 bg-orange-400 rounded" /><span className="text-xs text-gray-500">Temperatura</span></div>
-                      <div className="flex items-center gap-1.5"><span className="w-3 border-t border-dashed border-emerald-400" /><span className="text-xs text-gray-500">Zona óptima (20–28°C)</span></div>
-                      <div className="flex items-center gap-1.5"><span className="w-3 border-t border-dashed border-red-400" /><span className="text-xs text-gray-500">Límite crítico</span></div>
+                      <div className="flex items-center gap-1.5"><span className="w-3 h-0.5 bg-orange-400 rounded" /><span className="text-xs text-gray-500">{t('sensors.temperature')}</span></div>
+                      <div className="flex items-center gap-1.5"><span className="w-3 border-t border-dashed border-emerald-400" /><span className="text-xs text-gray-500">{t('sensors.optimalZone')}</span></div>
+                      <div className="flex items-center gap-1.5"><span className="w-3 border-t border-dashed border-red-400" /><span className="text-xs text-gray-500">{t('sensors.criticalLimit')}</span></div>
                     </div>
                   )}
                   <ResponsiveContainer width="100%" height={activeChart === 'todos' ? 160 : 260}>
@@ -422,7 +424,7 @@ const SensoresDashboard = () => {
                       <Area type="monotone" dataKey="temperatura" stroke="#f97316" strokeWidth={2.5}
                         fill="url(#gTemp)" dot={false}
                         activeDot={{ r:5, fill:'#f97316', strokeWidth:2, stroke:'#fff' }}
-                        name="Temp °C" />
+                        name={t('sensors.seriesTemp')} />
                     </AreaChart>
                   </ResponsiveContainer>
                 </div>
@@ -435,14 +437,14 @@ const SensoresDashboard = () => {
                       <div className="w-7 h-7 bg-sky-500 rounded-full ring-1 ring-black/5 dark:ring-white/10 flex items-center justify-center text-white">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="w-3.5 h-3.5"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
                       </div>
-                      <span className="text-xs font-medium text-gray-700 dark:text-gray-300">Humedad Aire y Suelo (%)</span>
+                      <span className="text-xs font-medium text-gray-700 dark:text-gray-300">{t('sensors.humidityChart')}</span>
                     </div>
                   )}
                   {activeChart === 'humedad' && (
                     <div className="flex items-center gap-4 mb-3 flex-wrap">
-                      <div className="flex items-center gap-1.5"><span className="w-3 h-0.5 rounded" style={{background:'#3b82f6'}} /><span className="text-xs text-gray-500">Humedad Aire</span></div>
-                      <div className="flex items-center gap-1.5"><span className="w-3 h-0.5 rounded" style={{background:'#10b981'}} /><span className="text-xs text-gray-500">Humedad Suelo</span></div>
-                      <div className="flex items-center gap-1.5"><span className="w-3 border-t border-dashed border-red-400" /><span className="text-xs text-gray-500">Umbral riego urgente (40%)</span></div>
+                      <div className="flex items-center gap-1.5"><span className="w-3 h-0.5 rounded" style={{background:'#3b82f6'}} /><span className="text-xs text-gray-500">{t('sensors.legendAirHumidity')}</span></div>
+                      <div className="flex items-center gap-1.5"><span className="w-3 h-0.5 rounded" style={{background:'#10b981'}} /><span className="text-xs text-gray-500">{t('sensors.legendSoilHumidity')}</span></div>
+                      <div className="flex items-center gap-1.5"><span className="w-3 border-t border-dashed border-red-400" /><span className="text-xs text-gray-500">{t('sensors.urgentIrrigation')}</span></div>
                     </div>
                   )}
                   <ResponsiveContainer width="100%" height={activeChart === 'todos' ? 160 : 260}>
@@ -467,11 +469,11 @@ const SensoresDashboard = () => {
                       <Area type="monotone" dataKey="humedadAire"  stroke="#3b82f6" strokeWidth={2.5}
                         fill="url(#gAire)"  dot={false}
                         activeDot={{ r:5, fill:'#3b82f6', strokeWidth:2, stroke:'#fff' }}
-                        name="H. Aire %" />
+                        name={t('sensors.seriesAir')} />
                       <Area type="monotone" dataKey="humedadSuelo" stroke="#10b981" strokeWidth={2.5}
                         fill="url(#gSuelo)" dot={false}
                         activeDot={{ r:5, fill:'#10b981', strokeWidth:2, stroke:'#fff' }}
-                        name="H. Suelo %" />
+                        name={t('sensors.seriesSoil')} />
                     </AreaChart>
                   </ResponsiveContainer>
                 </div>
@@ -489,18 +491,18 @@ const SensoresDashboard = () => {
           <div className="flex items-center gap-3 mb-4">
             <div className="w-9 h-9 bg-emerald-500 rounded-full ring-1 ring-black/5 dark:ring-white/10 flex items-center justify-center text-white">{Ic.cpu}</div>
             <div>
-              <h3 className="font-display text-sm font-semibold tracking-tight text-gray-900 dark:text-white">Dispositivo</h3>
-              <p className="text-xs text-gray-400">Configuración del sensor ESP32</p>
+              <h3 className="font-display text-sm font-semibold tracking-tight text-gray-900 dark:text-white">{t('sensors.device')}</h3>
+              <p className="text-xs text-gray-400">{t('sensors.deviceHint')}</p>
             </div>
           </div>
           <div className="grid grid-cols-2 gap-2">
             {[
               { label:'ESP32 ID',    value: sensorData?.sensor?.esp32_id || sensorActivo?.esp32_id || '—', mono:true },
-              { label:'Tipo',       value: sensorData?.sensor?.tipo      || 'DHT11 + FC-28'               },
-              { label:'Ubicación',  value: sensorData?.sensor?.ubicacion || '—'                           },
-              { label:'Cultivo',    value: sensorActivo?.cultivo_nombre  || '—'                           },
-              { label:'Intervalo',  value: 'Cada 10 segundos'                                             },
-              { label:'Protocolo',  value: 'HTTP · REST API'                                              },
+              { label:t('sensors.fieldType'), value: sensorData?.sensor?.tipo      || 'DHT11 + FC-28'               },
+              { label:t('sensors.fieldLocation'), value: sensorData?.sensor?.ubicacion || '—'                           },
+              { label:t('sensors.fieldCrop'), value: sensorActivo?.cultivo_nombre  || '—'                           },
+              { label:t('sensors.fieldInterval'), value: t('sensors.intervalValue') },
+              { label:t('sensors.fieldProtocol'), value: 'HTTP · REST API' },
             ].map((item, i) => (
               <div key={i} className="bg-gray-50 dark:bg-white/[0.04] rounded-2xl px-3 py-2.5 ring-1 ring-black/5 dark:ring-white/10">
                 <p className="text-[10px] text-gray-400">{item.label}</p>
@@ -518,10 +520,10 @@ const SensoresDashboard = () => {
           <div className="flex items-center gap-3 mb-4">
             <div className="w-9 h-9 bg-sky-500 rounded-full ring-1 ring-black/5 dark:ring-white/10 flex items-center justify-center text-white">{Ic.activity}</div>
             <div>
-              <h3 className="font-display text-sm font-semibold tracking-tight text-gray-900 dark:text-white">Estado en tiempo real</h3>
+              <h3 className="font-display text-sm font-semibold tracking-tight text-gray-900 dark:text-white">{t('sensors.realTimeStatus')}</h3>
               <p className="text-xs text-gray-400">
-                {hasData ? `${lecturas.length} lecturas registradas` : 'Sin lecturas disponibles'}
-                {lastUpdate && ` · ${lastUpdate.toLocaleTimeString('es-PE', { hour:'2-digit', minute:'2-digit', second:'2-digit' })}`}
+                {hasData ? t('sensors.readingsRecorded', { count: lecturas.length }) : t('sensors.noReadings')}
+                {lastUpdate && ` · ${lastUpdate.toLocaleTimeString(intlLocale, { hour:'2-digit', minute:'2-digit', second:'2-digit' })}`}
               </p>
             </div>
           </div>
@@ -536,18 +538,18 @@ const SensoresDashboard = () => {
             </span>
             <div>
               <p className={`text-xs font-semibold ${connected ? 'text-emerald-700 dark:text-emerald-300' : 'text-amber-700 dark:text-amber-300'}`}>
-                {connected ? 'ESP32 activo y enviando datos' : 'ESP32 sin conexión'}
+                {connected ? t('sensors.esp32Active') : t('sensors.esp32Offline')}
               </p>
               <p className="text-[10px] text-gray-500 dark:text-gray-400 mt-0.5">
                 {connected
-                  ? 'Funciona de forma autónoma con alimentación USB 5V'
-                  : 'Conecta el sensor al hotspot configurado para reanudar'}
+                  ? t('sensors.esp32ActiveHint')
+                  : t('sensors.esp32OfflineHint')}
               </p>
             </div>
           </div>
 
           <div className="space-y-2.5">
-            {sensorCards.map(({ tipo, val, icon, label, unit, decimals, minC, maxC }) => {
+            {sensorCards.map(({ tipo, val, icon, labelKey, unit, decimals, minC, maxC }) => {
               const estado = getEstado(tipo, val);
               const ep = ESTADO[estado];
               const pct = (minC != null && maxC != null && val != null)
@@ -556,7 +558,7 @@ const SensoresDashboard = () => {
               return (
                 <div key={tipo} className="flex items-center gap-3">
                   <span className="text-gray-400 shrink-0">{icon}</span>
-                  <span className="text-xs text-gray-600 dark:text-gray-400 w-24 shrink-0 truncate">{label}</span>
+                  <span className="text-xs text-gray-600 dark:text-gray-400 w-24 shrink-0 truncate">{t(labelKey)}</span>
                   <div className="flex-1 h-1.5 bg-gray-100 dark:bg-white/[0.06] rounded-full ring-1 ring-inset ring-black/5 dark:ring-white/10">
                     {val != null && (
                       <div className={`h-1.5 rounded-full transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] ${ep.dotColor}`}

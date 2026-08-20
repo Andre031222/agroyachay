@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify
 from datetime import datetime
 from db import get_db_connection
+from app.i18n import translate as _
 
 sensores_bp = Blueprint('sensores', __name__)
 
@@ -13,7 +14,7 @@ def recibir_lectura():
         if not data:
             return jsonify({
                 'success': False,
-                'message': 'No se recibieron datos'
+                'message': _('no_se_recibieron_datos')
             }), 400
 
         esp32_id = data.get('esp32_id')
@@ -22,7 +23,7 @@ def recibir_lectura():
         if not esp32_id:
             return jsonify({
                 'success': False,
-                'message': 'Falta campo requerido: esp32_id'
+                'message': _('falta_campo_requerido_esp32_id')
             }), 400
 
         connection = get_db_connection()
@@ -106,7 +107,7 @@ def recibir_lectura():
             if lecturas_insertadas == 0:
                 return jsonify({
                     'success': False,
-                    'message': 'No se recibieron lecturas válidas',
+                    'message': _('no_se_recibieron_lecturas_validas'),
                     'errores': errores if errores else None
                 }), 400
 
@@ -127,7 +128,7 @@ def recibir_lectura():
 
             response = {
                 'success': True,
-                'message': f'{lecturas_insertadas} lecturas guardadas correctamente',
+                'message': _('lecturas_guardadas', count=lecturas_insertadas),
                 'sensor_id': sensor_id,
                 'esp32_id': esp32_id,
                 'lecturas_procesadas': lecturas_insertadas,
@@ -148,7 +149,7 @@ def recibir_lectura():
     except Exception as e:
         return jsonify({
             'success': False,
-            'message': 'Error procesando lectura'
+            'message': _('error_procesando_lectura')
         }), 500
 
 
@@ -167,7 +168,7 @@ def registrar_sensor():
         if not all([cultivo_id, nombre, tipo, esp32_id]):
             return jsonify({
                 'success': False,
-                'message': 'Faltan campos requeridos'
+                'message': _('faltan_campos_requeridos')
             }), 400
 
         connection = get_db_connection()
@@ -178,7 +179,7 @@ def registrar_sensor():
             if cursor.fetchone():
                 return jsonify({
                     'success': False,
-                    'message': f'Ya existe un sensor con ESP32_ID: {esp32_id}'
+                    'message': _('sensor_duplicado', esp32_id=esp32_id)
                 }), 409
 
             cursor.execute("""
@@ -192,7 +193,7 @@ def registrar_sensor():
 
             return jsonify({
                 'success': True,
-                'message': 'Sensor registrado exitosamente',
+                'message': _('sensor_registrado_exitosamente'),
                 'sensor_id': sensor_id,
                 'esp32_id': esp32_id
             }), 201
@@ -204,7 +205,7 @@ def registrar_sensor():
     except Exception as e:
         return jsonify({
             'success': False,
-            'message': 'Error registrando sensor'
+            'message': _('error_registrando_sensor')
         }), 500
 
 
@@ -242,7 +243,7 @@ def listar_sensores():
     except Exception as e:
         return jsonify({
             'success': False,
-            'message': 'Error obteniendo sensores'
+            'message': _('error_obteniendo_sensores')
         }), 500
 
 
@@ -250,7 +251,7 @@ def listar_sensores():
 def lecturas_recientes():
     esp32_id = request.args.get('esp32_id', '').strip()
     if not esp32_id:
-        return jsonify({'success': False, 'message': 'Falta esp32_id'}), 400
+        return jsonify({'success': False, 'message': _('falta_esp32_id')}), 400
     try:
         conn = get_db_connection()
         cursor = conn.cursor()
@@ -258,7 +259,7 @@ def lecturas_recientes():
             "SELECT id FROM sensores WHERE esp32_id = %s LIMIT 1", (esp32_id,))
         row = cursor.fetchone()
         if not row:
-            return jsonify({'success': False, 'message': 'Sensor no encontrado', 'lecturas': []}), 404
+            return jsonify({'success': False, 'message': _('sensor_no_encontrado'), 'lecturas': []}), 404
         sensor_id = row['id']
         cursor.execute("""
             SELECT tipo_lectura, valor, unidad, timestamp
@@ -325,7 +326,7 @@ def obtener_lecturas(sensor_id):
     except Exception as e:
         return jsonify({
             'success': False,
-            'message': 'Error obteniendo lecturas'
+            'message': _('error_obteniendo_lecturas')
         }), 500
 
 
@@ -346,7 +347,7 @@ def estado_sensor_por_esp32(esp32_id):
             if not sensor:
                 return jsonify({
                     'success': False,
-                    'message': 'Sensor no encontrado'
+                    'message': _('sensor_no_encontrado')
                 }), 404
 
             sensor_id = sensor['id']
@@ -399,7 +400,7 @@ def estado_sensor_por_esp32(esp32_id):
     except Exception as e:
         return jsonify({
             'success': False,
-            'message': 'Error obteniendo estado'
+            'message': _('error_obteniendo_estado')
         }), 500
 
 
@@ -420,7 +421,7 @@ def estado_sensor(sensor_id):
             if not sensor:
                 return jsonify({
                     'success': False,
-                    'message': 'Sensor no encontrado'
+                    'message': _('sensor_no_encontrado')
                 }), 404
 
             if sensor['fecha_instalacion']:
@@ -462,7 +463,7 @@ def estado_sensor(sensor_id):
     except Exception as e:
         return jsonify({
             'success': False,
-            'message': 'Error obteniendo estado'
+            'message': _('error_obteniendo_estado')
         }), 500
 
 
@@ -506,7 +507,7 @@ def simular_datos():
     try:
         verify_jwt_in_request()
     except Exception:
-        return jsonify({'success': False, 'message': 'Token inválido o expirado'}), 401
+        return jsonify({'success': False, 'message': _('token_invalido_o_expirado')}), 401
 
     try:
         connection = get_db_connection()
@@ -517,7 +518,7 @@ def simular_datos():
             result = cursor.fetchone()
 
             if not result:
-                return jsonify({'success': False, 'message': 'No hay sensores activos para simular datos'}), 404
+                return jsonify({'success': False, 'message': _('no_hay_sensores_activos_para_simular')}), 404
 
             sensor_id = result['id']
 
@@ -557,7 +558,7 @@ def simular_datos():
 
             return jsonify({
                 'success': True,
-                'message': 'Datos de simulacion generados exitosamente',
+                'message': _('datos_de_simulacion_generados_exitosamente'),
                 'sensor_id': sensor_id,
                 'lecturas_generadas': lecturas_generadas,
                 'timestamp': base_time.isoformat()
@@ -570,7 +571,7 @@ def simular_datos():
     except Exception as e:
         return jsonify({
             'success': False,
-            'message': 'Error generando datos de simulacion'
+            'message': _('error_generando_datos_de_simulacion')
         }), 500
 
 
@@ -603,7 +604,7 @@ def listar_pendientes():
             cursor.close()
             connection.close()
     except Exception as e:
-        return jsonify({'success': False, 'message': 'Error interno del servidor'}), 500
+        return jsonify({'success': False, 'message': _('error_interno_del_servidor')}), 500
 
 
 @sensores_bp.route('/mis-dispositivos', methods=['GET'])
@@ -665,7 +666,7 @@ def mis_dispositivos():
             cursor.close()
             connection.close()
     except Exception as e:
-        return jsonify({'success': False, 'message': 'Error interno del servidor'}), 500
+        return jsonify({'success': False, 'message': _('error_interno_del_servidor')}), 500
 
 
 @sensores_bp.route('/<int:sensor_id>/vincular', methods=['POST'])
@@ -677,7 +678,7 @@ def vincular_sensor(sensor_id):
         ubicacion = data.get('ubicacion')
 
         if not cultivo_id:
-            return jsonify({'success': False, 'message': 'cultivo_id es requerido'}), 400
+            return jsonify({'success': False, 'message': _('cultivo_id_es_requerido')}), 400
 
         connection = get_db_connection()
         cursor = connection.cursor()
@@ -685,12 +686,12 @@ def vincular_sensor(sensor_id):
             cursor.execute("SELECT id, nombre, esp32_id FROM sensores WHERE id = %s", (sensor_id,))
             sensor = cursor.fetchone()
             if not sensor:
-                return jsonify({'success': False, 'message': 'Sensor no encontrado'}), 404
+                return jsonify({'success': False, 'message': _('sensor_no_encontrado')}), 404
 
             cursor.execute("SELECT id, nombre FROM cultivos WHERE id = %s", (cultivo_id,))
             cultivo = cursor.fetchone()
             if not cultivo:
-                return jsonify({'success': False, 'message': 'Cultivo no encontrado'}), 404
+                return jsonify({'success': False, 'message': _('cultivo_no_encontrado')}), 404
 
             nuevo_nombre = nombre or sensor['nombre']
             nueva_ubicacion = ubicacion or 'Campo principal'
@@ -707,7 +708,7 @@ def vincular_sensor(sensor_id):
 
             return jsonify({
                 'success': True,
-                'message': f'Dispositivo {sensor["esp32_id"]} vinculado al cultivo "{cultivo["nombre"]}"',
+                'message': _('dispositivo_vinculado', device=sensor['esp32_id'], crop=cultivo['nombre']),
                 'sensor_id': sensor_id,
                 'cultivo_id': cultivo_id
             }), 200
@@ -715,7 +716,7 @@ def vincular_sensor(sensor_id):
             cursor.close()
             connection.close()
     except Exception as e:
-        return jsonify({'success': False, 'message': 'Error interno del servidor'}), 500
+        return jsonify({'success': False, 'message': _('error_interno_del_servidor')}), 500
 
 
 @sensores_bp.route('/<int:sensor_id>/configurar', methods=['PUT'])
@@ -727,7 +728,7 @@ def configurar_sensor(sensor_id):
         try:
             cursor.execute("SELECT id FROM sensores WHERE id = %s", (sensor_id,))
             if not cursor.fetchone():
-                return jsonify({'success': False, 'message': 'Sensor no encontrado'}), 404
+                return jsonify({'success': False, 'message': _('sensor_no_encontrado')}), 404
 
             campos = []
             valores = []
@@ -742,18 +743,18 @@ def configurar_sensor(sensor_id):
                 valores.append(data['estado'])
 
             if not campos:
-                return jsonify({'success': False, 'message': 'No hay campos para actualizar'}), 400
+                return jsonify({'success': False, 'message': _('no_hay_campos_para_actualizar')}), 400
 
             valores.append(sensor_id)
             cursor.execute(f"UPDATE sensores SET {', '.join(campos)} WHERE id = %s", valores)
             connection.commit()
 
-            return jsonify({'success': True, 'message': 'Dispositivo actualizado correctamente'}), 200
+            return jsonify({'success': True, 'message': _('dispositivo_actualizado_correctamente')}), 200
         finally:
             cursor.close()
             connection.close()
     except Exception as e:
-        return jsonify({'success': False, 'message': 'Error interno del servidor'}), 500
+        return jsonify({'success': False, 'message': _('error_interno_del_servidor')}), 500
 
 
 @sensores_bp.route('/<int:sensor_id>/desvincular', methods=['POST'])
@@ -765,7 +766,7 @@ def desvincular_sensor(sensor_id):
             cursor.execute("SELECT id, nombre, esp32_id FROM sensores WHERE id = %s", (sensor_id,))
             sensor = cursor.fetchone()
             if not sensor:
-                return jsonify({'success': False, 'message': 'Sensor no encontrado'}), 404
+                return jsonify({'success': False, 'message': _('sensor_no_encontrado')}), 404
 
             cursor.execute("""
                 UPDATE sensores
@@ -778,8 +779,7 @@ def desvincular_sensor(sensor_id):
 
             return jsonify({
                 'success': True,
-                'message': f'Dispositivo {sensor["esp32_id"]} desvinculado correctamente. '
-                           f'Aparecera como pendiente hasta ser asignado de nuevo.',
+                'message': _('dispositivo_desvinculado', device=sensor['esp32_id']),
                 'sensor_id': sensor_id,
                 'esp32_id': sensor['esp32_id']
             }), 200
@@ -787,14 +787,14 @@ def desvincular_sensor(sensor_id):
             cursor.close()
             connection.close()
     except Exception as e:
-        return jsonify({'success': False, 'message': 'Error interno del servidor'}), 500
+        return jsonify({'success': False, 'message': _('error_interno_del_servidor')}), 500
 
 
 @sensores_bp.route('/health', methods=['GET'])
 def health_check():
     return jsonify({
         'success': True,
-        'message': 'Servicio de sensores operativo',
+        'message': _('servicio_de_sensores_operativo'),
         'timestamp': datetime.now().isoformat()
     }), 200
 
@@ -875,7 +875,7 @@ def obtener_estadisticas_sensor(sensor_id):
     except Exception as e:
         return jsonify({
             'success': False,
-            'message': 'Error obteniendo estadísticas'
+            'message': _('error_obteniendo_estadisticas')
         }), 500
 
 
@@ -942,7 +942,7 @@ def resumen_global():
     except Exception as e:
         return jsonify({
             'success': False,
-            'message': 'Error obteniendo resumen'
+            'message': _('error_obteniendo_resumen')
         }), 500
 
 
@@ -994,5 +994,5 @@ def datos_grafica(sensor_id):
     except Exception as e:
         return jsonify({
             'success': False,
-            'message': 'Error obteniendo datos de gráfica'
+            'message': _('error_obteniendo_datos_de_grafica')
         }), 500

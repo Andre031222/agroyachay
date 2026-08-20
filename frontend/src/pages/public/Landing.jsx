@@ -4,7 +4,9 @@ import { useGoogleLogin } from '@react-oauth/google';
 import { useAuth } from '../../hooks/useAuth';
 import { useTheme } from '../../context/ThemeContext';
 import { useSystemConfig } from '../../hooks/useSystemConfig';
+import { useLanguage } from '../../context/LanguageContext';
 import ThemeToggle from '../../components/common/ThemeToggle';
+import LanguageSelector from '../../components/common/LanguageSelector';
 
 const Inicio      = lazy(() => import('./Inicio'));
 const AcercaDe    = lazy(() => import('./AcercaDe'));
@@ -14,12 +16,12 @@ const Testimonios = lazy(() => import('./Testimonios'));
 const Contactos   = lazy(() => import('./Contactos'));
 
 const NAV_ITEMS = [
-  { key: 'inicio',      label: 'Inicio',      icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="w-5 h-5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg> },
-  { key: 'acerca',      label: 'Nosotros',    icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="w-5 h-5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg> },
-  { key: 'servicios',   label: 'Servicios',   icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="w-5 h-5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg> },
-  { key: 'planes',      label: 'Planes',      icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="w-5 h-5"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg> },
-  { key: 'testimonios', label: 'Datos',       icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="w-5 h-5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> },
-  { key: 'contactos',   label: 'Contacto',    icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="w-5 h-5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg> },
+  { key: 'inicio',      labelKey: 'landing.nav.inicio',      icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="w-5 h-5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg> },
+  { key: 'acerca',      labelKey: 'landing.nav.acerca',      icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="w-5 h-5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg> },
+  { key: 'servicios',   labelKey: 'landing.nav.servicios',   icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="w-5 h-5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg> },
+  { key: 'planes',      labelKey: 'landing.nav.planes',      icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="w-5 h-5"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg> },
+  { key: 'testimonios', labelKey: 'landing.nav.testimonios', icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="w-5 h-5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> },
+  { key: 'contactos',   labelKey: 'landing.nav.contactos',   icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="w-5 h-5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg> },
 ];
 
 export const WaveCanvas = ({ flip = false, dark = false }) => {
@@ -93,21 +95,28 @@ const GoogleIcon = () => (
   </svg>
 );
 
-const PageLoader = () => (
+const PageLoader = () => {
+  const { t } = useLanguage();
+
+  return (
   <div className="flex flex-col items-center justify-center gap-4 py-32 animate-fade-in">
     <div className="relative flex items-center justify-center">
       <span aria-hidden className="absolute w-12 h-12 rounded-full bg-emerald-500/15 blur-md" />
       <div className="relative w-7 h-7 border-2 border-emerald-500/30 border-t-emerald-500 rounded-full animate-spin" />
     </div>
-    <span className="text-[10px] uppercase font-medium text-gray-400 dark:text-gray-500">Cargando</span>
-  </div>
-);
+    <span className="text-[10px] uppercase font-medium text-gray-400 dark:text-gray-500">{t('landing.loading')}</span>
+    </div>
+  );
+};
 
-const MobileBottomNav = ({ active, onNavigate }) => (
+const MobileBottomNav = ({ active, onNavigate }) => {
+  const { t } = useLanguage();
+
+  return (
   <nav className="md:hidden fixed bottom-0 inset-x-0 z-50 px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-2 pointer-events-none">
     <div className="pointer-events-auto rounded-2xl p-1.5 bg-white/80 dark:bg-gray-900/70 backdrop-blur-xl ring-1 ring-black/5 dark:ring-white/10 shadow-[0_24px_60px_-24px_rgba(16,185,129,0.35)]">
       <div className="grid grid-cols-6 rounded-[calc(1rem-0.375rem)]">
-        {NAV_ITEMS.map(({ key, label, icon }) => {
+        {NAV_ITEMS.map(({ key, labelKey, icon }) => {
           const isActive = active === key;
           return (
             <button
@@ -128,15 +137,16 @@ const MobileBottomNav = ({ active, onNavigate }) => (
                 {icon}
               </span>
               <span className="text-[9px] font-semibold leading-none tracking-tight">
-                {label}
+                {t(labelKey)}
               </span>
             </button>
           );
         })}
       </div>
     </div>
-  </nav>
-);
+    </nav>
+  );
+};
 
 export const useFadeIn = () => {
   const ref = useRef(null);
@@ -167,6 +177,7 @@ const Landing = () => {
   const { loginWithGoogle } = useAuth();
   const { isDark } = useTheme();
   const { config, bool, imageUrl } = useSystemConfig();
+  const { t, tList } = useLanguage();
 
   const showAnnouncement = bool('announcement_enabled') && config.announcement_text;
   const logoSrc          = imageUrl('logo');
@@ -258,14 +269,17 @@ const Landing = () => {
                         : 'text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
                     }`}
                   >
-                    {item.label}
+                    {t(item.labelKey)}
                   </button>
                 ))}
               </div>
             </nav>
 
             <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
-              <ThemeToggle />
+              <div className="flex items-center gap-1 rounded-full p-1 bg-gray-50/70 dark:bg-white/[0.04] ring-1 ring-black/5 dark:ring-white/10">
+                <ThemeToggle size="sm" />
+                <LanguageSelector />
+              </div>
 
               <button
                 type="button"
@@ -285,8 +299,8 @@ const Landing = () => {
                 onClick={() => navigate('/login')}
                 className="group relative inline-flex items-center h-9 pl-4 pr-1.5 text-xs font-semibold bg-emerald-600 hover:bg-emerald-500 text-white rounded-full active:scale-[0.97] transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] shadow-[0_12px_30px_-12px_rgba(16,185,129,0.7)] touch-manipulation gap-2"
               >
-                <span className="hidden sm:inline">Acceder</span>
-                <span className="sm:hidden">Entrar</span>
+                <span className="hidden sm:inline">{t('landing.signIn')}</span>
+                <span className="sm:hidden">{t('landing.signInShort')}</span>
                 <span className="flex items-center justify-center w-7 h-7 rounded-full bg-white/15 transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-0.5">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="w-3.5 h-3.5"><path d="M5 12h14M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" /></svg>
                 </span>
@@ -360,21 +374,21 @@ const Landing = () => {
             </div>
 
             <div>
-              <p className="text-[10px] uppercase font-semibold text-emerald-200 mb-4">Módulos</p>
+              <p className="text-[10px] uppercase font-semibold text-emerald-200 mb-4">{t('landing.footerModules')}</p>
               <ul className="space-y-2.5">
-                {['Cultivos IoT', 'Sensores ESP32', 'Clima + IA', 'Detección Plagas', 'Predicción Cosecha', 'Informes PDF/Excel'].map(s => (
-                  <li key={s} className="text-sm text-emerald-100/55">{s}</li>
+                {tList('landing.modules').map(module => (
+                  <li key={module} className="text-sm text-emerald-100/55">{module}</li>
                 ))}
               </ul>
             </div>
 
             <div>
-              <p className="text-[10px] uppercase font-semibold text-emerald-200 mb-4">Navegación</p>
+              <p className="text-[10px] uppercase font-semibold text-emerald-200 mb-4">{t('landing.footerNavigation')}</p>
               <ul className="space-y-2.5">
                 {NAV_ITEMS.map(item => (
                   <li key={item.key}>
                     <button type="button" onClick={() => setActive(item.key)} className="text-sm text-emerald-100/55 hover:text-emerald-300 transition-colors duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]">
-                      {item.label}
+                      {t(item.labelKey)}
                     </button>
                   </li>
                 ))}
@@ -382,7 +396,7 @@ const Landing = () => {
             </div>
 
             <div>
-              <p className="text-[10px] uppercase font-semibold text-emerald-200 mb-4">Contacto</p>
+              <p className="text-[10px] uppercase font-semibold text-emerald-200 mb-4">{t('landing.footerContact')}</p>
               <ul className="space-y-3">
                 {config.footer_contact && (
                   <li className="flex items-start gap-2 text-sm text-emerald-100/55">
@@ -392,13 +406,13 @@ const Landing = () => {
                 )}
                 <li className="flex items-start gap-2 text-sm text-emerald-100/55">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="shrink-0 mt-0.5 text-emerald-400"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                  Puno, Perú
+                  {t('landing.footerLocation')}
                 </li>
               </ul>
               <div className="mt-6">
                 <button type="button" onClick={() => setActive('contactos')}
                   className="group inline-flex items-center gap-2 rounded-full pl-4 pr-1.5 py-1.5 text-sm font-semibold bg-emerald-600 hover:bg-emerald-500 text-white transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.97] shadow-[0_12px_30px_-12px_rgba(16,185,129,0.7)]">
-                  Enviar mensaje
+                  {t('landing.sendMessage')}
                   <span className="flex items-center justify-center w-7 h-7 rounded-full bg-white/15 transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-0.5">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M5 12h14M12 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round"/></svg>
                   </span>
@@ -409,13 +423,13 @@ const Landing = () => {
 
           <div className="border-t border-white/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
             <p className="text-xs text-emerald-100/40">
-              {config.footer_copyright || `© ${new Date().getFullYear()} ${config.site_name} — Todos los derechos reservados`}
+              {config.footer_copyright || t('landing.copyrightFallback', { year: new Date().getFullYear(), site: config.site_name })}
             </p>
             <div className="flex items-center gap-2 rounded-full px-3 py-1 ring-1 ring-white/10 bg-white/[0.04]">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span className="text-xs text-emerald-100/60">Sistema activo</span>
+              <span className="text-xs text-emerald-100/60">{t('landing.systemActive')}</span>
             </div>
-            <p className="text-xs text-emerald-100/30">Desarrollado por R. Andre Vilca Solorzano</p>
+            <p className="text-xs text-emerald-100/30">{t('landing.developedBy')}</p>
           </div>
         </div>
       </footer>

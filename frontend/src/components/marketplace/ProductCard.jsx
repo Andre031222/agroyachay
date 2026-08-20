@@ -1,4 +1,6 @@
 import React from 'react';
+import { useLanguage } from '../../context/LanguageContext';
+import { categoryLabel } from '../../utils/marketplace';
 
 const PLAT_BADGE = {
   MercadoLibre: 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300',
@@ -27,7 +29,13 @@ const IcTruck = () => (
   </svg>
 );
 
+const placeholderImage = (label) =>
+  `data:image/svg+xml,${encodeURIComponent(
+    `<svg xmlns="http://www.w3.org/2000/svg" width="400" height="176" viewBox="0 0 400 176"><rect width="400" height="176" fill="#f3f4f6"/><text x="200" y="96" text-anchor="middle" font-size="14" fill="#9ca3af">${label}</text></svg>`
+  )}`;
+
 const ProductCard = ({ producto }) => {
+  const { t } = useLanguage();
   const descPct = producto.precioOriginal
     ? Math.round(((producto.precioOriginal - producto.precio) / producto.precioOriginal) * 100)
     : 0;
@@ -40,7 +48,7 @@ const ProductCard = ({ producto }) => {
             src={producto.imagen}
             alt={producto.nombre}
             className="w-full h-full object-cover transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:scale-105"
-            onError={e => { e.target.src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="176" viewBox="0 0 400 176"><rect width="400" height="176" fill="%23f3f4f6"/><text x="200" y="96" text-anchor="middle" font-size="14" fill="%239ca3af">Sin imagen</text></svg>'; }}
+            onError={e => { e.target.src = placeholderImage(t('marketplace.noImage')); }}
           />
           <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/25 to-transparent" />
           <div className="absolute top-2.5 left-2.5">
@@ -56,19 +64,19 @@ const ProductCard = ({ producto }) => {
             )}
             {producto.envioGratis && (
               <span className="bg-emerald-500 text-white text-[10px] font-semibold px-2 py-0.5 rounded-full flex items-center gap-1 ring-1 ring-white/20">
-                <IcTruck /> Gratis
+                <IcTruck /> {t('marketplace.free')}
               </span>
             )}
           </div>
           {!producto.stock && (
             <div className="absolute inset-0 bg-black/60 backdrop-blur-[2px] flex items-center justify-center">
-              <span className="bg-white/10 ring-1 ring-white/20 text-white px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide">Agotado</span>
+              <span className="bg-white/10 ring-1 ring-white/20 text-white px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide">{t('marketplace.outOfStock')}</span>
             </div>
           )}
         </div>
 
         <div className="p-4 flex flex-col flex-1">
-          <span className="self-start inline-flex items-center text-[10px] font-medium uppercase tracking-[0.14em] text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-500/10 ring-1 ring-emerald-200/60 dark:ring-emerald-400/20 px-2.5 py-1 rounded-full mb-2.5">{producto.categoria} · {producto.subcategoria}</span>
+          <span className="self-start inline-flex items-center text-[10px] font-medium uppercase tracking-[0.14em] text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-500/10 ring-1 ring-emerald-200/60 dark:ring-emerald-400/20 px-2.5 py-1 rounded-full mb-2.5">{categoryLabel(t, producto.categoria)} · {categoryLabel(t, producto.subcategoria)}</span>
           <h3 className="text-sm font-semibold tracking-tight text-gray-900 dark:text-white mb-1.5 line-clamp-2 leading-snug flex-shrink-0">{producto.nombre}</h3>
           <p className="text-xs leading-relaxed text-gray-500 dark:text-gray-400 mb-3 line-clamp-2 flex-1">{producto.descripcion}</p>
 
@@ -100,12 +108,12 @@ const ProductCard = ({ producto }) => {
           >
             {producto.stock ? (
               <>
-                <IcCart /> Ver en {producto.plataforma}
+                <IcCart /> {t('marketplace.viewOn', { platform: producto.plataforma })}
                 <span className="flex items-center justify-center w-5 h-5 rounded-full bg-white/20 transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover/btn:translate-x-0.5">
                   <IcLink />
                 </span>
               </>
-            ) : 'No disponible'}
+            ) : t('marketplace.unavailable')}
           </button>
         </div>
       </div>

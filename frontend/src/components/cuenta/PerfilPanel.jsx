@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import { useProfilePanel } from '../../context/ProfilePanelContext';
+import { useLanguage } from '../../context/LanguageContext';
 import { authAPI } from '../../services/api';
 import { resolveAvatar } from '../../utils/avatar';
 import { notify } from '../../utils/swal';
@@ -39,6 +40,7 @@ const EyeClose = () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor
 const Spinner  = () => <svg className="animate-spin w-4 h-4" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" strokeOpacity=".25" strokeWidth="3"/><path d="M12 2a10 10 0 0 1 10 10" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/></svg>;
 
 const AvatarSection = ({ user, onUpdate }) => {
+  const { t } = useLanguage();
   const [uploading, setUploading] = useState(false);
   const [reverting, setReverting] = useState(false);
   const fileRef = useRef();
@@ -54,9 +56,9 @@ const AvatarSection = ({ user, onUpdate }) => {
     try {
       const res = await authAPI.uploadAvatar(file);
       onUpdate({ avatar: res.data.data.avatar });
-      notify.success('Foto actualizada');
+      notify.success(t('account.photoUpdated'));
     } catch {
-      notify.error('Error al subir la imagen');
+      notify.error(t('account.photoError'));
     } finally {
       setUploading(false);
       e.target.value = '';
@@ -68,9 +70,9 @@ const AvatarSection = ({ user, onUpdate }) => {
     try {
       const res = await authAPI.revertAvatar();
       onUpdate({ avatar: res.data.data.avatar });
-      notify.success('Foto de Google restaurada');
+      notify.success(t('account.googlePhotoRestored'));
     } catch {
-      notify.error('Error al restaurar la foto');
+      notify.error(t('account.revertError'));
     } finally { setReverting(false); }
   };
 
@@ -121,7 +123,7 @@ const AvatarSection = ({ user, onUpdate }) => {
               disabled={uploading}
               className="text-xs px-3.5 py-2 rounded-full bg-gray-50/80 dark:bg-white/[0.04] ring-1 ring-black/5 dark:ring-white/10 text-gray-600 dark:text-gray-300 hover:ring-emerald-400/60 hover:text-emerald-600 dark:hover:text-emerald-400 transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.98] font-medium"
             >
-              {uploading ? 'Subiendo…' : 'Subir foto'}
+              {uploading ? t('account.uploading') : t('account.uploadPhoto')}
             </button>
             {hasGoogleAvatar && isUsingCustom && (
               <button
@@ -129,7 +131,7 @@ const AvatarSection = ({ user, onUpdate }) => {
                 disabled={reverting}
                 className="text-xs px-3.5 py-2 rounded-full bg-gray-50/80 dark:bg-white/[0.04] ring-1 ring-black/5 dark:ring-white/10 text-gray-600 dark:text-gray-300 hover:ring-blue-400/60 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.98] font-medium"
               >
-                {reverting ? 'Restaurando…' : 'Usar Google'}
+                {reverting ? t('account.reverting') : t('account.useGoogle')}
               </button>
             )}
           </div>
@@ -140,6 +142,7 @@ const AvatarSection = ({ user, onUpdate }) => {
 };
 
 const PerfilSection = ({ user, onUpdate }) => {
+  const { t } = useLanguage();
   const [nombre,   setNombre]   = useState(user?.nombre || '');
   const [telefono, setTelefono] = useState(user?.telefono || '');
   const [saving,   setSaving]   = useState(false);
@@ -150,13 +153,13 @@ const PerfilSection = ({ user, onUpdate }) => {
   }, [user]);
 
   const save = async () => {
-    if (!nombre.trim() || nombre.trim().length < 2) return notify.error('Nombre muy corto');
+    if (!nombre.trim() || nombre.trim().length < 2) return notify.error(t('account.nameTooShort'));
     setSaving(true);
     try {
       const res = await authAPI.updateProfile({ nombre: nombre.trim(), telefono: telefono.trim() });
       onUpdate(res.data.data.user);
-      notify.success('Perfil actualizado');
-    } catch { notify.error('Error al guardar'); }
+      notify.success(t('account.profileUpdated'));
+    } catch { notify.error(t('account.saveError')); }
     finally { setSaving(false); }
   };
 
@@ -164,20 +167,20 @@ const PerfilSection = ({ user, onUpdate }) => {
 
   return (
     <div className="px-5 py-6 space-y-4">
-      <SectionTitle>Perfil</SectionTitle>
-      <Field label="Nombre">
-        <input value={nombre} onChange={e => setNombre(e.target.value)} placeholder="Tu nombre" className={inputCls} />
+      <SectionTitle>{t('account.profile')}</SectionTitle>
+      <Field label={t('account.name')}>
+        <input value={nombre} onChange={e => setNombre(e.target.value)} placeholder={t('account.namePlaceholder')} className={inputCls} />
       </Field>
-      <Field label="Email">
+      <Field label={t('account.email')}>
         <input value={user?.email || ''} readOnly className={inputCls + ' opacity-60 cursor-not-allowed'} />
       </Field>
-      <Field label="Teléfono">
-        <input value={telefono} onChange={e => setTelefono(e.target.value)} placeholder="Tu teléfono (opcional)" className={inputCls} />
+      <Field label={t('account.phone')}>
+        <input value={telefono} onChange={e => setTelefono(e.target.value)} placeholder={t('account.phonePlaceholder')} className={inputCls} />
       </Field>
       {dirty && (
         <button onClick={save} disabled={saving}
           className="w-full h-11 bg-emerald-600 hover:bg-emerald-500 disabled:opacity-60 text-white text-sm font-semibold rounded-full transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.98] flex items-center justify-center gap-2">
-          {saving ? <><Spinner />Guardando…</> : 'Guardar cambios'}
+          {saving ? <><Spinner />{t('account.saving')}</> : t('account.saveChanges')}
         </button>
       )}
     </div>
@@ -185,6 +188,7 @@ const PerfilSection = ({ user, onUpdate }) => {
 };
 
 const SeguridadSection = () => {
+  const { t } = useLanguage();
   const [form,    setForm]    = useState({ current: '', next: '', confirm: '' });
   const [show,    setShow]    = useState({ current: false, next: false });
   const [saving,  setSaving]  = useState(false);
@@ -192,44 +196,44 @@ const SeguridadSection = () => {
   const set = key => val => setForm(f => ({ ...f, [key]: val }));
 
   const save = async () => {
-    if (form.next !== form.confirm) return notify.error('Las contraseñas no coinciden');
-    if (form.next.length < 8) return notify.error('Mínimo 8 caracteres');
+    if (form.next !== form.confirm) return notify.error(t('account.passwordMismatch'));
+    if (form.next.length < 8) return notify.error(t('account.passwordTooShort'));
     setSaving(true);
     try {
       await authAPI.changePassword({ current_password: form.current, new_password: form.next });
-      notify.success('Contraseña actualizada');
+      notify.success(t('account.passwordUpdated'));
       setForm({ current: '', next: '', confirm: '' });
     } catch (e) {
-      notify.error(e.response?.data?.message || 'Error al cambiar contraseña');
+      notify.error(e.response?.data?.message || t('account.passwordError'));
     } finally { setSaving(false); }
   };
 
   return (
     <div className="px-5 py-6 space-y-4">
-      <SectionTitle>Seguridad</SectionTitle>
-      <Field label="Contraseña actual">
+      <SectionTitle>{t('account.security')}</SectionTitle>
+      <Field label={t('account.currentPassword')}>
         <div className="relative">
-          <input type={show.current ? 'text' : 'password'} value={form.current} onChange={e => set('current')(e.target.value)} placeholder="Tu contraseña actual" className={inputCls + ' pr-11'} />
+          <input type={show.current ? 'text' : 'password'} value={form.current} onChange={e => set('current')(e.target.value)} placeholder={t('account.currentPasswordPlaceholder')} className={inputCls + ' pr-11'} />
           <button type="button" onClick={() => setShow(s => ({ ...s, current: !s.current }))} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors duration-300 ease-[cubic-bezier(0.32,0.72,0,1)]">
             {show.current ? <EyeClose /> : <EyeOpen />}
           </button>
         </div>
       </Field>
-      <Field label="Nueva contraseña">
+      <Field label={t('account.newPassword')}>
         <div className="relative">
-          <input type={show.next ? 'text' : 'password'} value={form.next} onChange={e => set('next')(e.target.value)} placeholder="Mín. 8 caracteres" className={inputCls + ' pr-11'} />
+          <input type={show.next ? 'text' : 'password'} value={form.next} onChange={e => set('next')(e.target.value)} placeholder={t('account.newPasswordPlaceholder')} className={inputCls + ' pr-11'} />
           <button type="button" onClick={() => setShow(s => ({ ...s, next: !s.next }))} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors duration-300 ease-[cubic-bezier(0.32,0.72,0,1)]">
             {show.next ? <EyeClose /> : <EyeOpen />}
           </button>
         </div>
       </Field>
-      <Field label="Confirmar contraseña">
-        <input type="password" value={form.confirm} onChange={e => set('confirm')(e.target.value)} placeholder="Repite la nueva contraseña" className={inputCls} />
+      <Field label={t('account.confirmPassword')}>
+        <input type="password" value={form.confirm} onChange={e => set('confirm')(e.target.value)} placeholder={t('account.confirmPasswordPlaceholder')} className={inputCls} />
       </Field>
       {(form.current || form.next) && (
         <button onClick={save} disabled={saving}
           className="w-full h-11 bg-emerald-600 hover:bg-emerald-500 disabled:opacity-60 text-white text-sm font-semibold rounded-full transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.98] flex items-center justify-center gap-2">
-          {saving ? <><Spinner />Guardando…</> : 'Cambiar contraseña'}
+          {saving ? <><Spinner />{t('account.saving')}</> : t('account.changePassword')}
         </button>
       )}
     </div>
@@ -237,6 +241,7 @@ const SeguridadSection = () => {
 };
 
 const CuentaSection = ({ user }) => {
+  const { t, formatDate } = useLanguage();
   const { logout }    = useAuth();
   const { close }     = useProfilePanel();
   const navigate      = useNavigate();
@@ -249,19 +254,19 @@ const CuentaSection = ({ user }) => {
 
   return (
     <div className="px-5 py-6 space-y-4">
-      <SectionTitle>Cuenta</SectionTitle>
+      <SectionTitle>{t('account.account')}</SectionTitle>
       <div className="rounded-xl bg-gray-50/80 dark:bg-white/[0.04] ring-1 ring-black/5 dark:ring-white/10 px-4 py-3 space-y-3">
         <div className="flex items-center justify-between text-sm">
-          <span className="text-gray-500 dark:text-gray-400">Rol</span>
+          <span className="text-gray-500 dark:text-gray-400">{t('account.role')}</span>
           <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${ROLE_BADGE[user?.rol] || ROLE_BADGE.usuario}`}>
             {user?.rol?.toUpperCase()}
           </span>
         </div>
         {user?.fecha_registro && (
           <div className="flex items-center justify-between text-sm">
-            <span className="text-gray-500 dark:text-gray-400">Miembro desde</span>
+            <span className="text-gray-500 dark:text-gray-400">{t('account.memberSince')}</span>
             <span className="text-gray-700 dark:text-gray-300 text-xs font-medium tracking-tight">
-              {new Date(user.fecha_registro).toLocaleDateString('es-PE', { day: '2-digit', month: 'short', year: 'numeric' })}
+              {formatDate(user.fecha_registro, { day: '2-digit', month: 'short', year: 'numeric' })}
             </span>
           </div>
         )}
@@ -271,13 +276,14 @@ const CuentaSection = ({ user }) => {
         className="w-full mt-1 h-11 flex items-center justify-center gap-2 text-sm font-semibold text-red-600 dark:text-red-400 bg-red-500/10 dark:bg-red-500/10 hover:bg-red-500/15 ring-1 ring-red-500/20 rounded-full transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.98]"
       >
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="w-4 h-4"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-        Cerrar sesión
+        {t('account.logout')}
       </button>
     </div>
   );
 };
 
 const PerfilPanel = () => {
+  const { t } = useLanguage();
   const { isOpen, close } = useProfilePanel();
   const { user, updateUser } = useAuth();
 
@@ -307,7 +313,7 @@ const PerfilPanel = () => {
             <div className="flex items-center justify-between h-16 px-6 shrink-0">
               <div className="flex items-center gap-2.5">
                 <span className="w-1.5 h-6 rounded-full bg-emerald-500" />
-                <h2 className="text-base font-semibold tracking-tight text-gray-900 dark:text-white">Mi cuenta</h2>
+                <h2 className="text-base font-semibold tracking-tight text-gray-900 dark:text-white">{t('account.myAccount')}</h2>
               </div>
               <button onClick={close} className="p-2 rounded-full text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 bg-gray-50/80 dark:bg-white/[0.04] ring-1 ring-black/5 dark:ring-white/10 hover:ring-emerald-400/50 transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.95]">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>

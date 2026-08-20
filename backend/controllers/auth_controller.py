@@ -9,6 +9,7 @@ import requests
 import secrets
 from werkzeug.utils import secure_filename
 from db import get_db_connection
+from app.i18n import translate as _
 
 _AVATAR_DIR  = os.path.join(os.path.dirname(__file__), '..', 'uploads', 'avatars')
 _AVATAR_EXT  = {'png', 'jpg', 'jpeg', 'gif', 'webp'}
@@ -29,14 +30,14 @@ def login():
         if not username or not password:
             return jsonify({
                 'success': False,
-                'message': 'Email y contraseña requeridos'
+                'message': _('email_y_contrasena_requeridos')
             }), 400
 
         connection = get_db_connection()
         if not connection:
             return jsonify({
                 'success': False,
-                'message': 'Error de conexión a la base de datos'
+                'message': _('error_de_conexion_a_la_base')
             }), 500
 
         cursor = connection.cursor()
@@ -54,7 +55,7 @@ def login():
             connection.close()
             return jsonify({
                 'success': False,
-                'message': 'Credenciales inválidas'
+                'message': _('credenciales_invalidas')
             }), 401
 
         password_hash = user['password_hash']
@@ -62,7 +63,7 @@ def login():
         if not password_hash.startswith('$2b$'):
             cursor.close()
             connection.close()
-            return jsonify({'success': False, 'message': 'Credenciales inválidas'}), 401
+            return jsonify({'success': False, 'message': _('credenciales_invalidas')}), 401
 
         password_match = bcrypt.checkpw(
             password.encode('utf-8'),
@@ -75,7 +76,7 @@ def login():
             current_app.audit('login_failed', f"email={username}")
             return jsonify({
                 'success': False,
-                'message': 'Credenciales inválidas'
+                'message': _('credenciales_invalidas')
             }), 401
 
         expires = datetime.timedelta(days=30) if remember_me else datetime.timedelta(hours=24)
@@ -101,7 +102,7 @@ def login():
         current_app.audit('login_success', f"user_id={user['id']}")
         return jsonify({
             'success': True,
-            'message': 'Login exitoso',
+            'message': _('login_exitoso'),
             'data': {
                 'token': token,
                 'user': user_data
@@ -111,7 +112,7 @@ def login():
     except Exception as e:
         return jsonify({
             'success': False,
-            'message': 'Error interno del servidor'
+            'message': _('error_interno_del_servidor')
         }), 500
 
 
@@ -128,20 +129,20 @@ def register():
         if not nombre or not email or not password:
             return jsonify({
                 'success': False,
-                'message': 'Nombre, email y contraseña son requeridos'
+                'message': _('nombre_email_y_contrasena_son_requeridos')
             }), 400
 
         if not _EMAIL_RE.match(email):
-            return jsonify({'success': False, 'message': 'Formato de email inválido'}), 400
+            return jsonify({'success': False, 'message': _('formato_de_email_invalido')}), 400
 
         if len(password) < 8:
-            return jsonify({'success': False, 'message': 'La contraseña debe tener al menos 8 caracteres'}), 400
+            return jsonify({'success': False, 'message': _('la_contrasena_debe_tener_al_menos')}), 400
 
         connection = get_db_connection()
         if not connection:
             return jsonify({
                 'success': False,
-                'message': 'Error de conexión a la base de datos'
+                'message': _('error_de_conexion_a_la_base')
             }), 500
 
         cursor = connection.cursor()
@@ -152,7 +153,7 @@ def register():
             connection.close()
             return jsonify({
                 'success': False,
-                'message': 'El email ya está registrado'
+                'message': _('el_email_ya_esta_registrado')
             }), 409
 
         password_hash = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
@@ -184,7 +185,7 @@ def register():
 
         return jsonify({
             'success': True,
-            'message': 'Usuario registrado exitosamente',
+            'message': _('usuario_registrado_exitosamente'),
             'data': {
                 'token': token,
                 'user': {
@@ -201,7 +202,7 @@ def register():
     except Exception:
         return jsonify({
             'success': False,
-            'message': 'Error al registrar usuario'
+            'message': _('error_al_registrar_usuario')
         }), 500
 
 
@@ -214,7 +215,7 @@ def get_profile():
         if not connection:
             return jsonify({
                 'success': False,
-                'message': 'Error de conexión a la base de datos'
+                'message': _('error_de_conexion_a_la_base')
             }), 500
 
         cursor = connection.cursor()
@@ -233,7 +234,7 @@ def get_profile():
         if not user:
             return jsonify({
                 'success': False,
-                'message': 'Usuario no encontrado'
+                'message': _('usuario_no_encontrado')
             }), 404
 
         return jsonify({
@@ -246,7 +247,7 @@ def get_profile():
     except Exception as e:
         return jsonify({
             'success': False,
-            'message': 'Error interno del servidor'
+            'message': _('error_interno_del_servidor')
         }), 500
 
 
@@ -256,12 +257,12 @@ def logout():
     try:
         return jsonify({
             'success': True,
-            'message': 'Sesión cerrada exitosamente'
+            'message': _('sesion_cerrada_exitosamente')
         }), 200
     except Exception as e:
         return jsonify({
             'success': False,
-            'message': 'Error interno del servidor'
+            'message': _('error_interno_del_servidor')
         }), 500
 
 
@@ -274,7 +275,7 @@ def verify_token():
         if not connection:
             return jsonify({
                 'success': False,
-                'message': 'Error de conexión'
+                'message': _('error_de_conexion')
             }), 500
 
         cursor = connection.cursor()
@@ -291,7 +292,7 @@ def verify_token():
         if not user:
             return jsonify({
                 'success': False,
-                'message': 'Usuario no encontrado'
+                'message': _('usuario_no_encontrado')
             }), 404
 
         return jsonify({
@@ -304,7 +305,7 @@ def verify_token():
     except Exception as e:
         return jsonify({
             'success': False,
-            'message': 'Error interno del servidor'
+            'message': _('error_interno_del_servidor')
         }), 500
 
 
@@ -320,7 +321,7 @@ def google_auth():
         if not access_token:
             return jsonify({
                 'success': False,
-                'message': 'Token de Google requerido'
+                'message': _('token_de_google_requerido')
             }), 400
 
         google_user_info_url = 'https://www.googleapis.com/oauth2/v2/userinfo'
@@ -331,7 +332,7 @@ def google_auth():
         if response.status_code != 200:
             return jsonify({
                 'success': False,
-                'message': 'Token de Google inválido'
+                'message': _('token_de_google_invalido')
             }), 401
 
         google_user = response.json()
@@ -343,14 +344,14 @@ def google_auth():
         if not email:
             return jsonify({
                 'success': False,
-                'message': 'No se pudo obtener el email de Google'
+                'message': _('no_se_pudo_obtener_el_email')
             }), 400
 
         connection = get_db_connection()
         if not connection:
             return jsonify({
                 'success': False,
-                'message': 'Error de conexión a la base de datos'
+                'message': _('error_de_conexion_a_la_base')
             }), 500
 
         cursor = connection.cursor()
@@ -426,7 +427,7 @@ def google_auth():
 
         return jsonify({
             'success': True,
-            'message': 'Autenticación con Google exitosa',
+            'message': _('autenticacion_con_google_exitosa'),
             'data': {
                 'token': token,
                 'user': user_data,
@@ -437,7 +438,7 @@ def google_auth():
     except Exception as e:
         return jsonify({
             'success': False,
-            'message': 'Error interno del servidor'
+            'message': _('error_interno_del_servidor')
         }), 500
 
 
@@ -450,11 +451,11 @@ def update_name():
         nombre = (data.get('nombre') or '').strip()
 
         if not nombre or len(nombre) < 2:
-            return jsonify({'success': False, 'message': 'El nombre debe tener al menos 2 caracteres'}), 400
+            return jsonify({'success': False, 'message': _('el_nombre_debe_tener_al_menos')}), 400
 
         connection = get_db_connection()
         if not connection:
-            return jsonify({'success': False, 'message': 'Error de conexion'}), 500
+            return jsonify({'success': False, 'message': _('error_de_conexion_40')}), 500
 
         cursor = connection.cursor()
         cursor.execute('UPDATE usuarios SET nombre = %s WHERE id = %s', (nombre, current_user_id))
@@ -467,7 +468,7 @@ def update_name():
         return jsonify({'success': True, 'data': {'user': user}}), 200
 
     except Exception:
-        return jsonify({'success': False, 'message': 'Error interno del servidor'}), 500
+        return jsonify({'success': False, 'message': _('error_interno_del_servidor')}), 500
 
 
 @auth_bp.route('/profile', methods=['PUT'])
@@ -480,7 +481,7 @@ def update_profile():
         telefono = (data.get('telefono') or '').strip()
 
         if nombre and len(nombre) < 2:
-            return jsonify({'success': False, 'message': 'El nombre debe tener al menos 2 caracteres'}), 400
+            return jsonify({'success': False, 'message': _('el_nombre_debe_tener_al_menos')}), 400
 
         connection = get_db_connection()
         cursor     = connection.cursor()
@@ -503,7 +504,7 @@ def update_profile():
         cursor.close(); connection.close()
         return jsonify({'success': True, 'data': {'user': user}}), 200
     except Exception:
-        return jsonify({'success': False, 'message': 'Error interno del servidor'}), 500
+        return jsonify({'success': False, 'message': _('error_interno_del_servidor')}), 500
 
 
 @auth_bp.route('/change-password', methods=['PUT'])
@@ -516,7 +517,7 @@ def change_password():
         new_pwd     = data.get('new_password', '')
 
         if len(new_pwd) < 8:
-            return jsonify({'success': False, 'message': 'La nueva contraseña debe tener al menos 8 caracteres'}), 400
+            return jsonify({'success': False, 'message': _('la_nueva_contrasena_debe_tener_al')}), 400
 
         connection = get_db_connection()
         cursor     = connection.cursor()
@@ -524,26 +525,26 @@ def change_password():
         row = cursor.fetchone()
         if not row:
             cursor.close(); connection.close()
-            return jsonify({'success': False, 'message': 'Usuario no encontrado'}), 404
+            return jsonify({'success': False, 'message': _('usuario_no_encontrado')}), 404
 
         ph = row['password_hash']
         if ph.startswith('$2b$') and current_pwd:
             if not bcrypt.checkpw(current_pwd.encode('utf-8'), ph.encode('utf-8')):
                 cursor.close(); connection.close()
-                return jsonify({'success': False, 'message': 'Contraseña actual incorrecta'}), 401
+                return jsonify({'success': False, 'message': _('contrasena_actual_incorrecta')}), 401
 
         new_hash = bcrypt.hashpw(new_pwd.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
         cursor.execute("UPDATE usuarios SET password_hash = %s WHERE id = %s", (new_hash, user_id))
         connection.commit()
         cursor.close(); connection.close()
-        return jsonify({'success': True, 'message': 'Contraseña actualizada'}), 200
+        return jsonify({'success': True, 'message': _('contrasena_actualizada')}), 200
     except Exception:
-        return jsonify({'success': False, 'message': 'Error interno del servidor'}), 500
+        return jsonify({'success': False, 'message': _('error_interno_del_servidor')}), 500
 
 
 @auth_bp.route('/avatar', methods=['GET'])
 def list_avatars():
-    return jsonify({'success': False, 'message': 'Method not allowed'}), 405
+    return jsonify({'success': False, 'message': _('method_not_allowed')}), 405
 
 
 @auth_bp.route('/avatar/<path:filename>', methods=['GET'])
@@ -557,15 +558,15 @@ def upload_avatar():
     try:
         user_id = get_jwt_identity()
         if 'file' not in request.files:
-            return jsonify({'success': False, 'message': 'No se envió archivo'}), 400
+            return jsonify({'success': False, 'message': _('no_se_envio_archivo')}), 400
 
         file = request.files['file']
         if not file or not file.filename:
-            return jsonify({'success': False, 'message': 'Archivo vacío'}), 400
+            return jsonify({'success': False, 'message': _('archivo_vacio')}), 400
 
         ext = file.filename.rsplit('.', 1)[-1].lower() if '.' in file.filename else ''
         if ext not in _AVATAR_EXT:
-            return jsonify({'success': False, 'message': 'Formato no permitido (png, jpg, webp, gif)'}), 400
+            return jsonify({'success': False, 'message': _('formato_no_permitido_png_jpg_webp')}), 400
 
         os.makedirs(_AVATAR_DIR, exist_ok=True)
         for old in glob.glob(os.path.join(_AVATAR_DIR, f'av_{user_id}.*')):
@@ -583,7 +584,7 @@ def upload_avatar():
 
         return jsonify({'success': True, 'data': {'avatar': filename}}), 200
     except Exception:
-        return jsonify({'success': False, 'message': 'Error interno del servidor'}), 500
+        return jsonify({'success': False, 'message': _('error_interno_del_servidor')}), 500
 
 
 @auth_bp.route('/avatar', methods=['DELETE'])
@@ -601,4 +602,4 @@ def revert_avatar():
         cursor.close(); connection.close()
         return jsonify({'success': True, 'data': {'avatar': new_avatar}}), 200
     except Exception:
-        return jsonify({'success': False, 'message': 'Error interno del servidor'}), 500
+        return jsonify({'success': False, 'message': _('error_interno_del_servidor')}), 500

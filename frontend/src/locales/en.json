@@ -1,0 +1,2587 @@
+{
+  "app": {
+    "name": "AgroYachay",
+    "tagline": "Intelligent System"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "clima": "Weather",
+    "cultivos": "Crops",
+    "marketplace": "Marketplace",
+    "perfil": "My Profile",
+    "logout": "Log Out"
+  },
+  "sidebar": {
+    "navigation": "NAVIGATION",
+    "mainMenu": "Main Menu",
+    "home": "Home",
+    "weather": "Weather",
+    "cropManagement": "Crop Management",
+    "calculator": "Input Calculator",
+    "pestDetection": "Pest Detection",
+    "prediction": "Prediction",
+    "almanac": "Bristol Almanac",
+    "advisory": "Advisory",
+    "monitoring": "IoT Monitoring",
+    "devices": "My Devices",
+    "reports": "Reports",
+    "tipOfDay": "TIP OF THE DAY",
+    "tipMessage": "Check the weather monitoring daily to optimise your crops",
+    "myProfile": "My profile",
+    "logout": "Log out",
+    "admin": "Admin",
+    "superAdmin": "SuperAdmin",
+    "brandTagline": "IoT Agriculture"
+  },
+  "auth": {
+    "login": "Log In",
+    "register": "Sign Up",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "name": "First Name",
+    "lastName": "Last Name",
+    "dni": "ID Number",
+    "phone": "Phone",
+    "username": "Username",
+    "rememberMe": "Remember me",
+    "forgotPassword": "Forgot your password?",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
+    "loginHere": "Log in here",
+    "registerHere": "Sign up here",
+    "welcomeBack": "Welcome back!",
+    "createAccount": "Create a new account",
+    "loginWith": "Or log in with",
+    "registerWith": "Or sign up with",
+    "signInToAccount": "Sign in to your account",
+    "enterCredentials": "Enter your credentials to continue",
+    "continueWithGoogle": "Continue with Google",
+    "signUpWithGoogle": "Sign up with Google",
+    "orWithEmail": "or with email",
+    "emailOrUsername": "Email or username",
+    "emailPlaceholder": "you@email.com",
+    "namePlaceholder": "Your name",
+    "passwordPlaceholder": "••••••••",
+    "minCharsPlaceholder": "Min. 8 characters",
+    "repeatPassword": "Repeat the password",
+    "togglePassword": "Show or hide password",
+    "signingIn": "Signing in…",
+    "signIn": "Sign in",
+    "creatingAccount": "Creating account…",
+    "createAccountCta": "Create account",
+    "createFreeAccount": "Create your free account",
+    "noAccountQuestion": "Don't have an account?",
+    "registerFree": "Sign up for free",
+    "hasAccountQuestion": "Already have an account?",
+    "backToHome": "← Back to home",
+    "confirm": "Confirm",
+    "welcomeNamed": "Welcome, {{name}}!",
+    "googleError": "Could not connect to Google",
+    "passwordMismatch": "The passwords do not match",
+    "passwordTooShort": "The password must be at least 8 characters long",
+    "nameQuestion": "What should we call you?",
+    "nameTooShort": "Enter at least 2 characters",
+    "nameSaveError": "The name could not be saved",
+    "saving": "Saving…",
+    "goToDashboard": "Go to dashboard",
+    "showcasePoints": [
+      "Real-time ESP32 sensors",
+      "AI-powered pest detection",
+      "Harvest and weather prediction"
+    ],
+    "showcaseFooter": "Puno, Peru · Andean highlands · {{year}}",
+    "openingApp": "Opening AgroYachay...",
+    "welcomeApp": "Welcome to AgroYachay!",
+    "loginError": "Could not sign in",
+    "registerError": "The user could not be registered",
+    "googleAuthError": "Google authentication failed"
+  },
+  "dashboard": {
+    "welcome": "Welcome",
+    "overview": "Overview",
+    "statistics": "Statistics",
+    "recentActivity": "Recent Activity",
+    "totalCrops": "Total Crops",
+    "activeAlerts": "Active Alerts",
+    "weatherUpdates": "Weather Updates",
+    "recommendations": "Recommendations",
+    "greeting": "Hello, {{name}}",
+    "defaultName": "Farmer",
+    "systemActive": "System online",
+    "live": "Live",
+    "kpiCrops": "Active crops",
+    "kpiTemperature": "Temperature",
+    "kpiSoilHumidity": "Soil humidity",
+    "kpiPestDetections": "Pest detections",
+    "chartTitle": "Temperature today",
+    "chartRealData": "ESP32 sensor · real data",
+    "chartFallback": "Reference values",
+    "weatherTitle": "Weather · Puno",
+    "weatherToday": "Today in Puno, Peru",
+    "humidity": "Humidity",
+    "wind": "Wind",
+    "alerts": "Alerts",
+    "modules": "Modules",
+    "alertLevels": {
+      "alert": "Alert",
+      "warning": "Warning",
+      "ok": "OK"
+    },
+    "alertHighTemp": "High temperature: {{value}}°C",
+    "alertFrost": "Frost risk: {{value}}°C",
+    "alertLowHumidity": "Low humidity: {{value}}% — irrigate",
+    "alertSensorActive": "ESP32 sensor active",
+    "alertAllNormal": "System operating normally",
+    "quickLinks": {
+      "crops": "Crops",
+      "weather": "Weather",
+      "monitoring": "Monitoring",
+      "pests": "Pests",
+      "reports": "Reports",
+      "sensors": "Sensors",
+      "inputs": "Inputs",
+      "advisory": "Advisory"
+    }
+  },
+  "weather": {
+    "title": "Weather",
+    "current": "Current Weather",
+    "forecast": "Forecast",
+    "temperature": "Temperature",
+    "humidity": "Humidity",
+    "precipitation": "Precipitation",
+    "wind": "Wind",
+    "forecast7days": "7-Day Forecast",
+    "loadError": "The weather could not be loaded",
+    "locationSet": "Location: {{city}}",
+    "yourLocation": "Your location",
+    "refreshLocation": "Refresh location",
+    "detecting": "Detecting location…",
+    "loading": "Loading weather…",
+    "feelsLike": "Feels like",
+    "maxMin": "Max {{max}}° · Min {{min}}°",
+    "pressure": "Pressure",
+    "sunrise": "Sunrise",
+    "sunset": "Sunset",
+    "week": "Week",
+    "temperatureChart": "Weekly high and low · °C",
+    "humidityChart": "Weekly daily average · %",
+    "today": "Today",
+    "tomorrow": "Tomorrow",
+    "weekdays": [
+      "Sun",
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat"
+    ]
+  },
+  "crops": {
+    "title": "Crops",
+    "myCrops": "My Crops",
+    "addCrop": "Add Crop",
+    "cropType": "Crop Type",
+    "area": "Area",
+    "plantingDate": "Planting Date",
+    "harvestDate": "Harvest Date",
+    "status": "Status",
+    "healthy": "Healthy",
+    "needsAttention": "Needs Attention"
+  },
+  "calculator": {
+    "title": "Fertiliser Calculator",
+    "subtitle": "Specialised for the Puno Region",
+    "cropInfo": "Crop Information",
+    "selectCrop": "Select the crop and area of your parcel",
+    "cropType": "Crop Type",
+    "cropArea": "Crop Area",
+    "potato": "Potato",
+    "quinoa": "Quinoa",
+    "barley": "Cañihua",
+    "beans": "Faba Beans",
+    "oat": "Forage Oat",
+    "tarwi": "Tarwi (Andean Lupin)",
+    "oca": "Oca"
+  },
+  "marketplace": {
+    "title": "Marketplace",
+    "products": "Products",
+    "myProducts": "My Products",
+    "addProduct": "List Product",
+    "price": "Price",
+    "quantity": "Quantity",
+    "category": "Category",
+    "pageTitle": "Agricultural Marketplace",
+    "pageSubtitle": "Products for your field · MercadoLibre · Amazon · AliExpress",
+    "protectedPurchase": "Protected purchase",
+    "statsProducts": "Products",
+    "statsFreeShipping": "Free shipping",
+    "statsRating": "Average rating",
+    "searchPlaceholder": "Seeds, fertilisers, tools, sensors...",
+    "filters": "Filters",
+    "clear": "Clear",
+    "platform": "Platform",
+    "minPrice": "Min price (S/)",
+    "maxPrice": "Max price (S/)",
+    "onlyFreeShipping": "Free shipping only",
+    "all": "All",
+    "allFeminine": "All",
+    "productCount": "{{count}} products",
+    "sortRelevance": "Relevance",
+    "sortPriceAsc": "Price: lowest",
+    "sortPriceDesc": "Price: highest",
+    "sortBestSelling": "Best selling",
+    "sortBestRated": "Best rated",
+    "noResults": "No results for \"{{search}}\"",
+    "noResultsHint": "Try other terms or clear the filters",
+    "clearFilters": "Clear filters",
+    "safePurchase": "100% safe purchase",
+    "safePurchaseHint": "Redirects to verified platforms",
+    "badges": [
+      "Protected purchase",
+      "Shipping across Peru",
+      "Verified sellers",
+      "Guaranteed returns"
+    ],
+    "noImage": "No image",
+    "free": "Free",
+    "outOfStock": "Out of stock",
+    "unavailable": "Unavailable",
+    "viewOn": "View on {{platform}}",
+    "categories": {
+      "Semillas": "Seeds",
+      "Fertilizantes": "Fertilisers",
+      "Herramientas": "Tools",
+      "Riego": "Irrigation",
+      "Sensores IoT": "IoT Sensors",
+      "Proteccion": "Protection",
+      "Invernaderos": "Greenhouses",
+      "Papa": "Potato",
+      "Quinua": "Quinoa",
+      "Canihua": "Cañihua",
+      "NPK": "NPK",
+      "Foliar": "Foliar",
+      "Organicos": "Organic",
+      "Manuales": "Manual",
+      "Motorizadas": "Motorised",
+      "Goteo": "Drip",
+      "Aspersion": "Sprinkler",
+      "Bombas": "Pumps",
+      "Humedad": "Humidity",
+      "Temperatura": "Temperature",
+      "pH": "pH",
+      "Plagas": "Pests",
+      "Enfermedades": "Diseases",
+      "Heladas": "Frost"
+    }
+  },
+  "language": {
+    "select": "Select Language",
+    "spanish": "Spanish",
+    "quechua": "Quechua",
+    "aimara": "Aymara",
+    "welcome": "Welcome to AgroYachay",
+    "selectLanguage": "Please select your preferred language",
+    "continue": "Continue"
+  },
+  "pages": {
+    "dashboard": {
+      "title": "Dashboard",
+      "sub": "System overview"
+    },
+    "clima": {
+      "title": "Weather",
+      "sub": "Forecast and climate analysis"
+    },
+    "almanaque": {
+      "title": "Almanac",
+      "sub": "Agricultural calendar"
+    },
+    "cultivos": {
+      "title": "Crop Management",
+      "sub": "Parcels and crop cycles"
+    },
+    "monitoreo": {
+      "title": "IoT Monitoring",
+      "sub": "Real-time ESP32 sensors"
+    },
+    "insumos": {
+      "title": "Input Calculator",
+      "sub": "Fertilisers, water and pesticides"
+    },
+    "plagas": {
+      "title": "Pest Detection",
+      "sub": "AI-based identification"
+    },
+    "prediccion": {
+      "title": "Harvest Prediction",
+      "sub": "AI predictive analysis"
+    },
+    "asesoria": {
+      "title": "Specialised Advisory",
+      "sub": "Connect with certified agronomists"
+    },
+    "marketplace": {
+      "title": "Agricultural Marketplace",
+      "sub": "Products for your field"
+    },
+    "informes": {
+      "title": "Reports",
+      "sub": "PDF and Excel reports"
+    },
+    "dispositivos": {
+      "title": "IoT Devices",
+      "sub": "Manage your ESP32 sensors"
+    },
+    "admin": {
+      "title": "Administration Panel",
+      "sub": "User and platform management"
+    }
+  },
+  "theme": {
+    "light": "Switch to light theme",
+    "dark": "Switch to dark theme",
+    "lightShort": "Light theme",
+    "darkShort": "Dark theme"
+  },
+  "profile": {
+    "title": "My Profile",
+    "settings": "Account settings",
+    "logout": "Log out of the system"
+  },
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "search": "Search",
+    "filter": "Filter",
+    "export": "Export",
+    "print": "Print",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "close": "Close",
+    "viewMore": "View more",
+    "viewLess": "View less",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "submit": "Submit",
+    "user": "User",
+    "confirm": "Confirm",
+    "loadError": "The data could not be loaded",
+    "loadingShort": "Loading..."
+  },
+  "footer": {
+    "tagline": "Transforming Peruvian agriculture with smart technology and IoT",
+    "services": "Services",
+    "company": "Company",
+    "contact": "Contact",
+    "cropManagement": "Crop Management",
+    "iotMonitoring": "IoT Monitoring",
+    "weatherMonitoring": "Weather Monitoring",
+    "pestDetection": "Pest Detection",
+    "harvestPrediction": "Harvest Prediction",
+    "marketplace": "Marketplace",
+    "home": "Home",
+    "about": "About Us",
+    "advisory": "Specialised Advisory",
+    "blog": "Blog",
+    "support": "Support",
+    "location": "Puno, Peru",
+    "rights": "© {{year}} AgroYachay. All rights reserved."
+  },
+  "mobileNav": {
+    "allSections": "All sections",
+    "home": "Home",
+    "crops": "Crops",
+    "sensors": "Sensors",
+    "weather": "Weather",
+    "pests": "Pests",
+    "almanac": "Almanac",
+    "devices": "Devices",
+    "inputs": "Inputs",
+    "prediction": "Prediction",
+    "advisory": "Advisory",
+    "marketplace": "Marketplace",
+    "reports": "Reports",
+    "more": "More",
+    "close": "Close",
+    "profile": "Profile",
+    "mainNavigation": "Main navigation",
+    "moreSections": "More sections",
+    "closeMenu": "Close menu"
+  },
+  "errors": {
+    "title": "Something went wrong",
+    "description": "An unexpected error occurred. You can go back home and try again.",
+    "backHome": "Back to home"
+  },
+  "landing": {
+    "nav": {
+      "inicio": "Home",
+      "acerca": "About",
+      "servicios": "Services",
+      "planes": "Plans",
+      "testimonios": "Data",
+      "contactos": "Contact"
+    },
+    "loading": "Loading",
+    "signIn": "Sign in",
+    "signInShort": "Enter",
+    "footerModules": "Modules",
+    "footerNavigation": "Navigation",
+    "footerContact": "Contact",
+    "footerLocation": "Puno, Peru",
+    "sendMessage": "Send message",
+    "systemActive": "System online",
+    "developedBy": "Developed by R. Andre Vilca Solorzano",
+    "copyrightFallback": "© {{year}} {{site}} — All rights reserved",
+    "modules": [
+      "IoT Crops",
+      "ESP32 Sensors",
+      "Weather + AI",
+      "Pest Detection",
+      "Harvest Prediction",
+      "PDF/Excel Reports"
+    ]
+  },
+  "home": {
+    "heroTitleBefore": "Full control of your",
+    "heroTitleAfter": "from anywhere",
+    "viewSystem": "See the system",
+    "demoCard": {
+      "parcel": "Main Parcel",
+      "crop": "Potato Crop — 2.5 ha",
+      "active": "Active",
+      "temperature": "Temperature",
+      "airHumidity": "Air Humidity",
+      "soil": "Soil",
+      "normal": "Normal",
+      "optimal": "Optimal",
+      "irrigate": "Irrigate",
+      "chartTitle": "Temperature — last 8 readings",
+      "aiRecommends": "AgroIA recommends",
+      "aiMessage": "Soil humidity at 42% — schedule irrigation this afternoon. Forecast: clear skies, max T 17°C."
+    },
+    "features": [
+      {
+        "title": "Crop Management",
+        "desc": "10 crop types, full cycle from planned to harvested, activity history and inputs with real costs."
+      },
+      {
+        "title": "ESP32 IoT Monitoring",
+        "desc": "Air and soil temperature and humidity every 10 s. Automatic offline buffer. Alerts on configurable thresholds."
+      },
+      {
+        "title": "Weather + AI Weekly Plan",
+        "desc": "OpenWeather + Groq analyse your parcel and generate irrigation advice, frost warnings and daily activities."
+      },
+      {
+        "title": "Pest Detection",
+        "desc": "Photo from the field, Plant.id identifies the disease and Groq returns a plan with urgency, products and exact doses."
+      },
+      {
+        "title": "Harvest Prediction",
+        "desc": "scikit-learn estimates yield in kg/ha and projected profitability from your real sensor data."
+      },
+      {
+        "title": "Input Marketplace",
+        "desc": "Seeds, fertilisers and equipment linked directly to MercadoLibre and Amazon. No commissions, no middlemen."
+      },
+      {
+        "title": "PDF and Excel Reports",
+        "desc": "4 types: Executive, Crops, Financial, Climate. Charts generated from your real sensor data."
+      },
+      {
+        "title": "AgroIA Assistant",
+        "desc": "Open chat with Llama 3.3 70B via Groq. Answers on irrigation, pests and sowing with your field context."
+      }
+    ],
+    "esp32TitleLine1": "An ESP32 that works",
+    "esp32TitleLine2": "even without signal",
+    "esp32Description": "The ESP32 with DHT11 and FC-28 measures temperature, air humidity and soil humidity every 10 seconds. Without WiFi it buffers 10 readings and syncs them on reconnection. The firmware is yours, open source in Arduino C++.",
+    "esp32Points": [
+      "Readings every 10 s — temperature + air humidity + soil",
+      "Automatic 10-record offline buffer",
+      "Alerts on thresholds configurable per parcel",
+      "NTP UTC-5, real timestamps for Peru"
+    ],
+    "codeReading": "// Reading every 10 s",
+    "codePost": "// POST to the backend",
+    "codeBuffer": "// If no WiFi, buffer locally",
+    "aiTitleLine1": "AI that knows",
+    "aiTitleLine2": "your real field",
+    "aiDescription": "Groq llama-3.3-70b answers agricultural questions with the context of your active crops, region, sensor data and daily forecast. It is not a generic chatbot: it knows you grow potatoes in Puno and that the soil is at 42%.",
+    "aiPoints": [
+      "Climate analysis with risk and phytosanitary alerts",
+      "Pest management plan with products and doses",
+      "Weekly activity planning based on the forecast",
+      "Open chat: any agronomic question"
+    ],
+    "farmer": "Farmer",
+    "chat": [
+      {
+        "q": "When should I irrigate?",
+        "a": "Soil humidity at 42% and no rain forecast for 3 days. Irrigate early tomorrow, 45 min by drip."
+      },
+      {
+        "q": "What did the AI detect?",
+        "a": "Phytophthora infestans (late blight), 87% confidence. Urgency: 24h. Apply Metalaxyl 1.5 g/L."
+      },
+      {
+        "q": "Plan for this week",
+        "a": "Mon: fertilise. Wed: irrigate. Thu: optimal day for spraying (low wind, no rain)."
+      }
+    ],
+    "howTitle": "Full control in 4 steps",
+    "how": [
+      {
+        "title": "Register your parcel",
+        "desc": "Define crop, area and coordinates. The system prepares sensors, thresholds and the relevant modules."
+      },
+      {
+        "title": "Connect the ESP32",
+        "desc": "Firmware included. The sensor sends data every 10 s and works offline with automatic synchronisation."
+      },
+      {
+        "title": "Receive AI analysis",
+        "desc": "Groq combines weather, sensors and crops to give you field-specific recommendations in real time."
+      },
+      {
+        "title": "Generate reports",
+        "desc": "PDF/Excel with real charts, financial analysis and harvest projection. Immediate download."
+      }
+    ],
+    "platformTitleLine1": "A complete platform,",
+    "platformTitleLine2": "not a simple app",
+    "platformDescription": "30+ REST endpoints, 14 PostgreSQL tables, JWT authentication, server-side report generation, websockets for real-time sensors and an AI module with personalised context.",
+    "technicalDetails": "See technical details",
+    "stats": [
+      {
+        "value": "14",
+        "label": "PostgreSQL tables"
+      },
+      {
+        "value": "30+",
+        "label": "REST endpoints"
+      },
+      {
+        "value": "4",
+        "label": "Report types"
+      },
+      {
+        "value": "7",
+        "label": "Advisory areas"
+      }
+    ],
+    "ctaTitleLine1": "Connect your first sensor",
+    "ctaTitleLine2": "in under 10 minutes",
+    "ctaDescription": "No credit card. No installation. Create your account, add your parcel and the ESP32 starts sending data straight away.",
+    "ctaPrimary": "Create free account",
+    "ctaSecondary": "Request a demo"
+  },
+  "about": {
+    "heroBefore": "Built for the",
+    "heroHighlight": "remote fields",
+    "heroAfter": "of Peru",
+    "heroDescription": "AgroYachay was born with a clear goal: to give smallholder farmers the same tools as agribusiness, adapted to isolated highland and jungle areas, real budgets and intermittent connectivity.",
+    "viewModules": "See the system modules",
+    "contact": "Get in touch",
+    "problems": [
+      "Parcels in remote areas the agronomist never reaches",
+      "Pests detected too late for lack of continuous monitoring",
+      "No knowledge of the real state of the soil and the air",
+      "Losses from not knowing the forecast in advance",
+      "Purchase decisions without comparing real input prices",
+      "No history of activities or costs per parcel"
+    ],
+    "problemsSolved": "AgroYachay solves all of the above",
+    "pillarsTitle": "Why it works where others do not",
+    "pillars": [
+      {
+        "title": "Works without a stable signal",
+        "desc": "The ESP32 stores readings in a local buffer and syncs them automatically on reconnection. No data is lost even after hours without WiFi."
+      },
+      {
+        "title": "AI without depending on experts",
+        "desc": "Groq llama-3.3-70b answers irrigation, pest and fertilisation questions with real context from your field. Advisory in 7 specialities via tickets."
+      },
+      {
+        "title": "Your data, your server",
+        "desc": "Everything lives in your local PostgreSQL. No external services that fail, raise prices or expose your production data."
+      },
+      {
+        "title": "Hardware available in Peru",
+        "desc": "ESP32 (~S/.30) + DHT11 (~S/.8) + FC-28 (~S/.5). All available in local electronics shops. No expensive imported components."
+      }
+    ],
+    "modulesTitle": "11 modules. Fully integrated.",
+    "modulesDescription": "Every module shares data with the rest. Sensors feed the predictions, the weather informs the alerts and the AI has real context from your field.",
+    "modules": [
+      {
+        "label": "Crop management",
+        "desc": "Full cycle from Planned to Harvested, 10 types"
+      },
+      {
+        "label": "IoT dashboard",
+        "desc": "Real-time readings, automatic threshold alerts"
+      },
+      {
+        "label": "Weather + AI weekly plan",
+        "desc": "OpenWeather + Groq, day-by-day activity plan"
+      },
+      {
+        "label": "Pest detection",
+        "desc": "Photo → Plant.id → Groq plan with doses and urgency"
+      },
+      {
+        "label": "Harvest prediction",
+        "desc": "scikit-learn estimates kg/ha and projected profitability"
+      },
+      {
+        "label": "Specialised advisory",
+        "desc": "7 specialities, tickets with priority and status"
+      },
+      {
+        "label": "Input marketplace",
+        "desc": "Seeds, fertilisers, equipment — commission free"
+      },
+      {
+        "label": "Input calculator",
+        "desc": "NPK, water, pesticides, herbicides — per hectare"
+      },
+      {
+        "label": "PDF and Excel reports",
+        "desc": "4 types with real charts from your sensors"
+      },
+      {
+        "label": "Bristol Almanac",
+        "desc": "Lunar planning of agricultural activities"
+      },
+      {
+        "label": "AgroIA assistant",
+        "desc": "Open chat with Llama 3.3 70B, context from your field"
+      }
+    ],
+    "stackTitle": "Real production tools",
+    "stackDescription": "No experimental frameworks. Everything proven, documented and with an active community in Peru and Latin America.",
+    "stackCategories": [
+      "Backend",
+      "Database",
+      "Frontend",
+      "IoT Hardware",
+      "AI and APIs",
+      "Reports"
+    ],
+    "kitTitleLine1": "ESP32 + sensors.",
+    "kitTitleLine2": "Under S/.50 per kit.",
+    "kitDescription": "An ESP32 with DHT11 and FC-28 measures temperature, air humidity and soil humidity every 10 seconds. Without WiFi it buffers up to 10 readings and sends them automatically on reconnection. The firmware is Arduino C++ and the code is entirely yours.",
+    "hardware": [
+      "ESP32 DevKit — main controller with built-in WiFi",
+      "DHT11 — air temperature and humidity (GPIO 15)",
+      "FC-28 — analogue soil humidity (GPIO 34)",
+      "Connection status indicator LED (GPIO 2)",
+      "NTP UTC-5 synchronisation (Peru time zone)",
+      "HTTP POST to the backend every 10 seconds"
+    ],
+    "priceTotal": "Total",
+    "codeConfig": "// Configuration",
+    "codeSensors": "// Sensors",
+    "codeBuffer": "// Offline buffer",
+    "codeAutoSync": "// auto-sync",
+    "codeCalibration": "// FC-28 calibration",
+    "flowTitleLine1": "From the parcel to the report,",
+    "flowTitleLine2": "without leaving the system",
+    "flow": [
+      {
+        "title": "The sensor measures",
+        "desc": "Air and soil temperature and humidity every 10 s. Without WiFi, a local buffer of up to 10 readings. Real NTP timestamp."
+      },
+      {
+        "title": "The backend processes",
+        "desc": "Flask receives the POST, stores it in PostgreSQL, evaluates thresholds and fires automatic alerts on anomalies."
+      },
+      {
+        "title": "The AI analyses",
+        "desc": "Groq combines temperature, humidity, forecast and crop type. It generates an irrigation plan, phytosanitary alerts and daily activities."
+      },
+      {
+        "title": "You decide and act",
+        "desc": "Check the dashboard on your phone. Detect a pest with a photo. Ask the assistant. Request advisory if you need it."
+      },
+      {
+        "title": "The report is ready",
+        "desc": "PDF or Excel with real charts: crop status, financial analysis, climate impact. One-click download."
+      }
+    ],
+    "ctaTitleLine1": "The system is ready.",
+    "ctaTitleLine2": "So is your field.",
+    "ctaDescription": "Create your account, register your first parcel and connect the ESP32. No card, no contracts. Full control from day one.",
+    "ctaPrimary": "Create free account",
+    "ctaSecondary": "Talk to us",
+    "stackTables": "14 tables",
+    "stackSoilSensor": "FC-28 soil"
+  },
+  "services": {
+    "heroTitleLine1": "One system.",
+    "heroTitleLine2": "Nothing generic.",
+    "heroDescription": "Every module is connected to the rest. Sensor data feeds the predictions, the weather informs the alerts and the AI assistant has real context from your field.",
+    "createAccount": "Create free account",
+    "viewPlans": "See plans",
+    "exploreTitle": "Explore each module",
+    "exploreDescription": "Click any card to see detailed capabilities, the API behind it and the data it generates.",
+    "closeDetail": "Close detail",
+    "apiEndpoint": "API endpoint",
+    "capabilities": "Specific capabilities",
+    "networkTitle": "The modules talk to each other",
+    "networkDescription": "The real value is not in the modules on their own, but in the data network they form together.",
+    "network": [
+      {
+        "title": "Sensors → Prediction",
+        "desc": "ESP32 readings are input variables for the Random Forest model, estimating crop yield with greater accuracy."
+      },
+      {
+        "title": "Weather → Automatic alerts",
+        "desc": "Groq combines the 5-day forecast with your active crops and fires phytosanitary alerts and irrigation plans automatically."
+      },
+      {
+        "title": "Pests → Inputs → Report",
+        "desc": "Detection suggests products, they are recorded in the input calculator and the cost appears in the PDF profitability report."
+      }
+    ],
+    "metrics": [
+      {
+        "value": "10",
+        "label": "integrated modules",
+        "sub": "connected to each other"
+      },
+      {
+        "value": "14",
+        "label": "PostgreSQL tables",
+        "sub": "complete data model"
+      },
+      {
+        "value": "40+",
+        "label": "REST endpoints",
+        "sub": "documented API"
+      },
+      {
+        "value": "3",
+        "label": "external APIs",
+        "sub": "Groq · Plant.id · OpenWeather"
+      }
+    ],
+    "ctaTitleLine1": "Ready to connect",
+    "ctaTitleLine2": "your first sensor?",
+    "ctaDescription": "Set up your parcel and start receiving real-time data in under 10 minutes. No card, no contracts.",
+    "ctaSecondary": "See plans and pricing",
+    "items": {
+      "cultivos": {
+        "title": "Crop Management",
+        "badge": "Core",
+        "summary": "Full cycle for 10 crops from sowing to harvest.",
+        "desc": "Register parcels with GPS, crop type and key dates. The system keeps a history of activities, inputs with costs and automatic projections.",
+        "details": [
+          "10 crops: Potato, Maize, Wheat, Soy, Rice, Tomato, Quinoa, Oca, Faba Beans, Other",
+          "6 states: Planned → Harvested",
+          "Activities with date, type and cost",
+          "Inputs: NPK, water, pesticides, seeds",
+          "Historical yield statistics"
+        ]
+      },
+      "iot": {
+        "title": "ESP32 IoT Monitoring",
+        "badge": "Hardware",
+        "summary": "Automatic temperature, air humidity and soil readings every 10 s.",
+        "desc": "ESP32 + DHT11 + FC-28 sending data to the backend. Automatic threshold alerts, a 10-reading offline buffer and 7-day historical charts.",
+        "details": [
+          "ESP32 DevKit + DHT11 + FC-28",
+          "Frequency: every 10 seconds",
+          "Offline buffer: 10 readings without WiFi",
+          "Temperature and humidity alerts",
+          "7-day historical charts"
+        ]
+      },
+      "clima": {
+        "title": "Weather + AI Weekly Plan",
+        "badge": "AI · OpenWeather",
+        "summary": "Real-time forecast with AI analysis to plan activities.",
+        "desc": "OpenWeather + Groq llama-3.3-70b. Combines the 5-day forecast with active crops and produces a risk level, the optimal activity and a weekly plan.",
+        "details": [
+          "Current weather: temperature, humidity, wind",
+          "Forecast every 3 h for 5 days",
+          "AI analysis: low/medium/high/critical risk",
+          "Irrigation recommendations for the day",
+          "Phytosanitary alert when the weather favours pests"
+        ]
+      },
+      "plagas": {
+        "title": "AI Pest Detection",
+        "badge": "Plant.id v2",
+        "summary": "Identifies diseases by sending a photo from the field.",
+        "desc": "Plant.id v2 identifies the disease with a confidence percentage. Groq generates the management plan: urgency, products with doses and an organic alternative.",
+        "details": [
+          "Plant.id v2 Health Assessment API",
+          "Confidence as a percentage",
+          "Severity: mild / moderate / severe",
+          "Urgency: immediate / 24h / week / monitor",
+          "History per crop with archived images"
+        ]
+      },
+      "prediccion": {
+        "title": "Harvest Prediction",
+        "badge": "Machine Learning",
+        "summary": "Estimates yield in kg/ha and projected profitability with scikit-learn.",
+        "desc": "Random Forest analyses area, crop type, activity history and IoT readings to project yield and income at market price.",
+        "details": [
+          "Random Forest model — scikit-learn 1.3",
+          "Variables: area, crop, activities, IoT",
+          "Output: kg/ha + confidence interval",
+          "Income projection at local prices",
+          "History of predictions vs real results"
+        ]
+      },
+      "asesoria": {
+        "title": "Specialised Advisory",
+        "badge": "Ticket System",
+        "summary": "7 specialities tracked by status and priority.",
+        "desc": "Agronomic ticket system. The user describes the problem and chooses speciality and priority. The administrator replies with an email notification.",
+        "details": [
+          "7 agronomic specialities",
+          "4 priority levels",
+          "4 states: Pending → Resolved",
+          "Email notifications on creation or reply"
+        ]
+      },
+      "marketplace": {
+        "title": "Input Marketplace",
+        "badge": "Catalogue",
+        "summary": "Catalogue of seeds, fertilisers and equipment with reference prices.",
+        "desc": "Directory of agricultural products linked to MercadoLibre or Amazon. 5 categories, 12 base products and a scraping module for automatic updates.",
+        "details": [
+          "5 input categories",
+          "Reference price per platform",
+          "12 pre-loaded products",
+          "Filter by category and search"
+        ]
+      },
+      "informes": {
+        "title": "PDF / Excel Reports",
+        "badge": "Reporting",
+        "summary": "4 report types with real charts generated on the server.",
+        "desc": "ReportLab (PDF) + OpenPyXL (Excel) + Matplotlib for real charts of sensors, crops and finances. They stay archived for download at any time.",
+        "details": [
+          "Executive Dashboard",
+          "Crop Status with activities",
+          "Financial Analysis: costs and income",
+          "Climate Impact: weather-yield correlation"
+        ]
+      },
+      "insumos": {
+        "title": "Input Calculator",
+        "badge": "Utility",
+        "summary": "Calculates exact fertiliser, water and pesticide per hectare.",
+        "desc": "Enter area, crop type and requirements. The system calculates doses and costs, and records real usage in the seasonal history.",
+        "details": [
+          "NPK, Water, Pesticide, Herbicide, Seeds",
+          "Per-hectare calculation + unit conversion",
+          "Unit and total treatment cost",
+          "Application history per crop"
+        ]
+      },
+      "asistente": {
+        "title": "AgroIA Assistant",
+        "badge": "Groq LLM",
+        "summary": "Open chat with Llama 3.3 70B specialised in Peruvian agriculture.",
+        "desc": "Ask in natural language about irrigation, pests, sowing or any agricultural topic. It has context from your crops, region and real-time sensor data.",
+        "details": [
+          "llama-3.3-70b-versatile via the Groq API",
+          "Context: active crops, region, temperature",
+          "Answers with local doses and products",
+          "Weekly plan based on the 5-day forecast"
+        ]
+      }
+    }
+  },
+  "plans": {
+    "heroTitleLine1": "You buy the sensor.",
+    "heroTitleLine2": "The software is included.",
+    "heroDescription": "No subscriptions. No monthly charges. The AgroYachay Kit includes the ESP32 hardware ready to install and a full year of the platform.",
+    "startFree": "Start free",
+    "talkToSales": "Talk to sales",
+    "kitIncludes": "The AgroYachay Kit includes",
+    "kitItems": [
+      "5 simultaneous active parcels",
+      "Real-time IoT monitoring with your ESP32",
+      "Unlimited pest detection with Plant.id",
+      "Harvest prediction with ML (scikit-learn)",
+      "AgroIA assistant — chat with Llama 3.3 70B",
+      "Unlimited PDF and Excel reports",
+      "Alerts on temperature and humidity thresholds",
+      "Agricultural input marketplace"
+    ],
+    "trialNote": "14-day free trial included",
+    "oneTimePayment": "one-off payment",
+    "sectionTitle": "Two plans, one goal.",
+    "sectionDescription": "Start free and scale when your field needs it. No complicated migrations.",
+    "mostChosen": "Most chosen",
+    "perfectFor": "Perfect for",
+    "hardwareIncluded": "Hardware included",
+    "softwareIncluded": "1 year of software included",
+    "includes": "Includes",
+    "differentialsTitle": "Real technology. Fair price.",
+    "differentialsDescription": "We do not sell promises. Every feature of the system runs in production, with source code you can audit.",
+    "differentials": [
+      {
+        "title": "No contracts",
+        "desc": "Month to month. Cancel whenever you want, with no penalties or hidden charges."
+      },
+      {
+        "title": "Open hardware",
+        "desc": "Use your own ESP32. The firmware is open and compatible with any standard module."
+      },
+      {
+        "title": "Working AI",
+        "desc": "Groq llama-3.3-70b + Plant.id v2 + scikit-learn running in production, not promises."
+      },
+      {
+        "title": "Built for Peru",
+        "desc": "Designed for Andean crops — potato, quinoa, maize — in remote areas with intermittent connectivity."
+      }
+    ],
+    "faqTitle": "Everything you need to know",
+    "faqs": [
+      {
+        "q": "Does the Kit include everything needed to install it?",
+        "a": "Yes. It comes with the ESP32, DHT11 and FC-28 sensors, cables and the protective case. You only need a 5V USB power supply (a phone charger)."
+      },
+      {
+        "q": "What happens after the first year?",
+        "a": "The hardware is yours forever. The web platform costs S/ 59 from the second year onwards, only if you want to keep using the AI and reporting modules."
+      },
+      {
+        "q": "Can I use the Free plan without buying the sensor?",
+        "a": "Yes. The free plan includes crop management, weather, pest detection and the input calculator. It only lacks real-time IoT monitoring."
+      },
+      {
+        "q": "How do I receive the Kit?",
+        "a": "For now by writing to us directly. We ship across Peru via Olva Courier or Serpost. Delivery time: 3 to 7 working days."
+      },
+      {
+        "q": "Is the ESP32 firmware open source?",
+        "a": "Yes. The code is available and you can compile it yourself if you prefer. The Kit arrives with the firmware already installed and tested."
+      },
+      {
+        "q": "What payment methods do you accept?",
+        "a": "Yape, Plin and bank transfer to BCP/Interbank. We issue an electronic payment receipt."
+      }
+    ],
+    "ctaTitleLine1": "Ready to start?",
+    "ctaTitleLine2": "Your field is waiting.",
+    "ctaDescription": "Create your free account, register your first parcel and start seeing real data today. No commitment.",
+    "ctaPrimary": "Start free now",
+    "items": {
+      "free": {
+        "name": "No sensor",
+        "price": "Free",
+        "sub": "forever",
+        "description": "Manage your field without hardware. Start today.",
+        "perfectFor": "Farmers who do not have a sensor yet, students and agricultural technicians.",
+        "cta": "Create free account",
+        "badgeLabel": "Always free",
+        "features": [
+          "Up to 3 active parcels",
+          "Activity and cost tracking",
+          "Current weather and 5-day forecast",
+          "AI pest detection (10/month)",
+          "Input calculator",
+          "Bristol agricultural almanac",
+          "Input marketplace",
+          "Real-time IoT monitoring",
+          "AI harvest prediction",
+          "AgroIA assistant (chat)",
+          "PDF and Excel reports"
+        ]
+      },
+      "kit": {
+        "name": "AgroYachay Kit",
+        "price": "S/ 129",
+        "sub": "one-off payment · 1 year of software included",
+        "description": "The ESP32 sensor plus all the software for a year. No monthly charges.",
+        "perfectFor": "Any farmer. You buy the hardware once and that is it.",
+        "note": "From year 2: S/ 59/year for the software only",
+        "cta": "Order my kit",
+        "badgeLabel": "Best seller",
+        "hardware": [
+          "ESP32 WROOM-32 microcontroller",
+          "DHT11 sensor (air temperature and humidity)",
+          "FC-28 sensor (soil humidity)",
+          "Cables, resistors and protective case",
+          "Firmware pre-installed and tested"
+        ],
+        "features": [
+          "Unlimited parcels",
+          "Real-time IoT monitoring",
+          "Unlimited AI pest detection",
+          "Harvest prediction with ML",
+          "AgroIA assistant — open chat",
+          "Unlimited PDF and Excel reports",
+          "Alerts on configurable thresholds",
+          "Email support (24 h response)"
+        ]
+      }
+    }
+  },
+  "testimonials": {
+    "heroTitleLine1": "Results that",
+    "heroTitleLine2": "speak for themselves.",
+    "heroDescription": "This is where the measurable results of those using AgroYachay in their fields will go. Real data taken straight from the system, not estimates.",
+    "createAccount": "Create free account",
+    "contactTeam": "Contact the team",
+    "status": [
+      {
+        "label": "System in production",
+        "value": "Active"
+      },
+      {
+        "label": "First users",
+        "value": "In progress"
+      },
+      {
+        "label": "Published testimonials",
+        "value": "Pending"
+      },
+      {
+        "label": "Documented real data",
+        "value": "Pending"
+      }
+    ],
+    "expectedTitle": "What we expect to document first",
+    "expected": [
+      "Loss reduction through early pest detection",
+      "Water savings with soil humidity sensors",
+      "Harvest prediction accuracy vs real result",
+      "Response time to critical temperature alerts",
+      "Profitability per parcel before and after the system",
+      "Accuracy rate of the Plant.id v2 module"
+    ],
+    "beFirst": "Be the first to share your story",
+    "emptyTitle": "No testimonials published yet.",
+    "emptyDescription": "The system has just launched. When the first farmers share their results, their stories will appear here with real data, not impressions.",
+    "whyNoDataTitle": "Why is there no data yet?",
+    "whyNoDataDescription": "The testimonials that appear here will come with real system metrics: measured yield, pests detected, savings calculated. Nothing invented.",
+    "beFirstTitle": "Want to be the first?",
+    "beFirstDescription": "Create your account, connect your parcel and record real results from day one.",
+    "contactUs": "Contact us",
+    "metricsTitle": "Measurable results, not empty promises.",
+    "metricsDescription": "Every future testimonial will include at least one of these metrics, with real data from the system.",
+    "metrics": [
+      {
+        "symbol": "kg/ha",
+        "label": "Yield per parcel",
+        "desc": "ML prediction vs recorded real harvest"
+      },
+      {
+        "symbol": "%",
+        "label": "Detection confidence",
+        "desc": "Plant.id v2 identifying diseases"
+      },
+      {
+        "symbol": "°C",
+        "label": "Temperature alerts",
+        "desc": "Real-time notifications per sensor"
+      },
+      {
+        "symbol": "S/.",
+        "label": "Costs vs income",
+        "desc": "Financial report per season and crop"
+      }
+    ],
+    "ctaTitle": "Be the first to share your story.",
+    "ctaDescription": "Create your account, connect your parcel and record real results from day one. Your experience can help other farmers."
+  },
+  "contact": {
+    "heroTitleLine1": "We are here",
+    "heroTitleLine2": "to help you.",
+    "heroDescription": "Questions about sensors, plans or how to install the system: write to us directly through the form.",
+    "channels": [
+      {
+        "title": "Contact form",
+        "desc": "Main channel. We reply in under 48 h."
+      },
+      {
+        "title": "Email",
+        "desc": "Available depending on the plan. Set up when the account is activated."
+      },
+      {
+        "title": "Chat / WhatsApp",
+        "desc": "AgroYachay Kit and large projects. Priority support."
+      }
+    ],
+    "viewSupportPlans": "See support plans",
+    "formTitle": "Tell us about your case",
+    "formSubtitle": "We reply in under 48 working hours.",
+    "name": "Name *",
+    "namePlaceholder": "Your name",
+    "phone": "Phone",
+    "phonePlaceholder": "+51 999 000 000",
+    "email": "Email *",
+    "emailPlaceholder": "example@email.com",
+    "subject": "Subject",
+    "selectSubject": "Select a topic",
+    "subjects": [
+      "Question about IoT sensors",
+      "Information about plans",
+      "Technical support",
+      "Business / cooperative plan",
+      "System demo",
+      "Other"
+    ],
+    "message": "Message *",
+    "messagePlaceholder": "Describe your enquiry...",
+    "sending": "Sending…",
+    "send": "Send message",
+    "responseNote": "We reply in under 48 working hours.",
+    "requiredFields": "Please complete the required fields",
+    "sent": "Message sent successfully",
+    "supportTitle": "Support scales with your plan.",
+    "supportDescription": "Each plan includes a different level of attention. The larger your operation, the faster the response.",
+    "planPrefix": "Plan",
+    "supportTiers": [
+      {
+        "plan": "No sensor",
+        "items": [
+          "Contact form",
+          "Reply within 48 working hours",
+          "Technical documentation",
+          "Knowledge base"
+        ]
+      },
+      {
+        "plan": "AgroYachay Kit",
+        "items": [
+          "Everything above",
+          "Priority email support",
+          "Reply within 24 h",
+          "Help installing the sensor"
+        ]
+      },
+      {
+        "plan": "Large projects",
+        "items": [
+          "Custom quote",
+          "Dedicated point of contact",
+          "Training included",
+          "Extended support"
+        ]
+      }
+    ],
+    "availabilityTitle": "There is always someone available.",
+    "generalSupport": "General support",
+    "schedule": [
+      {
+        "day": "Monday to Friday",
+        "hours": "8:00 AM – 7:00 PM"
+      },
+      {
+        "day": "Saturdays",
+        "hours": "9:00 AM – 2:00 PM"
+      },
+      {
+        "day": "Sundays",
+        "hours": "Closed"
+      }
+    ],
+    "noSchedule": "No fixed hours",
+    "noScheduleDescription": "For large projects and cooperatives. When the field cannot wait, neither can we.",
+    "priorityItems": [
+      "Priority response with no queue",
+      "Access to specialised IoT technicians",
+      "Dedicated contact for large projects"
+    ],
+    "faqTitle": "What people ask us most.",
+    "faqs": [
+      {
+        "q": "Do I need internet in my parcel?",
+        "a": "Not necessarily. The sensors store up to 10 readings offline and sync on reconnection."
+      },
+      {
+        "q": "Does it work in areas without mobile coverage?",
+        "a": "Yes, the sensors can work with manual synchronisation. The local buffer keeps data without WiFi."
+      },
+      {
+        "q": "Who installs the sensors?",
+        "a": "You can do it yourself. The process is documented step by step with wiring diagrams."
+      },
+      {
+        "q": "Is support available in English?",
+        "a": "Yes, in English and Spanish, with knowledge of local Peruvian terms and crops."
+      },
+      {
+        "q": "How fast do you reply?",
+        "a": "Free plan: 48 h via the form. AgroYachay Kit: priority email support. For larger projects, contact us directly."
+      }
+    ],
+    "ctaTitleLine1": "Write to us.",
+    "ctaTitleLine2": "We reply today.",
+    "ctaDescription": "We know Peruvian agriculture, its crops and its context. Use the form and we will help you choose the right path for your field.",
+    "goToForm": "Go to the form"
+  },
+  "weatherConditions": {
+    "clear sky": "Clear sky",
+    "few clouds": "Few clouds",
+    "scattered clouds": "Scattered clouds",
+    "broken clouds": "Broken clouds",
+    "overcast clouds": "Overcast",
+    "light rain": "Light rain",
+    "moderate rain": "Rain",
+    "heavy intensity rain": "Heavy rain",
+    "thunderstorm": "Thunderstorm",
+    "snow": "Snow",
+    "mist": "Mist",
+    "fog": "Fog",
+    "haze": "Haze",
+    "drizzle": "Drizzle"
+  },
+  "account": {
+    "myAccount": "My account",
+    "profile": "Profile",
+    "security": "Security",
+    "account": "Account",
+    "name": "Name",
+    "namePlaceholder": "Your name",
+    "email": "Email",
+    "phone": "Phone",
+    "phonePlaceholder": "Your phone (optional)",
+    "saveChanges": "Save changes",
+    "saving": "Saving…",
+    "currentPassword": "Current password",
+    "currentPasswordPlaceholder": "Your current password",
+    "newPassword": "New password",
+    "newPasswordPlaceholder": "Min. 8 characters",
+    "confirmPassword": "Confirm password",
+    "confirmPasswordPlaceholder": "Repeat the new password",
+    "changePassword": "Change password",
+    "role": "Role",
+    "memberSince": "Member since",
+    "logout": "Log out",
+    "uploadPhoto": "Upload photo",
+    "uploading": "Uploading…",
+    "useGoogle": "Use Google",
+    "reverting": "Restoring…",
+    "photoUpdated": "Photo updated",
+    "photoError": "The image could not be uploaded",
+    "googlePhotoRestored": "Google photo restored",
+    "revertError": "The photo could not be restored",
+    "nameTooShort": "The name is too short",
+    "profileUpdated": "Profile updated",
+    "saveError": "Could not save",
+    "passwordMismatch": "The passwords do not match",
+    "passwordTooShort": "Minimum 8 characters",
+    "passwordUpdated": "Password updated",
+    "passwordError": "The password could not be changed"
+  },
+  "reports": {
+    "title": "Reports",
+    "subtitle": "PDF and Excel reports of your agricultural production",
+    "newReport": "New report",
+    "statsGenerated": "Reports generated",
+    "statsCrops": "Registered crops",
+    "statsDetections": "Pest detections",
+    "statsFormats": "PDF / Excel created",
+    "availableTypes": "Available report types",
+    "availableTypesHint": "Click to generate quickly",
+    "history": "Report history",
+    "historyHint": "Previously generated reports",
+    "empty": "No reports generated",
+    "emptyHint": "Create your first report to analyse your production",
+    "generateFirst": "Generate first report",
+    "download": "Download",
+    "downloaded": "Report downloaded",
+    "downloadError": "The report could not be downloaded",
+    "generateError": "The report could not be generated",
+    "modalTitle": "Generate report",
+    "generating": "Generating report...",
+    "generatingHint": "Processing agricultural data, this may take a few seconds",
+    "reportType": "Report type",
+    "outputFormat": "Output format",
+    "pdfHint": "To print and share",
+    "excelHint": "To analyse and edit",
+    "willGenerate": "About to generate",
+    "generateAndDownload": "Generate and download",
+    "types": {
+      "Dashboard Ejecutivo": {
+        "label": "Executive Dashboard",
+        "desc": "Full summary: crops, sensors, alerts and yield."
+      },
+      "Estado de Cultivos": {
+        "label": "Crop Status",
+        "desc": "Detailed analysis of each crop with progress and health."
+      },
+      "Analisis Financiero": {
+        "label": "Financial Analysis",
+        "desc": "ROI, input costs and estimated income."
+      },
+      "Impacto Climatico": {
+        "label": "Climate Impact",
+        "desc": "Weather conditions and their impact in Puno."
+      }
+    }
+  },
+  "camera": {
+    "starting": "Starting camera…",
+    "noAccess": "No camera access",
+    "permissionDenied": "Camera permission denied. Enable it in your browser settings.",
+    "unavailable": "The camera could not be accessed.",
+    "backCamera": "Back camera",
+    "frontCamera": "Front camera",
+    "framingHint": "Centre the plant or insect in the frame",
+    "capture": "Capture",
+    "switchCamera": "Switch camera",
+    "retake": "Retake",
+    "usePhoto": "Use photo"
+  },
+  "devices": {
+    "online": "Online",
+    "offline": "Offline",
+    "active": "Active",
+    "noSignal": "No signal",
+    "noData": "No data",
+    "crop": "Crop",
+    "lastSignal": "Last signal",
+    "unassigned": "Unassigned",
+    "noCropAssigned": "No crop assigned — readings are not stored",
+    "linkToCrop": "Link to a crop",
+    "configure": "Configure",
+    "unlink": "Unlink",
+    "status": {
+      "activo": "Active",
+      "inactivo": "Inactive",
+      "mantenimiento": "Under maintenance"
+    },
+    "selectCrop": "Select a crop",
+    "selectCropOption": "-- Select a crop --",
+    "linkError": "The device could not be linked",
+    "connectionError": "Connection error",
+    "namePlaceholder": "E.g. North parcel sensor",
+    "locationPlaceholder": "E.g. Centre of the parcel, row 3",
+    "linking": "Linking...",
+    "link": "Link",
+    "updated": "Device updated successfully",
+    "saveError": "Could not save",
+    "configLocationPlaceholder": "E.g. North parcel, row 3",
+    "linkDeviceTitle": "Link device",
+    "configureDeviceTitle": "Configure device",
+    "deviceName": "Device name",
+    "assignToCrop": "Assign to a crop",
+    "locationOptional": "Location (optional)",
+    "name": "Name",
+    "location": "Location",
+    "state": "Status",
+    "pageTitle": "IoT Devices",
+    "pageSubtitle": "Manage and link your ESP32 microcontrollers",
+    "connectNew": "Connect new",
+    "new": "New",
+    "refresh": "Refresh",
+    "loadError": "The devices could not be loaded",
+    "kpiLinked": "Linked",
+    "kpiOnline": "Online now",
+    "kpiPending": "Pending",
+    "unlinkTitle": "Unlink \"{{name}}\"?",
+    "unlinkText": "The device will move to \"Pending\". Historical readings are kept.",
+    "unlinkConfirm": "Yes, unlink",
+    "unlinked": "Device unlinked",
+    "unlinkError": "The device could not be unlinked",
+    "pendingBanner": "{{count}} device(s) waiting to be linked",
+    "tabLinked": "Linked ({{count}})",
+    "tabPending": "Pending",
+    "tabPendingCount": "Pending ({{count}})",
+    "loading": "Loading devices...",
+    "emptyLinked": "No linked devices",
+    "emptyLinkedHint": "When your ESP32 connects for the first time it will appear under Pending so you can link it to a crop.",
+    "emptyPending": "No pending devices",
+    "emptyPendingHint": "All connected ESP32 boards are already assigned to a crop.",
+    "howToConnect": "How do I connect a new ESP32?",
+    "connectionSteps": [
+      "Upload the firmware from the /arduino/agrovision_provisioning/ folder using the Arduino IDE.",
+      "Install the required libraries: ArduinoJson 6.x, DHT sensor library (Adafruit).",
+      "Power on the ESP32. It will create a WiFi network called \"AgroVision-Setup-XXXXXX\".",
+      "Connect your phone or PC to that network (no password). The portal opens automatically.",
+      "Select your WiFi network, enter the password and the server URL, then save.",
+      "The device will appear here as \"Pending\": click Link to assign it."
+    ],
+    "reconnectTitle": "To reconnect to a different WiFi network:",
+    "reconnectText": "hold the ESP32 BOOT button for 5 seconds until the LED blinks quickly. The device clears its credentials and returns to configuration mode."
+  },
+  "usbWizard": {
+    "title": "Connect a new device over USB",
+    "stepDetect": "Detect",
+    "stepVerify": "Verify",
+    "stepWifi": "WiFi",
+    "stepConfigure": "Configure",
+    "beforeYouStart": "Before you continue",
+    "beforeYouStartText": "Connect your ESP32 to the PC over USB. The LED must blink very fast (Setup mode). If it does not, hold BOOT for 5 s to reset.",
+    "searching": "Searching...",
+    "searchDevice": "Search for USB device",
+    "noDevices": "No ESP32 devices found",
+    "noDevicesHint": "Check that the USB cable carries data (not charge only) and that the CP210x driver is installed.",
+    "devicesFound": "{{count}} device(s) found:",
+    "showOtherPorts": "Also show other ports ({{count}} more)",
+    "deviceDetected": "ESP32 detected",
+    "firmwareInfo": "Firmware v{{version}} — Setup mode active",
+    "ledBlinking": "The LED is blinking fast: the ESP32 is ready to receive the WiFi configuration.",
+    "selectedPort": "Selected port:",
+    "scanningWifi": "Scanning WiFi networks... (may take 5 to 10 s)",
+    "availableNetworks": "Available networks ({{count}})",
+    "wifiPassword": "WiFi password",
+    "passwordPlaceholder": "Password for the selected network",
+    "server": "AgroYachay server",
+    "detectingIps": "Detecting IPs...",
+    "interfacesDetected": "{{count}} interface(s) detected",
+    "manualUrl": "Using a manual URL.",
+    "autoSelection": "Automatic selection. Type to override.",
+    "noNetworks": "No WiFi networks found.",
+    "retryScan": "Retry scan",
+    "configured": "ESP32 configured",
+    "willAppearPending": "In a few seconds it will appear as",
+    "willAppearPendingRest": "in this panel. The list refreshes automatically.",
+    "pending": "Pending",
+    "waitingConnection": "Waiting for the ESP32 to connect...",
+    "sendingConfig": "Sending configuration to the ESP32...",
+    "back": "Back",
+    "selectWifi": "Select WiFi network",
+    "verifying": "Verifying...",
+    "verifyDevice": "Verify device",
+    "configuring": "Configuring...",
+    "configureAndConnect": "Configure and connect",
+    "backendError": "Could not connect to the backend",
+    "selectPortFirst": "Select a port first",
+    "identifyError": "The device could not be identified",
+    "connectionErrorSetup": "Connection error. Check that the ESP32 is in Setup mode.",
+    "scanError": "The WiFi networks could not be scanned",
+    "scanUsbError": "Scan failed. Check the USB connection.",
+    "selectNetwork": "Select a WiFi network",
+    "serverUrlRequired": "The server URL is required",
+    "configError": "The ESP32 could not be configured",
+    "sendConfigError": "The configuration could not be sent to the ESP32."
+  },
+  "advisory": {
+    "title": "Specialised Advisory",
+    "subtitle": "Connect with certified agronomists · Puno",
+    "request": "Request",
+    "statMyQueries": "My queries",
+    "statExperts": "Available experts",
+    "statAnsweredByAI": "Answered by AI",
+    "statResponseTime": "Response time",
+    "statPending": "Pending",
+    "statSatisfaction": "Satisfaction",
+    "specialtiesTitle": "Our specialities",
+    "specialtiesHint": "Certified experts in every area",
+    "expertsCount": "{{count}} experts",
+    "myRequests": "My requests",
+    "myRequestsHint": "History and status of your queries",
+    "empty": "No requests yet",
+    "emptyHint": "Get help from certified highland agronomists",
+    "firstQuery": "Make my first query",
+    "aiAnswer": "AgroIA answer",
+    "agronomistAnswer": "Agronomist answer",
+    "aiGenerated": "AI-generated answer · Groq llama-3.3-70b",
+    "modalTitle": "Request advisory",
+    "modalSubtitle": "An expert will reply within 12-48 hours",
+    "advisoryType": "Advisory type",
+    "priority": "Priority",
+    "problemDescription": "Problem description",
+    "problemPlaceholder": "Describe your query in detail: observed symptoms, affected crop, how long the problem has lasted, soil conditions...",
+    "aiAnalysing": "AgroIA analysing…",
+    "aiQuickHelp": "Get quick AI guidance before sending",
+    "aiPreliminary": "AgroIA guidance (preliminary)",
+    "aiDisclaimer": "This is initial guidance. For a certified diagnosis, send the request to the expert.",
+    "sending": "Sending…",
+    "sendToExpert": "Send to expert",
+    "describeMore": "Describe the problem in at least 20 characters to get guidance",
+    "aiError": "The AI guidance could not be obtained",
+    "selectType": "Select the advisory type",
+    "describeProblem": "Describe your problem",
+    "sent": "Request sent successfully",
+    "sendError": "The request could not be sent",
+    "yourCrop": "their crop",
+    "aiPrompt": "A farmer from Puno, Peru (highlands 3800-4500 m.a.s.l.) asks about {{topic}}:\n\n\"{{problem}}\"\n\nGive brief initial guidance in plain text (no asterisks, no markdown):\n1. Possible diagnosis or cause of the problem\n2. Immediate actions they can take\n3. Whether a specialist visit is needed or they can handle it alone\n\nMaximum 5 sentences in total. Direct and practical. Answer in English.",
+    "priorities": {
+      "Baja": "Low",
+      "Media": "Medium",
+      "Alta": "High",
+      "Urgente": "Urgent"
+    },
+    "statuses": {
+      "Todas": "All",
+      "Pendiente": "Pending",
+      "Respondida": "Answered",
+      "Resuelta": "Resolved",
+      "En Proceso": "In progress",
+      "En Revision": "Under review",
+      "Cancelada": "Cancelled"
+    },
+    "specialties": {
+      "Nutrición Vegetal": {
+        "label": "Plant Nutrition",
+        "desc": "Fertilisation and nutrients to maximise yield."
+      },
+      "Manejo Hídrico": {
+        "label": "Water Management",
+        "desc": "Efficient irrigation systems and water management."
+      },
+      "Manejo de Suelos": {
+        "label": "Soil Management",
+        "desc": "Soil analysis, fertility and conservation."
+      },
+      "Control Fitosanitario": {
+        "label": "Phytosanitary Control",
+        "desc": "Prevention and control of pests and diseases."
+      },
+      "Análisis Productivo": {
+        "label": "Productivity Analysis",
+        "desc": "Yield assessment and improvement strategies."
+      },
+      "Agricultura Sostenible": {
+        "label": "Sustainable Agriculture",
+        "desc": "Ecological and sustainable practices for the highlands."
+      }
+    },
+    "problemHint": "The more detail you give, the better the answer"
+  },
+  "sensors": {
+    "loadingDevices": "Loading devices...",
+    "noDevices": "No linked devices",
+    "noDevicesHint": "Link your ESP32 sensor to a crop to start seeing temperature, air humidity and soil humidity in real time.",
+    "temperature": "Temperature",
+    "airHumidityShort": "Air hum.",
+    "soilHumidityShort": "Soil hum.",
+    "linkDevice": "Link ESP32 device",
+    "title": "IoT Monitoring",
+    "auto": "Auto",
+    "refresh": "Refresh",
+    "airTemperature": "Air Temperature",
+    "airHumidity": "Air Humidity",
+    "soilHumidity": "Soil Humidity",
+    "states": {
+      "normal": "Optimal",
+      "warning": "Out of range",
+      "critical": "Critical level",
+      "nodata": "No data"
+    },
+    "criticalMin": "Critical min.",
+    "optimal": "Optimal",
+    "criticalMax": "Critical max.",
+    "tabTemperature": "Temperature",
+    "tabHumidity": "Humidity",
+    "tabAll": "Full",
+    "readingsCount": "{{count}} readings",
+    "noData": "No data",
+    "noReadings": "No readings available",
+    "waitingFirstReading": "Waiting for the first sensor reading...",
+    "connectHotspot": "Connect the ESP32 to the configured hotspot",
+    "airTemperatureChart": "Air Temperature (°C)",
+    "optimalZone": "Optimal zone (20–28 °C)",
+    "criticalLimit": "Critical limit",
+    "humidityChart": "Air and Soil Humidity (%)",
+    "legendAirHumidity": "Air humidity",
+    "legendSoilHumidity": "Soil humidity",
+    "urgentIrrigation": "Urgent irrigation threshold (40 %)",
+    "seriesTemp": "Temp °C",
+    "seriesAir": "Air hum. %",
+    "seriesSoil": "Soil hum. %",
+    "device": "Device",
+    "deviceHint": "ESP32 sensor configuration",
+    "fieldType": "Type",
+    "fieldLocation": "Location",
+    "fieldCrop": "Crop",
+    "fieldInterval": "Interval",
+    "fieldProtocol": "Protocol",
+    "intervalValue": "Every 10 seconds",
+    "realTimeStatus": "Real-time status",
+    "readingsRecorded": "{{count}} readings recorded",
+    "esp32Active": "ESP32 active and sending data",
+    "esp32Offline": "ESP32 disconnected",
+    "esp32ActiveHint": "Runs autonomously on a 5V USB power supply",
+    "esp32OfflineHint": "Connect the sensor to the configured hotspot to resume"
+  },
+  "cropTypes": {
+    "Papa": {
+      "name": "Potato",
+      "description": "The region's main crop"
+    },
+    "Quinua": {
+      "name": "Quinoa",
+      "description": "High-value Andean superfood"
+    },
+    "Cañihua": {
+      "name": "Cañihua",
+      "description": "Frost-resistant Andean grain"
+    },
+    "Habas": {
+      "name": "Faba Beans",
+      "description": "Grain legume"
+    },
+    "Cebada": {
+      "name": "Barley",
+      "description": "Cereal for grain and forage"
+    },
+    "Avena Forrajera": {
+      "name": "Forage Oat",
+      "description": "Forage for livestock"
+    },
+    "Tarwi": {
+      "name": "Tarwi",
+      "description": "Legume with high protein value"
+    },
+    "Oca": {
+      "name": "Oca",
+      "description": "Traditional Andean tuber"
+    }
+  },
+  "cropStates": {
+    "Planificado": "Planned",
+    "Sembrado": "Sown",
+    "Crecimiento": "Growing",
+    "Floración": "Flowering",
+    "Maduración": "Ripening",
+    "Cosechado": "Harvested"
+  },
+  "units": {
+    "days": "days",
+    "hectares": "ha",
+    "tons": "t",
+    "tonsPerHa": "t/ha"
+  },
+  "prediction": {
+    "title": "Harvest Prediction",
+    "subtitle": "Predictive analysis + AgroIA · Puno Region",
+    "newPrediction": "New prediction",
+    "tabCalculator": "Calculator",
+    "tabHistory": "My crops",
+    "cropType": "Crop type",
+    "variety": "Variety",
+    "cropArea": "Crop area",
+    "hectares": "Hectares",
+    "analysing": "Analysing…",
+    "generate": "Generate AI prediction",
+    "selectCrop": "Select a crop",
+    "selectVariety": "Select a variety",
+    "generated": "Prediction generated",
+    "generateError": "The prediction could not be generated",
+    "totalYield": "Total yield",
+    "perHectare": "Per hectare",
+    "marketPrice": "Market price",
+    "perKg": "per kg",
+    "estimatedIncome": "Estimated income",
+    "total": "total",
+    "tons": "Tonnes",
+    "scenarioPessimistic": "Pessimistic",
+    "scenarioLikely": "Likely",
+    "scenarioOptimistic": "Optimistic",
+    "confidence": "confidence",
+    "aiRecommendations": "AgroIA recommendations",
+    "aiGenerating": "AgroIA generating recommendations…",
+    "noCrops": "No crops registered",
+    "noCropsHint": "Register crops in the Crops section to see predictions here",
+    "quickHint": "Quick predictions based on your registered crops",
+    "estimatedYieldShort": "est. yield",
+    "estimatedIncomeShort": "est. income",
+    "goToCalculator": "Go to the calculator"
+  },
+  "inputs": {
+    "title": "Input Calculator",
+    "subtitle": "Optimised NPK fertilisation · Puno 3800–4500 m.a.s.l.",
+    "print": "Print",
+    "newCalculation": "New calculation",
+    "cropType": "Crop type",
+    "variety": "Variety",
+    "optional": "(optional)",
+    "cropArea": "Crop area",
+    "hectares": "Hectares",
+    "parcelSmall": "Small parcel",
+    "parcelMedium": "Medium parcel",
+    "parcelLarge": "Large parcel",
+    "parcelIndustrial": "Industrial production",
+    "topos": "topos",
+    "acres": "acres",
+    "calculating": "Calculating…",
+    "selectCrop": "Select a crop",
+    "done": "Calculation complete",
+    "calcError": "Calculation failed",
+    "totalInvestment": "total investment",
+    "nitrogen": "Nitrogen (N)",
+    "phosphorus": "Phosphorus (P₂O₅)",
+    "potassium": "Potassium (K₂O)",
+    "npkDistribution": "NPK distribution (kg)",
+    "npkProportion": "NPK proportion",
+    "quantityKg": "Quantity (kg)",
+    "benefits": "Projected benefits",
+    "estimatedSaving": "Estimated saving",
+    "estimatedSavingHint": "Cost reduction of up to 25%",
+    "yieldIncrease": "Yield increase",
+    "yieldIncreaseHint": "Increase of up to 15%",
+    "productQuality": "Product quality",
+    "productQualityHint": "Premium product guaranteed",
+    "applicationTips": "Application recommendations",
+    "disclaimer": "Calculations based on INIA technical recommendations and Puno highland conditions.",
+    "optimalAltitude": "Optimal altitude",
+    "fertilisationPlan": "Fertilisation plan"
+  },
+  "pests": {
+    "tabImage": "By image",
+    "tabAI": "AI query",
+    "tabHistory": "History",
+    "tabGuide": "Guide",
+    "unspecified": "Not specified",
+    "notSpecified": "not specified",
+    "dropImage": "Drag an image here",
+    "dropImageHint": "or click to select · JPG, PNG, WEBP",
+    "or": "or",
+    "takePhoto": "Take a photo with the camera",
+    "analysingAI": "Analysing with AI…",
+    "analysing": "Analysing…",
+    "detect": "Detect pest",
+    "invalidImage": "Select a valid image",
+    "planError": "The management plan could not be generated",
+    "selectPhotoFirst": "Select or take a photo first",
+    "healthyPlant": "Healthy plant",
+    "detected": "Detected: {{name}}",
+    "detectionError": "Detection failed",
+    "analysisError": "The image could not be analysed with AI",
+    "describeMore": "Describe the symptoms in more detail",
+    "queryError": "The query failed",
+    "aiConnectionError": "Could not connect to AgroIA",
+    "healthy": "Healthy",
+    "noDiseaseSigns": "Plant with no signs of disease",
+    "noDiseaseSignsHint": "Continue your usual preventive monitoring.",
+    "description": "Description",
+    "causes": "Causes",
+    "treatment": "Treatment",
+    "prevention": "Prevention",
+    "managementPlan": "Management plan — AgroIA",
+    "generatingPlan": "AgroIA generating the management plan…",
+    "urgencyLevel": "Urgency level",
+    "assessment": "Assessment",
+    "recommendedProducts": "Recommended products",
+    "dose": "Dose",
+    "every": "Every",
+    "consultAgronomist": "Consult an agronomist if…",
+    "symptomQuery": "Symptom query — AgroIA",
+    "symptomQueryHint": "Describe what you observe. AgroIA will generate a diagnosis and a management plan specialised for the Puno highlands.",
+    "affectedCrop": "Affected crop (optional)",
+    "describeSymptoms": "Describe the symptoms",
+    "symptomsPlaceholder": "E.g. The potato leaves have brown spots with yellow edges. The spots appeared after the rains. The stem looks dark at the base. It affects about 20 plants in the north parcel.",
+    "moreDetailBetter": "The more detail, the better the diagnosis",
+    "aiAnalysing": "AgroIA analysing…",
+    "aiResponse": "AgroIA response",
+    "noDetections": "No detections recorded",
+    "noDetectionsHint": "Detections will appear here",
+    "confidence": "Confidence",
+    "commonPests": "Common pests of the Puno highlands",
+    "loading": "Loading…",
+    "guideCrops": "Crops",
+    "guideSymptoms": "Symptoms",
+    "guideTreatment": "Treatment",
+    "guidePrevention": "Prevention",
+    "advancedDiagnosis": "Advanced diagnosis with AgroIA",
+    "advancedDiagnosisHint": "If you cannot find your pest in this guide, describe the symptoms or upload a photo for an AI diagnosis.",
+    "region": "Puno, Peru — Highlands 3800-4500 m.a.s.l.",
+    "imagePreviewAlt": "Preview of the image to analyse",
+    "pageTitle": "Pest Detection",
+    "pageSubtitle": "Groq Vision · AgroIA · Smart diagnosis for the highlands",
+    "cropToAnalyse": "Crop to analyse (optional)",
+    "selectFile": "Choose a file",
+    "newQuery": "New query"
+  },
+  "cropsPanel": {
+    "title": "Crops",
+    "newCrop": "New crop",
+    "loading": "Loading crops...",
+    "loadError": "The crops could not be loaded",
+    "statActive": "Active crops",
+    "statArea": "Total area",
+    "statHealth": "Average health",
+    "statGrowing": "Growing",
+    "empty": "No crops registered",
+    "emptyHint": "Add your first crop with IoT monitoring",
+    "addCrop": "Add crop",
+    "health": "health",
+    "cropHealth": "Crop health",
+    "cycleProgress": "Cycle progress",
+    "area": "Area",
+    "daysLeft": "Days left",
+    "estimatedYield": "Est. yield",
+    "iotFactor": "IoT factor",
+    "iotVsOptimal": "IoT conditions vs optimal",
+    "optimalConditions": "Optimal conditions — no active alerts",
+    "logActivity": "Log activity",
+    "noActivities": "No activities recorded",
+    "noActivitiesHint": "Use the buttons above to record one",
+    "recsFooter": "Recommendations based on real-time IoT readings",
+    "tabSensors": "Sensors",
+    "tabActivities": "Activities",
+    "tabTips": "Tips",
+    "cropType": "Crop type",
+    "cycle": "Cycle",
+    "temp": "Temp",
+    "yield": "Yield",
+    "cropName": "Crop name *",
+    "variety": "Variety",
+    "unspecified": "Not specified",
+    "areaField": "Area (ha) *",
+    "sowingDate": "Sowing date *",
+    "notes": "Notes (optional)",
+    "notesPlaceholder": "Observations, soil conditions...",
+    "editCrop": "Edit",
+    "update": "Update",
+    "createCrop": "Create crop",
+    "activityType": "Activity type",
+    "activityDescription": "Description (optional)",
+    "activityPlaceholder": "E.g. 20 L per plant, NPK 15-15-15 fertiliser...",
+    "date": "Date",
+    "requiredFields": "Complete the name, area and sowing date",
+    "cropUpdated": "Crop updated",
+    "cropCreated": "Crop registered",
+    "saveError": "Could not save",
+    "deleteTitle": "Delete \"{{name}}\"?",
+    "deleteText": "The crop and all its data will be deleted. This action cannot be undone.",
+    "deleteConfirm": "Yes, delete",
+    "cropDeleted": "Crop deleted",
+    "deleteError": "Could not delete",
+    "activityLogged": "Activity recorded",
+    "deleteActivityTitle": "Delete this activity?",
+    "sensorTemperature": "Temperature",
+    "sensorSoilHumidity": "Soil hum.",
+    "sensorPh": "Soil pH",
+    "sensorLight": "Light",
+    "sensorAirHumidity": "Air hum.",
+    "sensorWind": "Wind",
+    "stages": {
+      "germination": "Germination",
+      "vegetative": "Vegetative growth",
+      "flowering": "Flowering",
+      "formation": "Formation",
+      "ripening": "Ripening",
+      "readyToHarvest": "Ready to harvest"
+    },
+    "activityTypes": {
+      "riego": "Irrigation",
+      "fertilizacion": "Fertilisation",
+      "fumigacion": "Spraying",
+      "aporque": "Hilling",
+      "deshierbe": "Weeding",
+      "tratamiento": "Treatment",
+      "observacion": "Observation",
+      "cosecha": "Partial harvest"
+    },
+    "alerts": {
+      "frostRisk": "Frost risk.",
+      "tempOutOfRange": "Temperature outside the optimal range.",
+      "urgentIrrigation": "Urgent irrigation.",
+      "humidityOutOfRange": "Humidity slightly out of range.",
+      "applyLime": "Apply agricultural lime.",
+      "applySulphur": "Apply elemental sulphur.",
+      "phOutOfRange": "pH slightly out of range.",
+      "strongWind": "Strong wind ({{value}} km/h)",
+      "installWindbreaks": "Install windbreaks.",
+      "temperatureLabel": "Temperature ({{value}} °C)",
+      "soilHumidityLabel": "Soil humidity ({{value}} %)",
+      "phLabel": "pH ({{value}})"
+    },
+    "recommendations": {
+      "frost": "Temperature below the minimum — frost risk. Cover with agrotextile or hail netting.",
+      "heat": "Temperature above the maximum — heat stress. Increase irrigation frequency.",
+      "coolish": "Temperature slightly low. Consider night cover if it drops further.",
+      "dry": "Critical soil humidity — irrigate immediately to avoid wilting.",
+      "wet": "Excess humidity — risk of fungi and rot. Check the drainage.",
+      "slightlyDry": "Humidity slightly low. Schedule irrigation in the coming hours.",
+      "lowPh": "Low pH ({{value}}). Apply agricultural lime to raise the pH gradually.",
+      "highPh": "High pH ({{value}}). Apply elemental sulphur to lower the pH.",
+      "wind": "Strong winds. Install temporary windbreaks to protect young plants.",
+      "flowering": "Flowering stage approaching. Apply potassium fertiliser to strengthen the flower.",
+      "ripening": "Ripening stage. Reduce irrigation gradually to favour the harvest.",
+      "harvest": "Crop ready for harvest. Plan the collection and storage logistics.",
+      "allGood": "All crop conditions are within the optimal ranges. Continue the usual management."
+    }
+  },
+  "admin": {
+    "saveChanges": "Save changes",
+    "uploading": "Uploading…",
+    "uploadHint": "Upload an image or drag it here",
+    "uploadError": "The image could not be uploaded",
+    "statsError": "Error loading the statistics",
+    "usersError": "Error loading the users",
+    "platformStats": "Platform statistics",
+    "total": "Total",
+    "active": "Active",
+    "last30": "Last 30 days",
+    "last7": "Last 7 days",
+    "byRole": "By role",
+    "inactiveAccount": "{{count}} inactive account in the system",
+    "inactiveAccounts": "{{count}} inactive accounts in the system",
+    "recentlyRegistered": "Recently registered",
+    "noRecords": "No records",
+    "userManagement": "User management",
+    "usersCount": "{{count}} users",
+    "searchPlaceholder": "Search by name or email…",
+    "filterAll": "All",
+    "filterInactive": "Inactive",
+    "since": "Since",
+    "deactivate": "Deactivate",
+    "activate": "Activate",
+    "password": "Password",
+    "newPasswordPlaceholder": "New password (min. 8 characters)",
+    "noUsersFound": "No users found",
+    "roleUpdated": "Role updated",
+    "genericError": "Error",
+    "minChars": "Minimum 8 characters",
+    "passwordUpdated": "Password updated",
+    "brandImages": "Brand images",
+    "logoLabel": "Main logo",
+    "logoHint": "Transparent SVG or PNG, min. 200×60 px",
+    "faviconLabel": "Favicon",
+    "faviconHint": "ICO or PNG 32×32 px",
+    "institutionLogoLabel": "Institution logo",
+    "institutionLogoHint": "Logo of the associated organisation or university",
+    "coverLabel": "Cover image (hero)",
+    "coverHint": "Recommended: 1920×1080 px",
+    "homepageSaved": "Home page saved",
+    "saveError": "Could not save",
+    "siteIdentity": "Site identity",
+    "siteName": "Site name",
+    "tagline": "Tagline",
+    "taglinePlaceholder": "Smart agriculture...",
+    "heroSection": "Hero section",
+    "heroTitle": "Hero title",
+    "heroTitleHint": "Large text of the main banner (max. 7 characters)",
+    "description": "Description",
+    "heroDescriptionPlaceholder": "Agricultural management platform...",
+    "ctaButton": "CTA button",
+    "ctaPlaceholder": "Start now",
+    "ecosystemSection": "Ecosystem section",
+    "titleField": "Title",
+    "ecosystemTitlePlaceholder": "Smart Agricultural Ecosystem",
+    "ecosystemDescriptionPlaceholder": "We connect technology...",
+    "announcementBanner": "Announcement banner",
+    "showBanner": "Show announcement banner",
+    "showBannerHint": "Appears at the top of every public page",
+    "bannerText": "Banner text",
+    "bannerPlaceholder": "New! Try our latest IoT features",
+    "bannerPreview": "Banner preview…",
+    "navSaved": "Navigation saved",
+    "navigation": "Navigation",
+    "navHint": "Customise the main menu links. Leave empty to use the default navigation.",
+    "labelPlaceholder": "Label",
+    "hrefPlaceholder": "/path or https://...",
+    "addItem": "Add item",
+    "footerSaved": "Footer saved",
+    "generalInfo": "General information",
+    "footerDescriptionPlaceholder": "Agricultural management system...",
+    "institution": "Institution",
+    "institutionPlaceholder": "National University...",
+    "contactEmail": "Contact email",
+    "copyright": "Copyright",
+    "socialNetworks": "Social networks",
+    "systemSaved": "System configuration saved",
+    "maintenanceMode": "Maintenance mode",
+    "enableMaintenance": "Enable maintenance mode",
+    "enableMaintenanceHint": "Shows a maintenance page to non-admin users",
+    "maintenanceMessage": "Maintenance message",
+    "maintenancePlaceholder": "The system is under maintenance...",
+    "analytics": "Analytics",
+    "ga4Hint": "Leave empty to disable analytics tracking",
+    "resetTitle": "Reset the configuration?",
+    "resetText": "All texts will return to their default values. Images are not deleted.",
+    "resetConfirm": "Yes, reset",
+    "resetDone": "Configuration reset",
+    "resetError": "The configuration could not be reset",
+    "resetSection": "Reset configuration",
+    "resetting": "Resetting…",
+    "resetDefaults": "Reset to default values",
+    "superAdminPanel": "SuperAdmin Panel",
+    "adminPanel": "Admin Panel",
+    "tabs": {
+      "stats": "Statistics",
+      "users": "Users",
+      "logo": "Logo",
+      "homepage": "Home",
+      "nav": "Navigation",
+      "footer": "Footer",
+      "system": "System",
+      "advanced": "Advanced"
+    },
+    "roles": {
+      "superadmin": "SuperAdmin",
+      "admin": "Admin",
+      "agricultor": "Farmer",
+      "usuario": "User"
+    },
+    "logoAndBrand": "Logo and brand",
+    "configError": "The configuration could not be loaded",
+    "inactiveTag": "INACTIVE",
+    "homepageTitle": "Home Page",
+    "footerTitle": "Footer",
+    "advancedTitle": "Advanced Settings",
+    "maintenanceWarning": "The site will be unreachable for regular users"
+  },
+  "almanac": {
+    "moonPhases": {
+      "Luna Nueva": "New moon",
+      "Cuarto Creciente": "First quarter",
+      "Luna Llena": "Full moon",
+      "Cuarto Menguante": "Last quarter"
+    },
+    "months": [
+      {
+        "name": "January",
+        "weather": "Heavy rains · Minimal irrigation",
+        "advice": "Ideal time for short-cycle crops. Make the most of seasonal rains. Control fungi caused by excess humidity.",
+        "sowing": [
+          "Maize",
+          "Potato",
+          "Quinoa",
+          "Barley"
+        ],
+        "harvest": [
+          "Early faba beans",
+          "Peas"
+        ],
+        "holidays": [
+          "New Year",
+          "Epiphany"
+        ],
+        "weeks": [
+          "Phytosanitary control on established crops",
+          "Hilling of growing potato and maize",
+          "Quinoa sowing in prepared parcels",
+          "Supplementary irrigation if rains are scarce"
+        ]
+      },
+      {
+        "name": "February",
+        "weather": "Peak rains · Protect the parcels",
+        "advice": "Pest control due to humidity. Ensure drainage on low ground. Watch for foliar diseases.",
+        "sowing": [
+          "Wheat",
+          "Barley",
+          "Vegetables"
+        ],
+        "harvest": [
+          "Early potato",
+          "Sweetcorn"
+        ],
+        "holidays": [
+          "Virgin of Candelaria",
+          "Valentine's Day"
+        ],
+        "weeks": [
+          "Preventive spraying against fungi",
+          "Furrow drainage in flooded areas",
+          "First sweetcorn harvest",
+          "Seed selection for the next season"
+        ]
+      },
+      {
+        "name": "March",
+        "weather": "End of the rains · Prepare the land",
+        "advice": "Last sowing of Andean crops. Start of the season's main harvest. Prepare the storerooms.",
+        "sowing": [
+          "Ulluco",
+          "Oca",
+          "Mashua"
+        ],
+        "harvest": [
+          "Quinoa",
+          "Kiwicha",
+          "Maize"
+        ],
+        "holidays": [
+          "Women's Day",
+          "Saint Joseph"
+        ],
+        "weeks": [
+          "Harvest of quinoa and late maize",
+          "Sowing of ulluco and oca in the highlands",
+          "Cleaning of irrigation channels",
+          "Preparing the storerooms for harvest"
+        ]
+      },
+      {
+        "name": "April",
+        "weather": "Dry season · Main harvest",
+        "advice": "Harvest time for Andean tubers. Plan qolqa-style storage. Seed selection.",
+        "sowing": [
+          "Faba beans (2nd season)"
+        ],
+        "harvest": [
+          "Potato",
+          "Oca",
+          "Ulluco",
+          "Mashua"
+        ],
+        "holidays": [
+          "Holy Week"
+        ],
+        "weeks": [
+          "Mass harvest of potato and tubers",
+          "Grading and seed selection",
+          "Dehydrating potato into chuño and tunta",
+          "Storage and production records"
+        ]
+      },
+      {
+        "name": "May",
+        "weather": "Dry and cold · Night frosts",
+        "advice": "Frost protection with smoke or night irrigation. Making chuño and moraya. Grain drying.",
+        "sowing": [
+          "Winter wheat"
+        ],
+        "harvest": [
+          "Quinoa",
+          "Cañihua",
+          "Tarwi"
+        ],
+        "holidays": [
+          "Labour Day",
+          "Mother's Day"
+        ],
+        "weeks": [
+          "Making chuño and tunta with the frosts",
+          "Harvest of cañihua and tarwi",
+          "Grain drying and threshing",
+          "Preparing and sowing winter wheat"
+        ]
+      },
+      {
+        "name": "June",
+        "weather": "Coldest month · Hard frosts",
+        "advice": "A month of agricultural rest. Tool maintenance. Cereal threshing. Planning for the next season.",
+        "sowing": [],
+        "harvest": [
+          "Wheat",
+          "Barley"
+        ],
+        "holidays": [
+          "Father's Day",
+          "Inti Raymi",
+          "Saints Peter and Paul"
+        ],
+        "weeks": [
+          "Threshing and winnowing of wheat and barley",
+          "Maintenance of tools and infrastructure",
+          "Inti Raymi — celebration and rest",
+          "Planning the 2026-2027 season"
+        ]
+      },
+      {
+        "name": "July",
+        "weather": "Intense cold · Clear skies",
+        "advice": "Preparing seedbeds under greenhouse. Soil analysis for the next season. Agricultural training.",
+        "sowing": [
+          "Greenhouse vegetables"
+        ],
+        "harvest": [
+          "Dry faba beans"
+        ],
+        "holidays": [
+          "Independence Day"
+        ],
+        "weeks": [
+          "Soil analysis for the following season",
+          "Lettuce and onion seedbeds under cover",
+          "Independence Day — celebration and rest",
+          "Incorporating green manure into the soil"
+        ]
+      },
+      {
+        "name": "August",
+        "weather": "Winds · Warming begins",
+        "advice": "Deep soil preparation. Incorporating organic matter. Seed analysis for the main season.",
+        "sowing": [
+          "Intensive land preparation"
+        ],
+        "harvest": [],
+        "holidays": [
+          "Assumption of the Virgin"
+        ],
+        "weeks": [
+          "Deep ploughing of the land",
+          "Incorporating organic manure and compost",
+          "Seed selection and treatment",
+          "Building and repairing terraces"
+        ]
+      },
+      {
+        "name": "September",
+        "weather": "Spring · Sporadic rains",
+        "advice": "Start of the main sowing. Apply base fertiliser. Check the irrigation system before the rains.",
+        "sowing": [
+          "Potato (main season)",
+          "Maize",
+          "Quinoa"
+        ],
+        "harvest": [],
+        "holidays": [
+          "Literacy Day"
+        ],
+        "weeks": [
+          "Potato sowing in the large parcels",
+          "Maize sowing in the mid zones",
+          "NPK base fertilisation",
+          "Installing and checking the irrigation system"
+        ]
+      },
+      {
+        "name": "October",
+        "weather": "Regular rains · Pleasant temperature",
+        "advice": "Continue the planned sowings. Weed control on established crops. First hilling of potato.",
+        "sowing": [
+          "Faba beans",
+          "Peas",
+          "Wheat"
+        ],
+        "harvest": [],
+        "holidays": [
+          "Battle of Angamos",
+          "Creole Song Day"
+        ],
+        "weeks": [
+          "Sowing of faba beans and peas",
+          "First weeding of the crops",
+          "First hilling of newly emerged potato",
+          "Preventive pest control in maize"
+        ]
+      },
+      {
+        "name": "November",
+        "weather": "Heavy rains · Hailstorms",
+        "advice": "Crop hilling. Supplementary fertilisation. Intensive phytosanitary watch against hailstorms.",
+        "sowing": [
+          "Barley",
+          "Forage oat"
+        ],
+        "harvest": [
+          "Green faba beans",
+          "Green peas"
+        ],
+        "holidays": [
+          "All Saints",
+          "All Souls"
+        ],
+        "weeks": [
+          "Second hilling of potato and maize",
+          "Application of foliar fertiliser",
+          "Harvest of green faba beans and peas",
+          "Hail watch and protective covers"
+        ]
+      },
+      {
+        "name": "December",
+        "weather": "Strong rains · Rainy summer",
+        "advice": "Intensive phytosanitary control. Prepare the infrastructure for the summer harvest. No irrigation needed.",
+        "sowing": [
+          "Last maize sowings"
+        ],
+        "harvest": [
+          "Early potato",
+          "Vegetables"
+        ],
+        "holidays": [
+          "Immaculate Conception",
+          "Christmas"
+        ],
+        "weeks": [
+          "Control of fungi and mildew in potato",
+          "Harvest of early vegetables",
+          "Christmas — celebration and rest",
+          "Season review and 2027 planning"
+        ]
+      }
+    ],
+    "crops": {
+      "Papa": {
+        "name": "Potato",
+        "family": "Solanaceae",
+        "altitude": "3200-4100 m.a.s.l.",
+        "duration": "6-8 months",
+        "irrigation": "450-600 mm",
+        "spacing": "90×30 cm",
+        "depth": "12 cm",
+        "desc": "The main crop of the highlands. Over 3000 varieties in Peru. Native varieties tolerate frost.",
+        "varieties": [
+          "Huayro",
+          "Imilla Negra",
+          "Ccompis",
+          "Única",
+          "Canchan",
+          "Yungay"
+        ]
+      },
+      "Quinua": {
+        "name": "Quinoa",
+        "family": "Amaranthaceae",
+        "altitude": "3000-4000 m.a.s.l.",
+        "duration": "5-8 months",
+        "irrigation": "300-500 mm",
+        "spacing": "40×25 cm",
+        "depth": "2 cm",
+        "desc": "Andean superfood with complete protein. Tolerant to drought, frost and salinity. World heritage crop.",
+        "varieties": [
+          "Salcedo INIA",
+          "Kancolla",
+          "Blanca de Juli",
+          "Rosada de Huancané",
+          "Negra Collana"
+        ]
+      },
+      "Maíz": {
+        "name": "Maize",
+        "family": "Poaceae",
+        "altitude": "2800-3500 m.a.s.l.",
+        "duration": "5-7 months",
+        "irrigation": "500-800 mm",
+        "spacing": "80×40 cm",
+        "depth": "5 cm",
+        "desc": "Ancestral Andean crop. The purple maize variety has high nutritional value. A staple of the Puno diet.",
+        "varieties": [
+          "Purple maize",
+          "White sweetcorn",
+          "Cancha",
+          "Kulli"
+        ]
+      },
+      "Cañihua": {
+        "name": "Cañihua",
+        "family": "Amaranthaceae",
+        "altitude": "3800-4500 m.a.s.l.",
+        "duration": "6-7 months",
+        "irrigation": "350-400 mm",
+        "spacing": "30×20 cm",
+        "depth": "1 cm",
+        "desc": "Hardier than quinoa. Highly nutritious. Grows up to 4500 m.a.s.l., where other crops fail.",
+        "varieties": [
+          "Cupi",
+          "Illimani",
+          "Ramis"
+        ]
+      },
+      "Habas": {
+        "name": "Faba Beans",
+        "family": "Fabaceae",
+        "altitude": "3000-4000 m.a.s.l.",
+        "duration": "5-7 months",
+        "irrigation": "350-500 mm",
+        "spacing": "60×30 cm",
+        "depth": "5 cm",
+        "desc": "Nitrogen-fixing legume. Improves soil fertility. Eaten both green and dried.",
+        "varieties": [
+          "IPA Gloriabamba",
+          "San Isidro",
+          "Copacabana"
+        ]
+      },
+      "Oca": {
+        "name": "Oca",
+        "family": "Oxalidaceae",
+        "altitude": "3200-4000 m.a.s.l.",
+        "duration": "7-8 months",
+        "irrigation": "600-700 mm",
+        "spacing": "60×30 cm",
+        "depth": "8 cm",
+        "desc": "Native Andean tuber with a high oxalate content. Second in importance after the potato.",
+        "varieties": [
+          "Huari",
+          "Pauccar",
+          "Chullpi"
+        ]
+      },
+      "Olluco": {
+        "name": "Ulluco",
+        "family": "Basellaceae",
+        "altitude": "3000-4200 m.a.s.l.",
+        "duration": "7-9 months",
+        "irrigation": "600-800 mm",
+        "spacing": "60×30 cm",
+        "depth": "8 cm",
+        "desc": "Highly nutritious Andean tuber. Most of its biomass is water. Important in the highland diet.",
+        "varieties": [
+          "Puca shungo",
+          "Yellow",
+          "White"
+        ]
+      },
+      "Tarwi": {
+        "name": "Tarwi",
+        "family": "Fabaceae",
+        "altitude": "2800-3800 m.a.s.l.",
+        "duration": "6-8 months",
+        "irrigation": "400-600 mm",
+        "spacing": "50×30 cm",
+        "depth": "4 cm",
+        "desc": "Legume with a higher protein content than soy. Fixes atmospheric nitrogen. Requires debittering.",
+        "varieties": [
+          "INIA 450",
+          "Quillahuaman",
+          "Andenes"
+        ]
+      },
+      "Trigo": {
+        "name": "Wheat",
+        "family": "Poaceae",
+        "altitude": "2800-3800 m.a.s.l.",
+        "duration": "5-6 months",
+        "irrigation": "350-500 mm",
+        "spacing": "15×15 cm",
+        "depth": "3 cm",
+        "desc": "An important cereal for self-consumption and sale. Requires well-drained soil and neutral pH.",
+        "varieties": [
+          "Centenario",
+          "INIA 414",
+          "Andino"
+        ]
+      },
+      "Cebada": {
+        "name": "Barley",
+        "family": "Poaceae",
+        "altitude": "3000-4200 m.a.s.l.",
+        "duration": "4-6 months",
+        "irrigation": "300-450 mm",
+        "spacing": "20×15 cm",
+        "depth": "4 cm",
+        "desc": "The cereal best adapted to highland conditions. Used as human and animal food and to make chicha.",
+        "varieties": [
+          "INIA 416",
+          "Quirusillas",
+          "UNA 80"
+        ]
+      }
+    },
+    "title": "Bristol Almanac",
+    "subtitle": "Agricultural and lunar calendar of the Andean highlands",
+    "print": "Print",
+    "export": "Export",
+    "searchPlaceholder": "Search a crop across every month… (potato, quinoa, maize)",
+    "viewMonthly": "Monthly",
+    "viewGantt": "Gantt",
+    "viewCrops": "Crops",
+    "viewStats": "Analysis",
+    "weekdays": [
+      "Sun",
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat"
+    ],
+    "shortMonths": [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec"
+    ],
+    "moonPhasesOf": "Moon phases in {{month}}",
+    "sowing": "Sowing",
+    "harvest": "Harvest",
+    "sowingCount": "{{count}} recommended crops",
+    "noSowing": "Not a sowing season",
+    "harvestCount": "{{count}} crops to harvest",
+    "noHarvest": "Not a harvest season",
+    "weatherAndAdvice": "Weather and advice",
+    "tempMin": "Min. temp.",
+    "tempMax": "Max. temp.",
+    "rain": "Rain",
+    "weeklyActivities": "Weekly activities",
+    "weeklyActivitiesSub": "Calendar of agricultural tasks",
+    "week": "Week",
+    "holidays": "Holidays",
+    "holidaysCount": "{{count}} important dates",
+    "lunarGuide": "Sowing guide by moon phase",
+    "lunarGuideSub": "Bristol Almanac — Andean agricultural tradition",
+    "ganttTitle": "Gantt — annual sowing and harvest 2026",
+    "ganttSub": "Green = sowing · Orange = harvest · Click to see the month",
+    "legendSowing": "Sowing",
+    "legendHarvest": "Harvest",
+    "legendBoth": "Sowing and harvest",
+    "legendNone": "No activity",
+    "backToCrops": "Back to all crops",
+    "altitude": "Altitude",
+    "duration": "Duration",
+    "irrigation": "Irrigation",
+    "spacing": "Spacing",
+    "depth": "Depth",
+    "sowingMonths": "Sowing months",
+    "harvestMonths": "Harvest months",
+    "mainVarieties": "Main varieties",
+    "statSowingCrops": "Sowing crops",
+    "statHarvestCrops": "Harvest crops",
+    "statMonthsWithSowing": "Months with sowing",
+    "statMoonPhases": "Moon phases",
+    "uniqueVarieties": "unique varieties",
+    "of12Months": "of 12 months",
+    "recordedIn2026": "recorded in 2026",
+    "monthlyActivity": "Monthly agricultural activity",
+    "monthlyActivitySub": "Number of sowing and harvest crops per month",
+    "rainfall": "Monthly rainfall 2026",
+    "rainfallSub": "Historical estimate for the Puno region · mm",
+    "rainLegend": "Rain (mm)",
+    "allSowingCrops": "All sowing crops",
+    "allHarvestCrops": "All harvest crops",
+    "almanacVarieties": "Varieties in the 2026 almanac",
+    "fullTable": "Full annual crop table 2026",
+    "fullTableSub": "Sowing · Harvest · Moon phases per month",
+    "tableHeaders": [
+      "Month",
+      "Temp",
+      "Rain",
+      "Sowing",
+      "Harvest",
+      "Moons"
+    ],
+    "exportTitle": "BRISTOL ALMANAC 2026",
+    "exportSowing": "SOWING",
+    "exportHarvest": "HARVEST",
+    "exportWeather": "WEATHER",
+    "exportAdvice": "ADVICE",
+    "exportWeekly": "WEEKLY ACTIVITIES",
+    "exportMoon": "MOON PHASES",
+    "exportDay": "Day",
+    "lunarTips": {
+      "Luna Nueva": "Sowing of roots and tubers.",
+      "Cuarto Creciente": "Favourable for fruits and leafy plants.",
+      "Luna Llena": "Optimal for harvesting and gathering.",
+      "Cuarto Menguante": "Ideal for pest control and pruning."
+    },
+    "today": "Today",
+    "moonPhase": "Moon phase",
+    "holiday": "Holiday",
+    "noSowingScheduled": "No sowings scheduled for this month.",
+    "noHarvestScheduled": "No harvests scheduled for this month.",
+    "sowingMonthsCount": "{{count}} sowing months",
+    "harvestMonthsCount": "{{count}} harvest months"
+  },
+  "siteDefaults": {
+    "site_tagline": "Smart Agriculture",
+    "hero_title": "farm",
+    "hero_description": "IoT, artificial intelligence and predictive analysis in a single platform. Built for remote areas of Peru where the farmer works alone.",
+    "hero_cta": "Start free",
+    "ecosystem_title": "Everything you need in one platform",
+    "ecosystem_description": "8 integrated modules that feed each other. Sensor data improves the prediction, the weather informs the alerts, the AI connects everything.",
+    "footer_description": "Agricultural platform with IoT, artificial intelligence and predictive analysis. Built for remote areas of Peru where the farmer works alone and needs full control of their field.",
+    "maintenance_message": "The system is under maintenance. Please try again later."
+  }
+}

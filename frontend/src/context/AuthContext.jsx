@@ -1,6 +1,7 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { authAPI } from '../services/api';
 import { notify } from '../utils/swal';
+import { translateKey } from '../utils/i18nBridge';
 
 export const AuthContext = createContext();
 
@@ -39,10 +40,10 @@ export const AuthProvider = ({ children }) => {
     try {
       const { data } = await authAPI.login(credentials);
       _persist(data.data.token, data.data.user);
-      notify.success('¡Bienvenido a AgroYachay!');
+      notify.success(translateKey('auth.welcomeApp'));
       return { success: true };
     } catch (error) {
-      const message = error.response?.data?.message || 'Error al iniciar sesión';
+      const message = error.response?.data?.message || translateKey('auth.loginError');
       notify.error(message);
       return { success: false, message };
     }
@@ -54,7 +55,7 @@ export const AuthProvider = ({ children }) => {
       _persist(data.data.token, data.data.user);
       return { success: true };
     } catch (error) {
-      const message = error.response?.data?.message || 'Error al registrar usuario';
+      const message = error.response?.data?.message || translateKey('auth.registerError');
       notify.error(message);
       return { success: false, message };
     }
@@ -81,7 +82,7 @@ export const AuthProvider = ({ children }) => {
       _persist(payload.token || payload.access_token, payload.user);
       return { success: true, isNewUser: payload.is_new_user || false, user: payload.user };
     } catch (error) {
-      const message = error.response?.data?.message || 'Error al autenticar con Google';
+      const message = error.response?.data?.message || translateKey('auth.googleAuthError');
       notify.error(message);
       return { success: false, message };
     }

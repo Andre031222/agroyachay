@@ -1,164 +1,2587 @@
 {
   "app": {
     "name": "AgroYachay",
-    "tagline": "Yachay Sistema"
+    "tagline": "Yachay Kamachiq"
   },
   "nav": {
-    "dashboard": "Qhaway Panqa",
+    "dashboard": "Qhawana",
     "clima": "Pacha",
-    "cultivos": "Tarpuy",
+    "cultivos": "Tarpuykuna",
     "marketplace": "Qhatu",
-    "perfil": "Ñuqap Perfil",
+    "perfil": "Ñuqap willayniy",
     "logout": "Lluqsiy"
   },
   "sidebar": {
-    "navigation": "PURINAPAQ",
-    "mainMenu": "Hatun Menu",
-    "home": "Wasi",
+    "navigation": "WAMP'UNA",
+    "mainMenu": "Hatun akllana",
+    "home": "Qallariy",
     "weather": "Pacha",
-    "cropManagement": "Tarpuy Kamachiy",
-    "calculator": "Insumokuna Yupay",
-    "pestDetection": "Plagakuna Tariy",
-    "prediction": "Willakuy",
-    "almanac": "Almanaque Bristol",
-    "advisory": "Yachachiy",
-    "monitoring": "Qhaway IoT",
-    "devices": "Mis Dispositivos",
-    "reports": "Willakuykuna",
-    "tipOfDay": "P'UNCHAWPA YACHAY",
-    "tipMessage": "Sapa p'unchaw pachata qhaway tarpuyniykita allin kananpaq"
+    "cropManagement": "Tarpuy kamachiy",
+    "calculator": "Yanapaq yupana",
+    "pestDetection": "Curu tariy",
+    "prediction": "Watuy",
+    "almanac": "Bristol killa qillqa",
+    "advisory": "Yanapay",
+    "monitoring": "IoT qhaway",
+    "devices": "Ñuqap antaykuna",
+    "reports": "Willaykuna",
+    "tipOfDay": "P'UNCHAW YACHACHIY",
+    "tipMessage": "Sapa p'unchaw pacha qhawayta qhaway, tarpuyniykikuna allin kananpaq",
+    "myProfile": "Ñuqap willayniy",
+    "logout": "Lluqsiy",
+    "admin": "Kamachiq",
+    "superAdmin": "Hatun kamachiq",
+    "brandTagline": "IoT Chakra Ruway"
   },
   "auth": {
     "login": "Yaykuy",
     "register": "Qillqakuy",
-    "email": "Correo Electrónico",
-    "password": "Yaykuy Rima",
-    "confirmPassword": "Yaykuy Rima Takyachiy",
+    "email": "E-chaski",
+    "password": "Yaykuna rimay",
+    "confirmPassword": "Yaykuna rimayta takyachiy",
     "name": "Suti",
-    "lastName": "Apellido",
+    "lastName": "Ayllu suti",
     "dni": "DNI",
-    "phone": "Teléfono",
-    "username": "Sutiki",
+    "phone": "Karu rimana",
+    "username": "Ruraq suti",
     "rememberMe": "Yuyariway",
-    "forgotPassword": "¿Qunqarqankichu yaykuy rimata?",
-    "noAccount": "¿Mana qillqasqachu kanki?",
-    "hasAccount": "¿Qillqasqachu kanki?",
+    "forgotPassword": "¿Yaykuna rimayniykita qunqarqankichu?",
+    "noAccount": "¿Manachu rakiquyki kan?",
+    "hasAccount": "¿Rakiquyki ñam kanchu?",
     "loginHere": "Kaypi yaykuy",
     "registerHere": "Kaypi qillqakuy",
-    "welcomeBack": "¡Allinlla kutimunki!",
-    "createAccount": "Musuq qillqa ruway",
-    "loginWith": "Otaq yaykuy",
-    "registerWith": "Otaq qillqakuy",
-    "signInToAccount": "Qillqaykiman yaykuy",
-    "enterCredentials": "Credencialniykita qillqay qatiykunaykipaq"
+    "welcomeBack": "¡Yapamanta allin hamusqayki!",
+    "createAccount": "Musuq rakiquta kamariy",
+    "loginWith": "Utaq kaywan yaykuy",
+    "registerWith": "Utaq kaywan qillqakuy",
+    "signInToAccount": "Rakiquykiman yaykuy",
+    "enterCredentials": "Willayniykikunata qillqay qatinaykipaq",
+    "continueWithGoogle": "Google-wan qatiy",
+    "signUpWithGoogle": "Google-wan qillqakuy",
+    "orWithEmail": "utaq e-chaskiwan",
+    "emailOrUsername": "E-chaski utaq ruraq suti",
+    "emailPlaceholder": "qam@email.com",
+    "namePlaceholder": "Sutiyki",
+    "passwordPlaceholder": "••••••••",
+    "minCharsPlaceholder": "8 sanampamanta aswan",
+    "repeatPassword": "Yaykuna rimayta yapamanta qillqay",
+    "togglePassword": "Yaykuna rimayta rikuchiy utaq pakay",
+    "signingIn": "Yaykuchkan…",
+    "signIn": "Yaykuy",
+    "creatingAccount": "Rakiquta kamarichkan…",
+    "createAccountCta": "Rakiquta kamariy",
+    "createFreeAccount": "Rakiquykita qullqi manawan kamariy",
+    "noAccountQuestion": "¿Manachu rakiquyki kan?",
+    "registerFree": "Qullqi manawan qillqakuy",
+    "hasAccountQuestion": "¿Rakiquyki ñam kanchu?",
+    "backToHome": "← Qallariyman kutiy",
+    "confirm": "Takyachiy",
+    "welcomeNamed": "¡Allin hamusqayki, {{name}}!",
+    "googleError": "Google-wan mana tinkiyta atirqanchu",
+    "passwordMismatch": "Yaykuna rimaykuna mana kikinchu",
+    "passwordTooShort": "Yaykuna rimayqa 8 sanampayuq kanan",
+    "nameQuestion": "¿Imaynatam sutiykita niykiku?",
+    "nameTooShort": "Iskay sanampamanta aswanta qillqay",
+    "nameSaveError": "Sutita mana waqaychayta atirqanchu",
+    "saving": "Waqaychachkan…",
+    "goToDashboard": "Qhawanaman riy",
+    "showcasePoints": [
+      "ESP32 musyaqkuna kunanpacha",
+      "Curu tariy IA-wan",
+      "Kusicha hinaspa pacha watuy"
+    ],
+    "showcaseFooter": "Puno, Peru · Anti pata · {{year}}",
+    "openingApp": "AgroYachayta kichachkan...",
+    "welcomeApp": "¡AgroYachayman allin hamusqayki!",
+    "loginError": "Yaykuypi pantasqa",
+    "registerError": "Ruraqta qillqaypi pantasqa",
+    "googleAuthError": "Google-wan riqsichiypi pantasqa"
   },
   "dashboard": {
-    "welcome": "Allinllachu",
-    "overview": "Tukuy Qhaway",
-    "statistics": "Yupaykunap Qhaway",
-    "recentActivity": "Kunan Rurasqakuna",
-    "totalCrops": "Tukuy Tarpuykuna",
-    "activeAlerts": "Alertakuna Kachkan",
-    "weatherUpdates": "Pachap Musuqyachiy",
-    "recommendations": "Yuyaychakuykuna"
+    "welcome": "Allin hamusqayki",
+    "overview": "Llapanmanta willay",
+    "statistics": "Yupaykuna",
+    "recentActivity": "Ñaqha ruwaykuna",
+    "totalCrops": "Llapa tarpuykuna",
+    "activeAlerts": "Kawsaq willakuykuna",
+    "weatherUpdates": "Pacha musuqchaykuna",
+    "recommendations": "Yuyaychaykuna",
+    "greeting": "Napaykullayki, {{name}}",
+    "defaultName": "Chakra runa",
+    "systemActive": "Kamachiq llamk'achkan",
+    "live": "Kunanpacha",
+    "kpiCrops": "Kawsaq tarpuykuna",
+    "kpiTemperature": "Q'uñi kay",
+    "kpiSoilHumidity": "Allpa huq'uy",
+    "kpiPestDetections": "Curu tarisqakuna",
+    "chartTitle": "P'unchawpa q'uñin",
+    "chartRealData": "ESP32 musyaq · chiqap willaykuna",
+    "chartFallback": "Qhawana chanikuna",
+    "weatherTitle": "Pacha · Puno",
+    "weatherToday": "Kunan Punopi, Peru",
+    "humidity": "Huq'uy",
+    "wind": "Wayra",
+    "alerts": "Willakuykuna",
+    "modules": "T'aqakuna",
+    "alertLevels": {
+      "alert": "Willakuy",
+      "warning": "Yuyachiy",
+      "ok": "Allin"
+    },
+    "alertHighTemp": "Ancha q'uñi: {{value}}°C",
+    "alertFrost": "Qasa manchakuy: {{value}}°C",
+    "alertLowHumidity": "Pisi huq'uy: {{value}}% — qarpay",
+    "alertSensorActive": "ESP32 musyaq llamk'achkan",
+    "alertAllNormal": "Kamachiq allinta llamk'achkan",
+    "quickLinks": {
+      "crops": "Tarpuykuna",
+      "weather": "Pacha",
+      "monitoring": "Qhaway",
+      "pests": "Curukuna",
+      "reports": "Willaykuna",
+      "sensors": "Musyaqkuna",
+      "inputs": "Yanapaqkuna",
+      "advisory": "Yanapay"
+    }
   },
   "weather": {
     "title": "Pacha",
-    "current": "Kunan Pacha",
-    "forecast": "Willakuy",
-    "temperature": "Ruphay",
-    "humidity": "Quncha",
+    "current": "Kunan pacha",
+    "forecast": "Watuy",
+    "temperature": "Q'uñi kay",
+    "humidity": "Huq'uy",
     "precipitation": "Para",
     "wind": "Wayra",
-    "forecast7days": "Qanchis p'unchaw willakuy"
+    "forecast7days": "7 p'unchaw watuy",
+    "loadError": "Pacha willay mana chaskisqachu",
+    "locationSet": "Kiti: {{city}}",
+    "yourLocation": "Qampa kitiyki",
+    "refreshLocation": "Kitita musuqchay",
+    "detecting": "Kitita maskachkan…",
+    "loading": "Pachata chaskichkan…",
+    "feelsLike": "Musyakuy",
+    "maxMin": "Aswan {{max}}° · Pisi {{min}}°",
+    "pressure": "Ñit'iy",
+    "sunrise": "Inti lluqsimuy",
+    "sunset": "Inti chinkay",
+    "week": "Simana",
+    "temperatureChart": "Simanapi aswan hinaspa pisi · °C",
+    "humidityChart": "Simanapi sapa p'unchaw chawpi · %",
+    "today": "Kunan",
+    "tomorrow": "Paqarin",
+    "weekdays": [
+      "Int",
+      "Kil",
+      "Ati",
+      "Quy",
+      "Ilp",
+      "Cha",
+      "Kuy"
+    ]
   },
   "crops": {
-    "title": "Tarpuy",
-    "myCrops": "Tarpuyniykuna",
-    "addCrop": "Tarpuyta Yapay",
-    "cropType": "Tarpuy Laya",
+    "title": "Tarpuykuna",
+    "myCrops": "Ñuqap tarpuykuna",
+    "addCrop": "Tarpuy yapay",
+    "cropType": "Tarpuy laya",
     "area": "Pampa",
-    "plantingDate": "Tarpuy P'unchaw",
-    "harvestDate": "Qulliy P'unchaw",
-    "status": "Imayna Kasqan",
+    "plantingDate": "Tarpuy p'unchaw",
+    "harvestDate": "Kusicha p'unchaw",
+    "status": "Kaynin",
     "healthy": "Qhali",
-    "needsAttention": "Qhawariyta Munan"
+    "needsAttention": "Qhawayta munan"
   },
   "calculator": {
-    "title": "Abunukuna Yupay",
-    "subtitle": "Puno Suyupaq Rurasqa",
-    "cropInfo": "Tarpuypa Willakuynin",
-    "selectCrop": "Tarpuyta chakraykip pampanta akllay",
-    "cropType": "Tarpuy Laya",
-    "cropArea": "Chakra Pampa",
+    "title": "Wanu yupana",
+    "subtitle": "Puno suyupaq wakichisqa",
+    "cropInfo": "Tarpuymanta willay",
+    "selectCrop": "Tarpuyta hinaspa chakraykip pampanta akllay",
+    "cropType": "Tarpuy laya",
+    "cropArea": "Tarpuy pampa",
     "potato": "Papa",
-    "quinoa": "Kinuwa",
+    "quinoa": "Kinwa",
     "barley": "Qañiwa",
     "beans": "Hawas",
     "oat": "Awina",
-    "tarwi": "Tarwi",
+    "tarwi": "Tarwi (Chuchu)",
     "oca": "Uqa"
   },
   "marketplace": {
     "title": "Qhatu",
-    "products": "Rurakuna",
-    "myProducts": "Ruraniykuna",
-    "addProduct": "Rurata Churay",
-    "price": "Chanin",
-    "quantity": "Hayka",
-    "category": "Laya"
+    "products": "Rantikuna",
+    "myProducts": "Ñuqap rantiykuna",
+    "addProduct": "Rantita churay",
+    "price": "Chani",
+    "quantity": "Hayk'a",
+    "category": "T'aqa",
+    "pageTitle": "Chakra qhatu",
+    "pageSubtitle": "Chakraykipaq rantikuna · MercadoLibre · Amazon · AliExpress",
+    "protectedPurchase": "Amachasqa rantiy",
+    "statsProducts": "Rantikuna",
+    "statsFreeShipping": "Qullqi manawan apachiy",
+    "statsRating": "Chawpi chaninchay",
+    "searchPlaceholder": "Muru, wanu, llamk'anakuna, musyaqkuna...",
+    "filters": "Suysuykuna",
+    "clear": "Pichay",
+    "platform": "Qhatu wasi",
+    "minPrice": "Pisi chani (S/)",
+    "maxPrice": "Hatun chani (S/)",
+    "onlyFreeShipping": "Qullqi manawan apachiylla",
+    "all": "Tukuy",
+    "allFeminine": "Tukuy",
+    "productCount": "{{count}} rantikuna",
+    "sortRelevance": "Chaniyuq",
+    "sortPriceAsc": "Chani: pisi",
+    "sortPriceDesc": "Chani: hatun",
+    "sortBestSelling": "Aswan rantisqa",
+    "sortBestRated": "Aswan allin chaninchasqa",
+    "noResults": "\"{{search}}\" mana tarisqachu",
+    "noResultsHint": "Huk simikunawan maskay utaq suysuykunata pichay",
+    "clearFilters": "Suysuykunata pichay",
+    "safePurchase": "100% amachasqa rantiy",
+    "safePurchaseHint": "Riqsisqa qhatu wasikunaman pusan",
+    "badges": [
+      "Amachasqa rantiy",
+      "Llapa Peruman apachiy",
+      "Riqsisqa qhatuqkuna",
+      "Kutichiy takyasqa"
+    ],
+    "noImage": "Mana rikchay",
+    "free": "Qullqi manawan",
+    "outOfStock": "Tukurqun",
+    "unavailable": "Mana atikunchu",
+    "viewOn": "{{platform}} qhatupi qhaway",
+    "categories": {
+      "Semillas": "Murukuna",
+      "Fertilizantes": "Wanukuna",
+      "Herramientas": "Llamk'anakuna",
+      "Riego": "Qarpay",
+      "Sensores IoT": "IoT musyaqkuna",
+      "Proteccion": "Amachay",
+      "Invernaderos": "Q'uñi wasikuna",
+      "Papa": "Papa",
+      "Quinua": "Kinwa",
+      "Canihua": "Qañiwa",
+      "NPK": "NPK",
+      "Foliar": "Raphipaq",
+      "Organicos": "Kawsaymanta",
+      "Manuales": "Makiwan",
+      "Motorizadas": "Antawan",
+      "Goteo": "Sut'uy",
+      "Aspersion": "Ch'aqchuy",
+      "Bombas": "Yaku wichachiq",
+      "Humedad": "Huq'uy",
+      "Temperatura": "Q'uñi kay",
+      "pH": "pH",
+      "Plagas": "Curukuna",
+      "Enfermedades": "Unquykuna",
+      "Heladas": "Qasakuna"
+    }
   },
   "language": {
-    "select": "Simita Akllay",
-    "spanish": "Español",
+    "select": "Simita akllay",
+    "spanish": "Kastilla simi",
     "quechua": "Runasimi",
-    "aimara": "Aimara",
-    "welcome": "AgroYachayman allinlla hamusqayki",
-    "selectLanguage": "Ama hina kaspa, simikita akllay",
-    "continue": "Puriy"
+    "aimara": "Aymara simi",
+    "welcome": "AgroYachayman allin hamusqayki",
+    "selectLanguage": "Ama hina kaspa, simiykita akllay",
+    "continue": "Qatiy"
   },
   "pages": {
-    "dashboard":   { "title": "Qhaway Panqa",        "sub": "Tukuy ruwaykuna qhaway"              },
-    "clima":       { "title": "Pacha",               "sub": "Pachap willakuynin"                  },
-    "almanaque":   { "title": "Almanaque",           "sub": "Tarpuy kullkha"                      },
-    "cultivos":    { "title": "Tarpuy Kamachiy",     "sub": "Tarpuykunap allin kananpaq"          },
-    "monitoreo":   { "title": "IoT Qhaway",          "sub": "ESP32 sensorkuna qhaway"             },
-    "insumos":     { "title": "Insumokuna Yupay",    "sub": "Abonokuna, yaku, chansfikakuna"      },
-    "plagas":      { "title": "Plagakuna Tariy",     "sub": "IA nisqawan riqsiy"                  },
-    "prediccion":  { "title": "Pallqay Willakuy",    "sub": "IA nisqawan qhaway"                  },
-    "asesoria":    { "title": "Yachachiy",           "sub": "Agronomokuna yanapay"                },
-    "marketplace": { "title": "Qhatu",               "sub": "Tarpuypaq rurakuna"                  },
-    "informes":    { "title": "Willakuykuna",        "sub": "PDF kay Excel reportekuna"           },
-    "dispositivos":{ "title": "IoT Kachariy",        "sub": "ESP32 sensorkuna kamachiy"           },
-    "admin":       { "title": "Kamachiy Panqa",      "sub": "Runakuna kamachiy"                   }
+    "dashboard": {
+      "title": "Qhawana",
+      "sub": "Llapa kamachiqpa pisi willaynin"
+    },
+    "clima": {
+      "title": "Pacha",
+      "sub": "Pacha watuy hinaspa t'aqwiy"
+    },
+    "almanaque": {
+      "title": "Killa qillqa",
+      "sub": "Chakra p'unchaw qillqa"
+    },
+    "cultivos": {
+      "title": "Tarpuy kamachiy",
+      "sub": "Chakrakuna hinaspa tarpuy muyuy"
+    },
+    "monitoreo": {
+      "title": "IoT qhaway",
+      "sub": "ESP32 musyaqkuna kunan pachapi"
+    },
+    "insumos": {
+      "title": "Yanapaq yupana",
+      "sub": "Wanu, yaku hinaspa curu hampi"
+    },
+    "plagas": {
+      "title": "Curu tariy",
+      "sub": "IA-wan riqsichiy"
+    },
+    "prediccion": {
+      "title": "Kusicha watuy",
+      "sub": "IA-wan watuy t'aqwiy"
+    },
+    "asesoria": {
+      "title": "Yachaysapa yanapay",
+      "sub": "Chakra yachaqkunawan tinkiy"
+    },
+    "marketplace": {
+      "title": "Chakra qhatu",
+      "sub": "Chakraykipaq rantikuna"
+    },
+    "informes": {
+      "title": "Willaykuna",
+      "sub": "PDF hinaspa Excel willaykuna"
+    },
+    "dispositivos": {
+      "title": "IoT antaykuna",
+      "sub": "ESP32 musyaqniykikunata kamachiy"
+    },
+    "admin": {
+      "title": "Kamachiy panel",
+      "sub": "Llamk'aqkuna hinaspa kamachiq kamachiy"
+    }
   },
   "theme": {
-    "light": "K'anchay temaman tikray",
-    "dark": "Laqha temaman tikray"
+    "light": "K'anchaq rikchayman tikray",
+    "dark": "Tutayaq rikchayman tikray",
+    "lightShort": "K'anchaq rikchay",
+    "darkShort": "Tutayaq rikchay"
   },
   "profile": {
-    "title": "Ñuqap Perfil",
-    "settings": "Qillqap Ruway",
-    "logout": "Sistema nisqamanta lluqsiy"
+    "title": "Ñuqap willayniy",
+    "settings": "Willayniy allichay",
+    "logout": "Kamachiqmanta lluqsiy"
   },
   "common": {
     "save": "Waqaychay",
-    "cancel": "Saqllay",
-    "delete": "Pichhay",
-    "edit": "Allichay",
+    "cancel": "Ama niy",
+    "delete": "Qulluy",
+    "edit": "Qillqay",
     "search": "Maskay",
-    "filter": "T'aqay",
-    "export": "Lluqsichiy",
-    "print": "Imprimiy",
-    "loading": "Cargaspa...",
-    "error": "Pantay",
-    "success": "Allinña",
+    "filter": "Suysuy",
+    "export": "Hurquy",
+    "print": "Ch'ipachiy",
+    "loading": "Chaskichkan...",
+    "error": "Pantasqa",
+    "success": "Allinmi",
     "close": "Wichqay",
     "viewMore": "Aswan qhaway",
-    "viewLess": "Pisi qhaway",
+    "viewLess": "Pisita qhaway",
     "back": "Kutiy",
     "next": "Qatiq",
     "previous": "Ñawpaq",
-    "submit": "Apachiy"
+    "submit": "Apachiy",
+    "user": "Ruraq",
+    "confirm": "Arí niy",
+    "loadError": "Willaykuna mana chaskisqachu",
+    "loadingShort": "Chaskichkan..."
+  },
+  "mobileNav": {
+    "allSections": "Llapa t'aqakuna",
+    "home": "Qallariy",
+    "crops": "Tarpuykuna",
+    "sensors": "Musyaqkuna",
+    "weather": "Pacha",
+    "pests": "Curukuna",
+    "almanac": "Killa qillqa",
+    "devices": "Antaykuna",
+    "inputs": "Yanapaqkuna",
+    "prediction": "Watuy",
+    "advisory": "Yanapay",
+    "marketplace": "Qhatu",
+    "reports": "Willaykuna",
+    "more": "Aswan",
+    "close": "Wichqay",
+    "profile": "Willayniy",
+    "mainNavigation": "Hatun wamp'una",
+    "moreSections": "Aswan t'aqakuna",
+    "closeMenu": "Akllanata wichqay"
+  },
+  "errors": {
+    "title": "Imapas pantasqa karqan",
+    "description": "Mana suyasqa pantay karqan. Qallariyman kutispa yapamanta ruwayta atinki.",
+    "backHome": "Qallariyman kutiy"
+  },
+  "units": {
+    "days": "p'unchawkuna",
+    "hectares": "ha",
+    "tons": "tun",
+    "tonsPerHa": "t/ha"
+  },
+  "cropStates": {
+    "Planificado": "Wakichisqa",
+    "Sembrado": "Tarpusqa",
+    "Crecimiento": "Wiñachkan",
+    "Floración": "T'ikachkan",
+    "Maduración": "Puquchkan",
+    "Cosechado": "Kusichasqa"
+  },
+  "cropTypes": {
+    "Papa": {
+      "name": "Papa",
+      "description": "Kay suyupi hatun tarpuy"
+    },
+    "Quinua": {
+      "name": "Kinwa",
+      "description": "Anti suyupi ancha allin mikhuy"
+    },
+    "Cañihua": {
+      "name": "Qañiwa",
+      "description": "Qasaman atipaq anti ruru"
+    },
+    "Habas": {
+      "name": "Hawas",
+      "description": "Ruru mikhuna yura"
+    },
+    "Cebada": {
+      "name": "Siwara",
+      "description": "Ruru hinaspa uywa mikhunapaq"
+    },
+    "Avena Forrajera": {
+      "name": "Awina",
+      "description": "Uywakunapaq mikhuy"
+    },
+    "Tarwi": {
+      "name": "Tarwi",
+      "description": "Ancha kallpayuq mikhuna yura"
+    },
+    "Oca": {
+      "name": "Uqa",
+      "description": "Ñawpa anti saphi mikhuy"
+    }
+  },
+  "weatherConditions": {
+    "clear sky": "Ch'uya",
+    "few clouds": "Pisi phuyu",
+    "scattered clouds": "Chaqru phuyu",
+    "broken clouds": "Chaqru phuyu",
+    "overcast clouds": "Phuyusqa",
+    "light rain": "Pisi para",
+    "moderate rain": "Para",
+    "heavy intensity rain": "Sinchi para",
+    "thunderstorm": "Illapa",
+    "snow": "Rit'i",
+    "mist": "Pukutay",
+    "fog": "Pacha phuyu",
+    "haze": "Q'usñi",
+    "drizzle": "Ipu para"
+  },
+  "sensors": {
+    "loadingDevices": "Antaykunata chaskichkan...",
+    "noDevices": "Mana tinkisqa antaykuna",
+    "noDevicesHint": "ESP32 musyaqniykita huk tarpuyman tinkiy, q'uñi kayta, wayra huq'uyta hinaspa allpa huq'uyta kunanpacha qhawanaykipaq.",
+    "temperature": "Q'uñi kay",
+    "airHumidityShort": "Wayra huq'uy",
+    "soilHumidityShort": "Allpa huq'uy",
+    "linkDevice": "ESP32 antata tinkiy",
+    "title": "IoT qhaway",
+    "auto": "Kikin",
+    "refresh": "Musuqchay",
+    "airTemperature": "Wayrap q'uñin",
+    "airHumidity": "Wayrap huq'uyin",
+    "soilHumidity": "Allpap huq'uyin",
+    "states": {
+      "normal": "Allin",
+      "warning": "Hawapi",
+      "critical": "Sinchi llakiy",
+      "nodata": "Mana willay"
+    },
+    "criticalMin": "Pisi llakiy",
+    "optimal": "Allin",
+    "criticalMax": "Aswan llakiy",
+    "tabTemperature": "Q'uñi kay",
+    "tabHumidity": "Huq'uy",
+    "tabAll": "Llapan",
+    "readingsCount": "{{count}} ñawinchaykuna",
+    "noData": "Mana willay",
+    "noReadings": "Mana ñawinchaykuna kanchu",
+    "waitingFirstReading": "Musyaqpa ñawpaq ñawinchayninta suyachkan...",
+    "connectHotspot": "ESP32-ta wakichisqa hotspot-man tinkiy",
+    "airTemperatureChart": "Wayrap q'uñin (°C)",
+    "optimalZone": "Allin kiti (20–28 °C)",
+    "criticalLimit": "Llakiy kuska",
+    "humidityChart": "Wayra hinaspa allpa huq'uy (%)",
+    "legendAirHumidity": "Wayra huq'uy",
+    "legendSoilHumidity": "Allpa huq'uy",
+    "urgentIrrigation": "Usqhay qarpay kuska (40 %)",
+    "seriesTemp": "Q'uñi °C",
+    "seriesAir": "Wayra huq'uy %",
+    "seriesSoil": "Allpa huq'uy %",
+    "device": "Anta",
+    "deviceHint": "ESP32 musyaq wakichiy",
+    "fieldType": "Laya",
+    "fieldLocation": "Kiti",
+    "fieldCrop": "Tarpuy",
+    "fieldInterval": "Chawpi pacha",
+    "fieldProtocol": "Protocolo",
+    "intervalValue": "Sapa 10 ratu",
+    "realTimeStatus": "Kunanpacha kaynin",
+    "readingsRecorded": "{{count}} ñawinchaykuna qillqasqa",
+    "esp32Active": "ESP32 llamk'achkan hinaspa willayta apachichkan",
+    "esp32Offline": "ESP32 mana tinkisqachu",
+    "esp32ActiveHint": "Sapallan llamk'an USB 5V kallpawan",
+    "esp32OfflineHint": "Musyaqta wakichisqa hotspot-man tinkiy yapamanta qallarinanpaq"
+  },
+  "account": {
+    "myAccount": "Ñuqap rakiquy",
+    "profile": "Willayniy",
+    "security": "Amachay",
+    "account": "Rakiqu",
+    "name": "Suti",
+    "namePlaceholder": "Sutiyki",
+    "email": "E-chaski",
+    "phone": "Karu rimana",
+    "phonePlaceholder": "Karu rimanayki (munaspa)",
+    "saveChanges": "Tikraykunata waqaychay",
+    "saving": "Waqaychachkan…",
+    "currentPassword": "Kunan yaykuna rimay",
+    "currentPasswordPlaceholder": "Kunan yaykuna rimayki",
+    "newPassword": "Musuq yaykuna rimay",
+    "newPasswordPlaceholder": "8 sanampamanta aswan",
+    "confirmPassword": "Yaykuna rimayta takyachiy",
+    "confirmPasswordPlaceholder": "Musuq yaykuna rimayta yapamanta qillqay",
+    "changePassword": "Yaykuna rimayta tikray",
+    "role": "Ruray",
+    "memberSince": "Kaymantapacha",
+    "logout": "Lluqsiy",
+    "uploadPhoto": "Rikchayta churkuy",
+    "uploading": "Churkuchkan…",
+    "useGoogle": "Google-ta llamk'achiy",
+    "reverting": "Kutichichkan…",
+    "photoUpdated": "Rikchay musuqchasqa",
+    "photoError": "Rikchayta churkuypi pantasqa",
+    "googlePhotoRestored": "Google rikchay kutichisqa",
+    "revertError": "Rikchayta kutichiypi pantasqa",
+    "nameTooShort": "Sutiqa ancha pisim",
+    "profileUpdated": "Willayniy musuqchasqa",
+    "saveError": "Waqaychaypi pantasqa",
+    "passwordMismatch": "Yaykuna rimaykuna mana kikinchu",
+    "passwordTooShort": "8 sanampamanta aswan",
+    "passwordUpdated": "Yaykuna rimay musuqchasqa",
+    "passwordError": "Yaykuna rimayta tikraypi pantasqa"
+  },
+  "camera": {
+    "starting": "Rikchaq antata qallarichkan…",
+    "noAccess": "Rikchaq antaman mana yaykuychu",
+    "permissionDenied": "Rikchaq anta mana saqillasqachu. Qhawaqniykip wakichiyninpi kichariy.",
+    "unavailable": "Rikchaq antaman mana yaykuyta atirqanchu.",
+    "backCamera": "Qhipa rikchaq anta",
+    "frontCamera": "Ñawpaq rikchaq anta",
+    "framingHint": "Yurata utaq curuta chawpiman churay",
+    "capture": "Hap'isqa",
+    "switchCamera": "Rikchaq antata tikray",
+    "retake": "Yapamanta ruway",
+    "usePhoto": "Kay rikchayta llamk'achiy"
+  },
+  "devices": {
+    "online": "Tinkisqa",
+    "offline": "Mana tinkisqa",
+    "active": "Llamk'achkan",
+    "noSignal": "Mana unancha",
+    "noData": "Mana willay",
+    "crop": "Tarpuy",
+    "lastSignal": "Qhipa unancha",
+    "unassigned": "Mana churasqa",
+    "noCropAssigned": "Mana tarpuy churasqa — ñawinchaykuna mana waqaychakunchu",
+    "linkToCrop": "Tarpuyman tinkiy",
+    "configure": "Wakichiy",
+    "unlink": "Paskay",
+    "status": {
+      "activo": "Llamk'achkan",
+      "inactivo": "Mana llamk'aq",
+      "mantenimiento": "Allichaypi"
+    },
+    "selectCrop": "Huk tarpuyta akllay",
+    "selectCropOption": "-- Huk tarpuyta akllay --",
+    "linkError": "Tinkiypi pantasqa",
+    "connectionError": "Tinkiypi pantasqa",
+    "namePlaceholder": "Hina: Chinchaysuyu chakra musyaq",
+    "locationPlaceholder": "Hina: Chakrap chawpin, 3 siqi",
+    "linking": "Tinkichkan...",
+    "link": "Tinkiy",
+    "updated": "Anta allinta musuqchasqa",
+    "saveError": "Waqaychaypi pantasqa",
+    "configLocationPlaceholder": "Hina: Chinchaysuyu chakra, 3 siqi",
+    "linkDeviceTitle": "Antata tinkiy",
+    "configureDeviceTitle": "Antata wakichiy",
+    "deviceName": "Antap sutin",
+    "assignToCrop": "Tarpuyman churay",
+    "locationOptional": "Kiti (munaspa)",
+    "name": "Suti",
+    "location": "Kiti",
+    "state": "Kaynin",
+    "pageTitle": "IoT antaykuna",
+    "pageSubtitle": "ESP32 antaykiykunata kamachiy hinaspa tinkiy",
+    "connectNew": "Musuqta tinkiy",
+    "new": "Musuq",
+    "refresh": "Musuqchay",
+    "loadError": "Antaykunata chaskiypi pantasqa",
+    "kpiLinked": "Tinkisqakuna",
+    "kpiOnline": "Kunan tinkisqa",
+    "kpiPending": "Suyaqkuna",
+    "unlinkTitle": "¿\"{{name}}\" antata paskaychu?",
+    "unlinkText": "Antaqa \"Suyaq\" kaymanmi tikranqa. Ñawpa ñawinchaykunaqa waqaychasqam kanqa.",
+    "unlinkConfirm": "Arí, paskay",
+    "unlinked": "Anta paskasqa",
+    "unlinkError": "Paskaypi pantasqa",
+    "pendingBanner": "{{count}} anta tinkiyta suyachkan",
+    "tabLinked": "Tinkisqakuna ({{count}})",
+    "tabPending": "Suyaqkuna",
+    "tabPendingCount": "Suyaqkuna ({{count}})",
+    "loading": "Antaykunata chaskichkan...",
+    "emptyLinked": "Mana tinkisqa antaykuna",
+    "emptyLinkedHint": "ESP32-yki ñawpaq kutipi tinkiptinqa, Suyaqkunapim rikhurinqa, huk tarpuyman tinkinaykipaq.",
+    "emptyPending": "Mana suyaq antaykuna",
+    "emptyPendingHint": "Llapa tinkisqa ESP32-kunaqa ñam huk tarpuyman churasqaña kanku.",
+    "howToConnect": "¿Imaynatam musuq ESP32-ta tinkina?",
+    "connectionSteps": [
+      "/arduino/agrovision_provisioning/ qullqamanta firmware-ta churkuy Arduino IDE-wan.",
+      "Munasqa librerías-ta churay: ArduinoJson 6.x, DHT sensor library (Adafruit).",
+      "ESP32-ta hap'ichiy. \"AgroVision-Setup-XXXXXX\" sutiyuq WiFi hawata kamarinqa.",
+      "Karu rimanaykita utaq computadoraykita chay hawaman tinkiy (mana yaykuna rimayniyuq). Portal kikinmanta kicharikunqa.",
+      "WiFi hawaykita akllay, yaykuna rimayta hinaspa servidor URL-ta qillqay, chaymanta waqaychay.",
+      "Antaqa kaypim \"Suyaq\" hina rikhurinqa: Tinkiy ñit'iy churanaykipaq."
+    ],
+    "reconnectTitle": "Huk WiFi hawaman yapamanta tinkinaykipaq:",
+    "reconnectText": "ESP32-pa BOOT ñit'inanta 5 ratu hap'iy, LED usqhayta ch'ipipinankama. Antaqa willayninkunata pichanmi hinaspa wakichiy kayman kutinmi."
+  },
+  "usbWizard": {
+    "title": "USB-wan musuq antata tinkiy",
+    "stepDetect": "Tariy",
+    "stepVerify": "Qhaway",
+    "stepWifi": "WiFi",
+    "stepConfigure": "Wakichiy",
+    "beforeYouStart": "Manaraq qatispa",
+    "beforeYouStartText": "ESP32-ykita USB-wan computadoraman tinkiy. LED-qa ancha usqhaytam ch'ipipinan (Setup kay). Mana chayqa, BOOT-ta 5 ratu hap'iy kutichinaykipaq.",
+    "searching": "Maskachkan...",
+    "searchDevice": "USB antata maskay",
+    "noDevices": "Mana ESP32 antaykuna tarisqachu",
+    "noDevicesHint": "Qhaway USB waskha willayta apachinanta (mana kallpallata) hinaspa CP210x driver churasqa kananta.",
+    "devicesFound": "{{count}} anta tarisqa:",
+    "showOtherPorts": "Huk puertokunatapas qhaway ({{count}} aswan)",
+    "deviceDetected": "ESP32 tarisqa",
+    "firmwareInfo": "Firmware v{{version}} — Setup kay llamk'achkan",
+    "ledBlinking": "LED usqhaytam ch'ipipichkan: ESP32-qa WiFi wakichiyta chaskinanpaq wakisqañam.",
+    "selectedPort": "Akllasqa puerto:",
+    "scanningWifi": "WiFi hawakunata maskachkan... (5-10 ratu unayanman)",
+    "availableNetworks": "Atikuq hawakuna ({{count}})",
+    "wifiPassword": "WiFi yaykuna rimay",
+    "passwordPlaceholder": "Akllasqa hawap yaykuna rimaynin",
+    "server": "AgroYachay servidor",
+    "detectingIps": "IP-kunata maskachkan...",
+    "interfacesDetected": "{{count}} interfaz tarisqa",
+    "manualUrl": "Makiwan qillqasqa URL-ta llamk'achichkan.",
+    "autoSelection": "Kikinmanta akllasqa. Qillqay tikranaykipaq.",
+    "noNetworks": "Mana WiFi hawakuna tarisqachu.",
+    "retryScan": "Yapamanta maskay",
+    "configured": "ESP32 wakichisqa",
+    "willAppearPending": "Pisi ratumanta kayhina rikhurinqa",
+    "willAppearPendingRest": "kay panelpi. Listaqa kikinmanta musuqchakunqa.",
+    "pending": "Suyaq",
+    "waitingConnection": "ESP32 tinkiyta suyachkan...",
+    "sendingConfig": "ESP32-man wakichiyta apachichkan...",
+    "back": "Qhipaman",
+    "selectWifi": "WiFi hawata akllay",
+    "verifying": "Qhawachkan...",
+    "verifyDevice": "Antata qhaway",
+    "configuring": "Wakichichkan...",
+    "configureAndConnect": "Wakichiy hinaspa tinkiy",
+    "backendError": "Backend-wan mana tinkiyta atirqanchu",
+    "selectPortFirst": "Ñawpaqta huk puertota akllay",
+    "identifyError": "Antata riqsichiypi pantasqa",
+    "connectionErrorSetup": "Tinkiypi pantasqa. Qhaway ESP32 Setup kaypi kananta.",
+    "scanError": "WiFi hawakunata maskaypi pantasqa",
+    "scanUsbError": "Maskaypi pantasqa. USB tinkiyta qhaway.",
+    "selectNetwork": "Huk WiFi hawata akllay",
+    "serverUrlRequired": "Servidor URL-qa munasqam",
+    "configError": "ESP32-ta wakichiypi pantasqa",
+    "sendConfigError": "ESP32-man wakichiyta apachiypi pantasqa."
+  },
+  "cropsPanel": {
+    "title": "Tarpuykuna",
+    "newCrop": "Musuq tarpuy",
+    "loading": "Tarpuykunata chaskichkan...",
+    "loadError": "Tarpuykunata chaskiypi pantasqa",
+    "statActive": "Kawsaq tarpuykuna",
+    "statArea": "Llapa pampa",
+    "statHealth": "Chawpi qhalikay",
+    "statGrowing": "Wiñachkan",
+    "empty": "Mana qillqasqa tarpuykuna",
+    "emptyHint": "IoT qhawaywan ñawpaq tarpuyniykita yapay",
+    "addCrop": "Tarpuyta yapay",
+    "health": "qhalikay",
+    "cropHealth": "Tarpuypa qhalikaynin",
+    "cycleProgress": "Muyuypa ñawpaqmanchaynin",
+    "area": "Pampa",
+    "daysLeft": "Puchuq p'unchawkuna",
+    "estimatedYield": "Watusqa puquy",
+    "iotFactor": "IoT chanin",
+    "iotVsOptimal": "IoT kaykuna vs allin kay",
+    "optimalConditions": "Allin kaykuna — mana willakuykuna",
+    "logActivity": "Ruwayta qillqay",
+    "noActivities": "Mana qillqasqa ruwaykuna",
+    "noActivitiesHint": "Hanaq ñit'inakunata llamk'achiy qillqanaykipaq",
+    "recsFooter": "Kunanpacha IoT ñawinchaykunapi hap'ipakuq yuyaychaykuna",
+    "tabSensors": "Musyaqkuna",
+    "tabActivities": "Ruwaykuna",
+    "tabTips": "Yachachiykuna",
+    "cropType": "Tarpuy laya",
+    "cycle": "Muyuy",
+    "temp": "Q'uñi",
+    "yield": "Puquy",
+    "cropName": "Tarpuypa sutin *",
+    "variety": "Laya",
+    "unspecified": "Mana willasqa",
+    "areaField": "Pampa (ha) *",
+    "sowingDate": "Tarpuy p'unchaw *",
+    "notes": "Qillqakuna (munaspa)",
+    "notesPlaceholder": "Qhawasqakuna, allpap kaynin...",
+    "editCrop": "Allichay",
+    "update": "Musuqchay",
+    "createCrop": "Tarpuyta kamariy",
+    "activityType": "Ruway laya",
+    "activityDescription": "Willakuy (munaspa)",
+    "activityPlaceholder": "Hina: 20 L sapa yuraman, NPK 15-15-15 wanu...",
+    "date": "P'unchaw",
+    "requiredFields": "Sutita, pampata hinaspa tarpuy p'unchawta hunt'achiy",
+    "cropUpdated": "Tarpuy musuqchasqa",
+    "cropCreated": "Tarpuy qillqasqa",
+    "saveError": "Waqaychaypi pantasqa",
+    "deleteTitle": "¿\"{{name}}\" tarpuyta qulluychu?",
+    "deleteText": "Tarpuy hinaspa llapa willaynin qullunqa. Kay ruwayqa mana kutichiy atinachu.",
+    "deleteConfirm": "Arí, qulluy",
+    "cropDeleted": "Tarpuy qullusqa",
+    "deleteError": "Qulluypi pantasqa",
+    "activityLogged": "Ruway qillqasqa",
+    "deleteActivityTitle": "¿Kay ruwayta qulluychu?",
+    "sensorTemperature": "Q'uñi kay",
+    "sensorSoilHumidity": "Allpa huq'uy",
+    "sensorPh": "Allpa pH",
+    "sensorLight": "K'anchay",
+    "sensorAirHumidity": "Wayra huq'uy",
+    "sensorWind": "Wayra",
+    "stages": {
+      "germination": "Ch'ichiy",
+      "vegetative": "Yura wiñay",
+      "flowering": "T'ikay",
+      "formation": "Ruruy qallariy",
+      "ripening": "Puquy",
+      "readyToHarvest": "Kusichanapaq wakisqa"
+    },
+    "activityTypes": {
+      "riego": "Qarpay",
+      "fertilizacion": "Wanuchay",
+      "fumigacion": "Hampichay",
+      "aporque": "Hallmay",
+      "deshierbe": "Qura hurquy",
+      "tratamiento": "Hampiy",
+      "observacion": "Qhaway",
+      "cosecha": "Rakisqa kusicha"
+    },
+    "alerts": {
+      "frostRisk": "Qasa manchakuy.",
+      "tempOutOfRange": "Q'uñi kayqa allin kitimanta hawapim.",
+      "urgentIrrigation": "Usqhay qarpay.",
+      "humidityOutOfRange": "Huq'uyqa ashllata hawapim.",
+      "applyLime": "Chakra isquta churay.",
+      "applySulphur": "Salliqta churay.",
+      "phOutOfRange": "pH-qa ashllata hawapim.",
+      "strongWind": "Sinchi wayra ({{value}} km/h)",
+      "installWindbreaks": "Wayra harkaqta churay.",
+      "temperatureLabel": "Q'uñi kay ({{value}} °C)",
+      "soilHumidityLabel": "Allpa huq'uy ({{value}} %)",
+      "phLabel": "pH ({{value}})"
+    },
+    "recommendations": {
+      "frost": "Q'uñi kay pisi kaymanta uraypi — qasa manchakuy. Agrotextil-wan utaq chikchi harkaq llikawan qatay.",
+      "heat": "Q'uñi kay aswan kaymanta hanaqpi — q'uñi ñak'ariy. Qarpayta aswanta ruway.",
+      "coolish": "Q'uñi kay ashlla pisim. Aswan uraykuptinqa tuta qatayta yuyay.",
+      "dry": "Allpa huq'uy sinchi llakiypi — kunallan qarpay, ama naq'ichun.",
+      "wet": "Ancha huq'uy — qhichka hinaspa ismuy manchakuy. Yaku lluqsinanta qhaway.",
+      "slightlyDry": "Huq'uy ashlla pisim. Hamuq ratukunapi qarpayta wakichiy.",
+      "lowPh": "pH pisi ({{value}}). Chakra isquta churay pH-ta allillamanta wichachinaykipaq.",
+      "highPh": "pH hatun ({{value}}). Salliqta churay pH-ta uraykuchinaykipaq.",
+      "wind": "Sinchi wayrakuna. Wayra harkaqkunata churay musuq yurakunata amachanaykipaq.",
+      "flowering": "T'ikay pacha qayllamuchkan. Potasio wanuta churay t'ikata kallpachanaykipaq.",
+      "ripening": "Puquy pacha. Qarpayta allillamanta pisiyachiy kusicha allin kananpaq.",
+      "harvest": "Tarpuy kusichanapaq wakisqa. Huqariyta hinaspa waqaychayta wakichiy.",
+      "allGood": "Llapa tarpuypa kayninkunaqa allin kitipim. Ñawpaq hinalla llamk'ay."
+    }
+  },
+  "pests": {
+    "tabImage": "Rikchaywan",
+    "tabAI": "IA tapukuy",
+    "tabHistory": "Ñawpa qillqa",
+    "tabGuide": "Pusaq",
+    "unspecified": "Mana willasqa",
+    "notSpecified": "mana willasqa",
+    "dropImage": "Huk rikchayta kayman aysamuy",
+    "dropImageHint": "utaq akllanaykipaq ñit'iy · JPG, PNG, WEBP",
+    "or": "utaq",
+    "takePhoto": "Rikchaq antawan rikchayta hurquy",
+    "analysingAI": "IA-wan t'aqwichkan…",
+    "analysing": "T'aqwichkan…",
+    "detect": "Curuta tariy",
+    "invalidImage": "Allin rikchayta akllay",
+    "planError": "Hampiy wakichiyta mana kamariyta atirqanchu",
+    "selectPhotoFirst": "Ñawpaqta huk rikchayta akllay utaq hurquy",
+    "healthyPlant": "Qhali yura",
+    "detected": "Tarisqa: {{name}}",
+    "detectionError": "Tariypi pantasqa",
+    "analysisError": "IA-wan rikchayta t'aqwiypi pantasqa",
+    "describeMore": "Unquy rikuchikuyninkunata aswan sut'ita willay",
+    "queryError": "Tapukuypi pantasqa",
+    "aiConnectionError": "AgroIA-wan tinkiypi pantasqa",
+    "healthy": "Qhali",
+    "noDiseaseSigns": "Yuraqa mana unquy rikuchikuyniyuqchu",
+    "noDiseaseSignsHint": "Sapa kutilla qhawayta qatiy.",
+    "description": "Willakuy",
+    "causes": "Imarayku",
+    "treatment": "Hampiy",
+    "prevention": "Harkay",
+    "managementPlan": "Hampiy wakichiy — AgroIA",
+    "generatingPlan": "AgroIA hampiy wakichiyta kamarichkan…",
+    "urgencyLevel": "Usqhay kay",
+    "assessment": "Chaninchay",
+    "recommendedProducts": "Yuyaychasqa hampikuna",
+    "dose": "Chani",
+    "every": "Sapa",
+    "consultAgronomist": "Chakra yachaqta tapuy sichus…",
+    "symptomQuery": "Unquy rikuchikuywan tapukuy — AgroIA",
+    "symptomQueryHint": "Ima qhawasqaykita willay. AgroIA riqsichiyta hinaspa Puno anti patapaq hampiy wakichiyta kamarinqa.",
+    "affectedCrop": "Unqusqa tarpuy (munaspa)",
+    "describeSymptoms": "Unquy rikuchikuykunata willay",
+    "symptomsPlaceholder": "Hina: Papap raphinkunapi q'illu manyayuq ch'umpi t'uqukuna kachkan. Chay t'uqukunaqa para qhipatam rikhurirqan. Tullun sapinpi yanam rikukun. Chinchaysuyu chakrapi 20 yuratam unquchin.",
+    "moreDetailBetter": "Aswan sut'i willakuywan, aswan allin riqsichiy",
+    "aiAnalysing": "AgroIA t'aqwichkan…",
+    "aiResponse": "AgroIA kutichiy",
+    "noDetections": "Mana qillqasqa tarisqakuna",
+    "noDetectionsHint": "Tarisqakunaqa kaypim rikhurinqa",
+    "confidence": "Iñiy",
+    "commonPests": "Puno anti patapi riqsisqa curukuna",
+    "loading": "Chaskichkan…",
+    "guideCrops": "Tarpuykuna",
+    "guideSymptoms": "Unquy rikuchikuykuna",
+    "guideTreatment": "Hampiy",
+    "guidePrevention": "Harkay",
+    "advancedDiagnosis": "AgroIA-wan aswan riqsichiy",
+    "advancedDiagnosisHint": "Kay pusaqpi curuykita mana tarispaqa, unquy rikuchikuykunata willay utaq huk rikchayta churkuy IA riqsichinanpaq.",
+    "region": "Puno, Peru — Anti pata 3800-4500 msnm",
+    "imagePreviewAlt": "T'aqwinapaq rikchaypa ñawpaq qhawaynin",
+    "pageTitle": "Curu tariy",
+    "pageSubtitle": "Groq Vision · AgroIA · Anti patapaq yachaysapa riqsichiy",
+    "cropToAnalyse": "T'aqwinapaq tarpuy (munaspa)",
+    "selectFile": "Willañiqita akllay",
+    "newQuery": "Musuq tapukuy"
+  },
+  "prediction": {
+    "title": "Kusicha watuy",
+    "subtitle": "Watuy t'aqwiy + AgroIA · Puno suyu",
+    "newPrediction": "Musuq watuy",
+    "tabCalculator": "Yupana",
+    "tabHistory": "Ñuqap tarpuykuna",
+    "cropType": "Tarpuy laya",
+    "variety": "Laya",
+    "cropArea": "Tarpuy pampa",
+    "hectares": "Hectáreakuna",
+    "analysing": "T'aqwichkan…",
+    "generate": "IA-wan watuyta kamariy",
+    "selectCrop": "Huk tarpuyta akllay",
+    "selectVariety": "Huk layata akllay",
+    "generated": "Watuy kamarisqa",
+    "generateError": "Watuyta kamariypi pantasqa",
+    "totalYield": "Llapa puquy",
+    "perHectare": "Sapa hectáreapi",
+    "marketPrice": "Qhatu chanin",
+    "perKg": "sapa kg",
+    "estimatedIncome": "Watusqa qullqi chaskiy",
+    "total": "llapan",
+    "tons": "Tunilaykuna",
+    "scenarioPessimistic": "Pisi",
+    "scenarioLikely": "Chiqapaq",
+    "scenarioOptimistic": "Aswan allin",
+    "confidence": "iñiy",
+    "aiRecommendations": "AgroIA yuyaychaykuna",
+    "aiGenerating": "AgroIA yuyaychaykunata kamarichkan…",
+    "noCrops": "Mana qillqasqa tarpuykuna",
+    "noCropsHint": "Tarpuykuna t'aqapi tarpuykunata qillqay, kaypi watuykunata qhawanaykipaq",
+    "quickHint": "Qillqasqa tarpuyniykikunapi hap'ipakuq usqhay watuykuna",
+    "estimatedYieldShort": "watusqa puquy",
+    "estimatedIncomeShort": "watusqa qullqi",
+    "goToCalculator": "Yupanaman riy"
+  },
+  "inputs": {
+    "title": "Yanapaq yupana",
+    "subtitle": "NPK wanuchay allichasqa · Puno 3800–4500 msnm",
+    "print": "Ch'ipachiy",
+    "newCalculation": "Musuq yupay",
+    "cropType": "Tarpuy laya",
+    "variety": "Laya",
+    "optional": "(munaspa)",
+    "cropArea": "Tarpuy pampa",
+    "hectares": "Hectáreakuna",
+    "parcelSmall": "Huch'uy chakra",
+    "parcelMedium": "Chawpi chakra",
+    "parcelLarge": "Hatun chakra",
+    "parcelIndustrial": "Hatun ruray",
+    "topos": "tupukuna",
+    "acres": "acres",
+    "calculating": "Yupachkan…",
+    "selectCrop": "Huk tarpuyta akllay",
+    "done": "Yupay tukusqa",
+    "calcError": "Yupaypi pantasqa",
+    "totalInvestment": "llapa qullqi churay",
+    "nitrogen": "Nitrógeno (N)",
+    "phosphorus": "Fósforo (P₂O₅)",
+    "potassium": "Potasio (K₂O)",
+    "npkDistribution": "NPK rakiy (kg)",
+    "npkProportion": "NPK tupu",
+    "quantityKg": "Hayk'a (kg)",
+    "benefits": "Allinkunap watuynin",
+    "estimatedSaving": "Watusqa waqaychay",
+    "estimatedSavingHint": "Chanikuna 25 % kama pisiyay",
+    "yieldIncrease": "Puquy yapakuy",
+    "yieldIncreaseHint": "15 % kama yapakuy",
+    "productQuality": "Rurusqap allin kaynin",
+    "productQualityHint": "Ancha allin ruru",
+    "applicationTips": "Churay yuyaychaykuna",
+    "disclaimer": "INIA-p yachay yuyaychayninkunapi hinaspa Puno anti patap kayninpi hap'ipakuq yupaykuna.",
+    "optimalAltitude": "Allin hanaq kay",
+    "fertilisationPlan": "Wanuchay wakichiy"
+  },
+  "advisory": {
+    "title": "Yachaysapa yanapay",
+    "subtitle": "Riqsisqa chakra yachaqkunawan tinkiy · Puno",
+    "request": "Mañakuy",
+    "statMyQueries": "Ñuqap tapukuykuna",
+    "statExperts": "Atikuq yachaqkuna",
+    "statAnsweredByAI": "IA kutichisqakuna",
+    "statResponseTime": "Kutichiy pacha",
+    "statPending": "Suyaqkuna",
+    "statSatisfaction": "Kusikuy",
+    "specialtiesTitle": "Ñuqaykup yachayniykukuna",
+    "specialtiesHint": "Sapa t'aqapi riqsisqa yachaqkuna",
+    "expertsCount": "{{count}} yachaqkuna",
+    "myRequests": "Ñuqap mañakuyniykuna",
+    "myRequestsHint": "Tapukuyniykikunap ñawpa qillqan hinaspa kaynin",
+    "empty": "Manaraq mañakuykuna",
+    "emptyHint": "Anti patamanta riqsisqa chakra yachaqkunap yanapayninta chaskiy",
+    "firstQuery": "Ñawpaq tapukuyniyta ruway",
+    "aiAnswer": "AgroIA kutichiy",
+    "agronomistAnswer": "Chakra yachaqpa kutichiynin",
+    "aiGenerated": "IA kamarisqa kutichiy · Groq llama-3.3-70b",
+    "modalTitle": "Yanapayta mañakuy",
+    "modalSubtitle": "Huk yachaq 12-48 uraspi kutichisunki",
+    "advisoryType": "Yanapay laya",
+    "priority": "Ñawpaqchay",
+    "problemDescription": "Sasachakuypa willakuynin",
+    "problemPlaceholder": "Tapukuyniykita sut'ita willay: qhawasqa unquy rikuchikuykuna, unqusqa tarpuy, hayk'a pachaña sasachakuy, allpap kaynin...",
+    "aiAnalysing": "AgroIA t'aqwichkan…",
+    "aiQuickHelp": "Manaraq apachispa IA-wan usqhay yuyaychayta chaskiy",
+    "aiPreliminary": "AgroIA yuyaychay (ñawpaq)",
+    "aiDisclaimer": "Kayqa ñawpaq yuyaychayllam. Riqsisqa riqsichiypaq, mañakuyta yachaqman apachiy.",
+    "sending": "Apachichkan…",
+    "sendToExpert": "Yachaqman apachiy",
+    "describeMore": "Sasachakuyta 20 sanampamanta aswanwan willay yuyaychayta chaskinaykipaq",
+    "aiError": "IA yuyaychayta mana chaskiyta atirqanchu",
+    "selectType": "Yanapay layata akllay",
+    "describeProblem": "Sasachakuyniykita willay",
+    "sent": "Mañakuy allinta apachisqa",
+    "sendError": "Mañakuyta apachiypi pantasqa",
+    "yourCrop": "tarpuyninmanta",
+    "aiPrompt": "Un agricultor de Puno, Perú (altiplano 3800-4500 msnm) consulta sobre {{topic}}:\n\n\"{{problem}}\"\n\nDame una orientación inicial breve en texto plano (sin asteriscos, sin markdown):\n1. Posible diagnóstico o causa del problema\n2. Acciones inmediatas que puede tomar\n3. Si requiere visita de un especialista o puede manejarlo solo\n\nMáximo 5 oraciones en total. Directo y práctico. Responde en español.",
+    "priorities": {
+      "Baja": "Pisi",
+      "Media": "Chawpi",
+      "Alta": "Hatun",
+      "Urgente": "Usqhay"
+    },
+    "statuses": {
+      "Todas": "Tukuy",
+      "Pendiente": "Suyaq",
+      "Respondida": "Kutichisqa",
+      "Resuelta": "Allichasqa",
+      "En Proceso": "Ruwaypi",
+      "En Revision": "Qhawaypi",
+      "Cancelada": "Saqisqa"
+    },
+    "specialties": {
+      "Nutrición Vegetal": {
+        "label": "Yura mikhuchiy",
+        "desc": "Wanuchay hinaspa mikhuykuna aswan puquy kananpaq."
+      },
+      "Manejo Hídrico": {
+        "label": "Yaku kamachiy",
+        "desc": "Allin qarpay kamachiykuna hinaspa yaku kamachiy."
+      },
+      "Manejo de Suelos": {
+        "label": "Allpa kamachiy",
+        "desc": "Allpa t'aqwiy, puquy atiy hinaspa waqaychay."
+      },
+      "Control Fitosanitario": {
+        "label": "Curu harkay",
+        "desc": "Curukuna hinaspa unquykuna harkay."
+      },
+      "Análisis Productivo": {
+        "label": "Puquy t'aqwiy",
+        "desc": "Puquykuna chaninchay hinaspa allinyachiy ñankuna."
+      },
+      "Agricultura Sostenible": {
+        "label": "Wiñay chakra ruway",
+        "desc": "Anti patapaq allpa amachaq ruwaykuna."
+      }
+    },
+    "problemHint": "Aswan sut'ita willaptiykiqa, aswan allinmi kutichiy kanqa"
+  },
+  "reports": {
+    "title": "Willaykuna",
+    "subtitle": "Chakra puquyniykimanta PDF hinaspa Excel willaykuna",
+    "newReport": "Musuq willay",
+    "statsGenerated": "Kamarisqa willaykuna",
+    "statsCrops": "Qillqasqa tarpuykuna",
+    "statsDetections": "Curu tarisqakuna",
+    "statsFormats": "PDF / Excel kamarisqa",
+    "availableTypes": "Atikuq willay layakuna",
+    "availableTypesHint": "Usqhayta kamarinaykipaq ñit'iy",
+    "history": "Willaykunap ñawpa qillqan",
+    "historyHint": "Ñawpaqta kamarisqa willaykuna",
+    "empty": "Mana kamarisqa willaykuna",
+    "emptyHint": "Puquyniykita t'aqwinaykipaq ñawpaq willayniykita kamariy",
+    "generateFirst": "Ñawpaq willayta kamariy",
+    "download": "Uraykachiy",
+    "downloaded": "Willay uraykachisqa",
+    "downloadError": "Willayta uraykachiypi pantasqa",
+    "generateError": "Willayta kamariypi pantasqa",
+    "modalTitle": "Willayta kamariy",
+    "generating": "Willayta kamarichkan...",
+    "generatingHint": "Chakra willaykunata llamk'apachkan, pisi ratu unayanman",
+    "reportType": "Willay laya",
+    "outputFormat": "Lluqsiy laya",
+    "pdfHint": "Ch'ipachinapaq hinaspa rakinapaq",
+    "excelHint": "T'aqwinapaq hinaspa allichanapaq",
+    "willGenerate": "Kayta kamarinqa",
+    "generateAndDownload": "Kamariy hinaspa uraykachiy",
+    "types": {
+      "Dashboard Ejecutivo": {
+        "label": "Hatun qhawana",
+        "desc": "Hunt'asqa willay: tarpuykuna, musyaqkuna, willakuykuna hinaspa puquy."
+      },
+      "Estado de Cultivos": {
+        "label": "Tarpuykunap kaynin",
+        "desc": "Sapa tarpuypa sut'i t'aqwiynin, ñawpaqmanchaywan hinaspa qhalikaywan."
+      },
+      "Analisis Financiero": {
+        "label": "Qullqi t'aqwiy",
+        "desc": "ROI, yanapaqkunap chanin hinaspa watusqa qullqi chaskiy."
+      },
+      "Impacto Climatico": {
+        "label": "Pacha llamk'apay",
+        "desc": "Pacha kaykuna hinaspa Punopi llamk'apaynin."
+      }
+    }
+  },
+  "admin": {
+    "saveChanges": "Tikraykunata waqaychay",
+    "uploading": "Churkuchkan…",
+    "uploadHint": "Rikchayta churkuy utaq kayman aysamuy",
+    "uploadError": "Rikchayta churkuypi pantasqa",
+    "statsError": "Yupaykunata chaskiypi pantasqa",
+    "usersError": "Ruraqkunata chaskiypi pantasqa",
+    "platformStats": "Kamachiqpa yupaynin",
+    "total": "Llapan",
+    "active": "Llamk'aqkuna",
+    "last30": "Qhipa 30 p'unchaw",
+    "last7": "Qhipa 7 p'unchaw",
+    "byRole": "Rurayninman hina",
+    "inactiveAccount": "{{count}} mana llamk'aq rakiqu kamachiqpi",
+    "inactiveAccounts": "{{count}} mana llamk'aq rakiqukuna kamachiqpi",
+    "recentlyRegistered": "Qhipa qillqakuqkuna",
+    "noRecords": "Mana qillqasqakuna",
+    "userManagement": "Ruraqkuna kamachiy",
+    "usersCount": "{{count}} ruraqkuna",
+    "searchPlaceholder": "Sutiwan utaq e-chaskiwan maskay…",
+    "filterAll": "Tukuy",
+    "filterInactive": "Mana llamk'aqkuna",
+    "since": "Kaymantapacha",
+    "deactivate": "Harkay",
+    "activate": "Kichay",
+    "password": "Yaykuna rimay",
+    "newPasswordPlaceholder": "Musuq yaykuna rimay (8 sanampamanta aswan)",
+    "noUsersFound": "Mana ruraqkuna tarisqachu",
+    "roleUpdated": "Ruray musuqchasqa",
+    "genericError": "Pantasqa",
+    "minChars": "8 sanampamanta aswan",
+    "passwordUpdated": "Yaykuna rimay musuqchasqa",
+    "brandImages": "Riqsichiy rikchaykuna",
+    "logoLabel": "Hatun riqsichiq",
+    "logoHint": "Ch'uya SVG utaq PNG, 200×60 px kama",
+    "faviconLabel": "Favicon",
+    "faviconHint": "ICO utaq PNG 32×32 px",
+    "institutionLogoLabel": "Yachay wasip riqsichiqnin",
+    "institutionLogoHint": "Tinkisqa huñup utaq hatun yachay wasip riqsichiqnin",
+    "coverLabel": "Qatana rikchay (hero)",
+    "coverHint": "Yuyaychasqa: 1920×1080 px",
+    "homepageSaved": "Qallariy p'anqa waqaychasqa",
+    "saveError": "Waqaychaypi pantasqa",
+    "siteIdentity": "Kamachiqpa riqsichiynin",
+    "siteName": "Kamachiqpa sutin",
+    "tagline": "Tagline",
+    "taglinePlaceholder": "Yachaysapa chakra ruway...",
+    "heroSection": "Hero t'aqa",
+    "heroTitle": "Hero uma",
+    "heroTitleHint": "Hatun rimay hatun bannerpi (7 sanampa kama)",
+    "description": "Willakuy",
+    "heroDescriptionPlaceholder": "Chakra kamachiy kamachiq...",
+    "ctaButton": "CTA ñit'ina",
+    "ctaPlaceholder": "Kunanmanta qallariy",
+    "ecosystemSection": "Ecosistema t'aqa",
+    "titleField": "Uma",
+    "ecosystemTitlePlaceholder": "Yachaysapa chakra ecosistema",
+    "ecosystemDescriptionPlaceholder": "Yachayta tinkichiyku...",
+    "announcementBanner": "Willakuy banner",
+    "showBanner": "Willakuy bannerta rikuchiy",
+    "showBannerHint": "Llapa hawa p'anqakunap hanaqninpim rikhurin",
+    "bannerText": "Bannerpa qillqan",
+    "bannerPlaceholder": "¡Musuq! Musuq IoT ruwayniykuta ruway",
+    "bannerPreview": "Bannerpa ñawpaq qhawaynin…",
+    "navSaved": "Wamp'una waqaychasqa",
+    "navigation": "Wamp'una",
+    "navHint": "Hatun akllanap t'inkinkunata allichay. Ch'usaqta saqiy ñawpaq wamp'unata llamk'achinaykipaq.",
+    "labelPlaceholder": "Unancha",
+    "hrefPlaceholder": "/ñan utaq https://...",
+    "addItem": "Yapayta yapay",
+    "footerSaved": "Chaki p'anqa waqaychasqa",
+    "generalInfo": "Llapanmanta willay",
+    "footerDescriptionPlaceholder": "Chakra kamachiy kamachiq...",
+    "institution": "Yachay wasi",
+    "institutionPlaceholder": "Suyup hatun yachay wasin...",
+    "contactEmail": "Tinkiy e-chaski",
+    "copyright": "Copyright",
+    "socialNetworks": "Runa masi hawakuna",
+    "systemSaved": "Kamachiqpa wakichiynin waqaychasqa",
+    "maintenanceMode": "Allichay kay",
+    "enableMaintenance": "Allichay kayta kichay",
+    "enableMaintenanceHint": "Mana kamachiq ruraqkunaman allichay p'anqata rikuchin",
+    "maintenanceMessage": "Allichay willakuy",
+    "maintenancePlaceholder": "Kamachiqqa allichaypim kachkan...",
+    "analytics": "Analytics",
+    "ga4Hint": "Ch'usaqta saqiy t'aqwiy qatiyta harkanaykipaq",
+    "resetTitle": "¿Wakichiyta kutichiychu?",
+    "resetText": "Llapa qillqakuna ñawpaq chaninman kutinqa. Rikchaykunaqa mana qullunchu.",
+    "resetConfirm": "Arí, kutichiy",
+    "resetDone": "Wakichiy kutichisqa",
+    "resetError": "Kutichiypi pantasqa",
+    "resetSection": "Wakichiyta kutichiy",
+    "resetting": "Kutichichkan…",
+    "resetDefaults": "Ñawpaq chanikunaman kutichiy",
+    "superAdminPanel": "Hatun kamachiq panel",
+    "adminPanel": "Kamachiq panel",
+    "tabs": {
+      "stats": "Yupaykuna",
+      "users": "Ruraqkuna",
+      "logo": "Riqsichiq",
+      "homepage": "Qallariy",
+      "nav": "Wamp'una",
+      "footer": "Chaki p'anqa",
+      "system": "Kamachiq",
+      "advanced": "Aswan yachay"
+    },
+    "roles": {
+      "superadmin": "Hatun kamachiq",
+      "admin": "Kamachiq",
+      "agricultor": "Chakra runa",
+      "usuario": "Ruraq"
+    },
+    "logoAndBrand": "Riqsichiq hinaspa marka",
+    "configError": "Wakichiyta chaskiypi pantasqa",
+    "inactiveTag": "MANA LLAMK'AQ",
+    "homepageTitle": "Qallariy P'anqa",
+    "footerTitle": "P'anqa Chaki",
+    "advancedTitle": "Ñawpaqchasqa Wakichiy",
+    "maintenanceWarning": "Kikin ruraqkunapaqqa kamachiqqa mana haykunapaqchu kanqa"
+  },
+  "landing": {
+    "nav": {
+      "inicio": "Qallariy",
+      "acerca": "Ñuqayku",
+      "servicios": "Yanapaykuna",
+      "planes": "Wakichiykuna",
+      "testimonios": "Willaykuna",
+      "contactos": "Tinkiy"
+    },
+    "loading": "Chaskichkan",
+    "signIn": "Yaykuy",
+    "signInShort": "Yaykuy",
+    "footerModules": "T'aqakuna",
+    "footerNavigation": "Wamp'una",
+    "footerContact": "Tinkiy",
+    "footerLocation": "Puno, Peru",
+    "sendMessage": "Willayta apachiy",
+    "systemActive": "Kamachiq llamk'achkan",
+    "developedBy": "R. Andre Vilca Solorzano ruwasqan",
+    "copyrightFallback": "© {{year}} {{site}} — Llapa hayñin waqaychasqa",
+    "modules": [
+      "IoT tarpuykuna",
+      "ESP32 musyaqkuna",
+      "Pacha + IA",
+      "Curu tariy",
+      "Kusicha watuy",
+      "PDF/Excel willaykuna"
+    ]
+  },
+  "footer": {
+    "tagline": "Peru chakra ruwayta yachaysapa antawan hinaspa IoT-wan tikrachichkayku",
+    "services": "Yanapaykuna",
+    "company": "Huñu",
+    "contact": "Tinkiy",
+    "cropManagement": "Tarpuy kamachiy",
+    "iotMonitoring": "IoT qhaway",
+    "weatherMonitoring": "Pacha qhaway",
+    "pestDetection": "Curu tariy",
+    "harvestPrediction": "Kusicha watuy",
+    "marketplace": "Qhatu",
+    "home": "Qallariy",
+    "about": "Ñuqaykumanta",
+    "advisory": "Yachaysapa yanapay",
+    "blog": "Blog",
+    "support": "Yanapay",
+    "location": "Puno, Peru",
+    "rights": "© {{year}} AgroYachay. Llapa hayñin waqaychasqa."
+  },
+  "siteDefaults": {
+    "site_tagline": "Yachaysapa chakra ruway",
+    "hero_title": "chakrayki",
+    "hero_description": "IoT, yuyayniyuq antakuna hinaspa watuy t'aqwiy huk kamachiqllapi. Peru karu suyukunapaq wakichisqa, maypichus chakra runa sapallan llamk'an.",
+    "hero_cta": "Qullqi manawan qallariy",
+    "ecosystem_title": "Llapa munasqayki huk kamachiqllapi",
+    "ecosystem_description": "8 tinkisqa t'aqakuna, huk huknin yanapanakuq. Musyaqpa willaynin watuyta allinyachin, pacha willakuykunata willan, IA llapanta tinkichin.",
+    "footer_description": "IoT, yuyayniyuq antakuna hinaspa watuy t'aqwiyniyuq chakra kamachiq. Peru karu suyukunapaq wakichisqa, maypichus chakra runa sapallan llamk'an hinaspa chakranta hunt'ata kamachiyta munan.",
+    "maintenance_message": "Kamachiqqa allichaypim kachkan. Ama hina kaspa, aswan qhipata ruway."
+  },
+  "testimonials": {
+    "heroTitleLine1": "Ruwaykunam",
+    "heroTitleLine2": "sapallanku riman.",
+    "heroDescription": "Kaypim AgroYachayta chakrankupi llamk'achiqkunap tupuy atina ruwayninkuna kanqa. Kamachiqmanta chiqap willaykuna, mana watusqallachu.",
+    "createAccount": "Qullqi manawan rakiquta kamariy",
+    "contactTeam": "Llamk'aq huñuwan tinkiy",
+    "status": [
+      {
+        "label": "Kamachiq llamk'achkan",
+        "value": "Llamk'achkan"
+      },
+      {
+        "label": "Ñawpaq ruraqkuna",
+        "value": "Ruwaypi"
+      },
+      {
+        "label": "Willakusqa willaykuna",
+        "value": "Suyaq"
+      },
+      {
+        "label": "Qillqasqa chiqap willaykuna",
+        "value": "Suyaq"
+      }
+    ],
+    "expectedTitle": "Ñawpaqta kayta qillqayta suyaniku",
+    "expected": [
+      "Curukunata ñawpaqta tarispa chinkaykuna pisiyay",
+      "Allpa huq'uy musyaqkunawan yaku waqaychay",
+      "Kusicha watuypa chiqan kaynin vs chiqap ruway",
+      "Sinchi q'uñi willakuykunaman kutichiy pacha",
+      "Sapa chakrapi qullqi mirachiy kamachiq manaraq hinaspa qhipan",
+      "Plant.id v2 t'aqap chiqan tarinan"
+    ],
+    "beFirst": "Willakuyniykita rakiq ñawpaq kay",
+    "emptyTitle": "Manaraqmi willakuykuna kanchu.",
+    "emptyDescription": "Kamachiqqa kunallanmi qallarirqan. Ñawpaq chakra runakuna ruwayninkuta rakiptinkuqa, willakuyninkuqa chiqap willaywanmi kaypi rikhurinqa, mana yuyaykunallawanchu.",
+    "whyNoDataTitle": "¿Imarayku manaraq willaykuna kanchu?",
+    "whyNoDataDescription": "Kaypi rikhuriq willakuykunaqa kamachiqpa chiqap tupuyninkunawanmi hamunqa: tupusqa puquy, tarisqa curukuna, yupasqa waqaychaykuna. Mana imapas tukuypachu.",
+    "beFirstTitle": "¿Ñawpaq kayta munankichu?",
+    "beFirstDescription": "Rakiquykita kamariy, chakraykita tinkiy hinaspa ñawpaq p'unchawmantapacha chiqap ruwaykunata qillqay.",
+    "contactUs": "Ñuqaykuwan tinkiy",
+    "metricsTitle": "Tupuy atina ruwaykuna, mana ch'usaq siminchakuykunachu.",
+    "metricsDescription": "Sapa hamuq willakuyqa kay tupuykunamanta hukninta apamunqa, kamachiqpa chiqap willayninwan.",
+    "metrics": [
+      {
+        "symbol": "kg/ha",
+        "label": "Sapa chakrapi puquy",
+        "desc": "ML watuy vs qillqasqa chiqap kusicha"
+      },
+      {
+        "symbol": "%",
+        "label": "Tariypi iñiy",
+        "desc": "Plant.id v2 unquykunata riqsichin"
+      },
+      {
+        "symbol": "°C",
+        "label": "Q'uñi willakuykuna",
+        "desc": "Musyaqpa kunanpacha willakuynin"
+      },
+      {
+        "symbol": "S/.",
+        "label": "Chanikuna vs qullqi chaskiy",
+        "desc": "Sapa mit'api hinaspa tarpuypi qullqi willay"
+      }
+    ],
+    "ctaTitle": "Willakuyniykita rakiq ñawpaq kay.",
+    "ctaDescription": "Rakiquykita kamariy, chakraykita tinkiy hinaspa ñawpaq p'unchawmantapacha chiqap ruwaykunata qillqay. Yachasqaykiqa huk chakra runakunatam yanapanman."
+  },
+  "home": {
+    "heroTitleBefore": "Hunt'a kamachiy",
+    "heroTitleAfter": "maymantapas",
+    "viewSystem": "Kamachiqta qhaway",
+    "demoCard": {
+      "parcel": "Hatun chakra",
+      "crop": "Papa tarpuy — 2.5 ha",
+      "active": "Llamk'achkan",
+      "temperature": "Q'uñi kay",
+      "airHumidity": "Wayra huq'uy",
+      "soil": "Allpa",
+      "normal": "Allin",
+      "optimal": "Ancha allin",
+      "irrigate": "Qarpay",
+      "chartTitle": "Q'uñi kay — qhipa 8 ñawinchaykuna",
+      "aiRecommends": "AgroIA yuyaychan",
+      "aiMessage": "Allpa huq'uy 42%-pi — kunan chisi qarpayta wakichiy. Watuy: ch'uya hanaq pacha, aswan q'uñi 17°C."
+    },
+    "features": [
+      {
+        "title": "Tarpuy kamachiy",
+        "desc": "10 tarpuy laya, hunt'a muyuy wakichisqamanta kusichasqakama, ruwaykunap hinaspa yanapaqkunap chiqap chaninwan qillqan."
+      },
+      {
+        "title": "ESP32 IoT qhaway",
+        "desc": "Q'uñi kay, wayra hinaspa allpa huq'uy sapa 10 ratu. Kikinmanta offline buffer. Wakichiy atina kuskakunawan willakuykuna."
+      },
+      {
+        "title": "Pacha + IA simana wakichiy",
+        "desc": "OpenWeather + Groq chakraykita t'aqwin hinaspa qarpay yuyaychayta, qasa willakuyta hinaspa p'unchawpa ruwayninkunata kamarin."
+      },
+      {
+        "title": "Curu tariy",
+        "desc": "Chakramanta rikchay → Plant.id unquyta riqsichin → Groq usqhay kaywan, hampikunawan hinaspa chiqap chaniwan wakichiyta kutichin."
+      },
+      {
+        "title": "Kusicha watuy",
+        "desc": "scikit-learn kg/ha puquyta hinaspa watusqa qullqi mirayta musyaqniykikunap chiqap willayninpi hap'ipakuspa watun."
+      },
+      {
+        "title": "Yanapaqkuna qhatu",
+        "desc": "Murukuna, wanukuna hinaspa llamk'anakuna MercadoLibre hinaspa Amazon-man chiqan t'inkiwan. Mana chawpi runakunayuq."
+      },
+      {
+        "title": "PDF hinaspa Excel willaykuna",
+        "desc": "4 laya: Hatun, Tarpuykuna, Qullqi, Pacha. Musyaqniykikunap chiqap willayninwan kamarisqa siq'ikuna."
+      },
+      {
+        "title": "AgroIA yanapaq",
+        "desc": "Llama 3.3 70B-wan Groq nisqapi qispisqa rimanakuy. Qarpaymanta, curukunamanta, tarpuymanta kunan chakraykip kayninwan kutichin."
+      }
+    ],
+    "esp32TitleLine1": "ESP32 llamk'aq",
+    "esp32TitleLine2": "mana unancha kaptinpas",
+    "esp32Description": "DHT11 hinaspa FC-28 antayuq ESP32-qa q'uñi kayta, wayra huq'uyta hinaspa allpa huq'uyta sapa 10 ratu tupun. Mana WiFi kaptinqa 10 ñawinchayta bufferpi waqaychan hinaspa yapamanta tinkiptin apachin. Firmware-qa qampam, Arduino C++ nisqapi kicharisqa.",
+    "esp32Points": [
+      "Sapa 10 ratu ñawinchay — q'uñi kay + wayra huq'uy + allpa",
+      "Kikinmanta 10 qillqa offline buffer",
+      "Sapa chakrapaq wakichiy atina kuskakunawan willakuykuna",
+      "NTP UTC-5, Perupaq chiqap pacha unancha"
+    ],
+    "codeReading": "// Sapa 10 ratu ñawinchay",
+    "codePost": "// Backend-man POST",
+    "codeBuffer": "// Mana WiFi kaptin, kaypi waqaychay",
+    "aiTitleLine1": "Chiqap chakraykita",
+    "aiTitleLine2": "riqsiq IA",
+    "aiDescription": "Groq llama-3.3-70b chakra tapukuykunata kutichin, kawsaq tarpuyniykikunap, suyuykip, musyaq willaykunap hinaspa p'unchawpa watuyninpa kayninwan. Manam yanqa chatbot-chu — yachanmi Punopi Papayki kasqanta hinaspa allpa 42%-pi kasqanta.",
+    "aiPoints": [
+      "Pacha t'aqwiy manchakuywan hinaspa curu willakuywan",
+      "Curu hampiy wakichiy hampikunawan hinaspa chaninwan",
+      "Watuyman hina simana ruwaykuna wakichiy",
+      "Qispisqa rimanakuy: ima chakra tapukuypas"
+    ],
+    "farmer": "Chakra runa",
+    "chat": [
+      {
+        "q": "¿Hayk'aqmi qarpasaq?",
+        "a": "Allpa huq'uy 42%-pi hinaspa 3 p'unchaw mana para watusqa. Paqarin tutamanta qarpay, 45 ratu sut'uywan."
+      },
+      {
+        "q": "¿Imatam IA tarirqan?",
+        "a": "Phytophthora infestans (qhipa rupha) — iñiy 87%. Usqhay kay: 24h. Metalaxil 1.5 g/L churay."
+      },
+      {
+        "q": "Kay simana wakichiy",
+        "a": "Kil: wanuchay. Quy: qarpay. Ilp: hampichanapaq allin p'unchaw (pisi wayra, mana para)."
+      }
+    ],
+    "howTitle": "4 ñiqipi, hunt'a kamachiy",
+    "how": [
+      {
+        "title": "Chakraykita qillqay",
+        "desc": "Tarpuyta, pampata hinaspa kitita willay. Kamachiqqa musyaqkunata, kuskakunata hinaspa t'aqakunata wakichin."
+      },
+      {
+        "title": "ESP32-ta tinkiy",
+        "desc": "Firmware churasqaña. Musyaqqa sapa 10 ratu willayta apachin hinaspa offline kikinmanta tinkiywan llamk'an."
+      },
+      {
+        "title": "IA t'aqwiyta chaskiy",
+        "desc": "Groq pachata, musyaqkunata hinaspa tarpuykunata tinkichin, chakraykipaq sapaq yuyaychayta kunanpacha qusunaykipaq."
+      },
+      {
+        "title": "Willaykunata kamariy",
+        "desc": "PDF/Excel chiqap siq'ikunawan, qullqi t'aqwiywan hinaspa kusicha watuywan. Kunallan uraykachiy."
+      }
+    ],
+    "platformTitleLine1": "Hunt'a kamachiq,",
+    "platformTitleLine2": "mana huch'uy app-llachu",
+    "platformDescription": "30+ REST endpoint, 14 tabla PostgreSQL nisqapi, JWT riqsichiy, servidorpi willay kamariy, kunanpacha musyaqkunapaq websocket hinaspa sapaq kayniyuq IA t'aqa.",
+    "technicalDetails": "Yachay willaykunata qhaway",
+    "stats": [
+      {
+        "value": "14",
+        "label": "PostgreSQL tablakuna"
+      },
+      {
+        "value": "30+",
+        "label": "REST endpointkuna"
+      },
+      {
+        "value": "4",
+        "label": "Willay layakuna"
+      },
+      {
+        "value": "7",
+        "label": "Yanapay t'aqakuna"
+      }
+    ],
+    "ctaTitleLine1": "Ñawpaq musyaqniykita tinkiy",
+    "ctaTitleLine2": "10 ratumanta pisipi",
+    "ctaDescription": "Mana qullqi qillqayuq. Mana churayniyuq. Rakiquykita kamariy, chakraykita yapay hinaspa ESP32-qa kunallanmi willayta apachiyta qallarinqa.",
+    "ctaPrimary": "Qullqi manawan rakiquta kamariy",
+    "ctaSecondary": "Rikuchiyta mañakuy"
+  },
+  "about": {
+    "heroBefore": "Peru karu",
+    "heroHighlight": "chakrapaq",
+    "heroAfter": "ruwasqa",
+    "heroDescription": "AgroYachayqa sut'i munaywanmi paqarirqan: huch'uy chakra runaman hatun chakra ruwaypa kikin llamk'anankunata quy, karu urqu hinaspa yunka suyukunaman, chiqap qullqiman hinaspa pisi tinkiyman wakichisqa.",
+    "viewModules": "Kamachiqpa t'aqankunata qhaway",
+    "contact": "Tinkiy",
+    "problems": [
+      "Karu chakrakuna maypichus agronomo mana chayanchu",
+      "Curukuna qhipata tarisqa mana sapa kuti qhawasqa kaptin",
+      "Allpapa hinaspa wayrapa chiqap kayninta mana yachay",
+      "Watuyta ñawpaqmanta mana yachaspa chinkaykuna",
+      "Yanapaqkunap chiqap chaninkunata mana tupachispa rantiy",
+      "Mana ruwaykunap nitaq chanikunap qillqanan sapa chakrapi"
+    ],
+    "problemsSolved": "AgroYachayqa llapa kaykunata allichan",
+    "pillarsTitle": "Imaraykum kaypi llamk'an huk mana llamk'aptin",
+    "pillars": [
+      {
+        "title": "Mana sinchi unanchayuq llamk'an",
+        "desc": "ESP32-qa ñawinchaykunata kikin bufferpi waqaychan hinaspa yapamanta tinkiptin kikinmanta apachin. Manam ima willaypas chinkanchu WiFi mana kaptinpas achka urakunata."
+      },
+      {
+        "title": "IA mana yachaysapakunapi hap'ipakuspa",
+        "desc": "Groq llama-3.3-70b qarpaymanta, curukunamanta hinaspa wanuchaymanta tapukuykunata kutichin chakraykip chiqap kayninwan. 7 yachaypi yanapay ticket nisqawan."
+      },
+      {
+        "title": "Willayniykikuna, servidorniykipi",
+        "desc": "Llapanmi PostgreSQL kikinniykipi kawsan. Mana hawa yanapaykuna pantanqa, chanin wichanqa, nitaq willayniykikunata rikuchinqa."
+      },
+      {
+        "title": "Peru suyupi rantina antakuna",
+        "desc": "ESP32 (~S/.30) + DHT11 (~S/.8) + FC-28 (~S/.5). Llapan kikin llaqtapi elektroniko qhatukunapi tarikun. Mana chanin antakunata hawamanta apamuspa."
+      }
+    ],
+    "modulesTitle": "11 t'aqa. Llapan tinkisqa.",
+    "modulesDescription": "Sapa t'aqam huknin t'aqakunawan willayta rakin. Musyaqkunam watuykunata mikhuchin, pachaqa willakuykunata willan hinaspa IA-qa chakraykip chiqap kayninta riqsin.",
+    "modules": [
+      {
+        "label": "Tarpuy kamachiy",
+        "desc": "Hunt'a muyuy Wakichisqa → Kusichasqa, 10 laya"
+      },
+      {
+        "label": "IoT dashboard",
+        "desc": "Kunanpacha ñawinchaykuna, kikin willakuykuna kuskarayku"
+      },
+      {
+        "label": "Pacha + IA simana wakichiy",
+        "desc": "OpenWeather + Groq, sapa p'unchawpaq ruway wakichiy"
+      },
+      {
+        "label": "Curu tariy",
+        "desc": "Rikchay → Plant.id → Groq wakichiy hampiwan hinaspa usqhay kaywan"
+      },
+      {
+        "label": "Kusicha watuy",
+        "desc": "scikit-learn kg/ha hinaspa watusqa qullqi mirayta watun"
+      },
+      {
+        "label": "Sapaq yanapay",
+        "desc": "7 yachay, ticket ñawpaqchasqawan hinaspa kayninwan"
+      },
+      {
+        "label": "Yanapaqkuna qhatu",
+        "desc": "Murukuna, wanukuna, llamk'anakuna — mana rantichiy chaniyuq"
+      },
+      {
+        "label": "Yanapaqkuna yupana",
+        "desc": "NPK, yaku, curu hampi, qura hampi — sapa hectáreapi"
+      },
+      {
+        "label": "PDF hinaspa Excel willaykuna",
+        "desc": "4 laya musyaqniykikunamanta chiqap siq'ikunawan"
+      },
+      {
+        "label": "Bristol almanaque",
+        "desc": "Killaman hina chakra ruwaykunata wakichiy"
+      },
+      {
+        "label": "AgroIA yanapaq",
+        "desc": "Llama 3.3 70B-wan qispisqa rimanakuy, chakraykip kayninwan"
+      }
+    ],
+    "stackTitle": "Chiqap ruwaypi llamk'anakuna",
+    "stackDescription": "Mana yachanapaq framework nisqakunayuq. Llapan yachasqaña, qillqasqaña hinaspa Perupi hinaspa Latinoamericapi kawsaq huñuyuq.",
+    "stackCategories": [
+      "Backend",
+      "Willay hatun waqaychana",
+      "Frontend",
+      "IoT antakuna",
+      "IA hinaspa API",
+      "Willaykuna"
+    ],
+    "kitTitleLine1": "ESP32 + musyaqkuna.",
+    "kitTitleLine2": "S/.50 manta pisi kit.",
+    "kitDescription": "DHT11 hinaspa FC-28-yuq ESP32-qa q'uñi kayta, wayra huq'uyta hinaspa allpa huq'uyta sapa 10 ratu tupun. Mana WiFi kaptinqa 10 ñawinchaykama bufferpi waqaychan hinaspa yapamanta tinkiptin kikinmanta apachin. Firmware-qa Arduino C++ nisqapim, kodigoqa hunt'atam qampa.",
+    "hardware": [
+      "ESP32 DevKit — hatun kamachiq WiFi-yuq",
+      "DHT11 — q'uñi kay + wayra huq'uy (GPIO 15)",
+      "FC-28 — allpa huq'uy analogiko (GPIO 34)",
+      "Tinkiy kaynin rikuchiq LED (GPIO 2)",
+      "NTP UTC-5 tinkichiy (Peru pacha kuska)",
+      "Sapa 10 ratu backend-man HTTP POST"
+    ],
+    "priceTotal": "Llapan",
+    "codeConfig": "// Wakichiy",
+    "codeSensors": "// Musyaqkuna",
+    "codeBuffer": "// Offline buffer",
+    "codeAutoSync": "// kikin tinkichiy",
+    "codeCalibration": "// FC-28 chiqanchay",
+    "flowTitleLine1": "Chakramanta willaykama,",
+    "flowTitleLine2": "mana kamachiqmanta lluqsispa",
+    "flow": [
+      {
+        "title": "Musyaq tupun",
+        "desc": "Q'uñi kay, wayra hinaspa allpa huq'uy sapa 10 ratu. Mana WiFi kaptin, 10 ñawinchaykama kikin buffer. NTP chiqap pacha unancha."
+      },
+      {
+        "title": "Backend ruwan",
+        "desc": "Flask POST-ta chaskin, PostgreSQL-pi waqaychan, kuskakunata t'aqwin hinaspa mana allin kaptin kikin willakuykunata kachan."
+      },
+      {
+        "title": "IA t'aqwin",
+        "desc": "Groq q'uñi kayta, huq'uyta, watuyta hinaspa tarpuy layata tinkichin. Qarpay wakichiyta, curu willakuyta hinaspa p'unchawpa ruwayninkunata kamarin."
+      },
+      {
+        "title": "Qam akllanki hinaspa ruwanki",
+        "desc": "Dashboard-ta celularniykipi qhawanki. Rikchaywan curuta tarinki. Yanapaqta tapunki. Yanapayta mañakunki munaspaqa."
+      },
+      {
+        "title": "Willay wakichisqaña",
+        "desc": "PDF utaq Excel chiqap siq'ikunawan: tarpuykunap kaynin, qullqi t'aqwiy, pacha llamiynin. Huk ñit'iyllapi uraykachiy."
+      }
+    ],
+    "ctaTitleLine1": "Kamachiqqa wakichisqañam.",
+    "ctaTitleLine2": "Chakraykipas, hinallataq.",
+    "ctaDescription": "Rakiquykita kamariy, ñawpaq chakraykita qillqay hinaspa ESP32-ta tinkiy. Mana qullqi qillqayuq, mana rimanakuyuq. Ñawpaq p'unchawmantapacha hunt'a kamachiy.",
+    "ctaPrimary": "Qullqi manawan rakiquta kamariy",
+    "ctaSecondary": "Ñuqaykuwan rimay",
+    "stackTables": "14 tabla",
+    "stackSoilSensor": "FC-28 allpa"
+  },
+  "services": {
+    "heroTitleLine1": "Huk kamachiq.",
+    "heroTitleLine2": "Mana ima yanqapas.",
+    "heroDescription": "Sapa t'aqam huknin t'aqakunawan tinkisqa. Musyaqpa willayninmi watuykunata mikhuchin, pachaqa willakuykunata willan hinaspa IA yanapaqqa chakraykip chiqap kayninta riqsin.",
+    "createAccount": "Qullqi manawan rakiquta kamariy",
+    "viewPlans": "Wakichiykunata qhaway",
+    "exploreTitle": "Sapa t'aqata maskay",
+    "exploreDescription": "Ima kartallapipas ñit'iy sapaq atiykunata, paypa API-nta hinaspa kamarisqan willaykunata qhawanaykipaq.",
+    "closeDetail": "Sapaq willayta wichq'ay",
+    "apiEndpoint": "API endpoint",
+    "capabilities": "Sapaq atiykuna",
+    "networkTitle": "T'aqakunam paykunapura rimanakunku",
+    "networkDescription": "Chiqap chaninqa manam sapaqchasqa t'aqakunapichu, aswanpas kuska ruwasqanku willay llika nisqapim.",
+    "network": [
+      {
+        "title": "Musyaqkuna → Watuy",
+        "desc": "ESP32 ñawinchaykunaqa Random Forest modelopa yaykuq tupuyninkunam, tarpuypa puquyninta aswan chiqanta watunanpaq."
+      },
+      {
+        "title": "Pacha → Kikin willakuykuna",
+        "desc": "Groq 5 p'unchaw watuyta kawsaq tarpuykunaykiwan tinkichin hinaspa curu willakuykunata hinaspa qarpay wakichiykunata kikinmanta kachan."
+      },
+      {
+        "title": "Curukuna → Yanapaqkuna → Willay",
+        "desc": "Tariyqa ruwaykunata yuyaychan, yanapaq yupanapi qillqakun hinaspa chaninqa PDF qullqi mirachiy willaypim rikhurin."
+      }
+    ],
+    "metrics": [
+      {
+        "value": "10",
+        "label": "tinkisqa t'aqakuna",
+        "sub": "paykunapura tinkisqa"
+      },
+      {
+        "value": "14",
+        "label": "PostgreSQL tablakuna",
+        "sub": "hunt'a willay modelo"
+      },
+      {
+        "value": "40+",
+        "label": "REST endpointkuna",
+        "sub": "qillqasqa API"
+      },
+      {
+        "value": "3",
+        "label": "hawa API",
+        "sub": "Groq · Plant.id · OpenWeather"
+      }
+    ],
+    "ctaTitleLine1": "¿Ñawpaq musyaqniykita",
+    "ctaTitleLine2": "tinkiy atinkichu?",
+    "ctaDescription": "Chakraykita wakichiy hinaspa 10 ratumanta pisipi kunanpacha willayta chaskiyta qallariy. Mana qullqi qillqayuq, mana rimanakuyuq.",
+    "ctaSecondary": "Wakichiykunata hinaspa chanikunata qhaway",
+    "items": {
+      "cultivos": {
+        "title": "Tarpuy kamachiy",
+        "badge": "Sunqu",
+        "summary": "10 tarpuypa hunt'a muyuynin tarpuymanta kusichakama.",
+        "desc": "Chakrakunata GPS-wan, tarpuy layawan hinaspa hatun p'unchawkunawan qillqay. Kamachiqmi ruwaykunap qillqanta, chaniyuq yanapaqkunata hinaspa kikin watuykunata apan.",
+        "details": [
+          "10 tarpuy: Papa, Sara, Trigo, Soja, Arroz, Tomate, Kinwa, Uqa, Habas, Huk",
+          "6 kay: Wakichisqa → Kusichasqa",
+          "Ruwaykuna p'unchawwan, layawan, chaniwan",
+          "Yanapaqkuna: NPK, yaku, curu hampi, muru",
+          "Ñawpaq puquypa yupaynin"
+        ]
+      },
+      "iot": {
+        "title": "ESP32 IoT qhaway",
+        "badge": "Antakuna",
+        "summary": "Q'uñi kaypa, wayra hinaspa allpa huq'uypa kikin ñawinchaynin sapa 10 ratu.",
+        "desc": "ESP32 + DHT11 + FC-28 backend-man willayta apachichkan. Kuskarayku kikin willakuykuna, 10 ñawinchay offline buffer hinaspa 7 p'unchaw ñawpaq siq'ikuna.",
+        "details": [
+          "ESP32 DevKit + DHT11 + FC-28",
+          "Kutin: sapa 10 sikundu",
+          "Offline buffer: 10 ñawinchay mana WiFi-yuq",
+          "Q'uñi kayrayku hinaspa huq'uyrayku willakuykuna",
+          "7 p'unchaw ñawpaq siq'ikuna"
+        ]
+      },
+      "clima": {
+        "title": "Pacha + IA simana wakichiy",
+        "badge": "IA · OpenWeather",
+        "summary": "Kunanpacha watuy IA t'aqwiywan ruwaykunata wakichinapaq.",
+        "desc": "OpenWeather + Groq llama-3.3-70b. 5 p'unchaw watuyta kawsaq tarpuykunawan tinkichin hinaspa manchakuy kayta, allin ruwayta hinaspa simana wakichiyta kamarin.",
+        "details": [
+          "Kunan pacha: q'uñi kay, huq'uy, wayra",
+          "Watuy sapa 3 ura 5 p'unchawpi",
+          "IA t'aqwiy: manchakuy pisi/chawpi/hatun/sinchi",
+          "P'unchawpa qarpay yuyaychaynin",
+          "Curu willakuy pacha curukunata yanapaptin"
+        ]
+      },
+      "plagas": {
+        "title": "IA curu tariy",
+        "badge": "Plant.id v2",
+        "summary": "Chakramanta huk rikchayta apachispa unquykunata riqsichin.",
+        "desc": "Plant.id v2 unquyta riqsichin iñiy pachakwan. Groq kamachiy wakichiyta kamarin: usqhay kay, ruwaykuna hampiwan hinaspa organiko hukniray.",
+        "details": [
+          "Plant.id v2 Health Assessment API",
+          "Iñiy pachakpi",
+          "Sinchi kay: pisi / chawpi / sinchi",
+          "Usqhay kay: kunallan / 24h / simana / qhaway",
+          "Sapa tarpuypa qillqan waqaychasqa rikchaykunawan"
+        ]
+      },
+      "prediccion": {
+        "title": "Kusicha watuy",
+        "badge": "Machine Learning",
+        "summary": "kg/ha puquyta hinaspa watusqa qullqi mirayta scikit-learn-wan watun.",
+        "desc": "Random Forest pampata, tarpuy layata, ruwaykunap qillqanta hinaspa IoT ñawinchaykunata t'aqwin, puquyta hinaspa qhatu chaniman hina qullqi chaskiyta watunanpaq.",
+        "details": [
+          "Random Forest modelo — scikit-learn 1.3",
+          "Tupuykuna: pampa, tarpuy, ruwaykuna, IoT",
+          "Lluqsiy: kg/ha + iñiy chawpi",
+          "Kikin llaqta chaniman hina qullqi watuy",
+          "Watuykunap qillqan vs chiqap ruway"
+        ]
+      },
+      "asesoria": {
+        "title": "Sapaq yanapay",
+        "badge": "Ticket kamachiq",
+        "summary": "7 yachay kayninwan hinaspa ñawpaqchayninwan qatipasqa.",
+        "desc": "Chakra ticket kamachiq. Ruraqmi sasachakuyta willan hinaspa yachayta hinaspa ñawpaqchayta akllan. Kamachiqmi email willakuywan kutichin.",
+        "details": [
+          "7 chakra yachay",
+          "4 ñawpaqchay kuska",
+          "4 kay: Suyachkan → Allichasqa",
+          "Email willakuykuna kamariptin utaq kutichiptin"
+        ]
+      },
+      "marketplace": {
+        "title": "Yanapaqkuna qhatu",
+        "badge": "Qillqa",
+        "summary": "Muru, wanu hinaspa llamk'ana qillqa qhawana chanikunawan.",
+        "desc": "Chakra ruwaykunap qillqan MercadoLibre utaq Amazon t'inkiwan. 5 t'aqa, 12 ñawpaq ruway hinaspa kikin musuqchanapaq scraping t'aqa.",
+        "details": [
+          "5 yanapaq t'aqa",
+          "Sapa hatun qhatupi qhawana chanin",
+          "12 ñawpaqmanta churasqa ruwaykuna",
+          "T'aqarayku suysuy hinaspa maskay"
+        ]
+      },
+      "informes": {
+        "title": "PDF / Excel willaykuna",
+        "badge": "Willaykuna",
+        "summary": "4 laya willay servidorpi kamarisqa chiqap siq'ikunawan.",
+        "desc": "ReportLab (PDF) + OpenPyXL (Excel) + Matplotlib musyaqkunamanta, tarpuykunamanta hinaspa qullqimanta chiqap siq'ikunapaq. Ima pachapipas uraykachinapaq waqaychasqa qhipanku.",
+        "details": [
+          "Hatun Dashboard",
+          "Tarpuykunap kaynin ruwaykunawan",
+          "Qullqi t'aqwiy: chanikuna hinaspa qullqi chaskiy",
+          "Pacha llamiy: pacha-puquy tinkinakuy"
+        ]
+      },
+      "insumos": {
+        "title": "Yanapaqkuna yupana",
+        "badge": "Yanapay",
+        "summary": "Sapa hectáreapaq wanuta, yakuta hinaspa curu hampita chiqanta yupan.",
+        "desc": "Pampata, tarpuy layata hinaspa munasqata qillqay. Kamachiqmi hampi chaninta, chanikunata yupan hinaspa sapa mit'api chiqap ruwayta qillqan.",
+        "details": [
+          "NPK, Yaku, Curu hampi, Qura hampi, Muru",
+          "Sapa hectáreapi yupay + tupuy tikray",
+          "Sapaq hinaspa llapa hampiy chanin",
+          "Sapa tarpuypa hampiy qillqan"
+        ]
+      },
+      "asistente": {
+        "title": "AgroIA yanapaq",
+        "badge": "Groq LLM",
+        "summary": "Peru chakra ruwaypi yachaq Llama 3.3 70B-wan qispisqa rimanakuy.",
+        "desc": "Qarpaymanta, curukunamanta, tarpuymanta utaq ima chakra rimaymantapas qispisqa simipi tapuy. Tarpuyniykikunap, suyuykip hinaspa kunanpacha musyaq willaykunap kayninta riqsin.",
+        "details": [
+          "llama-3.3-70b-versatile Groq API nisqawan",
+          "Kaynin: kawsaq tarpuykuna, suyu, q'uñi kay",
+          "Kutichiykuna kastellanupi hampiwan hinaspa kikin llaqta ruwaykunawan",
+          "5 p'unchaw watuyman hina simana wakichiy"
+        ]
+      }
+    }
+  },
+  "plans": {
+    "heroTitleLine1": "Musyaqta rantinki.",
+    "heroTitleLine2": "Software-qa yapasqam hamun.",
+    "heroDescription": "Mana killa killa qullqi mañakuy. Mana killapi paguy. AgroYachay Kit-qa churanapaq wakichisqa ESP32 antata hinaspa huk hunt'a wata kamachiqta apamun.",
+    "startFree": "Qullqi manawan qallariy",
+    "talkToSales": "Rantichiqkunawan rimay",
+    "kitIncludes": "AgroYachay Kit apamun",
+    "kitItems": [
+      "5 kawsaq chakra kuskanmanta",
+      "ESP32-ykiwan kunanpacha IoT qhaway",
+      "Mana tupuyuq curu tariy Plant.id-wan",
+      "ML kusicha watuy (scikit-learn)",
+      "AgroIA yanapaq — Llama 3.3 70B-wan rimanakuy",
+      "Mana tupuyuq PDF hinaspa Excel willaykuna",
+      "Q'uñi kay hinaspa huq'uy kuskarayku willakuykuna",
+      "Chakra yanapaqkuna qhatu"
+    ],
+    "trialNote": "14 p'unchaw qullqi manawan yachanapaq yapasqa",
+    "oneTimePayment": "huk kutilla paguy",
+    "sectionTitle": "Iskay wakichiy, huk munayllapaq.",
+    "sectionDescription": "Qullqi manawan qallariy hinaspa chakrayki munaptin wiñachiy. Mana sasa astaykunayuq.",
+    "mostChosen": "Aswan akllasqa",
+    "perfectFor": "Allinmi kaykunapaq",
+    "hardwareIncluded": "Antakuna yapasqa",
+    "softwareIncluded": "1 wata software yapasqa",
+    "includes": "Apamun",
+    "differentialsTitle": "Chiqap yachay antakuna. Chanin chanin.",
+    "differentialsDescription": "Manam siminchakuykunata rantichiykuchu. Sapa kamachiqpa ruwayninmi chiqap llamk'aypi kachkan, qhawanaykipaq kicharisqa kodigoyuq.",
+    "differentials": [
+      {
+        "title": "Mana rimanakuyuq",
+        "desc": "Killa killa. Munaspayki wichq'ay mana huchachaywan nitaq pakasqa chaniwan."
+      },
+      {
+        "title": "Kicharisqa antakuna",
+        "desc": "Kikin ESP32-ykita llamk'achiy. Firmware-qa kicharisqam hinaspa ima kikin t'aqawanpas tinkin."
+      },
+      {
+        "title": "Llamk'aq IA",
+        "desc": "Groq llama-3.3-70b + Plant.id v2 + scikit-learn chiqap ruwaypi purichkan, mana siminchakuyllachu."
+      },
+      {
+        "title": "Perupaq ruwasqa",
+        "desc": "Antis tarpuykunapaq wakichisqa — papa, kinwa, sara — karu suyukunapi pisi tinkiywan."
+      }
+    ],
+    "faqTitle": "Llapa yachanaykipaq kaqkuna",
+    "faqs": [
+      {
+        "q": "¿Kit-qa llapa churanapaq kaqtachu apamun?",
+        "a": "Arí. ESP32, DHT11 hinaspa FC-28 musyaqkuna, waskhakuna hinaspa waqaychaq qullqa hamun. USB 5V kallpallatam munanki (celular hunt'achiq)."
+      },
+      {
+        "q": "¿Imataq ñawpaq wata qhipata kanqa?",
+        "a": "Antakunaqa wiñaypaqmi qampa. Kamachiqqa S/ 59-mi iskay kaq watamanta wichayman, IA hinaspa willay t'aqakunata llamk'achiyta munaspallayki."
+      },
+      {
+        "q": "¿Qullqi mana wakichiyta llamk'achiymanchu musyaqta mana rantispa?",
+        "a": "Arí. Qullqi manawan wakichiyqa tarpuy kamachiyta, pachata, curu tariyta hinaspa yanapaq yupanata apamun. Kunanpacha IoT qhawayllatam chinkachin."
+      },
+      {
+        "q": "¿Imaynatam Kit-ta chaskisaq?",
+        "a": "Kunanqa ñuqaykuman chiqanta qillqamuspa. Llapa Peru suyuman Olva Courier utaq Serpost nisqawan apachiyku. Chayamuy pacha: 3 – 7 llamk'ana p'unchaw."
+      },
+      {
+        "q": "¿ESP32 firmware-qa kicharisqachu?",
+        "a": "Arí. Kodigoqa tarikunmi hinaspa qam kikiyki hukchayta atinki munaspaqa. Kit-qa firmware churasqaña hinaspa yachasqaña chayamun."
+      },
+      {
+        "q": "¿Ima paguy laykunatam chaskinkichik?",
+        "a": "Yape, Plin, BCP/Interbank bankumanta apachiy. Elektroniko paguy qillqata quyku."
+      }
+    ],
+    "ctaTitleLine1": "¿Qallariyta atinkichu?",
+    "ctaTitleLine2": "Chakraykim suyasunki.",
+    "ctaDescription": "Qullqi manawan rakiquykita kamariy, ñawpaq chakraykita qillqay hinaspa kunanmantapacha chiqap willaykunata qhaway. Mana ima huchayuq.",
+    "ctaPrimary": "Kunallan qullqi manawan qallariy",
+    "items": {
+      "free": {
+        "name": "Mana musyaqniyuq",
+        "price": "Qullqi manawan",
+        "sub": "wiñaypaq",
+        "description": "Chakraykita kamachiy mana antakunayuq. Kunanmanta qallariy.",
+        "perfectFor": "Manaraq musyaqniyuq chakra runakunapaq, yachaqkunapaq, chakra llamk'aqkunapaq.",
+        "cta": "Qullqi manawan rakiquta kamariy",
+        "badgeLabel": "Wiñaypaq qullqi manawan",
+        "features": [
+          "3 kawsaq chakrakama",
+          "Ruwaykunap hinaspa chanikunap qillqan",
+          "Kunan pacha hinaspa 5 p'unchaw watuy",
+          "IA curu tariy (10 sapa killa)",
+          "Yanapaqkuna yupana",
+          "Bristol chakra almanaque",
+          "Yanapaqkuna qhatu",
+          "Kunanpacha IoT qhaway",
+          "IA kusicha watuy",
+          "AgroIA yanapaq (rimanakuy)",
+          "PDF hinaspa Excel willaykuna"
+        ]
+      },
+      "kit": {
+        "name": "AgroYachay Kit",
+        "price": "S/ 129",
+        "sub": "huk kutilla paguy · 1 wata software yapasqa",
+        "description": "ESP32 musyaq + llapa software huk watapaq. Mana killa killa paguywan.",
+        "perfectFor": "Ima chakra runapas. Antakunata huk kutilla rantinki hinaspa wakichisqaña.",
+        "note": "2 kaq watamanta wichayman: S/ 59/wata software-llapaq",
+        "cta": "Kit-niyta mañakuy",
+        "badgeLabel": "Aswan rantisqa",
+        "hardware": [
+          "ESP32 WROOM-32 huch'uy kamachiq",
+          "DHT11 musyaq (q'uñi kay + wayra huq'uy)",
+          "FC-28 musyaq (allpa huq'uy)",
+          "Waskhakuna, hark'aqkuna hinaspa waqaychaq qullqa",
+          "Firmware ñawpaqmanta churasqa hinaspa yachasqa"
+        ],
+        "features": [
+          "Mana tupuyuq chakrakuna",
+          "Kunanpacha IoT qhaway",
+          "Mana tupuyuq IA curu tariy",
+          "ML kusicha watuy",
+          "AgroIA yanapaq — qispisqa rimanakuy",
+          "Mana tupuyuq PDF hinaspa Excel willaykuna",
+          "Wakichiy atina kuskarayku willakuykuna",
+          "Email yanapay (24 ura kutichiy)"
+        ]
+      }
+    }
+  },
+  "contact": {
+    "heroTitleLine1": "Kaypim kachkayku",
+    "heroTitleLine2": "yanapasunaykipaq.",
+    "heroDescription": "Musyaqkunamanta, wakichiykunamanta utaq kamachiqta imayna churanamanta tapukuykuna: qillqana p'anqanta llamk'achispa chiqanta qillqamuwayku.",
+    "channels": [
+      {
+        "title": "Tinkinapaq qillqana p'anqa",
+        "desc": "Hatun ñan. 48 uramanta pisipi kutichiyku."
+      },
+      {
+        "title": "Email",
+        "desc": "Wakichiyman hina tarikun. Rakiquta kichaspa wakichikun."
+      },
+      {
+        "title": "Rimanakuy / WhatsApp",
+        "desc": "AgroYachay Kit hinaspa hatun ruwaykuna. Ñawpaqchasqa yanapay."
+      }
+    ],
+    "viewSupportPlans": "Yanapay wakichiykunata qhaway",
+    "formTitle": "Sasachakuyniykita willawayku",
+    "formSubtitle": "48 llamk'ana uramanta pisipim kutichiyku.",
+    "name": "Suti *",
+    "namePlaceholder": "Sutiyki",
+    "phone": "Karu rimana",
+    "phonePlaceholder": "+51 999 000 000",
+    "email": "Email *",
+    "emailPlaceholder": "rikchay@correo.com",
+    "subject": "Rimay",
+    "selectSubject": "Huk rimayta akllay",
+    "subjects": [
+      "IoT musyaqkunamanta tapukuy",
+      "Wakichiykunamanta willay",
+      "Yachay yanapay",
+      "Hatun ruway / huñu wakichiy",
+      "Kamachiqpa rikuchiynin",
+      "Huk"
+    ],
+    "message": "Willay *",
+    "messagePlaceholder": "Tapukuyniykita willay...",
+    "sending": "Apachichkan…",
+    "send": "Willayta apachiy",
+    "responseNote": "48 llamk'ana uramanta pisipim kutichiyku.",
+    "requiredFields": "Munasqa kuskakunata hunt'achiy",
+    "sent": "Willay allinta apachisqa",
+    "supportTitle": "Yanapayqa wakichiyniykiwanmi wiñan.",
+    "supportDescription": "Sapa wakichiymi huk hina qhawariyta apamun. Aswan hatun llamk'ayniyki kaptin, aswan usqhaymi kutichiy.",
+    "planPrefix": "Wakichiy",
+    "supportTiers": [
+      {
+        "plan": "Mana musyaqniyuq",
+        "items": [
+          "Tinkinapaq qillqana p'anqa",
+          "48 llamk'ana urapi kutichiy",
+          "Yachay qillqakuna",
+          "Yachay hatun waqaychana"
+        ]
+      },
+      {
+        "plan": "AgroYachay Kit",
+        "items": [
+          "Llapa ñawpaqpi kaq",
+          "Ñawpaqchasqa email yanapay",
+          "24 urapi kutichiy",
+          "Musyaq churaypi yanapay"
+        ]
+      },
+      {
+        "plan": "Hatun ruwaykuna",
+        "items": [
+          "Sapaq chanin qillqa",
+          "Sapaq tinkinapaq rakiqu",
+          "Yachachiy yapasqa",
+          "Aswan hatun yanapay"
+        ]
+      }
+    ],
+    "availabilityTitle": "Sapa kutim pipas tarikun.",
+    "generalSupport": "Llapanpaq qhawariy",
+    "schedule": [
+      {
+        "day": "Killachawmanta Ch'askachawkama",
+        "hours": "8:00 AM – 7:00 PM"
+      },
+      {
+        "day": "K'uychichawkuna",
+        "hours": "9:00 AM – 2:00 PM"
+      },
+      {
+        "day": "Intichawkuna",
+        "hours": "Wichq'asqa"
+      }
+    ],
+    "noSchedule": "Mana pacha kuskayuq",
+    "noScheduleDescription": "Hatun ruwaykunapaq hinaspa huñukunapaq. Chakra mana suyaptin, ñuqaykupas manam suyaykuchu.",
+    "priorityItems": [
+      "Ñawpaqchasqa kutichiy mana mit'ata suyaspa",
+      "IoT-pi yachaq llamk'aqkunaman yaykuy",
+      "Hatun ruwaykunapaq sapaq tinkiy"
+    ],
+    "faqTitle": "Aswan tapuwasqanku.",
+    "faqs": [
+      {
+        "q": "¿Chakraypi internet-ta munanichu?",
+        "a": "Manam sapa kutichu. Musyaqkunaqa 10 ñawinchaykama offline waqaychan hinaspa yapamanta tinkiptin tinkichin."
+      },
+      {
+        "q": "¿Celular mana chayaq suyukunapi llamk'anchu?",
+        "a": "Arí, musyaqkunaqa makiwan tinkichispa llamk'ayta atinku. Kikin bufferqa willayta waqaychan mana WiFi-yuq."
+      },
+      {
+        "q": "¿Pitaq musyaqkunata churan?",
+        "a": "Qam kikiyki ruwayta atinki. Ñan ñanmi qillqasqa waskha siq'ikunawan."
+      },
+      {
+        "q": "¿Yanapayqa kastellanupichu?",
+        "a": "Arí, Peru suyupa rimayninkunata hinaspa tarpuykunanta riqsispa. Inglés simipipas qhawariyku."
+      },
+      {
+        "q": "¿Imayna usqhaytam kutichinkichik?",
+        "a": "Qullqi manawan wakichiy: 48 ura qillqana p'anqawan. AgroYachay Kit: ñawpaqchasqa email yanapay. Hatun ruwaykunapaq, chiqanta tinkiwayku."
+      }
+    ],
+    "ctaTitleLine1": "Qillqamuwayku.",
+    "ctaTitleLine2": "Kunanmi kutichiyku.",
+    "ctaDescription": "Peru chakra ruwayta, tarpuykunanta hinaspa kayninta riqsiykum. Qillqana p'anqata llamk'achiy hinaspa chakraykipaq allin ñanta akllanaykipaq yanapasqayki.",
+    "goToForm": "Qillqana p'anqaman riy"
+  },
+  "almanac": {
+    "moonPhases": {
+      "Luna Nueva": "Musuq killa",
+      "Cuarto Creciente": "Wiñaq killa",
+      "Luna Llena": "Pura killa",
+      "Cuarto Menguante": "Wañu killa"
+    },
+    "lunarTips": {
+      "Luna Nueva": "Saphikunata hinaspa papa layakunata tarpuy.",
+      "Cuarto Creciente": "Rurukunapaq hinaspa raphiyuq yurakunapaq allin.",
+      "Luna Llena": "Kusichanapaq hinaspa huñunapaq ancha allin.",
+      "Cuarto Menguante": "Curukunata hark'anapaq hinaspa k'utunapaq allin."
+    },
+    "months": [
+      {
+        "name": "Qhulla puquy",
+        "weather": "Sinchi para · Pisi qarpay",
+        "advice": "Pisi pacha tarpuykunapaq allin mit'a. Mit'a parakunata llamk'achiy. Sinchi huq'uyrayku k'aspa hark'ay.",
+        "sowing": [
+          "Sara",
+          "Papa",
+          "Kinwa",
+          "Siwara"
+        ],
+        "harvest": [
+          "Ñawpaq habas",
+          "Alwirhas"
+        ],
+        "holidays": [
+          "Musuq Wata",
+          "Reyes Magos"
+        ],
+        "weeks": [
+          "Sayasqa tarpuykunapi curu hark'ay",
+          "Wiñaq papa hinaspa sara hallmay",
+          "Wakichisqa chakrakunapi kinwa tarpuy",
+          "Para pisiyaptin yapa qarpay"
+        ]
+      },
+      {
+        "name": "Hatun puquy",
+        "weather": "Aswan para · Chakrakunata amachay",
+        "advice": "Huq'uyrayku curu hark'ay. Uray pampakunapi yaku lluqsinanta wakichiy. Raphi unquykunata qhaway.",
+        "sowing": [
+          "Trigo",
+          "Siwara",
+          "Yuyukuna"
+        ],
+        "harvest": [
+          "Ñawpaq papa",
+          "Chuqllu"
+        ],
+        "holidays": [
+          "Candelaria Mamacha",
+          "San Valentín"
+        ],
+        "weeks": [
+          "K'aspakunamanta ñawpaq hampiy",
+          "Unusqa pampakunapi wachu lluqsichiy",
+          "Ñawpaq chuqllu kusicha",
+          "Hamuq mit'apaq muru akllay"
+        ]
+      },
+      {
+        "name": "Pawqar waray",
+        "weather": "Para tukuy · Allpakunata wakichiy",
+        "advice": "Antis tarpuykunap qhipa tarpuynin. Mit'ap hatun kusichan qallariy. Taqikunata wakichiy.",
+        "sowing": [
+          "Ullucu",
+          "Uqa",
+          "Añu"
+        ],
+        "harvest": [
+          "Kinwa",
+          "Kiwicha",
+          "Sara"
+        ],
+        "holidays": [
+          "Warmip P'unchawnin",
+          "San José"
+        ],
+        "weeks": [
+          "Kinwa hinaspa qhipa sara kusicha",
+          "Hanaq suyukunapi ullucu hinaspa uqa tarpuy",
+          "Yarqhakunata pichay",
+          "Kusichapaq taqikunata wakichiy"
+        ]
+      },
+      {
+        "name": "Ayriwa",
+        "weather": "Ch'aki mit'a · Hatun kusicha",
+        "advice": "Antis papa layakunap kusicha mit'an. Qullqa hina waqaychayta wakichiy. Muru akllay.",
+        "sowing": [
+          "Habas (2 kaq mit'a)"
+        ],
+        "harvest": [
+          "Papa",
+          "Uqa",
+          "Ullucu",
+          "Añu"
+        ],
+        "holidays": [
+          "Santa Simana"
+        ],
+        "weeks": [
+          "Papap hinaspa uywa saphikunap hatun kusichan",
+          "Muru t'aqay hinaspa akllay",
+          "Ch'uñupaq hinaspa tuntapaq papa ch'akichiy",
+          "Waqaychay hinaspa puquy qillqay"
+        ]
+      },
+      {
+        "name": "Aymuray",
+        "weather": "Ch'aki hinaspa chiri · Tuta qasa",
+        "advice": "Q'usñiwan utaq tuta qarpaywan qasamanta amachay. Ch'uñu hinaspa muraya ruway. Rurukunata ch'akichiy.",
+        "sowing": [
+          "Chiri mit'a trigo"
+        ],
+        "harvest": [
+          "Kinwa",
+          "Qañiwa",
+          "Tarwi"
+        ],
+        "holidays": [
+          "Llamk'aypa P'unchawnin",
+          "Mamap P'unchawnin"
+        ],
+        "weeks": [
+          "Qasakunawan ch'uñu hinaspa tunta ruway",
+          "Qañiwa hinaspa tarwi kusicha",
+          "Rurukunata ch'akichiy hinaspa saruy",
+          "Chiri mit'a trigo wakichiy hinaspa tarpuy"
+        ]
+      },
+      {
+        "name": "Inti raymi",
+        "weather": "Aswan chiri killa · Sinchi qasa",
+        "advice": "Chakra samay killa. Llamk'anakunata allichay. Rurukunata saruy. Hamuq mit'ata wakichiy.",
+        "sowing": [],
+        "harvest": [
+          "Trigo",
+          "Siwara"
+        ],
+        "holidays": [
+          "Tatap P'unchawnin",
+          "Inti Raymi",
+          "San Pedro hinaspa San Pablo"
+        ],
+        "weeks": [
+          "Trigo hinaspa siwara saruy hinaspa wayrachiy",
+          "Llamk'anakunata hinaspa wasikunata allichay",
+          "Inti Raymi — raymi hinaspa samay",
+          "2026-2027 mit'ata wakichiy"
+        ]
+      },
+      {
+        "name": "Anta Sitwa",
+        "weather": "Sinchi chiri · Ch'uya hanaq pacha",
+        "advice": "Wasi ukhupi almasikita wakichiy. Hamuq mit'apaq allpata t'aqwiy. Chakra yachachiykuna.",
+        "sowing": [
+          "Wasi ukhupi yuyukuna"
+        ],
+        "harvest": [
+          "Ch'aki habas"
+        ],
+        "holidays": [
+          "Suyu Raymikuna"
+        ],
+        "weeks": [
+          "Hamuq mit'apaq allpa t'aqwiy",
+          "Qatasqapi lichuwa hinaspa siwulla almasika",
+          "Suyu Raymikuna — raymi hinaspa samay",
+          "Q'umir wanuta allpaman yapay"
+        ]
+      },
+      {
+        "name": "Qhapaq Sitwa",
+        "weather": "Wayrakuna · Q'uñiy qallariy",
+        "advice": "Allpakunata ukhuta wakichiy. Organiko wanuta yapay. Hatun mit'apaq murukunata t'aqwiy.",
+        "sowing": [
+          "Allpakunata sinchita wakichiy"
+        ],
+        "harvest": [],
+        "holidays": [
+          "Asunción Mamacha"
+        ],
+        "weeks": [
+          "Allpakunata ukhuta t'ikray",
+          "Organiko wanuta hinaspa compost yapay",
+          "Murukunata akllay hinaspa hampiy",
+          "Patakunata ruway hinaspa allichay"
+        ]
+      },
+      {
+        "name": "Quya Raymi",
+        "weather": "Pawqar mit'a · Sapa kuti para",
+        "advice": "Hatun tarpuy qallariy. Ukhu wanuta churay. Para manaraq chayamuchkaptin qarpay kamachiqta qhaway.",
+        "sowing": [
+          "Papa (hatun mit'a)",
+          "Sara",
+          "Kinwa"
+        ],
+        "harvest": [],
+        "holidays": [
+          "Qillqa Yachaypa P'unchawnin"
+        ],
+        "weeks": [
+          "Hatun chakrakunapi papa tarpuy",
+          "Chawpi suyukunapi sara tarpuy",
+          "NPK ukhu wanuchay",
+          "Qarpay kamachiqta churay hinaspa qhaway"
+        ]
+      },
+      {
+        "name": "Kantaray",
+        "weather": "Sapa kuti para · Sumaq q'uñi kay",
+        "advice": "Wakichisqa tarpuykunata qatiy. Sayasqa tarpuykunapi qurata hark'ay. Papap ñawpaq hallmaynin.",
+        "sowing": [
+          "Habas",
+          "Alwirhas",
+          "Trigo"
+        ],
+        "harvest": [],
+        "holidays": [
+          "Angamos Maqanakuy",
+          "Criolla Takiy"
+        ],
+        "weeks": [
+          "Habas hinaspa alwirhas tarpuy",
+          "Tarpuykunapi ñawpaq qura hurquy",
+          "Chayraq lluqsimuq papap ñawpaq hallmaynin",
+          "Sarapi curukunata ñawpaqmanta hark'ay"
+        ]
+      },
+      {
+        "name": "Ayamarq'a",
+        "weather": "Sinchi para · Chikchikuna",
+        "advice": "Tarpuykunata hallmay. Yapa wanuchay. Chikchimanta sinchi curu qhaway.",
+        "sowing": [
+          "Siwara",
+          "Uywapaq awina"
+        ],
+        "harvest": [
+          "Q'umir habas",
+          "Q'umir alwirhas"
+        ],
+        "holidays": [
+          "Llapa Santokuna",
+          "Wañuqkunap P'unchawnin"
+        ],
+        "weeks": [
+          "Papap hinaspa sarap iskay kaq hallmaynin",
+          "Raphi wanuta churay",
+          "Q'umir habas hinaspa alwirhas kusicha",
+          "Chikchita qhaway hinaspa amachaq qatakuna"
+        ]
+      },
+      {
+        "name": "Qhapaq Raymi",
+        "weather": "Sinchi para · Para ruphay mit'a",
+        "advice": "Sinchi curu hark'ay. Ruphay mit'a kusichapaq wasikunata wakichiy. Mana qarpay munasqachu.",
+        "sowing": [
+          "Sarap qhipa tarpuynin"
+        ],
+        "harvest": [
+          "Ñawpaq papa",
+          "Yuyukuna"
+        ],
+        "holidays": [
+          "Inmaculada Concepción",
+          "Navidad"
+        ],
+        "weeks": [
+          "Papapi k'aspa hinaspa mildiu hark'ay",
+          "Ñawpaq yuyukuna kusicha",
+          "Navidad — raymi hinaspa samay",
+          "Mit'a yupay hinaspa 2027 wakichiy"
+        ]
+      }
+    ],
+    "crops": {
+      "Papa": {
+        "name": "Papa",
+        "family": "Solanaceae",
+        "altitude": "3200-4100 msnm",
+        "duration": "6-8 killa",
+        "irrigation": "450-600 mm",
+        "spacing": "90×30 cm",
+        "depth": "12 cm",
+        "desc": "Altiplanopa hatun tarpuynin. Perupi 3000 laya aswan. Kikin layakunaqa qasata atipanku.",
+        "varieties": [
+          "Huayro",
+          "Imilla Negra",
+          "Ccompis",
+          "Única",
+          "Canchan",
+          "Yungay"
+        ]
+      },
+      "Quinua": {
+        "name": "Kinwa",
+        "family": "Amaranthaceae",
+        "altitude": "3000-4000 msnm",
+        "duration": "5-8 killa",
+        "irrigation": "300-500 mm",
+        "spacing": "40×25 cm",
+        "depth": "2 cm",
+        "desc": "Antis hatun mikhuy hunt'a proteinayuq. Ch'akita, qasata hinaspa kachita atipan. Runakunap hayñin.",
+        "varieties": [
+          "Salcedo INIA",
+          "Kancolla",
+          "Blanca de Juli",
+          "Rosada de Huancané",
+          "Negra Collana"
+        ]
+      },
+      "Maíz": {
+        "name": "Sara",
+        "family": "Poaceae",
+        "altitude": "2800-3500 msnm",
+        "duration": "5-7 killa",
+        "irrigation": "500-800 mm",
+        "spacing": "80×40 cm",
+        "depth": "5 cm",
+        "desc": "Ñawpa antis tarpuy. Kulli sarataqa ancha allin mikhuymi. Puno mikhuypa saphin.",
+        "varieties": [
+          "Kulli sara",
+          "Yuraq chuqllu",
+          "Kamcha",
+          "Kulli"
+        ]
+      },
+      "Cañihua": {
+        "name": "Qañiwa",
+        "family": "Amaranthaceae",
+        "altitude": "3800-4500 msnm",
+        "duration": "6-7 killa",
+        "irrigation": "350-400 mm",
+        "spacing": "30×20 cm",
+        "depth": "1 cm",
+        "desc": "Kinwamanta aswan sinchi. Ancha allin mikhuy. 4500 msnm-kama wiñan, maypichus huk tarpuykuna mana wiñankuchu.",
+        "varieties": [
+          "Cupi",
+          "Illimani",
+          "Ramis"
+        ]
+      },
+      "Habas": {
+        "name": "Habas",
+        "family": "Fabaceae",
+        "altitude": "3000-4000 msnm",
+        "duration": "5-7 killa",
+        "irrigation": "350-500 mm",
+        "spacing": "60×30 cm",
+        "depth": "5 cm",
+        "desc": "Nitrogenota hap'iq leguminosa. Allpap kallpanta allinyachin. Q'umirta hinaspa ch'akita mikhukun.",
+        "varieties": [
+          "IPA Gloriabamba",
+          "San Isidro",
+          "Copacabana"
+        ]
+      },
+      "Oca": {
+        "name": "Uqa",
+        "family": "Oxalidaceae",
+        "altitude": "3200-4000 msnm",
+        "duration": "7-8 killa",
+        "irrigation": "600-700 mm",
+        "spacing": "60×30 cm",
+        "depth": "8 cm",
+        "desc": "Antis kikin saphi mikhuy achka oxalatoyuq. Papamanta qatiq iskay kaq.",
+        "varieties": [
+          "Huari",
+          "Pauccar",
+          "Chullpi"
+        ]
+      },
+      "Olluco": {
+        "name": "Ullucu",
+        "family": "Basellaceae",
+        "altitude": "3000-4200 msnm",
+        "duration": "7-9 killa",
+        "irrigation": "600-800 mm",
+        "spacing": "60×30 cm",
+        "depth": "8 cm",
+        "desc": "Ancha allin antis saphi mikhuy. Achka yakuyuqmi. Altiplano mikhuypi ancha chaniyuq.",
+        "varieties": [
+          "Puka shungu",
+          "Q'illu",
+          "Yuraq"
+        ]
+      },
+      "Tarwi": {
+        "name": "Tarwi",
+        "family": "Fabaceae",
+        "altitude": "2800-3800 msnm",
+        "duration": "6-8 killa",
+        "irrigation": "400-600 mm",
+        "spacing": "50×30 cm",
+        "depth": "4 cm",
+        "desc": "Sojamanta aswan proteinayuq leguminosa. Wayramanta nitrogenota hap'in. Hayanta hurquna.",
+        "varieties": [
+          "INIA 450",
+          "Quillahuaman",
+          "Andenes"
+        ]
+      },
+      "Trigo": {
+        "name": "Trigo",
+        "family": "Poaceae",
+        "altitude": "2800-3800 msnm",
+        "duration": "5-6 killa",
+        "irrigation": "350-500 mm",
+        "spacing": "15×15 cm",
+        "depth": "3 cm",
+        "desc": "Kikin mikhuypaq hinaspa rantichiypaq chaniyuq ruru. Allin ch'akiq allpata hinaspa neutro pH-ta munan.",
+        "varieties": [
+          "Centenario",
+          "INIA 414",
+          "Andino"
+        ]
+      },
+      "Cebada": {
+        "name": "Siwara",
+        "family": "Poaceae",
+        "altitude": "3000-4200 msnm",
+        "duration": "4-6 killa",
+        "irrigation": "300-450 mm",
+        "spacing": "20×15 cm",
+        "depth": "4 cm",
+        "desc": "Altiplano kayman aswan yachasqa ruru. Runa mikhuypi, uywa mikhuypi hinaspa aqha ruwaypi llamk'achikun.",
+        "varieties": [
+          "INIA 416",
+          "Quirusillas",
+          "UNA 80"
+        ]
+      }
+    },
+    "title": "Bristol Almanaque",
+    "subtitle": "Antis altiplano chakra hinaspa killa qillqa",
+    "print": "Ch'ipachiy",
+    "export": "Hurquy",
+    "searchPlaceholder": "Llapa killakunapi tarpuyta maskay… (papa, kinwa, sara)",
+    "viewMonthly": "Killanpi",
+    "viewGantt": "Gantt",
+    "viewCrops": "Tarpuykuna",
+    "viewStats": "T'aqwiy",
+    "weekdays": [
+      "Int",
+      "Kil",
+      "Ati",
+      "Quy",
+      "Ilp",
+      "Cha",
+      "Kuy"
+    ],
+    "shortMonths": [
+      "Qhu",
+      "Hat",
+      "Paw",
+      "Ayr",
+      "Aym",
+      "Int",
+      "Ant",
+      "Qhs",
+      "Quy",
+      "Kan",
+      "Aya",
+      "Qha"
+    ],
+    "moonPhasesOf": "{{month}} killa kayninkuna",
+    "sowing": "Tarpuy",
+    "harvest": "Kusicha",
+    "sowingCount": "{{count}} yuyaychasqa tarpuy",
+    "noSowing": "Manam tarpuy mit'achu",
+    "harvestCount": "{{count}} kusichanapaq tarpuy",
+    "noHarvest": "Manam kusicha mit'achu",
+    "weatherAndAdvice": "Pacha hinaspa yuyaychay",
+    "tempMin": "Pisi q'uñi",
+    "tempMax": "Aswan q'uñi",
+    "rain": "Para",
+    "weeklyActivities": "Simanapi ruwaykuna",
+    "weeklyActivitiesSub": "Chakra llamk'aykunap qillqan",
+    "week": "Simana",
+    "holidays": "Raymikuna",
+    "holidaysCount": "{{count}} chaniyuq p'unchaw",
+    "lunarGuide": "Killa kayninman hina tarpuy yachachiy",
+    "lunarGuideSub": "Bristol Almanaque — antis chakra yachay",
+    "ganttTitle": "Gantt — 2026 wata tarpuy hinaspa kusicha",
+    "ganttSub": "Q'umir = tarpuy · Awranha = kusicha · Killata qhawanaykipaq ñit'iy",
+    "legendSowing": "Tarpuy",
+    "legendHarvest": "Kusicha",
+    "legendBoth": "Tarpuy hinaspa kusicha",
+    "legendNone": "Mana ruwayniyuq",
+    "backToCrops": "Llapa tarpuykunaman kutiy",
+    "altitude": "Hanay kay",
+    "duration": "Pacha",
+    "irrigation": "Qarpay",
+    "spacing": "Karu kay",
+    "depth": "Ukhu kay",
+    "sowingMonths": "Tarpuy killakuna",
+    "harvestMonths": "Kusicha killakuna",
+    "mainVarieties": "Hatun layakuna",
+    "statSowingCrops": "Tarpuy tarpuykuna",
+    "statHarvestCrops": "Kusicha tarpuykuna",
+    "statMonthsWithSowing": "Tarpuyniyuq killakuna",
+    "statMoonPhases": "Killa kayninkuna",
+    "uniqueVarieties": "sapaq layakuna",
+    "of12Months": "12 killamanta",
+    "recordedIn2026": "2026 watapi qillqasqa",
+    "monthlyActivity": "Killanpi chakra ruway",
+    "monthlyActivitySub": "Sapa killapi tarpuy hinaspa kusicha tarpuykunap yupaynin",
+    "rainfall": "2026 killanpi para",
+    "rainfallSub": "Puno suyupaq ñawpaq watusqa · mm",
+    "rainLegend": "Para (mm)",
+    "allSowingCrops": "Llapa tarpuy tarpuykuna",
+    "allHarvestCrops": "Llapa kusicha tarpuykuna",
+    "almanacVarieties": "2026 almanaquepa layankuna",
+    "fullTable": "2026 tarpuykunap hunt'a wata tablan",
+    "fullTableSub": "Tarpuy · Kusicha · Sapa killapi killa kayninkuna",
+    "tableHeaders": [
+      "Killa",
+      "Q'uñi",
+      "Para",
+      "Tarpuy",
+      "Kusicha",
+      "Killakuna"
+    ],
+    "exportTitle": "BRISTOL ALMANAQUE 2026",
+    "exportSowing": "TARPUY",
+    "exportHarvest": "KUSICHA",
+    "exportWeather": "PACHA",
+    "exportAdvice": "YUYAYCHAY",
+    "exportWeekly": "SIMANA RUWAYKUNA",
+    "exportMoon": "KILLA KAYNINKUNA",
+    "exportDay": "P'unchaw",
+    "today": "Kunan",
+    "moonPhase": "Killa kaynin",
+    "holiday": "Raymi",
+    "noSowingScheduled": "Kay killapaq mana wakichisqa tarpuykuna.",
+    "noHarvestScheduled": "Kay killapaq mana wakichisqa kusichakuna.",
+    "sowingMonthsCount": "{{count}} tarpuy killa",
+    "harvestMonthsCount": "{{count}} kusicha killa"
   }
 }

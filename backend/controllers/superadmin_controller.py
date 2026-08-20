@@ -2,6 +2,7 @@ import os
 import json
 from functools import wraps
 from datetime import datetime
+from app.i18n import translate as _
 
 import bcrypt
 from flask import Blueprint, request, jsonify, send_file, make_response
@@ -37,7 +38,7 @@ def require_superadmin(fn):
     def wrapper(*args, **kwargs):
         claims = get_jwt()
         if claims.get('rol') != 'superadmin':
-            return jsonify({'success': False, 'message': 'Acceso restringido a SuperAdmin'}), 403
+            return jsonify({'success': False, 'message': _('acceso_restringido_a_superadmin')}), 403
         return fn(*args, **kwargs)
     return wrapper
 
@@ -48,7 +49,7 @@ def require_admin(fn):
     def wrapper(*args, **kwargs):
         claims = get_jwt()
         if claims.get('rol') not in ('admin', 'superadmin'):
-            return jsonify({'success': False, 'message': 'Acceso restringido a administradores'}), 403
+            return jsonify({'success': False, 'message': _('acceso_restringido_a_administradores')}), 403
         return fn(*args, **kwargs)
     return wrapper
 
@@ -80,14 +81,14 @@ def get_public_config():
         resp.headers['Cache-Control'] = 'public, max-age=60'
         return resp
     except Exception as e:
-        return jsonify({'success': False, 'message': 'Error interno del servidor'}), 500
+        return jsonify({'success': False, 'message': _('error_interno_del_servidor')}), 500
 
 
 @superadmin_bp.route('/public/config/image/<key>', methods=['GET'])
 def serve_config_image(key):
     allowed_image_keys = {'logo', 'favicon', 'institution_logo', 'cover_image'}
     if key not in allowed_image_keys:
-        return jsonify({'success': False, 'message': 'Clave de imagen no valida'}), 400
+        return jsonify({'success': False, 'message': _('clave_de_imagen_no_valida')}), 400
 
     try:
         conn = get_db()
@@ -98,15 +99,15 @@ def serve_config_image(key):
         conn.close()
 
         if not row or not row['config_value']:
-            return jsonify({'success': False, 'message': 'Imagen no configurada'}), 404
+            return jsonify({'success': False, 'message': _('imagen_no_configurada')}), 404
 
         fpath = os.path.join(UPLOAD_DIR, row['config_value'])
         if not os.path.exists(fpath):
-            return jsonify({'success': False, 'message': 'Archivo no encontrado'}), 404
+            return jsonify({'success': False, 'message': _('archivo_no_encontrado')}), 404
 
         return send_file(fpath)
     except Exception as e:
-        return jsonify({'success': False, 'message': 'Error interno del servidor'}), 500
+        return jsonify({'success': False, 'message': _('error_interno_del_servidor')}), 500
 
 
 @superadmin_bp.route('/admin/users', methods=['GET'])
@@ -132,7 +133,7 @@ def list_users():
 
         return jsonify({'success': True, 'data': {'users': users, 'total': len(users)}}), 200
     except Exception as e:
-        return jsonify({'success': False, 'message': 'Error interno del servidor'}), 500
+        return jsonify({'success': False, 'message': _('error_interno_del_servidor')}), 500
 
 
 @superadmin_bp.route('/admin/users/<int:user_id>/role', methods=['PUT'])
@@ -152,10 +153,10 @@ def change_user_role(user_id):
             allowed_targets = ('agricultor', 'usuario')
 
         if new_role not in allowed_targets:
-            return jsonify({'success': False, 'message': 'Rol no permitido para tu nivel de acceso'}), 403
+            return jsonify({'success': False, 'message': _('rol_no_permitido_para_tu_nivel')}), 403
 
         if current_id == user_id:
-            return jsonify({'success': False, 'message': 'No puedes cambiar tu propio rol'}), 400
+            return jsonify({'success': False, 'message': _('no_puedes_cambiar_tu_propio_rol')}), 400
 
         conn = get_db()
         cur  = conn.cursor()
@@ -163,18 +164,18 @@ def change_user_role(user_id):
         target = cur.fetchone()
         if not target:
             cur.close(); conn.close()
-            return jsonify({'success': False, 'message': 'Usuario no encontrado'}), 404
+            return jsonify({'success': False, 'message': _('usuario_no_encontrado')}), 404
 
         if caller_rol != 'superadmin' and target['rol'] in ('superadmin', 'admin'):
             cur.close(); conn.close()
-            return jsonify({'success': False, 'message': 'Sin permisos para modificar este usuario'}), 403
+            return jsonify({'success': False, 'message': _('sin_permisos_para_modificar_este_usuario')}), 403
 
         cur.execute("UPDATE usuarios SET rol = %s WHERE id = %s", (new_role, user_id))
         conn.commit()
         cur.close(); conn.close()
-        return jsonify({'success': True, 'message': f'Rol actualizado a {new_role}'}), 200
+        return jsonify({'success': True, 'message': _('rol_actualizado', role=new_role)}), 200
     except Exception:
-        return jsonify({'success': False, 'message': 'Error interno del servidor'}), 500
+        return jsonify({'success': False, 'message': _('error_interno_del_servidor')}), 500
 
 
 @superadmin_bp.route('/admin/users/<int:user_id>/toggle', methods=['PUT'])
@@ -186,7 +187,7 @@ def toggle_user_active(user_id):
         current_id = int(get_jwt_identity())
 
         if current_id == user_id:
-            return jsonify({'success': False, 'message': 'No puedes desactivarte a ti mismo'}), 400
+            return jsonify({'success': False, 'message': _('no_puedes_desactivarte_a_ti_mismo')}), 400
 
         conn = get_db()
         cur  = conn.cursor()
@@ -194,20 +195,20 @@ def toggle_user_active(user_id):
         target = cur.fetchone()
         if not target:
             cur.close(); conn.close()
-            return jsonify({'success': False, 'message': 'Usuario no encontrado'}), 404
+            return jsonify({'success': False, 'message': _('usuario_no_encontrado')}), 404
 
         if caller_rol != 'superadmin' and target['rol'] in ('superadmin', 'admin'):
             cur.close(); conn.close()
-            return jsonify({'success': False, 'message': 'Sin permisos para modificar este usuario'}), 403
+            return jsonify({'success': False, 'message': _('sin_permisos_para_modificar_este_usuario')}), 403
 
         cur.execute("UPDATE usuarios SET activo = NOT activo WHERE id = %s RETURNING activo", (user_id,))
         row = cur.fetchone()
         conn.commit()
         cur.close(); conn.close()
-        estado = 'activado' if row['activo'] else 'desactivado'
-        return jsonify({'success': True, 'message': f'Usuario {estado}', 'activo': row['activo']}), 200
+        estado = _('usuario_activado') if row['activo'] else _('usuario_desactivado')
+        return jsonify({'success': True, 'message': _('usuario_estado', state=estado), 'activo': row['activo']}), 200
     except Exception:
-        return jsonify({'success': False, 'message': 'Error interno del servidor'}), 500
+        return jsonify({'success': False, 'message': _('error_interno_del_servidor')}), 500
 
 
 @superadmin_bp.route('/admin/users/<int:user_id>/reset-password', methods=['PUT'])
@@ -220,7 +221,7 @@ def reset_user_password(user_id):
         data         = request.get_json()
         new_password = data.get('new_password', '')
         if len(new_password) < 8:
-            return jsonify({'success': False, 'message': 'La contraseña debe tener al menos 8 caracteres'}), 400
+            return jsonify({'success': False, 'message': _('la_contrasena_debe_tener_al_menos')}), 400
 
         conn = get_db()
         cur  = conn.cursor()
@@ -228,19 +229,19 @@ def reset_user_password(user_id):
         target = cur.fetchone()
         if not target:
             cur.close(); conn.close()
-            return jsonify({'success': False, 'message': 'Usuario no encontrado'}), 404
+            return jsonify({'success': False, 'message': _('usuario_no_encontrado')}), 404
 
         if caller_rol != 'superadmin' and target['rol'] in ('superadmin', 'admin'):
             cur.close(); conn.close()
-            return jsonify({'success': False, 'message': 'Sin permisos para modificar este usuario'}), 403
+            return jsonify({'success': False, 'message': _('sin_permisos_para_modificar_este_usuario')}), 403
 
         password_hash = bcrypt.hashpw(new_password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
         cur.execute("UPDATE usuarios SET password_hash = %s WHERE id = %s", (password_hash, user_id))
         conn.commit()
         cur.close(); conn.close()
-        return jsonify({'success': True, 'message': 'Contraseña actualizada'}), 200
+        return jsonify({'success': True, 'message': _('contrasena_actualizada')}), 200
     except Exception:
-        return jsonify({'success': False, 'message': 'Error interno del servidor'}), 500
+        return jsonify({'success': False, 'message': _('error_interno_del_servidor')}), 500
 
 
 @superadmin_bp.route('/admin/super/config', methods=['GET'])
@@ -262,7 +263,7 @@ def get_all_config():
 
         return jsonify({'success': True, 'data': result}), 200
     except Exception as e:
-        return jsonify({'success': False, 'message': 'Error interno del servidor'}), 500
+        return jsonify({'success': False, 'message': _('error_interno_del_servidor')}), 500
 
 
 @superadmin_bp.route('/admin/super/config', methods=['POST'])
@@ -271,7 +272,7 @@ def save_config():
     try:
         data = request.get_json()
         if not isinstance(data, dict):
-            return jsonify({'success': False, 'message': 'Se esperaba un objeto JSON'}), 400
+            return jsonify({'success': False, 'message': _('se_esperaba_un_objeto_json')}), 400
 
         current_id = get_jwt_identity()
         conn = get_db()
@@ -291,9 +292,9 @@ def save_config():
 
         conn.commit()
         cur.close(); conn.close()
-        return jsonify({'success': True, 'message': f'{len(data)} clave(s) guardada(s)'}), 200
+        return jsonify({'success': True, 'message': _('claves_guardadas', count=len(data))}), 200
     except Exception as e:
-        return jsonify({'success': False, 'message': 'Error interno del servidor'}), 500
+        return jsonify({'success': False, 'message': _('error_interno_del_servidor')}), 500
 
 
 @superadmin_bp.route('/admin/super/config/upload/<key>', methods=['POST'])
@@ -301,17 +302,17 @@ def save_config():
 def upload_config_image(key):
     allowed_image_keys = {'logo', 'favicon', 'institution_logo', 'cover_image'}
     if key not in allowed_image_keys:
-        return jsonify({'success': False, 'message': 'Clave de imagen no valida'}), 400
+        return jsonify({'success': False, 'message': _('clave_de_imagen_no_valida')}), 400
 
     if 'file' not in request.files:
-        return jsonify({'success': False, 'message': 'No se envio ningun archivo'}), 400
+        return jsonify({'success': False, 'message': _('no_se_envio_ningun_archivo')}), 400
 
     file = request.files['file']
     if file.filename == '':
-        return jsonify({'success': False, 'message': 'Archivo sin nombre'}), 400
+        return jsonify({'success': False, 'message': _('archivo_sin_nombre')}), 400
 
     if not _allowed_file(file.filename):
-        return jsonify({'success': False, 'message': f'Extension no permitida. Usa: {ALLOWED_IMAGE_EXT}'}), 400
+        return jsonify({'success': False, 'message': _('extension_no_permitida', extensions=ALLOWED_IMAGE_EXT)}), 400
 
     os.makedirs(UPLOAD_DIR, exist_ok=True)
 
@@ -336,7 +337,7 @@ def upload_config_image(key):
 
     return jsonify({
         'success': True,
-        'message': 'Imagen subida correctamente',
+        'message': _('imagen_subida_correctamente'),
         'filename': filename,
         'url': f'/api/public/config/image/{key}'
     }), 200
@@ -361,9 +362,9 @@ def reset_config():
         """, (datetime.utcnow(),))
         conn.commit()
         cur.close(); conn.close()
-        return jsonify({'success': True, 'message': 'Configuracion restablecida a valores por defecto'}), 200
+        return jsonify({'success': True, 'message': _('configuracion_restablecida_a_valores_por_defecto')}), 200
     except Exception as e:
-        return jsonify({'success': False, 'message': 'Error interno del servidor'}), 500
+        return jsonify({'success': False, 'message': _('error_interno_del_servidor')}), 500
 
 
 @superadmin_bp.route('/admin/super/promote', methods=['POST'])
@@ -375,7 +376,7 @@ def promote_first_superadmin():
         cur.execute("SELECT id FROM usuarios WHERE rol = 'superadmin' LIMIT 1")
         if cur.fetchone():
             cur.close(); conn.close()
-            return jsonify({'success': False, 'message': 'Ya existe un superadmin. Usa el panel para gestionar roles.'}), 409
+            return jsonify({'success': False, 'message': _('ya_existe_un_superadmin_usa_el')}), 409
 
         data = request.get_json()
         email = (data.get('email') or '').strip()
@@ -383,9 +384,9 @@ def promote_first_superadmin():
         nombre = (data.get('nombre') or 'SuperAdmin').strip()
 
         if not email or not password:
-            return jsonify({'success': False, 'message': 'Email y contrasena requeridos'}), 400
+            return jsonify({'success': False, 'message': _('email_y_contrasena_requeridos_112')}), 400
         if len(password) < 8:
-            return jsonify({'success': False, 'message': 'Contrasena minima de 8 caracteres'}), 400
+            return jsonify({'success': False, 'message': _('contrasena_minima_de_8_caracteres')}), 400
 
         cur.execute("SELECT id FROM usuarios WHERE email = %s", (email,))
         existing = cur.fetchone()
@@ -394,7 +395,7 @@ def promote_first_superadmin():
             cur.execute("UPDATE usuarios SET rol = 'superadmin' WHERE id = %s RETURNING id", (existing['id'],))
             conn.commit()
             cur.close(); conn.close()
-            return jsonify({'success': True, 'message': f'Usuario {email} promovido a superadmin'}), 200
+            return jsonify({'success': True, 'message': _('usuario_promovido', email=email)}), 200
 
         password_hash = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
         cur.execute("""
@@ -405,6 +406,6 @@ def promote_first_superadmin():
         conn.commit()
         cur.close(); conn.close()
 
-        return jsonify({'success': True, 'message': 'SuperAdmin creado exitosamente', 'user_id': user_id}), 201
+        return jsonify({'success': True, 'message': _('superadmin_creado_exitosamente'), 'user_id': user_id}), 201
     except Exception as e:
-        return jsonify({'success': False, 'message': 'Error interno del servidor'}), 500
+        return jsonify({'success': False, 'message': _('error_interno_del_servidor')}), 500

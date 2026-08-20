@@ -1,3 +1,4 @@
+import logging
 import os
 import re
 import json
@@ -5,8 +6,10 @@ import base64
 import urllib.request
 from groq import Groq
 
+logger = logging.getLogger(__name__)
+
 GROQ_API_KEY  = os.getenv('GROQ_API_KEY', '')
-MODEL         = 'llama-3.3-70b-versatile'
+MODEL         = os.getenv('GROQ_TEXT_MODEL', 'openai/gpt-oss-120b')
 MODEL_VISION  = 'meta-llama/llama-4-scout-17b-16e-instruct'  # legacy Groq vision (deprecated upstream)
 
 # Motor de visión para diagnóstico de plagas/enfermedades:
@@ -23,6 +26,17 @@ andina (papa, maíz, quinua, habas, oca, trigo) pero conoces cultivos tropicales
 Responde siempre en español, de forma clara, práctica y directa.
 Cuando des recomendaciones, sé específico con dosis, fechas y productos disponibles en Perú.
 Limita tu respuesta a lo solicitado sin información irrelevante."""
+
+
+def _parse_json(texto: str):
+    limpio = (texto or '').strip()
+    if limpio.startswith('```'):
+        partes = limpio.split('```')
+        limpio = partes[1] if len(partes) > 1 else limpio
+        if limpio.startswith('json'):
+            limpio = limpio[4:]
+    encontrado = re.search(r'\{.*\}', limpio, re.DOTALL)
+    return json.loads(encontrado.group(0) if encontrado else limpio)
 
 
 def _cliente():
@@ -99,12 +113,7 @@ Reglas:
             texto = _vision_groq(b64, mime, prompt)
 
         # Extraer el objeto JSON aunque el modelo lo envuelva en ``` o texto extra.
-        if texto.startswith('```'):
-            texto = texto.split('```')[1]
-            if texto.startswith('json'):
-                texto = texto[4:]
-        m = re.search(r'\{.*\}', texto, re.DOTALL)
-        resultado = json.loads(m.group(0) if m else texto)
+        resultado = _parse_json(texto)
         resultado.setdefault('is_healthy', False)
         resultado.setdefault('confianza',  70)
         resultado.setdefault('severidad',  'moderada')
@@ -150,17 +159,14 @@ Responde SOLO el JSON, sin texto adicional."""
                 {'role': 'user', 'content': prompt}
             ],
             temperature=0.3,
-            max_tokens=600
+            max_tokens=2000
         )
 
         texto = response.choices[0].message.content.strip()
-        if texto.startswith('```'):
-            texto = texto.split('```')[1]
-            if texto.startswith('json'):
-                texto = texto[4:]
-        return {'success': True, 'analisis': json.loads(texto)}
+        return {'success': True, 'analisis': _parse_json(texto)}
 
-    except Exception as e:
+    except Exception:
+        logger.exception('Groq request failed')
         return {'success': False, 'error': 'Error al contactar el servicio de IA'}
 
 
@@ -195,17 +201,14 @@ Responde SOLO el JSON."""
                 {'role': 'user', 'content': prompt}
             ],
             temperature=0.2,
-            max_tokens=700
+            max_tokens=2000
         )
 
         texto = response.choices[0].message.content.strip()
-        if texto.startswith('```'):
-            texto = texto.split('```')[1]
-            if texto.startswith('json'):
-                texto = texto[4:]
-        return {'success': True, 'consejo': json.loads(texto)}
+        return {'success': True, 'consejo': _parse_json(texto)}
 
-    except Exception as e:
+    except Exception:
+        logger.exception('Groq request failed')
         return {'success': False, 'error': 'Error al contactar el servicio de IA'}
 
 
@@ -242,7 +245,8 @@ def consulta_agricola(pregunta: str, contexto: dict = None) -> dict:
             'tokens_usados': response.usage.total_tokens
         }
 
-    except Exception as e:
+    except Exception:
+        logger.exception('Groq request failed')
         return {'success': False, 'error': 'Error al contactar el servicio de IA'}
 
 
@@ -293,15 +297,12 @@ Responde SOLO el JSON."""
                 {'role': 'user', 'content': prompt}
             ],
             temperature=0.3,
-            max_tokens=700
+            max_tokens=2500
         )
 
         texto = response.choices[0].message.content.strip()
-        if texto.startswith('```'):
-            texto = texto.split('```')[1]
-            if texto.startswith('json'):
-                texto = texto[4:]
-        return {'success': True, 'plan': json.loads(texto)}
+        return {'success': True, 'plan': _parse_json(texto)}
 
-    except Exception as e:
+    except Exception:
+        logger.exception('Groq request failed')
         return {'success': False, 'error': 'Error al contactar el servicio de IA'}

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { cultivosAPI } from '../../services/api';
 import { notify, confirmAction } from '../../utils/swal';
+import { useLanguage } from '../../context/LanguageContext';
 
 const Ic = {
   sprout:  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="w-5 h-5"><path d="M7 20s4-4.5 4-10a8 8 0 0 1 8-8c0 6-4 10-8 10"/><path d="M7 20c0-3 2-5 4-6" strokeLinecap="round"/></svg>,
@@ -34,23 +35,23 @@ const CULTIVOS_PUNO = {
 };
 
 const ETAPAS = [
-  { max:20,  label:'Germinación',         color:'bg-yellow-400' },
-  { max:40,  label:'Crecimiento vegetal', color:'bg-green-500'  },
-  { max:60,  label:'Floración',           color:'bg-pink-500'   },
-  { max:80,  label:'Formación',           color:'bg-blue-500'   },
-  { max:100, label:'Maduración',          color:'bg-orange-500' },
-  { max:999, label:'Lista para cosecha',  color:'bg-emerald-500'},
+  { max:20,  labelKey:'cropsPanel.stages.germination',    color:'bg-yellow-400' },
+  { max:40,  labelKey:'cropsPanel.stages.vegetative',     color:'bg-green-500'  },
+  { max:60,  labelKey:'cropsPanel.stages.flowering',      color:'bg-pink-500'   },
+  { max:80,  labelKey:'cropsPanel.stages.formation',      color:'bg-blue-500'   },
+  { max:100, labelKey:'cropsPanel.stages.ripening',       color:'bg-orange-500' },
+  { max:999, labelKey:'cropsPanel.stages.readyToHarvest', color:'bg-emerald-500'},
 ];
 
 const ACTIVIDADES_TIPOS = [
-  { id:'riego',         label:'Riego',           emoji:'💧', color:'text-sky-600 dark:text-sky-400',     bg:'bg-sky-50 dark:bg-sky-900/20 border-sky-200 dark:border-sky-800/40'     },
-  { id:'fertilizacion', label:'Fertilización',   emoji:'🌿', color:'text-green-600 dark:text-green-400', bg:'bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800/40' },
-  { id:'fumigacion',    label:'Fumigación',       emoji:'🛡️', color:'text-orange-600 dark:text-orange-400',bg:'bg-orange-50 dark:bg-orange-900/20 border-orange-200 dark:border-orange-800/40'},
-  { id:'aporque',       label:'Aporque',           emoji:'⛏️', color:'text-amber-600 dark:text-amber-400', bg:'bg-amber-50 dark:bg-amber-900/20 border-amber-200 dark:border-amber-800/40' },
-  { id:'deshierbe',     label:'Deshierbe',         emoji:'✂️', color:'text-teal-600 dark:text-teal-400',   bg:'bg-teal-50 dark:bg-teal-900/20 border-teal-200 dark:border-teal-800/40'   },
-  { id:'tratamiento',   label:'Tratamiento',       emoji:'💊', color:'text-red-600 dark:text-red-400',     bg:'bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-800/40'       },
-  { id:'observacion',   label:'Observación',       emoji:'📝', color:'text-violet-600 dark:text-violet-400',bg:'bg-violet-50 dark:bg-violet-900/20 border-violet-200 dark:border-violet-800/40'},
-  { id:'cosecha',       label:'Cosecha parcial',   emoji:'🌾', color:'text-yellow-600 dark:text-yellow-400',bg:'bg-yellow-50 dark:bg-yellow-900/20 border-yellow-200 dark:border-yellow-800/40'},
+  { id:'riego', labelKey:'cropsPanel.activityTypes.riego',           emoji:'💧', color:'text-sky-600 dark:text-sky-400',     bg:'bg-sky-50 dark:bg-sky-900/20 border-sky-200 dark:border-sky-800/40'     },
+  { id:'fertilizacion', labelKey:'cropsPanel.activityTypes.fertilizacion',   emoji:'🌿', color:'text-green-600 dark:text-green-400', bg:'bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800/40' },
+  { id:'fumigacion', labelKey:'cropsPanel.activityTypes.fumigacion',       emoji:'🛡️', color:'text-orange-600 dark:text-orange-400',bg:'bg-orange-50 dark:bg-orange-900/20 border-orange-200 dark:border-orange-800/40'},
+  { id:'aporque', labelKey:'cropsPanel.activityTypes.aporque',           emoji:'⛏️', color:'text-amber-600 dark:text-amber-400', bg:'bg-amber-50 dark:bg-amber-900/20 border-amber-200 dark:border-amber-800/40' },
+  { id:'deshierbe', labelKey:'cropsPanel.activityTypes.deshierbe',         emoji:'✂️', color:'text-teal-600 dark:text-teal-400',   bg:'bg-teal-50 dark:bg-teal-900/20 border-teal-200 dark:border-teal-800/40'   },
+  { id:'tratamiento', labelKey:'cropsPanel.activityTypes.tratamiento',       emoji:'💊', color:'text-red-600 dark:text-red-400',     bg:'bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-800/40'       },
+  { id:'observacion', labelKey:'cropsPanel.activityTypes.observacion',       emoji:'📝', color:'text-violet-600 dark:text-violet-400',bg:'bg-violet-50 dark:bg-violet-900/20 border-violet-200 dark:border-violet-800/40'},
+  { id:'cosecha', labelKey:'cropsPanel.activityTypes.cosecha',   emoji:'🌾', color:'text-yellow-600 dark:text-yellow-400',bg:'bg-yellow-50 dark:bg-yellow-900/20 border-yellow-200 dark:border-yellow-800/40'},
 ];
 
 const LS_KEY = 'ts_actividades_v1';
@@ -93,41 +94,40 @@ const STATUS_BG    = {
   critical: 'bg-red-50 dark:bg-red-900/20 border-red-100 dark:border-red-800/40',
 };
 
-const getRecomendaciones = (sensors, info, cultivo) => {
+const getRecomendaciones = (t, sensors, info, cultivo) => {
   const recs = [];
   if (!info) return recs;
 
-  const t = sensors.temperatura, h = sensors.humedadSuelo, ph = sensors.ph;
+  const temp = sensors.temperatura, h = sensors.humedadSuelo, ph = sensors.ph;
   const pron = (() => {
     if (!cultivo.fecha_siembra) return null;
     const dias = Math.floor((new Date() - new Date(cultivo.fecha_siembra)) / 86400000);
     return Math.min(100, (dias / info.ciclo) * 100);
   })();
 
-  if (t < info.temp.min)       recs.push({ nivel:'alto',  emoji:'🥶', txt:'Temperatura bajo el mínimo — riesgo de helada. Cubre con agrotextil o malla antigranizo.' });
-  else if (t > info.temp.max)  recs.push({ nivel:'alto',  emoji:'🔥', txt:'Temperatura sobre el máximo — estrés térmico. Aumenta la frecuencia de riego.' });
-  else if (t < info.temp.ideal - 3) recs.push({ nivel:'medio', emoji:'🌡️', txt:'Temperatura un poco baja. Considera cobertura nocturna si baja más.' });
+  if (temp < info.temp.min) recs.push({ nivel:'alto', emoji:'🥶', txt:t('cropsPanel.recommendations.frost') });
+  else if (temp > info.temp.max) recs.push({ nivel:'alto', emoji:'🔥', txt:t('cropsPanel.recommendations.heat') });
+  else if (temp < info.temp.ideal - 3) recs.push({ nivel:'medio', emoji:'🌡️', txt:t('cropsPanel.recommendations.coolish') });
 
-  if (h < info.humSuelo.min)   recs.push({ nivel:'alto',  emoji:'🏜️', txt:'Humedad del suelo crítica — aplica riego inmediatamente para evitar marchitamiento.' });
-  else if (h > info.humSuelo.max) recs.push({ nivel:'alto',  emoji:'🌊', txt:'Exceso de humedad — riesgo de hongos y pudrición. Verifica el drenaje.' });
-  else if (h < info.humSuelo.ideal - 8) recs.push({ nivel:'medio', emoji:'💧', txt:'Humedad ligeramente baja. Programa riego en las próximas horas.' });
+  if (h < info.humSuelo.min) recs.push({ nivel:'alto', emoji:'🏜️', txt:t('cropsPanel.recommendations.dry') });
+  else if (h > info.humSuelo.max) recs.push({ nivel:'alto', emoji:'🌊', txt:t('cropsPanel.recommendations.wet') });
+  else if (h < info.humSuelo.ideal - 8) recs.push({ nivel:'medio', emoji:'💧', txt:t('cropsPanel.recommendations.slightlyDry') });
 
-  if (ph < info.ph.min)        recs.push({ nivel:'alto',  emoji:'⚗️', txt:`pH bajo (${ph.toFixed(1)}). Aplica cal agrícola para elevar el pH gradualmente.` });
-  else if (ph > info.ph.max)   recs.push({ nivel:'alto',  emoji:'⚗️', txt:`pH alto (${ph.toFixed(1)}). Aplica azufre elemental para reducir el pH.` });
+  if (ph < info.ph.min) recs.push({ nivel:'alto', emoji:'⚗️', txt:t('cropsPanel.recommendations.lowPh', { value: ph.toFixed(1) }) });
+  else if (ph > info.ph.max) recs.push({ nivel:'alto', emoji:'⚗️', txt:t('cropsPanel.recommendations.highPh', { value: ph.toFixed(1) }) });
 
-  if (sensors.viento > 25)     recs.push({ nivel:'medio', emoji:'💨', txt:'Vientos fuertes. Instala cortavientos temporales para proteger plantas jóvenes.' });
+  if (sensors.viento > 25) recs.push({ nivel:'medio', emoji:'💨', txt:t('cropsPanel.recommendations.wind') });
 
   if (pron !== null) {
-    if (pron >= 35 && pron < 45) recs.push({ nivel:'info', emoji:'🌸', txt:'Etapa de floración próxima. Aplica fertilizante potásico para fortalecer la flor.' });
-    if (pron >= 75 && pron < 85) recs.push({ nivel:'info', emoji:'📦', txt:'Etapa de maduración. Reduce el riego gradualmente para favorecer la cosecha.' });
-    if (pron >= 95)               recs.push({ nivel:'info', emoji:'🌾', txt:'Cultivo listo para cosecha. Planifica la logística de recolección y almacenamiento.' });
+    if (pron >= 35 && pron < 45) recs.push({ nivel:'info', emoji:'🌸', txt:t('cropsPanel.recommendations.flowering') });
+    if (pron >= 75 && pron < 85) recs.push({ nivel:'info', emoji:'📦', txt:t('cropsPanel.recommendations.ripening') });
+    if (pron >= 95) recs.push({ nivel:'info', emoji:'🌾', txt:t('cropsPanel.recommendations.harvest') });
   }
 
-  if (!recs.length) recs.push({ nivel:'ok', emoji:'✅', txt:'Todas las condiciones del cultivo están dentro de los rangos óptimos. Continúa el manejo habitual.' });
+  if (!recs.length) recs.push({ nivel:'ok', emoji:'✅', txt:t('cropsPanel.recommendations.allGood') });
   return recs;
 };
 
-// Double-bezel shell: presentational wrapper consistent with Auth (Login / AuthShared)
 const Card = ({ children, className = '' }) => (
   <div className="rounded-2xl p-1.5 bg-white/70 dark:bg-white/[0.04] ring-1 ring-black/5 dark:ring-white/10">
     <div className={`rounded-[calc(1rem-0.375rem)] bg-white dark:bg-gray-900/90 shadow-[inset_0_1px_1px_rgba(255,255,255,0.6)] dark:shadow-[inset_0_1px_1px_rgba(255,255,255,0.08)] ${className}`}>
@@ -149,6 +149,7 @@ const GestionCultivosIoT = () => {
   const [showModal, setShowModal]           = useState(false);
   const [editingCultivo, setEditingCultivo] = useState(null);
   const [selectedCultivo, setSelectedCultivo] = useState(null);
+  const { t, formatDate } = useLanguage();
   const [detailTab, setDetailTab]           = useState('sensores');
   const [showActModal, setShowActModal]     = useState(false);
   const [actForm, setActForm]               = useState({ tipo: 'riego', descripcion: '', fecha: new Date().toISOString().split('T')[0] });
@@ -186,7 +187,7 @@ const GestionCultivosIoT = () => {
       const data = Array.isArray(r.data.data) ? r.data.data : [];
       setCultivos(data.filter(c => c?.id && c?.nombre && c?.tipo_cultivo));
     } catch (e) {
-      if (e.response?.status !== 401) notify.error('Error al cargar cultivos');
+      if (e.response?.status !== 401) notify.error(t('cropsPanel.loadError'));
       setCultivos([]);
     } finally { setLoading(false); }
   };
@@ -197,9 +198,9 @@ const GestionCultivosIoT = () => {
     const alertas = [];
     let salud = 100;
     const checks = [
-      { val: sensors.temperatura,  range: info.temp,     label:`Temperatura (${sensors.temperatura.toFixed(1)}°C)`,   critMsg:'Riesgo de helada.',             warnMsg:'Temperatura fuera del rango óptimo.', penalty:[25,15] },
-      { val: sensors.humedadSuelo, range: info.humSuelo, label:`Humedad suelo (${sensors.humedadSuelo.toFixed(0)}%)`, critMsg:'Riego urgente.',                 warnMsg:'Humedad ligeramente fuera de rango.', penalty:[20,15] },
-      { val: sensors.ph,           range: info.ph,       label:`pH (${sensors.ph.toFixed(1)})`,                       critMsg:sensors.ph < info.ph.min ? 'Aplicar cal agrícola.' : 'Aplicar azufre elemental.', warnMsg:'pH ligeramente fuera de rango.', penalty:[10,8] },
+      { val: sensors.temperatura, range: info.temp, label:t('cropsPanel.alerts.temperatureLabel', { value: sensors.temperatura.toFixed(1) }), critMsg:t('cropsPanel.alerts.frostRisk'), warnMsg:t('cropsPanel.alerts.tempOutOfRange'), penalty:[25,15] },
+      { val: sensors.humedadSuelo, range: info.humSuelo, label:t('cropsPanel.alerts.soilHumidityLabel', { value: sensors.humedadSuelo.toFixed(0) }), critMsg:t('cropsPanel.alerts.urgentIrrigation'), warnMsg:t('cropsPanel.alerts.humidityOutOfRange'), penalty:[20,15] },
+      { val: sensors.ph, range: info.ph, label:t('cropsPanel.alerts.phLabel', { value: sensors.ph.toFixed(1) }), critMsg:sensors.ph < info.ph.min ? t('cropsPanel.alerts.applyLime') : t('cropsPanel.alerts.applySulphur'), warnMsg:t('cropsPanel.alerts.phOutOfRange'), penalty:[10,8] },
     ];
     checks.forEach(({ val, range, label, critMsg, warnMsg, penalty }) => {
       if (val < range.min || val > range.max) {
@@ -210,9 +211,9 @@ const GestionCultivosIoT = () => {
         salud -= penalty[1] / 2;
       }
     });
-    if (sensors.viento > 25) { alertas.push({ tipo:'warn', msg:`Viento fuerte (${sensors.viento.toFixed(1)} km/h)`, rec:'Instalar cortavientos.' }); salud -= 5; }
+    if (sensors.viento > 25) { alertas.push({ tipo:'warn', msg:t('cropsPanel.alerts.strongWind', { value: sensors.viento.toFixed(1) }), rec:t('cropsPanel.alerts.installWindbreaks') }); salud -= 5; }
     return { alertas, salud: Math.max(0, Math.round(salud)), optimo: alertas.length === 0 };
-  }, [sensors]);
+  }, [sensors, t]);
 
   const calcPronostico = useCallback((cultivo) => {
     const info = CULTIVOS_PUNO[cultivo.tipo_cultivo];
@@ -234,19 +235,19 @@ const GestionCultivosIoT = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!form.nombre.trim() || !form.area || !form.fecha_siembra) { notify.warning('Completa nombre, área y fecha de siembra'); return; }
+    if (!form.nombre.trim() || !form.area || !form.fecha_siembra) { notify.warning(t('cropsPanel.requiredFields')); return; }
     try {
       const payload = { nombre: form.nombre.trim(), tipo_cultivo: form.tipo_cultivo, variedad: form.variedad || '', area_hectareas: parseFloat(form.area), fecha_siembra: form.fecha_siembra, notas: form.notas.trim() };
       if (editingCultivo) {
         await cultivosAPI.updateCultivo(editingCultivo.id, payload);
-        notify.success('Cultivo actualizado');
+        notify.success(t('cropsPanel.cropUpdated'));
       } else {
         await cultivosAPI.createCultivo(payload);
-        notify.success('Cultivo registrado');
+        notify.success(t('cropsPanel.cropCreated'));
       }
       closeModal();
       await fetchCultivos();
-    } catch (err) { notify.error(err.response?.data?.message || 'Error al guardar'); }
+    } catch (err) { notify.error(err.response?.data?.message || t('cropsPanel.saveError')); }
   };
 
   const handleEdit = (c) => {
@@ -256,14 +257,14 @@ const GestionCultivosIoT = () => {
   };
 
   const handleDelete = async (c) => {
-    const ok = await confirmAction({ title: `¿Eliminar "${c.nombre}"?`, text: 'Se eliminará el cultivo y todos sus datos. Esta acción no se puede deshacer.', confirmText: 'Sí, eliminar', danger: true });
+    const ok = await confirmAction({ title: t('cropsPanel.deleteTitle', { name: c.nombre }), text: t('cropsPanel.deleteText'), confirmText: t('cropsPanel.deleteConfirm'), danger: true });
     if (!ok) return;
     try {
       await cultivosAPI.deleteCultivo(c.id);
-      notify.success('Cultivo eliminado');
+      notify.success(t('cropsPanel.cropDeleted'));
       if (selectedCultivo?.id === c.id) setSelectedCultivo(null);
       await fetchCultivos();
-    } catch { notify.error('Error al eliminar'); }
+    } catch { notify.error(t('cropsPanel.deleteError')); }
   };
 
   const closeModal = () => {
@@ -275,14 +276,14 @@ const GestionCultivosIoT = () => {
   const handleSaveActividad = () => {
     if (!selectedCultivo) return;
     saveActividad(selectedCultivo.id, { tipo: actForm.tipo, descripcion: actForm.descripcion.trim(), fecha: actForm.fecha ? new Date(actForm.fecha).toISOString() : new Date().toISOString() });
-    notify.success('Actividad registrada');
+    notify.success(t('cropsPanel.activityLogged'));
     setActForm({ tipo:'riego', descripcion:'', fecha: new Date().toISOString().split('T')[0] });
     setShowActModal(false);
     setActRefresh(n => n + 1);
   };
 
   const handleDeleteActividad = async (actId) => {
-    const ok = await confirmAction({ title: '¿Eliminar esta actividad?', confirmText: 'Eliminar', danger: true });
+    const ok = await confirmAction({ title: t('cropsPanel.deleteActivityTitle'), confirmText: t('common.delete'), danger: true });
     if (!ok || !selectedCultivo) return;
     deleteActividad(selectedCultivo.id, actId);
     setActRefresh(n => n + 1);
@@ -298,13 +299,13 @@ const GestionCultivosIoT = () => {
   const actividades = selectedCultivo ? getActividades(selectedCultivo.id) : [];
   const detailPron  = selectedCultivo ? calcPronostico(selectedCultivo) : null;
   const detailInfo  = selectedCultivo ? CULTIVOS_PUNO[selectedCultivo.tipo_cultivo] : null;
-  const recs        = selectedCultivo && detailInfo ? getRecomendaciones(sensors, detailInfo, selectedCultivo) : [];
+  const recs        = selectedCultivo && detailInfo ? getRecomendaciones(t, sensors, detailInfo, selectedCultivo) : [];
 
   if (loading) return (
     <div className="p-5 bg-gray-50 dark:bg-gray-950 min-h-full flex items-center justify-center">
       <div className="flex flex-col items-center gap-3">
         <div className="w-8 h-8 border-2 border-emerald-500 border-t-transparent rounded-full animate-spin" />
-        <p className="text-sm text-gray-500">Cargando cultivos...</p>
+        <p className="text-sm text-gray-500">{t('cropsPanel.loading')}</p>
       </div>
     </div>
   );
@@ -314,11 +315,11 @@ const GestionCultivosIoT = () => {
 
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <h1 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 dark:text-white">Cultivos</h1>
+          <h1 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 dark:text-white">{t('cropsPanel.title')}</h1>
         </div>
         <button onClick={() => setShowModal(true)}
           className="group relative h-11 pl-5 pr-12 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.98] shadow-[0_12px_30px_-10px_rgba(16,185,129,0.7)] flex items-center gap-2 touch-manipulation">
-          <span>Nuevo cultivo</span>
+          <span>{t('cropsPanel.newCrop')}</span>
           <span className="absolute right-1.5 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/15 flex items-center justify-center transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-0.5 group-hover:-translate-y-[calc(50%+1px)] group-hover:scale-105">
             {Ic.plus}
           </span>
@@ -328,12 +329,12 @@ const GestionCultivosIoT = () => {
       <Card className="p-4">
         <div className="flex flex-wrap gap-2.5">
           {[
-            { icon: Ic.therm,    v: `${sensors.temperatura.toFixed(1)}°C`, l: 'Temperatura' },
-            { icon: Ic.drop,     v: `${sensors.humedadSuelo.toFixed(0)}%`, l: 'H. Suelo'   },
-            { icon: Ic.activity, v: sensors.ph.toFixed(1),                  l: 'pH suelo'   },
-            { icon: Ic.sun,      v: `${sensors.luz.toFixed(0)}%`,           l: 'Luz solar'  },
-            { icon: Ic.wind,     v: `${sensors.viento.toFixed(1)} km/h`,    l: 'Viento'     },
-            { icon: Ic.drop,     v: `${sensors.humedad.toFixed(0)}%`,       l: 'H. Aire'    },
+            { icon: Ic.therm,    v: `${sensors.temperatura.toFixed(1)}°C`, l: t('cropsPanel.sensorTemperature') },
+            { icon: Ic.drop,     v: `${sensors.humedadSuelo.toFixed(0)}%`, l: t('cropsPanel.sensorSoilHumidity') },
+            { icon: Ic.activity, v: sensors.ph.toFixed(1), l: t('cropsPanel.sensorPh') },
+            { icon: Ic.sun,      v: `${sensors.luz.toFixed(0)}%`, l: t('cropsPanel.sensorLight') },
+            { icon: Ic.wind,     v: `${sensors.viento.toFixed(1)} km/h`, l: t('cropsPanel.sensorWind') },
+            { icon: Ic.drop,     v: `${sensors.humedad.toFixed(0)}%`, l: t('cropsPanel.sensorAirHumidity') },
           ].map((s, i) => (
             <div key={i} className="flex items-center gap-2.5 rounded-xl px-3 py-2 bg-gray-50/80 dark:bg-white/[0.04] ring-1 ring-black/5 dark:ring-white/10">
               <span className="flex items-center justify-center w-7 h-7 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 shrink-0">{s.icon}</span>
@@ -348,10 +349,10 @@ const GestionCultivosIoT = () => {
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
         {[
-          { icon: Ic.layers, label:'Cultivos activos',   value: stats.total,      unit:'',   color:'bg-emerald-500' },
-          { icon: Ic.pin,    label:'Área total',          value: stats.area,       unit:'ha', color:'bg-sky-500'     },
-          { icon: Ic.gauge,  label:'Salud promedio',      value: `${stats.salud}`, unit:'%',  color:'bg-violet-500'  },
-          { icon: Ic.trend,  label:'En crecimiento',      value: stats.creciendo,  unit:'',   color:'bg-amber-500'   },
+          { icon: Ic.layers, label:t('cropsPanel.statActive'), value: stats.total,      unit:'',   color:'bg-emerald-500' },
+          { icon: Ic.pin,    label:t('cropsPanel.statArea'), value: stats.area,       unit:'ha', color:'bg-sky-500'     },
+          { icon: Ic.gauge,  label:t('cropsPanel.statHealth'), value: `${stats.salud}`, unit:'%',  color:'bg-violet-500'  },
+          { icon: Ic.trend,  label:t('cropsPanel.statGrowing'), value: stats.creciendo,  unit:'',   color:'bg-amber-500'   },
         ].map((k, i) => (
           <Card key={i} className="p-4">
             <div className={`${k.color} w-9 h-9 rounded-xl flex items-center justify-center text-white mb-3 ring-1 ring-black/5`}>{k.icon}</div>
@@ -370,11 +371,11 @@ const GestionCultivosIoT = () => {
           {cultivos.length === 0 ? (
             <Card className="py-16 px-6 text-center">
               <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-5 bg-emerald-500/10 ring-1 ring-emerald-300/20 text-emerald-600 dark:text-emerald-400">{Ic.sprout}</div>
-              <h3 className="font-display text-xl font-bold tracking-tight text-gray-900 dark:text-white mb-1.5">Sin cultivos registrados</h3>
-              <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">Agrega tu primer cultivo con monitoreo IoT</p>
+              <h3 className="font-display text-xl font-bold tracking-tight text-gray-900 dark:text-white mb-1.5">{t('cropsPanel.empty')}</h3>
+              <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">{t('cropsPanel.emptyHint')}</p>
               <button onClick={() => setShowModal(true)}
                 className="group relative inline-flex items-center gap-2 h-11 pl-5 pr-12 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.98] shadow-[0_12px_30px_-10px_rgba(16,185,129,0.7)] touch-manipulation">
-                <span>Agregar cultivo</span>
+                <span>{t('cropsPanel.addCrop')}</span>
                 <span className="absolute right-1.5 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/15 flex items-center justify-center transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-0.5 group-hover:-translate-y-[calc(50%+1px)] group-hover:scale-105">
                   {Ic.arrow}
                 </span>
@@ -419,7 +420,7 @@ const GestionCultivosIoT = () => {
                             <p className={`text-xs font-bold leading-none ${pron.salud >= 80 ? 'text-emerald-600 dark:text-emerald-400' : pron.salud >= 60 ? 'text-amber-600 dark:text-amber-400' : 'text-red-600 dark:text-red-400'}`}>
                               {pron.salud}%
                             </p>
-                            <p className="text-[9px] text-gray-400 mt-0.5">salud</p>
+                            <p className="text-[9px] text-gray-400 mt-0.5">{t('cropsPanel.health')}</p>
                           </div>
                         )}
                       </div>
@@ -427,7 +428,7 @@ const GestionCultivosIoT = () => {
                       {pron && (
                         <div className="mb-3">
                           <div className="flex items-center justify-between mb-1.5">
-                            <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full text-white ${pron.etapa.color}`}>{pron.etapa.label}</span>
+                            <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full text-white ${pron.etapa.color}`}>{t(pron.etapa.labelKey)}</span>
                             <span className="text-[11px] font-semibold tracking-tight text-gray-700 dark:text-gray-300">{pron.progreso}%</span>
                           </div>
                           <div className="w-full h-1.5 bg-gray-100 dark:bg-white/10 rounded-full overflow-hidden">
@@ -452,9 +453,9 @@ const GestionCultivosIoT = () => {
                       {lastAct && (
                         <div className="flex items-center gap-1.5 mb-2 text-[10px] text-gray-400 dark:text-gray-500">
                           <span>{ACTIVIDADES_TIPOS.find(a => a.id === lastAct.tipo)?.emoji || '📝'}</span>
-                          <span>{ACTIVIDADES_TIPOS.find(a => a.id === lastAct.tipo)?.label || lastAct.tipo}</span>
+                          <span>{ACTIVIDADES_TIPOS.find(a => a.id === lastAct.tipo)?.labelKey ? t(ACTIVIDADES_TIPOS.find(a => a.id === lastAct.tipo).labelKey) : lastAct.tipo}</span>
                           <span>·</span>
-                          <span>{new Date(lastAct.fecha).toLocaleDateString('es-PE', { day:'numeric', month:'short' })}</span>
+                          <span>{formatDate(lastAct.fecha, { day:'numeric', month:'short' })}</span>
                           {acts.length > 1 && <span className="ml-auto">{acts.length} actividades</span>}
                         </div>
                       )}
@@ -496,7 +497,7 @@ const GestionCultivosIoT = () => {
                 <div>
                   <div className="flex items-center gap-2">
                     <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${detailInfo.light} ${detailInfo.text} ring-1 ring-inset ${detailInfo.border.replace(/border-/g, 'ring-')}`}>{selectedCultivo.tipo_cultivo}</span>
-                    <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full text-white ${detailPron.etapa.color}`}>{detailPron.etapa.label}</span>
+                    <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full text-white ${detailPron.etapa.color}`}>{t(detailPron.etapa.labelKey)}</span>
                   </div>
                   <h3 className="font-display text-lg font-bold tracking-tight text-gray-900 dark:text-white mt-1.5">{selectedCultivo.nombre}</h3>
                   {selectedCultivo.variedad && <p className="text-xs text-gray-400 dark:text-gray-500">{selectedCultivo.variedad}</p>}
@@ -506,9 +507,9 @@ const GestionCultivosIoT = () => {
 
               <div className="flex border-b border-black/5 dark:border-white/10">
                 {[
-                  { id:'sensores',     label:'Sensores',    icon: Ic.activity },
-                  { id:'actividades',  label:'Actividades', icon: Ic.list     },
-                  { id:'recomendaciones', label:'Consejos', icon: Ic.star     },
+                  { id:'sensores',     label:t('cropsPanel.tabSensors'), icon: Ic.activity },
+                  { id:'actividades',  label:t('cropsPanel.tabActivities'), icon: Ic.list },
+                  { id:'recomendaciones', label:t('cropsPanel.tabTips'), icon: Ic.star },
                 ].map(tab => (
                   <button key={tab.id} onClick={() => setDetailTab(tab.id)}
                     className={`flex-1 flex items-center justify-center gap-1.5 py-2.5 text-xs font-semibold transition-colors touch-manipulation ${
@@ -528,7 +529,7 @@ const GestionCultivosIoT = () => {
                   <>
                     <div>
                       <div className="flex items-center justify-between mb-1.5">
-                        <span className="text-xs font-medium text-gray-500 dark:text-gray-400">Salud del cultivo</span>
+                        <span className="text-xs font-medium text-gray-500 dark:text-gray-400">{t('cropsPanel.cropHealth')}</span>
                         <span className={`font-display text-lg font-bold tracking-tight ${detailPron.salud >= 80 ? 'text-emerald-500' : detailPron.salud >= 60 ? 'text-amber-500' : 'text-red-500'}`}>{detailPron.salud}%</span>
                       </div>
                       <div className="w-full h-2.5 bg-gray-100 dark:bg-white/10 rounded-full overflow-hidden">
@@ -538,7 +539,7 @@ const GestionCultivosIoT = () => {
 
                     <div>
                       <div className="flex items-center justify-between mb-1.5">
-                        <span className="text-xs font-medium text-gray-500 dark:text-gray-400">Progreso del ciclo</span>
+                        <span className="text-xs font-medium text-gray-500 dark:text-gray-400">{t('cropsPanel.cycleProgress')}</span>
                         <span className="text-sm font-semibold tracking-tight text-gray-800 dark:text-gray-200">{detailPron.progreso}%</span>
                       </div>
                       <div className="w-full h-2 bg-gray-100 dark:bg-white/10 rounded-full overflow-hidden">
@@ -549,10 +550,10 @@ const GestionCultivosIoT = () => {
 
                     <div className="grid grid-cols-2 gap-2">
                       {[
-                        { label:'Área',             value:`${selectedCultivo.area_hectareas || 0} ha` },
-                        { label:'Días restantes',   value:`${detailPron.diasRest} días`              },
-                        { label:'Rendim. estimado', value:`~${detailPron.rendimiento} kg`            },
-                        { label:'Factor IoT',       value:`${(detailPron.factor * 100).toFixed(0)}%` },
+                        { label:t('cropsPanel.area'), value:`${selectedCultivo.area_hectareas || 0} ${t('units.hectares')}` },
+                        { label:t('cropsPanel.daysLeft'), value:`${detailPron.diasRest} ${t('units.days')}` },
+                        { label:t('cropsPanel.estimatedYield'), value:`~${detailPron.rendimiento} kg` },
+                        { label:t('cropsPanel.iotFactor'), value:`${(detailPron.factor * 100).toFixed(0)}%` },
                       ].map((s, i) => (
                         <div key={i} className="rounded-xl px-3 py-2.5 bg-gray-50/80 dark:bg-white/[0.04] ring-1 ring-black/5 dark:ring-white/10">
                           <p className="text-[10px] text-gray-400 dark:text-gray-500">{s.label}</p>
@@ -562,13 +563,13 @@ const GestionCultivosIoT = () => {
                     </div>
 
                     <div>
-                      <p className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-2.5">Condiciones IoT vs Óptimo</p>
+                      <p className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-2.5">{t('cropsPanel.iotVsOptimal')}</p>
                       <div className="space-y-2.5">
                         {[
-                          { label:'Temperatura', actual: sensors.temperatura.toFixed(1), unit:'°C', range: detailInfo.temp,     icon: Ic.therm    },
-                          { label:'H. suelo',    actual: sensors.humedadSuelo.toFixed(0),unit:'%',  range: detailInfo.humSuelo, icon: Ic.drop     },
-                          { label:'pH suelo',    actual: sensors.ph.toFixed(1),          unit:'',   range: detailInfo.ph,       icon: Ic.activity },
-                          { label:'Luz',         actual: sensors.luz.toFixed(0),         unit:'%',  range: detailInfo.luz,      icon: Ic.sun      },
+                          { label:t('cropsPanel.sensorTemperature'), actual: sensors.temperatura.toFixed(1), unit:'°C', range: detailInfo.temp,     icon: Ic.therm    },
+                          { label:t('cropsPanel.sensorSoilHumidity'), actual: sensors.humedadSuelo.toFixed(0),unit:'%',  range: detailInfo.humSuelo, icon: Ic.drop     },
+                          { label:t('cropsPanel.sensorPh'), actual: sensors.ph.toFixed(1),          unit:'',   range: detailInfo.ph,       icon: Ic.activity },
+                          { label:t('cropsPanel.sensorLight'), actual: sensors.luz.toFixed(0),         unit:'%',  range: detailInfo.luz,      icon: Ic.sun      },
                         ].map((s, i) => {
                           const st = getSensorStatus(parseFloat(s.actual), s.range);
                           const pct = Math.min(100, Math.max(3, ((parseFloat(s.actual) - s.range.min) / (s.range.max - s.range.min)) * 100));
@@ -598,7 +599,7 @@ const GestionCultivosIoT = () => {
                     ) : (
                       <div className="flex items-center gap-2 px-3 py-2.5 bg-emerald-50 dark:bg-emerald-900/20 rounded-xl ring-1 ring-inset ring-emerald-200/70 dark:ring-emerald-800/40">
                         <span className="text-emerald-500">{Ic.check}</span>
-                        <span className="text-xs font-semibold text-emerald-700 dark:text-emerald-400">Condiciones óptimas — sin alertas activas</span>
+                        <span className="text-xs font-semibold text-emerald-700 dark:text-emerald-400">{t('cropsPanel.optimalConditions')}</span>
                       </div>
                     )}
                   </>
@@ -608,7 +609,7 @@ const GestionCultivosIoT = () => {
                   <>
                     <button onClick={() => setShowActModal(true)}
                       className="group relative w-full h-11 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-semibold transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.98] shadow-[0_12px_30px_-12px_rgba(16,185,129,0.7)] flex items-center justify-center gap-2 touch-manipulation">
-                      <span>Registrar actividad</span>
+                      <span>{t('cropsPanel.logActivity')}</span>
                       <span className="absolute right-1.5 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/15 flex items-center justify-center transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-0.5 group-hover:-translate-y-[calc(50%+1px)] group-hover:scale-105">
                         {Ic.plus}
                       </span>
@@ -619,7 +620,7 @@ const GestionCultivosIoT = () => {
                         <button key={at.id} onClick={() => { setActForm(f => ({ ...f, tipo: at.id })); setShowActModal(true); }}
                           className={`flex flex-col items-center gap-1 py-2.5 rounded-xl ring-1 ring-inset text-xs font-semibold transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.97] hover:opacity-80 touch-manipulation ${at.bg.replace(/border-/g, 'ring-')}`}>
                           <span className="text-lg leading-none">{at.emoji}</span>
-                          <span className={`text-[10px] ${at.color}`}>{at.label}</span>
+                          <span className={`text-[10px] ${at.color}`}>{t(at.labelKey)}</span>
                         </button>
                       ))}
                     </div>
@@ -627,19 +628,21 @@ const GestionCultivosIoT = () => {
                     {actividades.length === 0 ? (
                       <div className="text-center py-8 text-gray-400 dark:text-gray-600">
                         <p className="text-2xl mb-2">📋</p>
-                        <p className="text-xs font-medium">Sin actividades registradas</p>
-                        <p className="text-[10px] mt-0.5">Usa los botones de arriba para registrar</p>
+                        <p className="text-xs font-medium">{t('cropsPanel.noActivities')}</p>
+                        <p className="text-[10px] mt-0.5">{t('cropsPanel.noActivitiesHint')}</p>
                       </div>
                     ) : (
                       <div className="space-y-2">
                         {actividades.map(act => {
-                          const tipo = ACTIVIDADES_TIPOS.find(a => a.id === act.tipo) || { emoji:'📝', label: act.tipo, color:'text-gray-600', bg:'bg-gray-50 border-gray-200' };
+                          const tipo = ACTIVIDADES_TIPOS.find(a => a.id === act.tipo);
+                          const tipoLabel = tipo ? t(tipo.labelKey) : act.tipo;
+                          const tipoStyle = tipo || { emoji:'📝', color:'text-gray-600', bg:'bg-gray-50 border-gray-200' };
                           return (
                             <div key={act.id} className={`flex items-start gap-3 px-3 py-2.5 rounded-xl ring-1 ring-inset ${tipo.bg.replace(/border-/g, 'ring-')}`}>
-                              <span className="text-xl shrink-0 leading-none mt-0.5">{tipo.emoji}</span>
+                              <span className="text-xl shrink-0 leading-none mt-0.5">{tipoStyle.emoji}</span>
                               <div className="flex-1 min-w-0">
                                 <div className="flex items-center justify-between gap-2">
-                                  <p className={`text-xs font-semibold ${tipo.color}`}>{tipo.label}</p>
+                                  <p className={`text-xs font-semibold ${tipoStyle.color}`}>{tipoLabel}</p>
                                   <p className="text-[10px] text-gray-400 shrink-0">{new Date(act.fecha).toLocaleDateString('es-PE', { day:'numeric', month:'short' })}</p>
                                 </div>
                                 {act.descripcion && <p className="text-xs text-gray-600 dark:text-gray-400 mt-0.5 leading-snug">{act.descripcion}</p>}
@@ -667,7 +670,7 @@ const GestionCultivosIoT = () => {
                       </div>
                     ))}
                     <div className="pt-2 border-t border-black/5 dark:border-white/10">
-                      <p className="text-[10px] text-gray-400 text-center">Recomendaciones basadas en lecturas IoT en tiempo real</p>
+                      <p className="text-[10px] text-gray-400 text-center">{t('cropsPanel.recsFooter')}</p>
                     </div>
                   </div>
                 )}
@@ -687,7 +690,7 @@ const GestionCultivosIoT = () => {
           <div className="rounded-t-[calc(2rem-0.375rem)] sm:rounded-[calc(1rem-0.375rem)] bg-white dark:bg-gray-900 overflow-hidden max-h-[calc(92vh-12px)] flex flex-col">
             <div className="flex items-center justify-between px-5 py-4 border-b border-black/5 dark:border-white/10">
               <h2 className="font-display text-base font-bold tracking-tight text-gray-900 dark:text-white">
-                {editingCultivo ? `Editar — ${editingCultivo.nombre}` : 'Nuevo cultivo'}
+                {editingCultivo ? `${t('cropsPanel.editCrop')} — ${editingCultivo.nombre}` : t('cropsPanel.newCrop')}
               </h2>
               <button onClick={closeModal} className="p-2 rounded-xl text-gray-400 hover:bg-gray-100 dark:hover:bg-white/10 transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-95 touch-manipulation">
                 {Ic.x}
@@ -699,7 +702,7 @@ const GestionCultivosIoT = () => {
 
                 {!editingCultivo && (
                   <div>
-                    <label className={Lbl}>Tipo de cultivo</label>
+                    <label className={Lbl}>{t('cropsPanel.cropType')}</label>
                     <div className="grid grid-cols-5 gap-2">
                       {Object.entries(CULTIVOS_PUNO).map(([tipo, info]) => {
                         const emojis = { Papa:'🥔', Quinua:'🌾', Cañihua:'🌿', Habas:'🫘', Maíz:'🌽' };
@@ -728,10 +731,10 @@ const GestionCultivosIoT = () => {
                     <div className={`flex items-center gap-3 px-3 py-2.5 rounded-xl ring-1 ring-inset ${info.light} ${info.border.replace(/border-/g, 'ring-')}`}>
                       <div className={`w-6 h-6 rounded-lg ${info.accent} flex-shrink-0 ring-1 ring-black/5`} />
                       <div className="flex gap-3 text-[10px] text-gray-600 dark:text-gray-400 flex-wrap">
-                        <span><b>Ciclo:</b> {info.ciclo}d</span>
-                        <span><b>Temp:</b> {info.temp.ideal}°C</span>
+                        <span><b>{t('cropsPanel.cycle')}:</b> {info.ciclo}d</span>
+                        <span><b>{t('cropsPanel.temp')}:</b> {info.temp.ideal}°C</span>
                         <span><b>pH:</b> {info.ph.ideal}</span>
-                        <span><b>Rendim.:</b> {info.rendimiento} t/ha</span>
+                        <span><b>{t('cropsPanel.yield')}:</b> {info.rendimiento} {t('units.tonsPerHa')}</span>
                       </div>
                     </div>
                   );
@@ -739,33 +742,33 @@ const GestionCultivosIoT = () => {
 
                 <div className="grid grid-cols-2 gap-3">
                   <div className="col-span-2">
-                    <label className={Lbl}>Nombre del cultivo *</label>
+                    <label className={Lbl}>{t('cropsPanel.cropName')}</label>
                     <input type="text" value={form.nombre} onChange={e => setForm({...form, nombre: e.target.value})}
                       placeholder={`${form.tipo_cultivo} — ${new Date().getFullYear()}`} required className={Inp} />
                   </div>
                   <div>
-                    <label className={Lbl}>Variedad</label>
+                    <label className={Lbl}>{t('cropsPanel.variety')}</label>
                     <select value={form.variedad} onChange={e => setForm({...form, variedad: e.target.value})} className={Inp}>
-                      <option value="">Sin especificar</option>
+                      <option value="">{t('cropsPanel.unspecified')}</option>
                       {(CULTIVOS_PUNO[form.tipo_cultivo]?.variedades || []).map(v => (
                         <option key={v} value={v}>{v}</option>
                       ))}
                     </select>
                   </div>
                   <div>
-                    <label className={Lbl}>Área (ha) *</label>
+                    <label className={Lbl}>{t('cropsPanel.areaField')}</label>
                     <input type="number" step="0.01" min="0.01" value={form.area}
                       onChange={e => setForm({...form, area: e.target.value})} placeholder="2.5" required className={Inp} />
                   </div>
                   <div className="col-span-2">
-                    <label className={Lbl}>Fecha de siembra *</label>
+                    <label className={Lbl}>{t('cropsPanel.sowingDate')}</label>
                     <input type="date" value={form.fecha_siembra}
                       onChange={e => setForm({...form, fecha_siembra: e.target.value})} required className={Inp} />
                   </div>
                   <div className="col-span-2">
-                    <label className={Lbl}>Notas (opcional)</label>
+                    <label className={Lbl}>{t('cropsPanel.notes')}</label>
                     <textarea value={form.notas} onChange={e => setForm({...form, notas: e.target.value})}
-                      placeholder="Observaciones, condiciones del terreno..." rows={2}
+                      placeholder={t('cropsPanel.notesPlaceholder')} rows={2}
                       className={`${Inp} h-auto py-2 resize-none`} />
                   </div>
                 </div>
@@ -773,11 +776,11 @@ const GestionCultivosIoT = () => {
                 <div className="flex gap-3 pt-1">
                   <button type="submit"
                     className="flex-1 h-11 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.98] shadow-[0_12px_30px_-12px_rgba(16,185,129,0.7)]">
-                    {editingCultivo ? 'Actualizar' : 'Crear cultivo'}
+                    {editingCultivo ? t('cropsPanel.update') : t('cropsPanel.createCrop')}
                   </button>
                   <button type="button" onClick={closeModal}
                     className="flex-1 h-11 rounded-full bg-gray-100 dark:bg-white/[0.06] text-gray-700 dark:text-gray-300 font-semibold text-sm ring-1 ring-black/5 dark:ring-white/10 hover:bg-gray-200 dark:hover:bg-white/[0.1] transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.98]">
-                    Cancelar
+                    {t('common.cancel')}
                   </button>
                 </div>
               </form>
@@ -792,12 +795,12 @@ const GestionCultivosIoT = () => {
           <div className="w-full max-w-sm rounded-2xl p-1.5 bg-white/10 ring-1 ring-white/15 animate-slide-up" onClick={e => e.stopPropagation()}>
           <div className="rounded-[calc(1rem-0.375rem)] bg-white dark:bg-gray-900 overflow-hidden">
             <div className="flex items-center justify-between px-5 py-4 border-b border-black/5 dark:border-white/10">
-              <h3 className="font-display text-base font-bold tracking-tight text-gray-900 dark:text-white">Registrar actividad</h3>
+              <h3 className="font-display text-base font-bold tracking-tight text-gray-900 dark:text-white">{t('cropsPanel.logActivity')}</h3>
               <button onClick={() => setShowActModal(false)} className="p-1.5 rounded-xl text-gray-400 hover:bg-gray-100 dark:hover:bg-white/10 transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-95 touch-manipulation">{Ic.x}</button>
             </div>
             <div className="p-5 space-y-4">
               <div>
-                <label className={Lbl}>Tipo de actividad</label>
+                <label className={Lbl}>{t('cropsPanel.activityType')}</label>
                 <div className="grid grid-cols-4 gap-1.5">
                   {ACTIVIDADES_TIPOS.map(at => (
                     <button key={at.id} type="button" onClick={() => setActForm(f => ({ ...f, tipo: at.id }))}
@@ -807,25 +810,25 @@ const GestionCultivosIoT = () => {
                           : 'bg-gray-50/80 dark:bg-white/[0.04] ring-black/5 dark:ring-white/10 hover:ring-black/10 dark:hover:ring-white/20'
                       }`}>
                       <span className="text-lg leading-none">{at.emoji}</span>
-                      <span className="text-[9px] font-semibold text-gray-600 dark:text-gray-400">{at.label}</span>
+                      <span className="text-[9px] font-semibold text-gray-600 dark:text-gray-400">{t(at.labelKey)}</span>
                     </button>
                   ))}
                 </div>
               </div>
               <div>
-                <label className={Lbl}>Descripción (opcional)</label>
-                <textarea value={actForm.descripcion} onChange={e => setActForm(f => ({ ...f, descripcion: e.target.value }))} placeholder="Ej: 20L por planta, fertilizante NPK 15-15-15..." rows={3} className={`${Inp} h-auto py-2 resize-none`} />
+                <label className={Lbl}>{t('cropsPanel.activityDescription')}</label>
+                <textarea value={actForm.descripcion} onChange={e => setActForm(f => ({ ...f, descripcion: e.target.value }))} placeholder={t('cropsPanel.activityPlaceholder')} rows={3} className={`${Inp} h-auto py-2 resize-none`} />
               </div>
               <div>
-                <label className={Lbl}>Fecha</label>
+                <label className={Lbl}>{t('cropsPanel.date')}</label>
                 <input type="date" value={actForm.fecha} onChange={e => setActForm(f => ({ ...f, fecha: e.target.value }))} className={Inp} />
               </div>
               <div className="flex gap-3">
                 <button type="button" onClick={handleSaveActividad} className="flex-1 h-11 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.98] shadow-[0_12px_30px_-12px_rgba(16,185,129,0.7)]">
-                  Guardar
+                  {t('common.save')}
                 </button>
                 <button type="button" onClick={() => setShowActModal(false)} className="flex-1 h-11 rounded-full bg-gray-100 dark:bg-white/[0.06] text-gray-700 dark:text-gray-300 font-semibold text-sm ring-1 ring-black/5 dark:ring-white/10 hover:bg-gray-200 dark:hover:bg-white/[0.1] transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.98]">
-                  Cancelar
+                  {t('common.cancel')}
                 </button>
               </div>
             </div>

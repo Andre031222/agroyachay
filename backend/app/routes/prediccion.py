@@ -3,6 +3,7 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 from app.models import db
 from app.models.cultivo import Cultivo, PrediccionCosecha
 from app.services.ml_prediccion import PrediccionService
+from ..i18n import translate as _
 
 prediccion_bp = Blueprint('prediccion', __name__)
 
@@ -16,15 +17,15 @@ def predecir_cosecha_post():
         cultivo_id = data.get('cultivo_id')
 
         if not cultivo_id:
-            return jsonify({'success': False, 'message': 'cultivo_id requerido'}), 400
+            return jsonify({'success': False, 'message': _('cultivo_id_requerido')}), 400
 
         cultivo = Cultivo.query.filter_by(id=cultivo_id, usuario_id=user_id).first()
         if not cultivo:
-            return jsonify({'success': False, 'message': 'Cultivo no encontrado o sin acceso'}), 404
+            return jsonify({'success': False, 'message': _('cultivo_no_encontrado_o_sin_acceso')}), 404
 
         prediccion_data = PrediccionService.predecir_rendimiento(cultivo_id)
         if not prediccion_data:
-            return jsonify({'success': False, 'message': 'No se pudo generar predicción'}), 500
+            return jsonify({'success': False, 'message': _('no_se_pudo_generar_prediccion')}), 500
 
         prediccion = PrediccionCosecha(
             cultivo_id=cultivo_id,
@@ -42,7 +43,7 @@ def predecir_cosecha_post():
 
     except Exception as e:
         db.session.rollback()
-        return jsonify({'success': False, 'message': 'Error interno del servidor'}), 500
+        return jsonify({'success': False, 'message': _('error_interno_del_servidor')}), 500
 
 
 @prediccion_bp.route('/historial', methods=['GET'])
@@ -59,7 +60,7 @@ def historial_predicciones_usuario():
         return jsonify({'success': True, 'data': [p.to_dict() for p in predicciones]}), 200
 
     except Exception as e:
-        return jsonify({'success': False, 'message': 'Error interno del servidor'}), 500
+        return jsonify({'success': False, 'message': _('error_interno_del_servidor')}), 500
 
 
 @prediccion_bp.route('/cultivo/<int:cultivo_id>', methods=['GET'])
@@ -72,7 +73,7 @@ def predecir_cosecha(cultivo_id):
         if not cultivo:
             return jsonify({
                 'success': False,
-                'message': 'Cultivo no encontrado'
+                'message': _('cultivo_no_encontrado')
             }), 404
 
         prediccion_data = PrediccionService.predecir_rendimiento(cultivo_id)
@@ -80,7 +81,7 @@ def predecir_cosecha(cultivo_id):
         if not prediccion_data:
             return jsonify({
                 'success': False,
-                'message': 'No se pudo generar predicción'
+                'message': _('no_se_pudo_generar_prediccion')
             }), 500
 
         prediccion = PrediccionCosecha(
@@ -105,7 +106,7 @@ def predecir_cosecha(cultivo_id):
         db.session.rollback()
         return jsonify({
             'success': False,
-            'message': 'Error interno del servidor'
+            'message': _('error_interno_del_servidor')
         }), 500
 
 @prediccion_bp.route('/cultivo/<int:cultivo_id>/tendencia', methods=['GET'])
@@ -118,7 +119,7 @@ def tendencia_prediccion(cultivo_id):
         if not cultivo:
             return jsonify({
                 'success': False,
-                'message': 'Cultivo no encontrado'
+                'message': _('cultivo_no_encontrado')
             }), 404
 
         tendencia = PrediccionService.generar_grafico_tendencia(cultivo_id)
@@ -126,7 +127,7 @@ def tendencia_prediccion(cultivo_id):
         if not tendencia:
             return jsonify({
                 'success': False,
-                'message': 'No se pudo generar tendencia'
+                'message': _('no_se_pudo_generar_tendencia')
             }), 500
 
         return jsonify({
@@ -137,7 +138,7 @@ def tendencia_prediccion(cultivo_id):
     except Exception as e:
         return jsonify({
             'success': False,
-            'message': 'Error interno del servidor'
+            'message': _('error_interno_del_servidor')
         }), 500
 
 @prediccion_bp.route('/historial/<int:cultivo_id>', methods=['GET'])
@@ -150,7 +151,7 @@ def historial_predicciones(cultivo_id):
         if not cultivo:
             return jsonify({
                 'success': False,
-                'message': 'Cultivo no encontrado'
+                'message': _('cultivo_no_encontrado')
             }), 404
 
         predicciones = PrediccionCosecha.query.filter_by(cultivo_id=cultivo_id)\
@@ -164,5 +165,5 @@ def historial_predicciones(cultivo_id):
     except Exception as e:
         return jsonify({
             'success': False,
-            'message': 'Error interno del servidor'
+            'message': _('error_interno_del_servidor')
         }), 500

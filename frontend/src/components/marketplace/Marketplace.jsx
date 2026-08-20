@@ -1,5 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import ProductCard from './ProductCard';
+import { useLanguage } from '../../context/LanguageContext';
+import { categoryLabel } from '../../utils/marketplace';
 
 const Ic = {
   search:  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="w-4 h-4"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>,
@@ -44,6 +46,7 @@ const INP = 'h-10 px-3.5 text-sm rounded-xl transition-all duration-300 ease-[cu
 
 const Marketplace = () => {
   const [search, setSearch]           = useState('');
+  const { t, tList } = useLanguage();
   const [cat, setCat]                 = useState('Todos');
   const [plat, setPlat]               = useState('Todas');
   const [orden, setOrden]             = useState('relevancia');
@@ -88,22 +91,22 @@ const Marketplace = () => {
 
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
         <div>
-          <h1 className="font-display text-2xl sm:text-3xl font-bold tracking-tight text-gray-900 dark:text-white">Marketplace Agricola</h1>
+          <h1 className="font-display text-2xl sm:text-3xl font-bold tracking-tight text-gray-900 dark:text-white">{t('marketplace.pageTitle')}</h1>
           <p className="text-xs text-gray-400 dark:text-gray-500 mt-1.5">
-            Productos para tu campo · MercadoLibre · Amazon · AliExpress
+            {t('marketplace.pageSubtitle')}
           </p>
         </div>
         <div className="flex items-center gap-1.5 text-xs text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-500/10 ring-1 ring-emerald-200/60 dark:ring-emerald-400/20 px-3.5 py-2 rounded-full">
           {Ic.shield}
-          <span className="font-semibold">Compra protegida</span>
+          <span className="font-semibold">{t('marketplace.protectedPurchase')}</span>
         </div>
       </div>
 
       <div className="grid grid-cols-3 gap-3">
         {[
-          { icon: Ic.pkg,   val: stats.total,        lbl:'Productos',      color:'bg-emerald-500' },
-          { icon: Ic.truck, val: stats.gratis,        lbl:'Envio gratis',   color:'bg-sky-500'     },
-          { icon: Ic.star,  val: `${stats.rating}*`, lbl:'Rating promedio',color:'bg-amber-500'   },
+          { icon: Ic.pkg,   val: stats.total,        lbl:t('marketplace.statsProducts'), color:'bg-emerald-500' },
+          { icon: Ic.truck, val: stats.gratis,        lbl:t('marketplace.statsFreeShipping'), color:'bg-sky-500'     },
+          { icon: Ic.star,  val: `${stats.rating}*`, lbl:t('marketplace.statsRating'), color:'bg-amber-500'   },
         ].map(({ icon, val, lbl, color }) => (
           <div key={lbl} className="rounded-[1.5rem] p-1 ring-1 ring-black/5 dark:ring-white/10 bg-gradient-to-b from-gray-100/70 to-gray-50/30 dark:from-white/[0.06] dark:to-white/[0.02]">
             <div className="rounded-[calc(1.5rem-0.25rem)] bg-white dark:bg-gray-900 ring-1 ring-black/5 dark:ring-white/5 p-3.5 flex items-center gap-3">
@@ -124,7 +127,7 @@ const Marketplace = () => {
               <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400">{Ic.search}</span>
               <input
                 type="text"
-                placeholder="Semillas, fertilizantes, herramientas, sensores..."
+                placeholder={t('marketplace.searchPlaceholder')}
                 value={search}
                 onChange={e => setSearch(e.target.value)}
                 className={INP + ' w-full pl-10'}
@@ -138,13 +141,13 @@ const Marketplace = () => {
                   : 'bg-gray-50/80 dark:bg-white/[0.04] ring-1 ring-black/5 dark:ring-white/10 text-gray-600 dark:text-gray-300 hover:bg-white dark:hover:bg-white/[0.06]'
               }`}>
               {Ic.filter}
-              Filtros
+              {t('marketplace.filters')}
               {hayFiltros && <span className="w-1.5 h-1.5 rounded-full bg-white shrink-0" />}
             </button>
             {hayFiltros && (
               <button onClick={limpiar}
                 className="flex items-center gap-1 h-10 px-4 rounded-full ring-1 ring-rose-200/70 dark:ring-rose-400/20 text-rose-500 text-xs font-semibold hover:bg-rose-50 dark:hover:bg-rose-500/10 transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.98] touch-manipulation">
-                {Ic.x} Limpiar
+                {Ic.x} {t('marketplace.clear')}
               </button>
             )}
           </div>
@@ -152,23 +155,25 @@ const Marketplace = () => {
           {showFiltros && (
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-3 border-t border-black/5 dark:border-white/10">
               <div>
-                <label className="block text-[10px] font-semibold text-gray-400 uppercase tracking-[0.14em] mb-1.5">Plataforma</label>
+                <label className="block text-[10px] font-semibold text-gray-400 uppercase tracking-[0.14em] mb-1.5">{t('marketplace.platform')}</label>
                 <select value={plat} onChange={e => setPlat(e.target.value)} className={INP + ' w-full'}>
-                  {PLATAFORMAS.map(p => <option key={p}>{p}</option>)}
+                  {PLATAFORMAS.map(p => (
+                    <option key={p} value={p}>{p === 'Todas' ? t('marketplace.allFeminine') : p}</option>
+                  ))}
                 </select>
               </div>
               <div>
-                <label className="block text-[10px] font-semibold text-gray-400 uppercase tracking-[0.14em] mb-1.5">Precio min (S/)</label>
+                <label className="block text-[10px] font-semibold text-gray-400 uppercase tracking-[0.14em] mb-1.5">{t('marketplace.minPrice')}</label>
                 <input type="number" value={precioMin} onChange={e => setPrecioMin(e.target.value)} placeholder="0" className={INP + ' w-full'} />
               </div>
               <div>
-                <label className="block text-[10px] font-semibold text-gray-400 uppercase tracking-[0.14em] mb-1.5">Precio max (S/)</label>
+                <label className="block text-[10px] font-semibold text-gray-400 uppercase tracking-[0.14em] mb-1.5">{t('marketplace.maxPrice')}</label>
                 <input type="number" value={precioMax} onChange={e => setPrecioMax(e.target.value)} placeholder="9999" className={INP + ' w-full'} />
               </div>
               <div className="flex flex-col justify-end">
                 <label className="flex items-center gap-2 cursor-pointer h-10 bg-gray-50/80 dark:bg-white/[0.04] ring-1 ring-black/5 dark:ring-white/10 rounded-xl px-3.5 hover:bg-white dark:hover:bg-white/[0.06] transition-all duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] touch-manipulation">
                   <input type="checkbox" checked={soloGratis} onChange={e => setSoloGratis(e.target.checked)} className="accent-emerald-500 w-3.5 h-3.5" />
-                  <span className="text-xs font-semibold text-gray-700 dark:text-gray-300">Solo envio gratis</span>
+                  <span className="text-xs font-semibold text-gray-700 dark:text-gray-300">{t('marketplace.onlyFreeShipping')}</span>
                 </label>
               </div>
             </div>
@@ -185,7 +190,7 @@ const Marketplace = () => {
                   ? 'bg-emerald-600 text-white'
                   : 'bg-white dark:bg-white/[0.04] ring-1 ring-black/5 dark:ring-white/10 text-gray-600 dark:text-gray-300 hover:ring-emerald-300/70 dark:hover:ring-emerald-400/30'
               }`}>
-              {c}
+              {c === 'Todos' ? t('marketplace.all') : categoryLabel(t, c)}
               {c !== 'Todos' && (
                 <span className="ml-1 opacity-60 text-[10px]">
                   ({PRODUCTOS.filter(p => p.categoria === c).length})
@@ -195,13 +200,13 @@ const Marketplace = () => {
           ))}
         </div>
         <div className="flex items-center gap-3 sm:ml-auto shrink-0">
-          <span className="text-xs text-gray-500 dark:text-gray-400 font-medium whitespace-nowrap">{filtrados.length} productos</span>
+          <span className="text-xs text-gray-500 dark:text-gray-400 font-medium whitespace-nowrap">{t('marketplace.productCount', { count: filtrados.length })}</span>
           <select value={orden} onChange={e => setOrden(e.target.value)} className={INP + ' text-xs'}>
-            <option value="relevancia">Relevancia</option>
-            <option value="precio_asc">Precio: menor</option>
-            <option value="precio_desc">Precio: mayor</option>
-            <option value="mas_vendidos">Mas vendidos</option>
-            <option value="mejor_valorados">Mejor valorados</option>
+            <option value="relevancia">{t('marketplace.sortRelevance')}</option>
+            <option value="precio_asc">{t('marketplace.sortPriceAsc')}</option>
+            <option value="precio_desc">{t('marketplace.sortPriceDesc')}</option>
+            <option value="mas_vendidos">{t('marketplace.sortBestSelling')}</option>
+            <option value="mejor_valorados">{t('marketplace.sortBestRated')}</option>
           </select>
         </div>
       </div>
@@ -210,11 +215,11 @@ const Marketplace = () => {
         <div className="rounded-[1.75rem] p-1.5 ring-1 ring-black/5 dark:ring-white/10 bg-gradient-to-b from-gray-100/70 to-gray-50/30 dark:from-white/[0.06] dark:to-white/[0.02]">
           <div className="rounded-[calc(1.75rem-0.375rem)] bg-white dark:bg-gray-900 ring-1 ring-black/5 dark:ring-white/5 py-14 px-4 flex flex-col items-center gap-3 text-center">
             <div className="w-14 h-14 bg-gray-50 dark:bg-white/[0.04] ring-1 ring-black/5 dark:ring-white/10 rounded-2xl flex items-center justify-center text-gray-400">{Ic.pkg}</div>
-            <p className="font-display text-base font-semibold tracking-tight text-gray-700 dark:text-gray-200">Sin resultados para "{search}"</p>
-            <p className="text-xs text-gray-400 dark:text-gray-500">Intenta con otros terminos o limpia los filtros</p>
+            <p className="font-display text-base font-semibold tracking-tight text-gray-700 dark:text-gray-200">{t('marketplace.noResults', { search })}</p>
+            <p className="text-xs text-gray-400 dark:text-gray-500">{t('marketplace.noResultsHint')}</p>
             <button onClick={limpiar}
               className="h-10 px-5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold rounded-full transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.98] touch-manipulation">
-              Limpiar filtros
+              {t('marketplace.clearFilters')}
             </button>
           </div>
         </div>
@@ -229,12 +234,12 @@ const Marketplace = () => {
           <div className="flex items-center gap-3 shrink-0">
             <div className="w-10 h-10 bg-emerald-600 rounded-2xl flex items-center justify-center text-white">{Ic.shield}</div>
             <div>
-              <p className="font-display text-base font-semibold tracking-tight text-gray-900 dark:text-white">Compra 100% segura</p>
-              <p className="text-xs text-gray-400 dark:text-gray-500 mt-0.5">Redirige a plataformas verificadas</p>
+              <p className="font-display text-base font-semibold tracking-tight text-gray-900 dark:text-white">{t('marketplace.safePurchase')}</p>
+              <p className="text-xs text-gray-400 dark:text-gray-500 mt-0.5">{t('marketplace.safePurchaseHint')}</p>
             </div>
           </div>
           <div className="flex flex-wrap gap-2">
-            {['Compra protegida','Envios a todo Peru','Vendedores verificados','Devolucion garantizada'].map(b => (
+            {tList('marketplace.badges').map(b => (
               <span key={b} className="text-[10px] font-semibold px-3 py-1.5 bg-emerald-50 dark:bg-emerald-500/10 ring-1 ring-emerald-200/60 dark:ring-emerald-400/20 text-emerald-700 dark:text-emerald-300 rounded-full">
                 {b}
               </span>

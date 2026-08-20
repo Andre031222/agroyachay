@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { plagasAPI, cultivosAPI, asistenteAPI } from '../../services/api';
 import { notify } from '../../utils/swal';
+import { useLanguage } from '../../context/LanguageContext';
 import CameraCapture from './CameraCapture';
 
 const Ic = {
@@ -60,6 +61,7 @@ const ArrowCircle = () => (
 );
 
 const DeteccionPlagas = () => {
+  const { t, formatDate } = useLanguage();
   const [tab, setTab]                     = useState('imagen');
   const [cultivos, setCultivos]           = useState([]);
   const [cultivo, setCultivo]             = useState('');
@@ -86,7 +88,7 @@ const DeteccionPlagas = () => {
       cultivosAPI.getAll().then(r => setCultivos(r.data?.data || [])).catch(() => {}),
       plagasAPI.getBiblioteca().then(r => setBiblioteca(r.data?.data || [])).catch(() => {}),
     ]);
-  }, []);
+  }, [t]);
 
   useEffect(() => {
     if (tab === 'historial') {
@@ -95,7 +97,7 @@ const DeteccionPlagas = () => {
   }, [tab]);
 
   const applyFile = (file) => {
-    if (!file || !file.type.startsWith('image/')) { notify.error('Selecciona una imagen válida'); return; }
+    if (!file || !file.type.startsWith('image/')) { notify.error(t('pests.invalidImage')); return; }
     setImageFile(file);
     const reader = new FileReader();
     reader.onloadend = () => setImagePreview(reader.result);
@@ -112,19 +114,19 @@ const DeteccionPlagas = () => {
         nombre_plaga: det.nombre_plaga,
         confianza:    det.confianza,
         severidad:    det.severidad,
-        cultivo:      cultivoNombre || 'no especificado',
+        cultivo:      cultivoNombre || t('pests.notSpecified'),
         descripcion:  det.descripcion || '',
       });
       if (res.data.success) setGroqPlan(res.data.data);
     } catch {
-      notify.error('No se pudo generar el plan de manejo');
+      notify.error(t('pests.planError'));
     } finally {
       setGroqLoading(false);
     }
-  }, []);
+  }, [t]);
 
   const handleDetectar = async () => {
-    if (!imageFile) { notify.warning('Selecciona o toma una foto primero'); return; }
+    if (!imageFile) { notify.warning(t('pests.selectPhotoFirst')); return; }
     setDetecting(true);
     setDetection(null);
     setGroqPlan(null);
@@ -138,31 +140,31 @@ const DeteccionPlagas = () => {
       if (res.data.success) {
         setDetection(res.data.data);
         callGroqPlan(res.data.data, cultivoObj?.tipo_cultivo || '');
-        notify.success(res.data.data.is_healthy ? 'Planta saludable' : `Detectado: ${res.data.data.nombre_plaga}`);
+        notify.success(res.data.data.is_healthy ? t('pests.healthyPlant') : t('pests.detected', { name: res.data.data.nombre_plaga }));
       } else {
-        notify.error(res.data.message || 'Error en la detección');
+        notify.error(res.data.message || t('pests.detectionError'));
       }
     } catch {
-      notify.error('Error al analizar la imagen con IA');
+      notify.error(t('pests.analysisError'));
     } finally {
       setDetecting(false);
     }
   };
 
   const handleConsulta = async () => {
-    if (sintomas.trim().length < 10) { notify.warning('Describe los síntomas con más detalle'); return; }
+    if (sintomas.trim().length < 10) { notify.warning(t('pests.describeMore')); return; }
     setConsultaLoading(true);
     setConsultaResp(null);
     const cultivoObj = cultivos.find(c => String(c.id) === String(cultivo));
     try {
       const res = await asistenteAPI.consulta(sintomas.trim(), {
-        region: 'Puno, Perú — Altiplano 3800-4500 msnm',
+        region: t('pests.region'),
         cultivos: cultivoObj ? [cultivoObj.tipo_cultivo] : [],
       });
       if (res.data.success) setConsultaResp(res.data.data.respuesta);
-      else notify.error(res.data.message || 'Error en la consulta');
+      else notify.error(res.data.message || t('pests.queryError'));
     } catch {
-      notify.error('Error al conectar con AgroIA');
+      notify.error(t('pests.aiConnectionError'));
     } finally {
       setConsultaLoading(false);
     }
@@ -185,20 +187,20 @@ const DeteccionPlagas = () => {
       <div className="relative flex items-center justify-between animate-slide-up">
         <div>
           <h1 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 dark:text-white">
-            Detección de Plagas
+            {t('pests.pageTitle')}
           </h1>
           <p className="mt-2 text-sm leading-relaxed text-gray-500 dark:text-gray-400 max-w-md">
-            Groq Vision · AgroIA · Diagnóstico inteligente para el Altiplano
+            {t('pests.pageSubtitle')}
           </p>
         </div>
       </div>
 
       <div className="relative inline-flex gap-1 bg-gray-100/80 dark:bg-white/[0.04] p-1 rounded-full ring-1 ring-black/5 dark:ring-white/10 w-fit animate-slide-up">
         {[
-          { id:'imagen',    label:'Por imagen', icon: Ic.camera  },
-          { id:'sintomas',  label:'Consulta IA', icon: Ic.brain  },
-          { id:'historial', label:'Historial',   icon: Ic.history},
-          { id:'guia',      label:'Guía',        icon: Ic.book   },
+          { id:'imagen',    label:t('pests.tabImage'), icon: Ic.camera },
+          { id:'sintomas',  label:t('pests.tabAI'), icon: Ic.brain },
+          { id:'historial', label:t('pests.tabHistory'), icon: Ic.history },
+          { id:'guia',      label:t('pests.tabGuide'), icon: Ic.book },
         ].map(t => (
           <button key={t.id} onClick={() => setTab(t.id)}
             className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.97] touch-manipulation ${
@@ -218,10 +220,10 @@ const DeteccionPlagas = () => {
             <div className="p-5 space-y-4">
             <div>
               <label className="block text-[10px] font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-[0.18em] mb-2">
-                Cultivo a analizar (opcional)
+                {t('pests.cropToAnalyse')}
               </label>
               <select value={cultivo} onChange={e => setCultivo(e.target.value)} className={INP}>
-                <option value="">Sin especificar</option>
+                <option value="">{t('pests.unspecified')}</option>
                 {cultivos.map(c => (
                   <option key={c.id} value={c.id}>{c.nombre} — {c.tipo_cultivo}</option>
                 ))}
@@ -243,11 +245,11 @@ const DeteccionPlagas = () => {
                     {Ic.upload}
                   </div>
                   <div className="text-center">
-                    <p className="text-sm font-semibold text-gray-800 dark:text-gray-200">Arrastra una imagen aquí</p>
-                    <p className="text-xs text-gray-400 dark:text-gray-500 mt-0.5">o haz clic para seleccionar · JPG, PNG, WEBP</p>
+                    <p className="text-sm font-semibold text-gray-800 dark:text-gray-200">{t('pests.dropImage')}</p>
+                    <p className="text-xs text-gray-400 dark:text-gray-500 mt-0.5">{t('pests.dropImageHint')}</p>
                   </div>
                   <span className="text-xs font-semibold text-emerald-700 dark:text-emerald-300 bg-emerald-500/10 px-3.5 py-1.5 rounded-full ring-1 ring-emerald-500/20">
-                    Seleccionar archivo
+                    {t('pests.selectFile')}
                   </span>
                   <input ref={fileRef} type="file" accept="image/*" className="hidden"
                     onChange={e => applyFile(e.target.files[0])} />
@@ -255,7 +257,7 @@ const DeteccionPlagas = () => {
 
                 <div className="relative flex items-center gap-3">
                   <div className="flex-1 h-px bg-black/5 dark:bg-white/10" />
-                  <span className="text-[10px] uppercase tracking-[0.18em] text-gray-400 dark:text-gray-500">o</span>
+                  <span className="text-[10px] uppercase tracking-[0.18em] text-gray-400 dark:text-gray-500">{t('pests.or')}</span>
                   <div className="flex-1 h-px bg-black/5 dark:bg-white/10" />
                 </div>
 
@@ -265,18 +267,18 @@ const DeteccionPlagas = () => {
                   className="group w-full flex items-center justify-center gap-2.5 h-12 bg-gray-900 dark:bg-white/[0.06] hover:bg-gray-800 dark:hover:bg-white/[0.1] text-white rounded-full ring-1 ring-white/10 transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.98] touch-manipulation"
                 >
                   {Ic.camera}
-                  <span className="text-sm font-semibold">Tomar foto con la cámara</span>
+                  <span className="text-sm font-semibold">{t('pests.takePhoto')}</span>
                 </button>
               </div>
             ) : (
               <div className="flex flex-col sm:flex-row items-start gap-4">
                 <div className="relative rounded-2xl p-1.5 bg-gradient-to-b from-black/[0.05] to-transparent dark:from-white/10 dark:to-white/[0.02] ring-1 ring-black/5 dark:ring-white/10 w-full sm:w-48 shrink-0">
                   <div className="relative rounded-[calc(1rem-0.25rem)] overflow-hidden h-48 bg-gray-100 dark:bg-gray-800">
-                    <img src={imagePreview} alt="Vista previa de la imagen a analizar" className="w-full h-full object-cover" />
+                    <img src={imagePreview} alt={t('pests.imagePreviewAlt')} className="w-full h-full object-cover" />
                     {detecting && (
                       <div className="absolute inset-0 bg-black/60 backdrop-blur-[2px] flex flex-col items-center justify-center gap-2.5">
                         <div className="w-8 h-8 border-2 border-white/25 border-t-white rounded-full animate-spin" />
-                        <span className="text-white text-xs font-semibold tracking-tight">Analizando con IA…</span>
+                        <span className="text-white text-xs font-semibold tracking-tight">{t('pests.analysingAI')}</span>
                       </div>
                     )}
                   </div>
@@ -289,7 +291,7 @@ const DeteccionPlagas = () => {
                   <div className="flex gap-2">
                     <button onClick={handleDetectar} disabled={detecting}
                       className="group flex-1 flex items-center justify-center gap-2 h-11 bg-emerald-600 hover:bg-emerald-500 disabled:opacity-50 text-white text-sm font-semibold rounded-full transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.98] touch-manipulation">
-                      {detecting ? <><Spinner sm /> Analizando…</> : <>{Ic.bug} Detectar plaga <ArrowCircle /></>}
+                      {detecting ? <><Spinner sm /> {t('pests.analysing')}</> : <>{Ic.bug} {t('pests.detect')} <ArrowCircle /></>}
                     </button>
                     <button onClick={resetImagen} disabled={detecting}
                       className="h-11 w-11 flex items-center justify-center bg-gray-50/80 dark:bg-white/[0.04] text-gray-500 rounded-full ring-1 ring-black/5 dark:ring-white/10 hover:bg-gray-100 dark:hover:bg-white/[0.08] transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-95 touch-manipulation">
@@ -319,7 +321,7 @@ const DeteccionPlagas = () => {
                     <h3 className="font-display text-lg font-bold tracking-tight text-gray-900 dark:text-white truncate">{detection.nombre_plaga}</h3>
                     <div className="flex flex-wrap items-center gap-2 mt-1.5">
                       <span className={`text-[10px] font-semibold px-2.5 py-0.5 rounded-full ring-1 ${severCfg.badge}`}>
-                        {detection.is_healthy ? 'Saludable' : detection.severidad}
+                        {detection.is_healthy ? t('pests.healthy') : detection.severidad}
                       </span>
                       <span className="text-xs text-gray-500 dark:text-gray-400">
                         Confianza: <strong>{detection.confianza}%</strong>
@@ -338,17 +340,17 @@ const DeteccionPlagas = () => {
                   <div className="flex items-center gap-3 bg-emerald-500/10 ring-1 ring-emerald-500/20 rounded-2xl px-4 py-3.5">
                     <span className="text-emerald-500 shrink-0">{Ic.check}</span>
                     <div>
-                      <p className="text-sm font-semibold text-emerald-700 dark:text-emerald-400">Planta sin signos de enfermedad</p>
-                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Continúa el monitoreo preventivo habitual.</p>
+                      <p className="text-sm font-semibold text-emerald-700 dark:text-emerald-400">{t('pests.noDiseaseSigns')}</p>
+                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{t('pests.noDiseaseSignsHint')}</p>
                     </div>
                   </div>
                 ) : (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {[
-                      { key:'descripcion', label:'Descripción', icon: Ic.info,   cls:'bg-blue-500/[0.06] ring-blue-500/20',     text:'text-blue-700 dark:text-blue-400'     },
-                      { key:'causas',      label:'Causas',      icon: Ic.warn,   cls:'bg-amber-500/[0.06] ring-amber-500/20', text:'text-amber-700 dark:text-amber-400'   },
-                      { key:'tratamiento', label:'Tratamiento', icon: Ic.drop,   cls:'bg-emerald-500/[0.06] ring-emerald-500/20', text:'text-emerald-700 dark:text-emerald-400' },
-                      { key:'prevencion',  label:'Prevención',  icon: Ic.shield, cls:'bg-violet-500/[0.06] ring-violet-500/20', text:'text-violet-700 dark:text-violet-400' },
+                      { key:'descripcion', label:t('pests.description'), icon: Ic.info,   cls:'bg-blue-500/[0.06] ring-blue-500/20',     text:'text-blue-700 dark:text-blue-400'     },
+                      { key:'causas',      label:t('pests.causes'), icon: Ic.warn,   cls:'bg-amber-500/[0.06] ring-amber-500/20', text:'text-amber-700 dark:text-amber-400'   },
+                      { key:'tratamiento', label:t('pests.treatment'), icon: Ic.drop,   cls:'bg-emerald-500/[0.06] ring-emerald-500/20', text:'text-emerald-700 dark:text-emerald-400' },
+                      { key:'prevencion',  label:t('pests.prevention'), icon: Ic.shield, cls:'bg-violet-500/[0.06] ring-violet-500/20', text:'text-violet-700 dark:text-violet-400' },
                     ].filter(f => detection[f.key]).map(({ key, label, icon, cls, text }) => (
                       <div key={key} className={`rounded-2xl ring-1 p-3.5 ${cls}`}>
                         <p className={`flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.14em] mb-2 ${text}`}>{icon} {label}</p>
@@ -363,7 +365,7 @@ const DeteccionPlagas = () => {
                     <div className="flex items-center gap-2.5 mb-3">
                       <div className="w-8 h-8 bg-violet-500/10 ring-1 ring-violet-500/20 rounded-xl flex items-center justify-center text-violet-500">{Ic.brain}</div>
                       <div>
-                        <h4 className="text-sm font-semibold tracking-tight text-gray-900 dark:text-white">Plan de manejo — AgroIA</h4>
+                        <h4 className="text-sm font-semibold tracking-tight text-gray-900 dark:text-white">{t('pests.managementPlan')}</h4>
                         <p className="text-[10px] text-gray-400">Groq · llama-3.3-70b-versatile</p>
                       </div>
                     </div>
@@ -371,7 +373,7 @@ const DeteccionPlagas = () => {
                     {groqLoading ? (
                       <div className="flex items-center gap-3 bg-violet-500/[0.06] ring-1 ring-violet-500/20 rounded-2xl px-4 py-4">
                         <div className="w-4 h-4 border-2 border-violet-500/30 border-t-violet-500 rounded-full animate-spin" />
-                        <span className="text-sm text-violet-700 dark:text-violet-400 font-medium">AgroIA generando plan de manejo…</span>
+                        <span className="text-sm text-violet-700 dark:text-violet-400 font-medium">{t('pests.generatingPlan')}</span>
                       </div>
                     ) : groqPlan ? (
                       <div className="space-y-3">
@@ -381,7 +383,7 @@ const DeteccionPlagas = () => {
                             <div className={`flex items-center gap-2.5 px-4 py-3 rounded-2xl ring-1 ${u.cls}`}>
                               <span className={`w-2.5 h-2.5 rounded-full shrink-0 ${u.dot}`} />
                               <div>
-                                <p className="text-[10px] font-semibold uppercase tracking-[0.14em]">Nivel de urgencia</p>
+                                <p className="text-[10px] font-semibold uppercase tracking-[0.14em]">{t('pests.urgencyLevel')}</p>
                                 <p className="text-sm font-bold tracking-tight">{u.label}</p>
                               </div>
                             </div>
@@ -390,7 +392,7 @@ const DeteccionPlagas = () => {
 
                         {groqPlan.confirmacion && (
                           <div className="bg-gray-50/80 dark:bg-white/[0.04] rounded-2xl px-4 py-3 ring-1 ring-black/5 dark:ring-white/10">
-                            <p className="text-[10px] font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-[0.14em] mb-1">Evaluación</p>
+                            <p className="text-[10px] font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-[0.14em] mb-1">{t('pests.assessment')}</p>
                             <p className="text-sm text-gray-700 dark:text-gray-300">{groqPlan.confirmacion}</p>
                           </div>
                         )}
@@ -412,14 +414,14 @@ const DeteccionPlagas = () => {
                         {groqPlan.productos_quimicos?.length > 0 && (
                           <div className="bg-white dark:bg-white/[0.03] rounded-2xl ring-1 ring-black/5 dark:ring-white/10 overflow-hidden">
                             <div className="px-4 py-2.5 border-b border-black/5 dark:border-white/10">
-                              <p className="text-[10px] font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-[0.14em]">Productos recomendados</p>
+                              <p className="text-[10px] font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-[0.14em]">{t('pests.recommendedProducts')}</p>
                             </div>
                             <div className="divide-y divide-black/5 dark:divide-white/[0.06]">
                               {groqPlan.productos_quimicos.map((p, i) => (
                                 <div key={i} className="grid grid-cols-3 gap-2 px-4 py-2.5 text-xs">
                                   <p className="font-semibold text-gray-800 dark:text-gray-200">{p.nombre}</p>
-                                  <p className="text-gray-500 dark:text-gray-400">Dosis: <span className="font-semibold text-gray-700 dark:text-gray-300">{p.dosis}</span></p>
-                                  <p className="text-gray-500 dark:text-gray-400">Cada: <span className="font-semibold text-gray-700 dark:text-gray-300">{p.frecuencia}</span></p>
+                                  <p className="text-gray-500 dark:text-gray-400">{t('pests.dose')}: <span className="font-semibold text-gray-700 dark:text-gray-300">{p.dosis}</span></p>
+                                  <p className="text-gray-500 dark:text-gray-400">{t('pests.every')}: <span className="font-semibold text-gray-700 dark:text-gray-300">{p.frecuencia}</span></p>
                                 </div>
                               ))}
                             </div>
@@ -451,7 +453,7 @@ const DeteccionPlagas = () => {
                           <div className="flex items-start gap-2.5 bg-amber-500/[0.06] ring-1 ring-amber-500/20 rounded-2xl px-3.5 py-3">
                             <span className="text-amber-500 shrink-0 mt-0.5">{Ic.warn}</span>
                             <div>
-                              <p className="text-xs font-semibold text-amber-700 dark:text-amber-400 mb-0.5">Consulta con agrónomo si…</p>
+                              <p className="text-xs font-semibold text-amber-700 dark:text-amber-400 mb-0.5">{t('pests.consultAgronomist')}</p>
                               <p className="text-sm text-gray-700 dark:text-gray-300">{groqPlan.cuando_consultar_especialista}</p>
                             </div>
                           </div>
@@ -473,30 +475,30 @@ const DeteccionPlagas = () => {
             <div className="flex items-start gap-3 bg-violet-500/[0.06] ring-1 ring-violet-500/20 rounded-2xl px-4 py-3.5">
               <span className="text-violet-500 shrink-0 mt-0.5">{Ic.brain}</span>
               <div>
-                <p className="text-sm font-semibold text-violet-700 dark:text-violet-400">Consulta por síntomas — AgroIA</p>
-                <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Describe lo que observas. AgroIA generará diagnóstico y plan de manejo especializado para el Altiplano puneño.</p>
+                <p className="text-sm font-semibold text-violet-700 dark:text-violet-400">{t('pests.symptomQuery')}</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{t('pests.symptomQueryHint')}</p>
               </div>
             </div>
 
             <div>
-              <label className="block text-[10px] font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-[0.18em] mb-2">Cultivo afectado (opcional)</label>
+              <label className="block text-[10px] font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-[0.18em] mb-2">{t('pests.affectedCrop')}</label>
               <select value={cultivo} onChange={e => setCultivo(e.target.value)} className={INP}>
-                <option value="">Sin especificar</option>
+                <option value="">{t('pests.unspecified')}</option>
                 {cultivos.map(c => <option key={c.id} value={c.id}>{c.nombre} — {c.tipo_cultivo}</option>)}
               </select>
             </div>
 
             <div>
-              <label className="block text-[10px] font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-[0.18em] mb-2">Describe los síntomas</label>
+              <label className="block text-[10px] font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-[0.18em] mb-2">{t('pests.describeSymptoms')}</label>
               <textarea
                 value={sintomas}
                 onChange={e => setSintomas(e.target.value)}
                 rows={5}
-                placeholder="Ej: Las hojas de la papa tienen manchas marrones con bordes amarillos. Las manchas aparecieron después de las lluvias. El tallo se ve oscuro en la base. Afecta a unas 20 plantas en la parcela norte."
+                placeholder={t('pests.symptomsPlaceholder')}
                 className={`${INP} h-auto py-3 resize-none`}
               />
               <div className="flex justify-between mt-1">
-                <p className="text-[10px] text-gray-400">Cuanto más detallado, mejor el diagnóstico</p>
+                <p className="text-[10px] text-gray-400">{t('pests.moreDetailBetter')}</p>
                 <p className={`text-[10px] ${sintomas.length > 900 ? 'text-red-400' : 'text-gray-400'}`}>{sintomas.length}/1000</p>
               </div>
             </div>
@@ -504,7 +506,7 @@ const DeteccionPlagas = () => {
             <button onClick={handleConsulta} disabled={consultaLoading || sintomas.trim().length < 10}
               className="group w-full h-11 flex items-center justify-center gap-2 bg-violet-600 hover:bg-violet-500 disabled:opacity-50 text-white text-sm font-semibold rounded-full transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.98] touch-manipulation">
               {consultaLoading
-                ? <><div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> AgroIA analizando…</>
+                ? <><div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> {t('pests.aiAnalysing')}</>
                 : <>{Ic.send} Consultar AgroIA <ArrowCircle /></>}
             </button>
             </div>
@@ -516,7 +518,7 @@ const DeteccionPlagas = () => {
               <div className="flex items-center gap-2.5 mb-4">
                 <div className="w-8 h-8 bg-violet-500/10 ring-1 ring-violet-500/20 rounded-xl flex items-center justify-center text-violet-500">{Ic.brain}</div>
                 <div>
-                  <h3 className="text-sm font-semibold tracking-tight text-gray-900 dark:text-white">Respuesta de AgroIA</h3>
+                  <h3 className="text-sm font-semibold tracking-tight text-gray-900 dark:text-white">{t('pests.aiResponse')}</h3>
                   <p className="text-[10px] text-gray-400">Groq · llama-3.3-70b-versatile</p>
                 </div>
               </div>
@@ -525,7 +527,7 @@ const DeteccionPlagas = () => {
               </div>
               <button onClick={() => { setSintomas(''); setConsultaResp(null); }}
                 className="mt-3 text-xs text-violet-600 dark:text-violet-400 font-semibold hover:underline touch-manipulation">
-                Nueva consulta
+                {t('pests.newQuery')}
               </button>
               </div>
             </Bezel>
@@ -539,8 +541,8 @@ const DeteccionPlagas = () => {
             <Bezel className="animate-slide-up">
               <div className="py-14 flex flex-col items-center gap-3">
                 <div className="w-12 h-12 bg-gray-50/80 dark:bg-white/[0.04] ring-1 ring-black/5 dark:ring-white/10 rounded-2xl flex items-center justify-center text-gray-400">{Ic.history}</div>
-                <p className="text-sm font-semibold text-gray-600 dark:text-gray-400">Sin detecciones registradas</p>
-                <p className="text-xs text-gray-400 dark:text-gray-500">Las detecciones aparecerán aquí</p>
+                <p className="text-sm font-semibold text-gray-600 dark:text-gray-400">{t('pests.noDetections')}</p>
+                <p className="text-xs text-gray-400 dark:text-gray-500">{t('pests.noDetectionsHint')}</p>
               </div>
             </Bezel>
           ) : historial.map(d => {
@@ -556,8 +558,8 @@ const DeteccionPlagas = () => {
                       <span className={`text-[10px] font-semibold px-2.5 py-0.5 rounded-full ring-1 ${sc.badge}`}>{d.severidad}</span>
                     </div>
                     <div className="flex items-center gap-3 mt-1 text-xs text-gray-400 dark:text-gray-500 flex-wrap">
-                      <span>Confianza: <strong>{parseFloat(d.confianza || 0).toFixed(1)}%</strong></span>
-                      <span>{d.fecha_deteccion ? new Date(d.fecha_deteccion).toLocaleDateString('es-PE', { day:'numeric', month:'short', year:'numeric' }) : '—'}</span>
+                      <span>{t('pests.confidence')}: <strong>{parseFloat(d.confianza || 0).toFixed(1)}%</strong></span>
+                      <span>{d.fecha_deteccion ? formatDate(d.fecha_deteccion, { day:'numeric', month:'short', year:'numeric' }) : '—'}</span>
                       {d.tratamiento_aplicado && <span className="flex items-center gap-1 text-emerald-500 font-semibold">{Ic.check} Tratado</span>}
                     </div>
                   </div>
@@ -574,10 +576,10 @@ const DeteccionPlagas = () => {
             <div className="p-5">
             <div className="flex items-center gap-2.5 mb-4">
               <div className="w-8 h-8 bg-violet-500/10 ring-1 ring-violet-500/20 rounded-xl flex items-center justify-center text-violet-500">{Ic.book}</div>
-              <h3 className="text-sm font-semibold tracking-tight text-gray-900 dark:text-white">Plagas comunes del Altiplano puneño</h3>
+              <h3 className="text-sm font-semibold tracking-tight text-gray-900 dark:text-white">{t('pests.commonPests')}</h3>
             </div>
             {biblioteca.length === 0
-              ? <p className="text-sm text-gray-400">Cargando…</p>
+              ? <p className="text-sm text-gray-400">{t('pests.loading')}</p>
               : (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   {biblioteca.map((p, i) => (
@@ -591,10 +593,10 @@ const DeteccionPlagas = () => {
                       </div>
                       <div className="p-4 space-y-2">
                         {[
-                          { icon: Ic.leaf,   label:'Cultivos',    val: p.cultivos_afectados?.join(', '), color:'text-emerald-500' },
-                          { icon: Ic.warn,   label:'Síntomas',    val: p.sintomas,                      color:'text-amber-500'   },
-                          { icon: Ic.drop,   label:'Tratamiento', val: p.tratamiento,                   color:'text-sky-500'     },
-                          { icon: Ic.shield, label:'Prevención',  val: p.prevencion,                    color:'text-violet-500'  },
+                          { icon: Ic.leaf,   label:t('pests.guideCrops'), val: p.cultivos_afectados?.join(', '), color:'text-emerald-500' },
+                          { icon: Ic.warn,   label:t('pests.guideSymptoms'), val: p.sintomas,                      color:'text-amber-500'   },
+                          { icon: Ic.drop,   label:t('pests.guideTreatment'), val: p.tratamiento,                   color:'text-sky-500'     },
+                          { icon: Ic.shield, label:t('pests.guidePrevention'), val: p.prevencion,                    color:'text-violet-500'  },
                         ].filter(r => r.val).map(({ icon, label, val, color }) => (
                           <div key={label} className="flex items-start gap-2 text-xs">
                             <span className={`${color} shrink-0 mt-0.5`}>{icon}</span>
@@ -613,9 +615,9 @@ const DeteccionPlagas = () => {
           <div className="bg-violet-500/[0.06] ring-1 ring-violet-500/20 rounded-2xl p-4 animate-slide-up">
             <div className="flex items-center gap-2 mb-2">
               <span className="text-violet-500">{Ic.brain}</span>
-              <p className="text-sm font-semibold text-violet-700 dark:text-violet-400">Diagnóstico avanzado con AgroIA</p>
+              <p className="text-sm font-semibold text-violet-700 dark:text-violet-400">{t('pests.advancedDiagnosis')}</p>
             </div>
-            <p className="text-xs text-gray-600 dark:text-gray-400 mb-3">Si no encuentras tu plaga en esta guía, describe los síntomas o sube una foto para diagnóstico con IA.</p>
+            <p className="text-xs text-gray-600 dark:text-gray-400 mb-3">{t('pests.advancedDiagnosisHint')}</p>
             <button onClick={() => setTab('sintomas')}
               className="flex items-center gap-1.5 text-xs font-semibold text-violet-600 dark:text-violet-400 hover:underline touch-manipulation">
               {Ic.send} Abrir consulta IA

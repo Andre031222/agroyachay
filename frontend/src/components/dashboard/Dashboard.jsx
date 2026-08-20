@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useCallback, useRef, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
+import { useLanguage } from '../../context/LanguageContext';
+import { weatherLabel } from '../../utils/weather';
 import { climaAPI, cultivosAPI, informesAPI, dispositivosAPI } from '../../services/api';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
@@ -9,14 +11,6 @@ const tempFallback = [
   { h: '12:00', t: 14 }, { h: '15:00', t: 15 },
   { h: '18:00', t: 12 }, { h: '21:00', t: 9 },
 ];
-
-const WEATHER_LABELS = {
-  'clear sky': 'Despejado', 'few clouds': 'Pocas nubes',
-  'scattered clouds': 'Nublado parcial', 'broken clouds': 'Nublado parcial',
-  'overcast clouds': 'Nublado', 'light rain': 'Lluvia ligera',
-  'moderate rain': 'Lluvia', 'heavy intensity rain': 'Lluvia intensa',
-  'thunderstorm': 'Tormenta', 'snow': 'Nieve', 'mist': 'Neblina',
-};
 
 const Ic = {
   leaf:    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="w-4 h-4"><path d="M11 20A7 7 0 0 1 4 13c0-3.87 3.13-7 7-7 3.87 0 7 3.13 7 7a7 7 0 0 1-7 7z"/><path d="M11 20c0-4-2-7-7-8" strokeLinecap="round"/></svg>,
@@ -47,7 +41,6 @@ const ChartTip = ({ active, payload, label }) => {
   );
 };
 
-// Double-bezel shell, consistent with Auth cards.
 const Bezel = ({ className = '', coreClass = '', children, style }) => (
   <div
     style={style}
@@ -59,8 +52,11 @@ const Bezel = ({ className = '', coreClass = '', children, style }) => (
   </div>
 );
 
-const KpiCard = ({ icon, label, value, unit, color, live }) => (
-  <Bezel coreClass="p-5">
+const KpiCard = ({ icon, label, value, unit, color, live }) => {
+  const { t } = useLanguage();
+
+  return (
+    <Bezel coreClass="p-5">
     <div className="flex items-center justify-between mb-4">
       <div className={`w-10 h-10 rounded-full flex items-center justify-center text-white ring-1 ring-white/20 ${color}`}>
         {icon}
@@ -68,7 +64,7 @@ const KpiCard = ({ icon, label, value, unit, color, live }) => (
       {live && (
         <span className="flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-emerald-600 dark:text-emerald-400">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-          Live
+          {t('dashboard.live')}
         </span>
       )}
     </div>
@@ -77,12 +73,14 @@ const KpiCard = ({ icon, label, value, unit, color, live }) => (
       {unit && <span className="text-sm font-semibold text-gray-400 dark:text-gray-500">{unit}</span>}
     </div>
     <p className="text-xs text-gray-500 dark:text-gray-400 mt-2 tracking-tight">{label}</p>
-  </Bezel>
-);
+    </Bezel>
+  );
+};
 
 const Dashboard = () => {
   const { user }  = useAuth();
   const navigate  = useNavigate();
+  const { t, intlLocale } = useLanguage();
   const [hora, setHora] = useState(new Date());
 
   const [clima,  setClima]  = useState({ temperatura: null, descripcion: '', humedad: null, velocidad_viento: null });
@@ -139,7 +137,7 @@ const Dashboard = () => {
               for (let i = rows.length - 1; i >= 0 && pts.length < 6; i -= step) {
                 const row = rows[i];
                 pts.unshift({
-                  h: new Date(row.timestamp || row.fecha).toLocaleTimeString('es-PE', { hour: '2-digit', minute: '2-digit' }),
+                  h: new Date(row.timestamp || row.fecha).toLocaleTimeString(intlLocale, { hour: '2-digit', minute: '2-digit' }),
                   t: parseFloat((row.temperatura_aire ?? row.temperatura ?? row.valor ?? 0).toFixed(1)),
                 });
               }
@@ -149,7 +147,7 @@ const Dashboard = () => {
         }
       }
     } finally { setLoading(false); }
-  }, []);
+  }, [intlLocale]);
 
   useEffect(() => {
     fetchAll();
@@ -161,61 +159,57 @@ const Dashboard = () => {
   const humedSuelo = sensor?.lecturas?.humedad_suelo    ?? sensor?.humedad_suelo    ?? null;
 
   const kpis = useMemo(() => [
-    { icon: Ic.leaf,  label: 'Cultivos activos',   value: loading ? '…' : String(cultivos.length), unit: '',   color: 'bg-emerald-500', live: false },
-    { icon: Ic.therm, label: 'Temperatura',         value: tempSensor != null ? tempSensor.toFixed(1) : (clima.temperatura != null ? Math.round(clima.temperatura).toString() : '…'), unit: '°C', color: 'bg-orange-500', live: true },
-    { icon: Ic.drop,  label: 'Humedad del suelo',   value: humedSuelo != null ? Math.round(humedSuelo).toString() : (clima.humedad != null ? Math.round(clima.humedad).toString() : '…'), unit: '%',  color: 'bg-sky-500',    live: true },
-    { icon: Ic.trend, label: 'Detecciones plagas',  value: loading ? '…' : String(estadisticas?.metricas?.total_detecciones ?? 0), unit: '',   color: 'bg-violet-500', live: false },
-  ], [cultivos.length, tempSensor, humedSuelo, clima, estadisticas, loading]);
+    { icon: Ic.leaf,  label: t('dashboard.kpiCrops'),   value: loading ? '…' : String(cultivos.length), unit: '',   color: 'bg-emerald-500', live: false },
+    { icon: Ic.therm, label: t('dashboard.kpiTemperature'),         value: tempSensor != null ? tempSensor.toFixed(1) : (clima.temperatura != null ? Math.round(clima.temperatura).toString() : '…'), unit: '°C', color: 'bg-orange-500', live: true },
+    { icon: Ic.drop,  label: t('dashboard.kpiSoilHumidity'),   value: humedSuelo != null ? Math.round(humedSuelo).toString() : (clima.humedad != null ? Math.round(clima.humedad).toString() : '…'), unit: '%',  color: 'bg-sky-500',    live: true },
+    { icon: Ic.trend, label: t('dashboard.kpiPestDetections'),  value: loading ? '…' : String(estadisticas?.metricas?.total_detecciones ?? 0), unit: '',   color: 'bg-violet-500', live: false },
+  ], [cultivos.length, tempSensor, humedSuelo, clima, estadisticas, loading, t]);
 
   const allAlerts = useMemo(() => {
     const list = [];
     if (sensor) {
-      const t = sensor.lecturas?.temperatura_aire ?? sensor.temperatura_aire;
-      const h = sensor.lecturas?.humedad_suelo    ?? sensor.humedad_suelo;
-      if (t != null && t > 20) list.push({ msg: `Temperatura alta: ${t.toFixed(1)}°C`,     dot: 'bg-red-400',     label: 'Alerta' });
-      if (t != null && t < 5)  list.push({ msg: `Riesgo helada: ${t.toFixed(1)}°C`,          dot: 'bg-red-400',     label: 'Alerta' });
-      if (h != null && h < 40) list.push({ msg: `Humedad baja: ${Math.round(h)}% — Riego`,   dot: 'bg-amber-400',   label: 'Aviso'  });
-      if (sensor.conectado)    list.push({ msg: 'Sensor ESP32 activo',                        dot: 'bg-emerald-400', label: 'OK'     });
+      const temp = sensor.lecturas?.temperatura_aire ?? sensor.temperatura_aire;
+      const soil = sensor.lecturas?.humedad_suelo ?? sensor.humedad_suelo;
+      if (temp != null && temp > 20) list.push({ msg: t('dashboard.alertHighTemp', { value: temp.toFixed(1) }), dot: 'bg-red-400', level: 'alert' });
+      if (temp != null && temp < 5) list.push({ msg: t('dashboard.alertFrost', { value: temp.toFixed(1) }), dot: 'bg-red-400', level: 'alert' });
+      if (soil != null && soil < 40) list.push({ msg: t('dashboard.alertLowHumidity', { value: Math.round(soil) }), dot: 'bg-amber-400', level: 'warning' });
+      if (sensor.conectado) list.push({ msg: t('dashboard.alertSensorActive'), dot: 'bg-emerald-400', level: 'ok' });
     }
     alertas.forEach(a => list.push({
       msg: a.mensaje || a.descripcion || a.titulo || '',
       dot: a.nivel === 'alto' ? 'bg-red-400' : 'bg-amber-400',
-      label: a.nivel === 'alto' ? 'Alerta' : 'Aviso',
+      level: a.nivel === 'alto' ? 'alert' : 'warning',
     }));
-    if (!list.length) list.push({ msg: 'Sistema operando con normalidad', dot: 'bg-emerald-400', label: 'OK' });
+    if (!list.length) list.push({ msg: t('dashboard.alertAllNormal'), dot: 'bg-emerald-400', level: 'ok' });
     return list.slice(0, 5);
-  }, [sensor, alertas]);
+  }, [sensor, alertas, t]);
 
   const quickLinks = [
-    { icon: Ic.sprout, label: 'Cultivos',   path: '/cultivos',   color: 'text-emerald-600 dark:text-emerald-400', bg: 'hover:bg-emerald-50 dark:hover:bg-emerald-900/20' },
-    { icon: Ic.cloud,  label: 'Clima',      path: '/clima',      color: 'text-sky-600 dark:text-sky-400',         bg: 'hover:bg-sky-50 dark:hover:bg-sky-900/20' },
-    { icon: Ic.act,    label: 'Monitoreo',  path: '/monitoreo',  color: 'text-orange-600 dark:text-orange-400',   bg: 'hover:bg-orange-50 dark:hover:bg-orange-900/20' },
-    { icon: Ic.bug,    label: 'Plagas',     path: '/plagas',     color: 'text-red-600 dark:text-red-400',         bg: 'hover:bg-red-50 dark:hover:bg-red-900/20' },
-    { icon: Ic.chart,  label: 'Informes',  path: '/informes',   color: 'text-violet-600 dark:text-violet-400',   bg: 'hover:bg-violet-50 dark:hover:bg-violet-900/20' },
-    { icon: Ic.cpu,    label: 'Sensores',   path: '/dispositivos',color: 'text-gray-600 dark:text-gray-400',      bg: 'hover:bg-gray-100 dark:hover:bg-gray-800' },
-    { icon: Ic.drop,   label: 'Insumos',    path: '/insumos',    color: 'text-cyan-600 dark:text-cyan-400',       bg: 'hover:bg-cyan-50 dark:hover:bg-cyan-900/20' },
-    { icon: Ic.chat,   label: 'Asesoría',   path: '/asesoria',   color: 'text-teal-600 dark:text-teal-400',       bg: 'hover:bg-teal-50 dark:hover:bg-teal-900/20' },
+    { icon: Ic.sprout, label: t('dashboard.quickLinks.crops'),   path: '/cultivos',   color: 'text-emerald-600 dark:text-emerald-400', bg: 'hover:bg-emerald-50 dark:hover:bg-emerald-900/20' },
+    { icon: Ic.cloud,  label: t('dashboard.quickLinks.weather'),      path: '/clima',      color: 'text-sky-600 dark:text-sky-400',         bg: 'hover:bg-sky-50 dark:hover:bg-sky-900/20' },
+    { icon: Ic.act,    label: t('dashboard.quickLinks.monitoring'),  path: '/monitoreo',  color: 'text-orange-600 dark:text-orange-400',   bg: 'hover:bg-orange-50 dark:hover:bg-orange-900/20' },
+    { icon: Ic.bug,    label: t('dashboard.quickLinks.pests'),     path: '/plagas',     color: 'text-red-600 dark:text-red-400',         bg: 'hover:bg-red-50 dark:hover:bg-red-900/20' },
+    { icon: Ic.chart,  label: t('dashboard.quickLinks.reports'),  path: '/informes',   color: 'text-violet-600 dark:text-violet-400',   bg: 'hover:bg-violet-50 dark:hover:bg-violet-900/20' },
+    { icon: Ic.cpu,    label: t('dashboard.quickLinks.sensors'),   path: '/dispositivos',color: 'text-gray-600 dark:text-gray-400',      bg: 'hover:bg-gray-100 dark:hover:bg-gray-800' },
+    { icon: Ic.drop,   label: t('dashboard.quickLinks.inputs'),    path: '/insumos',    color: 'text-cyan-600 dark:text-cyan-400',       bg: 'hover:bg-cyan-50 dark:hover:bg-cyan-900/20' },
+    { icon: Ic.chat,   label: t('dashboard.quickLinks.advisory'),   path: '/asesoria',   color: 'text-teal-600 dark:text-teal-400',       bg: 'hover:bg-teal-50 dark:hover:bg-teal-900/20' },
   ];
 
-  const timeStr = hora.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
-  const dateStr = hora.toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long' });
-  const firstName = user?.nombre?.split(' ')[0] || 'Agricultor';
-  const descClima = WEATHER_LABELS[clima.descripcion?.toLowerCase()] ?? clima.descripcion ?? '—';
+  const timeStr = hora.toLocaleTimeString(intlLocale, { hour: '2-digit', minute: '2-digit' });
+  const dateStr = hora.toLocaleDateString(intlLocale, { weekday: 'long', day: 'numeric', month: 'long' });
+  const firstName = user?.nombre?.split(' ')[0] || t('dashboard.defaultName');
+  const descClima = weatherLabel(t, clima.descripcion);
 
   return (
     <div className="relative min-h-full overflow-hidden bg-gray-50 dark:bg-gray-950 px-4 py-6 sm:px-6 sm:py-8">
-
-      {/* Ambient accents, consistent with Auth showcase */}
       <div aria-hidden className="pointer-events-none absolute -top-40 -right-24 w-[34rem] h-[34rem] rounded-full bg-emerald-500/10 dark:bg-emerald-500/15 blur-[140px]" />
       <div aria-hidden className="pointer-events-none absolute bottom-[-12rem] left-[-8rem] w-[34rem] h-[34rem] rounded-full bg-teal-400/10 dark:bg-teal-400/10 blur-[150px]" />
 
       <div className="relative max-w-7xl mx-auto space-y-6 animate-slide-up">
-
-        {/* Header */}
         <div className="flex items-end justify-between gap-4">
           <div>
             <h1 className="font-display text-4xl sm:text-5xl text-gray-900 dark:text-white tracking-tight">
-              Hola, {firstName}
+              {t('dashboard.greeting', { name: firstName })}
             </h1>
             <p className="mt-2 text-sm text-gray-500 dark:text-gray-400 capitalize">{dateStr}</p>
           </div>
@@ -223,25 +217,21 @@ const Dashboard = () => {
             <p className="font-display text-3xl text-gray-900 dark:text-white leading-none tracking-tight tabular-nums">{timeStr}</p>
             <div className="flex items-center justify-end gap-1.5 mt-2">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-              <span className="text-[10px] font-semibold uppercase tracking-[0.16em] text-emerald-600 dark:text-emerald-400">Sistema activo</span>
+              <span className="text-[10px] font-semibold uppercase tracking-[0.16em] text-emerald-600 dark:text-emerald-400">{t('dashboard.systemActive')}</span>
             </div>
           </div>
         </div>
-
-        {/* KPIs — bento grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-5">
           {kpis.map((k, i) => <KpiCard key={i} {...k} />)}
         </div>
-
-        {/* Chart + side column */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-5">
 
           <Bezel className="lg:col-span-2" coreClass="p-6">
             <div className="flex items-start justify-between mb-5">
               <div>
-                <h3 className="font-display text-xl text-gray-900 dark:text-white tracking-tight">Temperatura del día</h3>
+                <h3 className="font-display text-xl text-gray-900 dark:text-white tracking-tight">{t('dashboard.chartTitle')}</h3>
                 <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                  {sensor ? 'Sensor ESP32 · datos reales' : 'Valores de referencia'}
+                  {sensor ? t('dashboard.chartRealData') : t('dashboard.chartFallback')}
                 </p>
               </div>
               <span className="flex items-center justify-center w-9 h-9 rounded-full text-orange-500 bg-orange-50 dark:bg-orange-500/10 ring-1 ring-orange-500/15">
@@ -269,9 +259,9 @@ const Dashboard = () => {
 
             <Bezel coreClass="p-6">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="font-display text-xl text-gray-900 dark:text-white tracking-tight">Clima · Puno</h3>
+                <h3 className="font-display text-xl text-gray-900 dark:text-white tracking-tight">{t('dashboard.weatherTitle')}</h3>
                 <button onClick={() => navigate('/clima')} className="text-[11px] text-emerald-600 dark:text-emerald-400 font-semibold flex items-center gap-0.5 hover:text-emerald-500 transition-colors duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] touch-manipulation">
-                  Ver más {Ic.right}
+                  {t('common.viewMore')} {Ic.right}
                 </button>
               </div>
               <div className="flex items-center gap-4 mb-4">
@@ -280,13 +270,13 @@ const Dashboard = () => {
                 </span>
                 <div>
                   <p className="text-sm font-semibold text-gray-700 dark:text-gray-300 tracking-tight">{descClima || '…'}</p>
-                  <p className="text-xs text-gray-400 dark:text-gray-500">Hoy en Puno, Perú</p>
+                  <p className="text-xs text-gray-400 dark:text-gray-500">{t('dashboard.weatherToday')}</p>
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-2.5">
                 {[
-                  { icon: Ic.drop, label: 'Humedad', v: clima.humedad != null ? `${clima.humedad}%` : '…' },
-                  { icon: Ic.wind, label: 'Viento',  v: clima.velocidad_viento != null ? `${Math.round(clima.velocidad_viento * 3.6)} km/h` : '…' },
+                  { icon: Ic.drop, label: t('dashboard.humidity'), v: clima.humedad != null ? `${clima.humedad}%` : '…' },
+                  { icon: Ic.wind, label: t('dashboard.wind'), v: clima.velocidad_viento != null ? `${Math.round(clima.velocidad_viento * 3.6)} km/h` : '…' },
                 ].map((s, i) => (
                   <div key={i} className="flex items-center gap-2.5 rounded-sm bg-gray-50/80 dark:bg-white/[0.04] ring-1 ring-black/5 dark:ring-white/10 px-3 py-2.5">
                     <span className="flex items-center justify-center w-7 h-7 rounded-full text-gray-500 dark:text-gray-400 bg-white dark:bg-white/[0.04] ring-1 ring-black/5 dark:ring-white/10 shrink-0">{s.icon}</span>
@@ -302,7 +292,7 @@ const Dashboard = () => {
             <Bezel className="flex-1" coreClass="p-6 h-full">
               <div className="flex items-center gap-2.5 mb-4">
                 <span className="flex items-center justify-center w-8 h-8 rounded-full text-amber-500 bg-amber-50 dark:bg-amber-500/10 ring-1 ring-amber-500/15 shrink-0">{Ic.bell}</span>
-                <h3 className="font-display text-xl text-gray-900 dark:text-white tracking-tight">Alertas</h3>
+                <h3 className="font-display text-xl text-gray-900 dark:text-white tracking-tight">{t('dashboard.alerts')}</h3>
                 <span className="ml-auto flex items-center justify-center min-w-[1.5rem] h-6 px-2 rounded-full text-[10px] font-semibold text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-white/[0.04] ring-1 ring-black/5 dark:ring-white/10 tabular-nums">{allAlerts.length}</span>
               </div>
               <div className="space-y-3">
@@ -311,8 +301,8 @@ const Dashboard = () => {
                     <span className={`w-1.5 h-1.5 rounded-full mt-1.5 shrink-0 ${a.dot}`} />
                     <span className="text-xs text-gray-600 dark:text-gray-400 flex-1 leading-snug">{a.msg}</span>
                     <span className={`text-[10px] font-semibold uppercase tracking-[0.12em] shrink-0 ${
-                      a.label === 'Alerta' ? 'text-red-500' : a.label === 'Aviso' ? 'text-amber-500' : 'text-emerald-500'
-                    }`}>{a.label}</span>
+                      a.level === 'alert' ? 'text-red-500' : a.level === 'warning' ? 'text-amber-500' : 'text-emerald-500'
+                    }`}>{t(`dashboard.alertLevels.${a.level}`)}</span>
                   </div>
                 ))}
               </div>
@@ -320,10 +310,8 @@ const Dashboard = () => {
 
           </div>
         </div>
-
-        {/* Módulos */}
         <Bezel coreClass="p-6">
-          <h3 className="font-display text-xl text-gray-900 dark:text-white tracking-tight mb-5">Módulos</h3>
+          <h3 className="font-display text-xl text-gray-900 dark:text-white tracking-tight mb-5">{t('dashboard.modules')}</h3>
           <div className="grid grid-cols-4 sm:grid-cols-8 gap-2.5">
             {quickLinks.map((n, i) => (
               <button

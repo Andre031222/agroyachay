@@ -7,6 +7,7 @@ from flask_compress import Compress
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from dotenv import load_dotenv
+from app.i18n import translate as _
 
 load_dotenv()
 
@@ -67,6 +68,7 @@ _default_origins = [
     "http://localhost:3000",
     "http://localhost:3002",
     "http://localhost:5000",
+    "http://localhost:5173",
     "http://localhost:5174",
     "http://localhost:5175",
 ]
@@ -125,28 +127,28 @@ jwt = JWTManager(app)
 def invalid_token_callback(error_string):
     return jsonify({
         'success': False,
-        'message': f'Token inválido: {error_string}'
+        'message': _('token_invalido', error=error_string)
     }), 422
 
 @jwt.unauthorized_loader
 def missing_token_callback(error_string):
     return jsonify({
         'success': False,
-        'message': f'Token faltante: {error_string}'
+        'message': _('token_faltante', error=error_string)
     }), 401
 
 @jwt.expired_token_loader
 def expired_token_callback(jwt_header, jwt_payload):
     return jsonify({
         'success': False,
-        'message': 'El token ha expirado'
+        'message': _('el_token_ha_expirado')
     }), 401
 
 @jwt.revoked_token_loader
 def revoked_token_callback(jwt_header, jwt_payload):
     return jsonify({
         'success': False,
-        'message': 'El token ha sido revocado'
+        'message': _('el_token_ha_sido_revocado')
     }), 401
 
 from controllers.auth_controller import auth_bp
@@ -183,7 +185,7 @@ app.register_blueprint(informes_bp, url_prefix='/api/informes')
 @app.route('/')
 def home():
     return {
-        'message': 'AgroYachay API v2.0',
+        'message': _('agroyachay_api_v2_0'),
         'status': 'running',
         'endpoints': {
             'auth': '/api/auth',
@@ -203,7 +205,7 @@ def home():
 def health():
     return jsonify({
         'status': 'healthy',
-        'message': 'AgroYachay API is running'
+        'message': _('agroyachay_api_is_running')
     }), 200
 
 if __name__ == '__main__':

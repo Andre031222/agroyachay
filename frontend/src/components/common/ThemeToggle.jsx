@@ -1,8 +1,11 @@
 import React from 'react';
 import { useTheme } from '../../context/ThemeContext';
+import { useLanguage } from '../../context/LanguageContext';
 
 const ThemeToggle = ({ className = '', size = 'md' }) => {
   const { isDark, toggleTheme } = useTheme();
+  const { t } = useLanguage();
+  const label = isDark ? t('theme.lightShort') : t('theme.darkShort');
 
   const btn = size === 'sm' ? 'w-7 h-7' : 'w-8 h-8';
   const ico = size === 'sm' ? 'w-3.5 h-3.5' : 'w-4 h-4';
@@ -11,8 +14,8 @@ const ThemeToggle = ({ className = '', size = 'md' }) => {
     <button
       onClick={toggleTheme}
       className={`${btn} flex items-center justify-center rounded-lg transition-colors bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 ${className}`}
-      aria-label={isDark ? 'Tema claro' : 'Tema oscuro'}
-      title={isDark ? 'Tema claro' : 'Tema oscuro'}
+      aria-label={label}
+      title={label}
     >
       {isDark ? (
         <svg className={`${ico} text-amber-400`} viewBox="0 0 24 24" fill="none"

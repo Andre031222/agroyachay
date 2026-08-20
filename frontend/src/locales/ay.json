@@ -1,164 +1,2587 @@
 {
   "app": {
     "name": "AgroYachay",
-    "tagline": "Yatiña Sistema"
+    "tagline": "Amuyt'ayiri Sistema"
   },
   "nav": {
     "dashboard": "Uñjawi",
     "clima": "Pacha",
-    "cultivos": "Yapuchawi",
-    "marketplace": "Alxawi",
-    "perfil": "Nayax Perfil",
+    "cultivos": "Yapunaka",
+    "marketplace": "Qhatu",
+    "perfil": "Nayan yatiyawixa",
     "logout": "Mistuña"
   },
   "sidebar": {
-    "navigation": "SARNAQAWI",
-    "mainMenu": "Jach'a Menú",
-    "home": "Uta",
+    "navigation": "WAMPUÑA",
+    "mainMenu": "Jach'a ajlliwi",
+    "home": "Qalltawi",
     "weather": "Pacha",
-    "cropManagement": "Yapuchäwi Apnaqaña",
-    "calculator": "Insumonaka Jakhuña",
-    "pestDetection": "Plaganaka Jikxataña",
-    "prediction": "Yatiyawi",
-    "almanac": "Almanaque Bristol",
-    "advisory": "Yatichawi",
-    "monitoring": "Uñjawi IoT",
-    "devices": "Mis Dispositivos",
+    "cropManagement": "Yapu apnaqawi",
+    "calculator": "Yanapiri jakhuri",
+    "pestDetection": "Laq'u thaqhawi",
+    "prediction": "Amuyt'awi",
+    "almanac": "Bristol phaxsi qillqa",
+    "advisory": "Yanapt'awi",
+    "monitoring": "IoT uñjawi",
+    "devices": "Nayan yänakaxa",
     "reports": "Yatiyawinaka",
-    "tipOfDay": "URUN YATIQAWI",
-    "tipMessage": "Sapa uru pacha uñjaña yapuchäwinakama suma apnaqañataki"
+    "tipOfDay": "URU IWXAWI",
+    "tipMessage": "Sapa uru pacha uñjawi uñjam, yapunakama askichañataki",
+    "myProfile": "Nayan yatiyawixa",
+    "logout": "Mistuña",
+    "admin": "Apnaqiri",
+    "superAdmin": "Jach'a apnaqiri",
+    "brandTagline": "IoT Yapuchawi"
   },
   "auth": {
     "login": "Mantaña",
-    "register": "Qillqantaña",
-    "email": "Correo Electrónico",
-    "password": "Mantañ Aru",
-    "confirmPassword": "Mantañ Aru Askichañataki",
+    "register": "Qillqt'ayasiña",
+    "email": "Aru jalayiri",
+    "password": "Jamasa aru",
+    "confirmPassword": "Jamasa aru iyawsaña",
     "name": "Suti",
-    "lastName": "Apellido",
+    "lastName": "Ayllu suti",
     "dni": "DNI",
-    "phone": "Teléfono",
-    "username": "Sutinaka",
-    "rememberMe": "Amtasiñani",
-    "forgotPassword": "¿Armasktati mantañ aruxa?",
-    "noAccount": "¿Janicha qillqatätati?",
-    "hasAccount": "¿Qillqatätati?",
-    "loginHere": "Akaxa mantaña",
-    "registerHere": "Akaxa qillqantaña",
-    "welcomeBack": "¡Suma kuttaskta!",
-    "createAccount": "Machaq qillqa luraña",
-    "loginWith": "Ukhamaraki mantaña",
-    "registerWith": "Ukhamaraki qillqantaña",
-    "signInToAccount": "Qillqatamaru mantaña",
-    "enterCredentials": "Credencialanakama qillqantaña sarañataki"
+    "phone": "Jaya arst'awi",
+    "username": "Apnaqirin sutipa",
+    "rememberMe": "Amtasitay",
+    "forgotPassword": "¿Jamasa arumat armasta?",
+    "noAccount": "¿Janit cuentama utjki?",
+    "hasAccount": "¿Cuentamax utjxiti?",
+    "loginHere": "Akana mantam",
+    "registerHere": "Akana qillqt'ayasim",
+    "welcomeBack": "¡Wasitat suma jutawi!",
+    "createAccount": "Machaqa cuenta uñstayaña",
+    "loginWith": "Jan ukax akampi mantaña",
+    "registerWith": "Jan ukax akampi qillqt'ayasiña",
+    "signInToAccount": "Cuentamaru mantam",
+    "enterCredentials": "Yatiyawinakama qillqma sarantañataki",
+    "continueWithGoogle": "Google-mpi sarantaña",
+    "signUpWithGoogle": "Google-mpi qillqt'ayasiña",
+    "orWithEmail": "jan ukax aru jalayirimpi",
+    "emailOrUsername": "Aru jalayiri jan ukax apnaqiri suti",
+    "emailPlaceholder": "juma@email.com",
+    "namePlaceholder": "Sutima",
+    "passwordPlaceholder": "••••••••",
+    "minCharsPlaceholder": "8 qillqanakat juk'ampi",
+    "repeatPassword": "Jamasa aru wasitat qillqma",
+    "togglePassword": "Jamasa aru uñachayaña jan ukax imantaña",
+    "signingIn": "Mantaski…",
+    "signIn": "Mantaña",
+    "creatingAccount": "Cuenta uñstayaski…",
+    "createAccountCta": "Cuenta uñstayaña",
+    "createFreeAccount": "Cuentama inaki uñstayam",
+    "noAccountQuestion": "¿Janit cuentama utjki?",
+    "registerFree": "Inaki qillqt'ayasim",
+    "hasAccountQuestion": "¿Cuentamax utjxiti?",
+    "backToHome": "← Qalltawiru kutt'aña",
+    "confirm": "Iyawsaña",
+    "welcomeNamed": "¡Suma jutawi, {{name}}!",
+    "googleError": "Google-mpi jani chinuqasiñjamäkiti",
+    "passwordMismatch": "Jamasa arunakax jani kikpakiti",
+    "passwordTooShort": "Jamasa aruxa 8 qillqanakani kañapawa",
+    "nameQuestion": "¿Kunjamas sutimax satäna?",
+    "nameTooShort": "Pä qillqanakat juk'ampi qillqma",
+    "nameSaveError": "Suti jani imañjamäkiti",
+    "saving": "Imaski…",
+    "goToDashboard": "Uñjawiru saraña",
+    "showcasePoints": [
+      "ESP32 uñjirinaka jichha pachana",
+      "Laq'u thaqhawi IA-mpi",
+      "Apthapi ukat pacha amuyt'awi"
+    ],
+    "showcaseFooter": "Puno, Peru · Anti pata · {{year}}",
+    "openingApp": "AgroYachay jist'araski...",
+    "welcomeApp": "¡AgroYachayaru suma jutawi!",
+    "loginError": "Mantañana pantja",
+    "registerError": "Apnaqiri qillqt'ayañana pantja",
+    "googleAuthError": "Google-mpi uñt'ayañana pantja"
   },
   "dashboard": {
-    "welcome": "Suma urunakapxi",
-    "overview": "Taqi Uñjawi",
-    "statistics": "Jakhunakax Uñjawi",
-    "recentActivity": "Jichha Lurawinaka",
-    "totalCrops": "Taqi Yapuchäwinaka",
-    "activeAlerts": "Alertanaka Utji",
-    "weatherUpdates": "Pachan Machaqaña",
-    "recommendations": "Yatiyawinaka"
+    "welcome": "Suma jutawi",
+    "overview": "Taqit yatiyawi",
+    "statistics": "Jakhunaka",
+    "recentActivity": "Jichha luratanaka",
+    "totalCrops": "Taqi yapunaka",
+    "activeAlerts": "Jaktir yatiyawinaka",
+    "weatherUpdates": "Pacha machaqachawinaka",
+    "recommendations": "Iwxanaka",
+    "greeting": "Kamisaraki, {{name}}",
+    "defaultName": "Yapuchiri",
+    "systemActive": "Sistema irnaqaski",
+    "live": "Jichha pacha",
+    "kpiCrops": "Jaktir yapunaka",
+    "kpiTemperature": "Junt'u",
+    "kpiSoilHumidity": "Laq'a juq'u",
+    "kpiPestDetections": "Laq'u thaqhatanaka",
+    "chartTitle": "Uruna junt'upa",
+    "chartRealData": "ESP32 uñjiri · chiqa yatiyawinaka",
+    "chartFallback": "Uñjañ chaninaka",
+    "weatherTitle": "Pacha · Puno",
+    "weatherToday": "Jichhüru Punona, Peru",
+    "humidity": "Juq'u",
+    "wind": "Thaya",
+    "alerts": "Yatiyawinaka",
+    "modules": "T'aqanaka",
+    "alertLevels": {
+      "alert": "Yatiyawi",
+      "warning": "Amuyt'ayawi",
+      "ok": "Waliki"
+    },
+    "alertHighTemp": "Wali junt'u: {{value}}°C",
+    "alertFrost": "Juyphi axsarawi: {{value}}°C",
+    "alertLowHumidity": "Juk'a juq'u: {{value}}% — qarpaña",
+    "alertSensorActive": "ESP32 uñjiri irnaqaski",
+    "alertAllNormal": "Sistema walikiwa irnaqaski",
+    "quickLinks": {
+      "crops": "Yapunaka",
+      "weather": "Pacha",
+      "monitoring": "Uñjawi",
+      "pests": "Laq'unaka",
+      "reports": "Yatiyawinaka",
+      "sensors": "Uñjirinaka",
+      "inputs": "Yanapirinaka",
+      "advisory": "Yanapt'awi"
+    }
   },
   "weather": {
     "title": "Pacha",
-    "current": "Jichha Pacha",
-    "forecast": "Yatiyawi",
+    "current": "Jichha pacha",
+    "forecast": "Amuyt'awi",
     "temperature": "Junt'u",
-    "humidity": "Quncha",
+    "humidity": "Juq'u",
     "precipitation": "Jallu",
     "wind": "Thaya",
-    "forecast7days": "Paqallq'u uru yatiyawi"
+    "forecast7days": "7 uru amuyt'awi",
+    "loadError": "Pacha yatiyawi jani katuqkiti",
+    "locationSet": "Cheqa: {{city}}",
+    "yourLocation": "Juman cheqama",
+    "refreshLocation": "Cheqa machaqachaña",
+    "detecting": "Cheqa thaqhaski…",
+    "loading": "Pacha katuqasiski…",
+    "feelsLike": "Jamuyawi",
+    "maxMin": "Jach'a {{max}}° · Juk'a {{min}}°",
+    "pressure": "Limiyawi",
+    "sunrise": "Willjta",
+    "sunset": "Jaypu",
+    "week": "Semana",
+    "temperatureChart": "Semanana jach'a ukat juk'a · °C",
+    "humidityChart": "Semanana sapa uru taypi · %",
+    "today": "Jichhüru",
+    "tomorrow": "Qharüru",
+    "weekdays": [
+      "Wil",
+      "Pha",
+      "Sax",
+      "Pch",
+      "Ill",
+      "Ñan",
+      "Sam"
+    ]
   },
   "crops": {
-    "title": "Yapuchawi",
-    "myCrops": "Yapuchäwiniwa",
-    "addCrop": "Yapuchäwi Yapxataña",
-    "cropType": "Yapuchäwin Kasta",
+    "title": "Yapunaka",
+    "myCrops": "Nayan yapunakaxa",
+    "addCrop": "Yapu yapaña",
+    "cropType": "Yapu kasta",
     "area": "Pampa",
-    "plantingDate": "Yapuchañ Uru",
-    "harvestDate": "Alisañ Uru",
-    "status": "Kunjamsa",
-    "healthy": "K'umarani",
-    "needsAttention": "Uñjañawa munani"
+    "plantingDate": "Yapuña uru",
+    "harvestDate": "Apthapiña uru",
+    "status": "Kankañapa",
+    "healthy": "Q'uma",
+    "needsAttention": "Uñjañ muni"
   },
   "calculator": {
-    "title": "Abunonaka Jakhuña",
-    "subtitle": "Puno Markachitaki Luraña",
-    "cropInfo": "Yapuchäwin Yatiyawi",
-    "selectCrop": "Yapuchäwi yapu pampama ajlliña",
-    "cropType": "Yapuchäwin Kasta",
-    "cropArea": "Yapu Pampa",
+    "title": "Wanu jakhuri",
+    "subtitle": "Puno markataki wakichata",
+    "cropInfo": "Yapunakat yatiyawi",
+    "selectCrop": "Yapu ukat yapumana pampapa ajlliña",
+    "cropType": "Yapu kasta",
+    "cropArea": "Yapu pampa",
     "potato": "Ch'uqi",
-    "quinoa": "Jupa",
+    "quinoa": "Jiwra",
     "barley": "Qañawa",
     "beans": "Jawasa",
     "oat": "Awina",
-    "tarwi": "Tarwi",
+    "tarwi": "Tawri (Chuchu)",
     "oca": "Apilla"
   },
   "marketplace": {
-    "title": "Alxawi",
-    "products": "Yänaka",
-    "myProducts": "Yänakaja",
-    "addProduct": "Yä Uñstayaña",
-    "price": "Qullqi",
+    "title": "Qhatu",
+    "products": "Alañanaka",
+    "myProducts": "Nayan alañanakaxa",
+    "addProduct": "Alaña uchaña",
+    "price": "Chani",
     "quantity": "Qawqha",
-    "category": "Kasta"
+    "category": "T'aqa",
+    "pageTitle": "Yapu qhatu",
+    "pageSubtitle": "Yapumataki alañanaka · MercadoLibre · Amazon · AliExpress",
+    "protectedPurchase": "Jark'aqata alawi",
+    "statsProducts": "Alañanaka",
+    "statsFreeShipping": "Inaki apayawi",
+    "statsRating": "Taypi chaninchawi",
+    "searchPlaceholder": "Jatha, wanu, yänaka, uñjirinaka...",
+    "filters": "Suysuwinaka",
+    "clear": "Pichaña",
+    "platform": "Qhatu uta",
+    "minPrice": "Juk'a chani (S/)",
+    "maxPrice": "Jach'a chani (S/)",
+    "onlyFreeShipping": "Inaki apayawiki",
+    "all": "Taqi",
+    "allFeminine": "Taqi",
+    "productCount": "{{count}} alañanaka",
+    "sortRelevance": "Chanini",
+    "sortPriceAsc": "Chani: juk'a",
+    "sortPriceDesc": "Chani: jach'a",
+    "sortBestSelling": "Juk'ampi alata",
+    "sortBestRated": "Juk'ampi aski chaninchata",
+    "noResults": "\"{{search}}\" jani jikxataskiti",
+    "noResultsHint": "Yaqha arunakampi thaqham jan ukax suysuwinaka picham",
+    "clearFilters": "Suysuwinaka pichaña",
+    "safePurchase": "100% jark'aqata alawi",
+    "safePurchaseHint": "Uñt'ata qhatu utanakaruw irpi",
+    "badges": [
+      "Jark'aqata alawi",
+      "Taqi Peruru apayawi",
+      "Uñt'ata aljirinaka",
+      "Kutt'ayawi qhanañchata"
+    ],
+    "noImage": "Jani jamuqa",
+    "free": "Inaki",
+    "outOfStock": "Tukusiwayi",
+    "unavailable": "Jani utjkiti",
+    "viewOn": "{{platform}} qhatuna uñjaña",
+    "categories": {
+      "Semillas": "Jathanaka",
+      "Fertilizantes": "Wanunaka",
+      "Herramientas": "Yänaka",
+      "Riego": "Qarpawi",
+      "Sensores IoT": "IoT uñjirinaka",
+      "Proteccion": "Jark'aqawi",
+      "Invernaderos": "Junt'u utanaka",
+      "Papa": "Ch'uqi",
+      "Quinua": "Jiwra",
+      "Canihua": "Qañawa",
+      "NPK": "NPK",
+      "Foliar": "Laphitaki",
+      "Organicos": "Jakawit apsuta",
+      "Manuales": "Amparampi",
+      "Motorizadas": "Yänampi",
+      "Goteo": "Ch'aqawi",
+      "Aspersion": "Ch'allawi",
+      "Bombas": "Uma aptiri",
+      "Humedad": "Juq'u",
+      "Temperatura": "Junt'u",
+      "pH": "pH",
+      "Plagas": "Laq'unaka",
+      "Enfermedades": "Usunaka",
+      "Heladas": "Juyphinaka"
+    }
   },
   "language": {
-    "select": "Aru Ajlliña",
-    "spanish": "Español",
-    "quechua": "Quechua",
-    "aimara": "Aymara",
-    "welcome": "AgroYachayru suma jutaskta",
-    "selectLanguage": "Uka ajllita arumaxa",
-    "continue": "Sarañani"
+    "select": "Aru ajlliña",
+    "spanish": "Kastilla aru",
+    "quechua": "Qhichwa aru",
+    "aimara": "Aymar aru",
+    "welcome": "AgroYachayaru suma jutawi",
+    "selectLanguage": "Mira, arumar ajllim",
+    "continue": "Sarantaña"
   },
   "pages": {
-    "dashboard":   { "title": "Uñjawi",              "sub": "Tukuy lurawina uñjaña"               },
-    "clima":       { "title": "Pacha",               "sub": "Pachax yatiyawi"                     },
-    "almanaque":   { "title": "Almanaque",           "sub": "Yapuchawi kullkha"                   },
-    "cultivos":    { "title": "Yapuchäwi Apnaqaña",  "sub": "Yapuchäwinakax suma apnaqaña"        },
-    "monitoreo":   { "title": "IoT Uñjawi",          "sub": "ESP32 sensoranaka uñjaña"            },
-    "insumos":     { "title": "Insumonaka Jakhuña",  "sub": "Abononaka, uma, chansficanaka"       },
-    "plagas":      { "title": "Plaganaka Jikxataña", "sub": "IA yatiqawinx riqsiña"               },
-    "prediccion":  { "title": "Pallqawi Yatiyawi",   "sub": "IA yatiqawinx uñjaña"               },
-    "asesoria":    { "title": "Yatichawi",           "sub": "Agronomonaka yanapiri"               },
-    "marketplace": { "title": "Alxawi",              "sub": "Yapuchäwipax yänaka"                 },
-    "informes":    { "title": "Yatiyawinaka",        "sub": "PDF kay Excel reportenaka"           },
-    "dispositivos":{ "title": "IoT Apnaqaña",        "sub": "ESP32 sensoranaka apnaqaña"          },
-    "admin":       { "title": "Apnaqawi",            "sub": "Jakanaka apnaqaña"                   }
+    "dashboard": {
+      "title": "Uñjawi",
+      "sub": "Taqi sistemana juk'a yatiyawipa"
+    },
+    "clima": {
+      "title": "Pacha",
+      "sub": "Pacha amuyt'awi ukat uñakipawi"
+    },
+    "almanaque": {
+      "title": "Phaxsi qillqa",
+      "sub": "Yapuchawi uru qillqa"
+    },
+    "cultivos": {
+      "title": "Yapu apnaqawi",
+      "sub": "Yapunaka ukat yapu muyuwi"
+    },
+    "monitoreo": {
+      "title": "IoT uñjawi",
+      "sub": "ESP32 uñjirinaka jichha pachana"
+    },
+    "insumos": {
+      "title": "Yanapiri jakhuri",
+      "sub": "Wanu, uma ukat laq'u qulla"
+    },
+    "plagas": {
+      "title": "Laq'u thaqhawi",
+      "sub": "IA-mpi uñt'ayawi"
+    },
+    "prediccion": {
+      "title": "Apthapi amuyt'awi",
+      "sub": "IA-mpi amuyt'awi uñakipawi"
+    },
+    "asesoria": {
+      "title": "Yatiñani yanapt'awi",
+      "sub": "Yapu yatiñaninakampi chikachasiña"
+    },
+    "marketplace": {
+      "title": "Yapu qhatu",
+      "sub": "Yapumataki alañanaka"
+    },
+    "informes": {
+      "title": "Yatiyawinaka",
+      "sub": "PDF ukat Excel yatiyawinaka"
+    },
+    "dispositivos": {
+      "title": "IoT yänaka",
+      "sub": "ESP32 uñjirinakama apnaqaña"
+    },
+    "admin": {
+      "title": "Apnaqaña panel",
+      "sub": "Apnaqirinaka ukat sistema apnaqawi"
+    }
   },
   "theme": {
-    "light": "Qhana temaru mayjt'aña",
-    "dark": "Ch'amaka temaru mayjt'aña"
+    "light": "Qhana uñnaqiru turkaña",
+    "dark": "Ch'amaka uñnaqiru turkaña",
+    "lightShort": "Qhana uñnaqi",
+    "darkShort": "Ch'amaka uñnaqi"
   },
   "profile": {
-    "title": "Nayax Perfil",
-    "settings": "Qillqax Luraña",
-    "logout": "Sistemat mistuni"
+    "title": "Nayan yatiyawixa",
+    "settings": "Cuenta askichawi",
+    "logout": "Sistemata mistuña"
   },
   "common": {
     "save": "Imaña",
-    "cancel": "Utjayaña",
-    "delete": "Chhaqtayaña",
-    "edit": "Askichaña",
+    "cancel": "Jan saña",
+    "delete": "Pichaña",
+    "edit": "Trukaña",
     "search": "Thaqaña",
-    "filter": "Jaljañataki",
-    "export": "Mistsuña",
-    "print": "Imprimiña",
-    "loading": "Cargasaxa...",
-    "error": "Pantjawi",
+    "filter": "Suysuña",
+    "export": "Apsuña",
+    "print": "Limiña",
+    "loading": "Katuqasiski...",
+    "error": "Pantja",
     "success": "Waliki",
     "close": "Jist'antaña",
     "viewMore": "Juk'ampi uñjaña",
-    "viewLess": "Jisk'a uñjaña",
-    "back": "Qhipaaru",
+    "viewLess": "Juk'a uñjaña",
+    "back": "Kutt'aña",
     "next": "Arkiri",
     "previous": "Nayriri",
-    "submit": "Apsuña"
+    "submit": "Khitaña",
+    "user": "Apnaqiri",
+    "confirm": "Iyawsaña",
+    "loadError": "Yatiyawinaka jani katuqkiti",
+    "loadingShort": "Katuqasiski..."
+  },
+  "mobileNav": {
+    "allSections": "Taqi t'aqanaka",
+    "home": "Qalltawi",
+    "crops": "Yapunaka",
+    "sensors": "Uñjirinaka",
+    "weather": "Pacha",
+    "pests": "Laq'unaka",
+    "almanac": "Phaxsi qillqa",
+    "devices": "Yänaka",
+    "inputs": "Yanapirinaka",
+    "prediction": "Amuyt'awi",
+    "advisory": "Yanapt'awi",
+    "marketplace": "Qhatu",
+    "reports": "Yatiyawinaka",
+    "more": "Juk'ampi",
+    "close": "Jist'antaña",
+    "profile": "Yatiyawi",
+    "mainNavigation": "Jach'a wampuña",
+    "moreSections": "Juk'ampi t'aqanaka",
+    "closeMenu": "Ajlliwi jist'antaña"
+  },
+  "errors": {
+    "title": "Kunas jani walikiti",
+    "description": "Jani suyt'ata pantja utjawayi. Qalltawiru kutt'asa wasitat lurañ atkasmawa.",
+    "backHome": "Qalltawiru kutt'aña"
+  },
+  "units": {
+    "days": "urunaka",
+    "hectares": "ha",
+    "tons": "tun",
+    "tonsPerHa": "t/ha"
+  },
+  "cropStates": {
+    "Planificado": "Wakichata",
+    "Sembrado": "Yapuñata",
+    "Crecimiento": "Jilaskiwa",
+    "Floración": "Panqaraskiwa",
+    "Maduración": "Puquskiwa",
+    "Cosechado": "Apthapita"
+  },
+  "cropTypes": {
+    "Papa": {
+      "name": "Ch'uqi",
+      "description": "Aka markana jach'a yapu"
+    },
+    "Quinua": {
+      "name": "Jiwra",
+      "description": "Anti markana suma manq'a"
+    },
+    "Cañihua": {
+      "name": "Qañawa",
+      "description": "Juyphir atipiri anti jathi"
+    },
+    "Habas": {
+      "name": "Jawasa",
+      "description": "Jathi manq'a ali"
+    },
+    "Cebada": {
+      "name": "Siwara",
+      "description": "Jathi ukat uywa manq'ataki"
+    },
+    "Avena Forrajera": {
+      "name": "Awina",
+      "description": "Uywanakataki manq'a"
+    },
+    "Tarwi": {
+      "name": "Tawri",
+      "description": "Wali ch'amani manq'a ali"
+    },
+    "Oca": {
+      "name": "Apilla",
+      "description": "Nayra anti saphi manq'a"
+    }
+  },
+  "weatherConditions": {
+    "clear sky": "Qhana",
+    "few clouds": "Juk'a qinaya",
+    "scattered clouds": "Ch'iqi qinaya",
+    "broken clouds": "Ch'iqi qinaya",
+    "overcast clouds": "Qinayani",
+    "light rain": "Juk'a jallu",
+    "moderate rain": "Jallu",
+    "heavy intensity rain": "Ch'ama jallu",
+    "thunderstorm": "Illapu",
+    "snow": "Khunu",
+    "mist": "Urpu",
+    "fog": "Qinaya urpu",
+    "haze": "Q'iwi",
+    "drizzle": "Jallu ch'ua"
+  },
+  "sensors": {
+    "loadingDevices": "Yänaka katuqasiski...",
+    "noDevices": "Jani chinutata yänaka",
+    "noDevicesHint": "ESP32 uñjirima mä yapuru chinuma, junt'u, thaya juq'u ukat laq'a juq'u jichha pachana uñjañataki.",
+    "temperature": "Junt'u",
+    "airHumidityShort": "Thaya juq'u",
+    "soilHumidityShort": "Laq'a juq'u",
+    "linkDevice": "ESP32 yäna chinuña",
+    "title": "IoT uñjawi",
+    "auto": "Pachpa",
+    "refresh": "Machaqachaña",
+    "airTemperature": "Thayan junt'upa",
+    "airHumidity": "Thayan juq'upa",
+    "soilHumidity": "Laq'an juq'upa",
+    "states": {
+      "normal": "Askipa",
+      "warning": "Anqana",
+      "critical": "Ch'ama llakisiwi",
+      "nodata": "Jani yatiyawi"
+    },
+    "criticalMin": "Juk'a llakisiwi",
+    "optimal": "Askipa",
+    "criticalMax": "Jach'a llakisiwi",
+    "tabTemperature": "Junt'u",
+    "tabHumidity": "Juq'u",
+    "tabAll": "Taqpacha",
+    "readingsCount": "{{count}} ullañanaka",
+    "noData": "Jani yatiyawi",
+    "noReadings": "Jani ullañanaka utjkiti",
+    "waitingFirstReading": "Uñjirin nayriri ullañapa suyt'aski...",
+    "connectHotspot": "ESP32 wakichata hotspot-aru chinuma",
+    "airTemperatureChart": "Thayan junt'upa (°C)",
+    "optimalZone": "Aski cheqa (20–28 °C)",
+    "criticalLimit": "Llakisiwi kurmi",
+    "humidityChart": "Thaya ukat laq'a juq'u (%)",
+    "legendAirHumidity": "Thaya juq'u",
+    "legendSoilHumidity": "Laq'a juq'u",
+    "urgentIrrigation": "Jank'aki qarpañ kurmi (40 %)",
+    "seriesTemp": "Junt'u °C",
+    "seriesAir": "Thaya juq'u %",
+    "seriesSoil": "Laq'a juq'u %",
+    "device": "Yäna",
+    "deviceHint": "ESP32 uñjiri wakichawi",
+    "fieldType": "Kasta",
+    "fieldLocation": "Cheqa",
+    "fieldCrop": "Yapu",
+    "fieldInterval": "Taypi pacha",
+    "fieldProtocol": "Protocolo",
+    "intervalValue": "Sapa 10 sikuntu",
+    "realTimeStatus": "Jichha pacha kankaña",
+    "readingsRecorded": "{{count}} ullañanaka qillqata",
+    "esp32Active": "ESP32 irnaqaski ukat yatiyawi khitaski",
+    "esp32Offline": "ESP32 jani chinutakiti",
+    "esp32ActiveHint": "Sapakiw irnaqi USB 5V ch'amampi",
+    "esp32OfflineHint": "Uñjiri wakichata hotspot-aru chinuma wasitat qalltañataki"
+  },
+  "account": {
+    "myAccount": "Nayan cuentaxa",
+    "profile": "Yatiyawi",
+    "security": "Jark'aqawi",
+    "account": "Cuenta",
+    "name": "Suti",
+    "namePlaceholder": "Sutima",
+    "email": "Aru jalayiri",
+    "phone": "Jaya arst'awi",
+    "phonePlaceholder": "Jaya arst'awima (munasa)",
+    "saveChanges": "Turkanaka imaña",
+    "saving": "Imaski…",
+    "currentPassword": "Jichha jamasa aru",
+    "currentPasswordPlaceholder": "Jichha jamasa aruma",
+    "newPassword": "Machaqa jamasa aru",
+    "newPasswordPlaceholder": "8 qillqanakat juk'ampi",
+    "confirmPassword": "Jamasa aru iyawsaña",
+    "confirmPasswordPlaceholder": "Machaqa jamasa aru wasitat qillqma",
+    "changePassword": "Jamasa aru turkaña",
+    "role": "Luräwi",
+    "memberSince": "Akat sarapxi",
+    "logout": "Mistuña",
+    "uploadPhoto": "Jamuqa apayaña",
+    "uploading": "Apayaski…",
+    "useGoogle": "Google apnaqaña",
+    "reverting": "Kutt'ayaski…",
+    "photoUpdated": "Jamuqa machaqachata",
+    "photoError": "Jamuqa apayañana pantja",
+    "googlePhotoRestored": "Google jamuqa kutt'ayata",
+    "revertError": "Jamuqa kutt'ayañana pantja",
+    "nameTooShort": "Sutixa wali juk'akiwa",
+    "profileUpdated": "Yatiyawi machaqachata",
+    "saveError": "Imañana pantja",
+    "passwordMismatch": "Jamasa arunakax jani kikpakiti",
+    "passwordTooShort": "8 qillqanakat juk'ampi",
+    "passwordUpdated": "Jamasa aru machaqachata",
+    "passwordError": "Jamasa aru turkañana pantja"
+  },
+  "camera": {
+    "starting": "Jamuqiri qalltaski…",
+    "noAccess": "Jani jamuqiriru mantañjamäkiti",
+    "permissionDenied": "Jamuqiri jani jaytatakiti. Uñjirimana wakichawipana jist'aram.",
+    "unavailable": "Jani jamuqiriru mantañjamäkiti.",
+    "backCamera": "Qhipa jamuqiri",
+    "frontCamera": "Nayra jamuqiri",
+    "framingHint": "Ali jan ukax laq'u taypiru uchaña",
+    "capture": "Katuta",
+    "switchCamera": "Jamuqiri turkaña",
+    "retake": "Wasitat lurañ",
+    "usePhoto": "Aka jamuqa apnaqaña"
+  },
+  "devices": {
+    "online": "Chinutata",
+    "offline": "Jani chinutata",
+    "active": "Irnaqaski",
+    "noSignal": "Jani unancha",
+    "noData": "Jani yatiyawi",
+    "crop": "Yapu",
+    "lastSignal": "Qhipa unancha",
+    "unassigned": "Jani uchata",
+    "noCropAssigned": "Jani yapu uchata — ullañanakax jani imantkiti",
+    "linkToCrop": "Yapuru chinuña",
+    "configure": "Wakichaña",
+    "unlink": "Jararaña",
+    "status": {
+      "activo": "Irnaqaski",
+      "inactivo": "Jani irnaqki",
+      "mantenimiento": "Askichawina"
+    },
+    "selectCrop": "Mä yapu ajlliña",
+    "selectCropOption": "-- Mä yapu ajlliña --",
+    "linkError": "Chinuñana pantja",
+    "connectionError": "Chinuqasiñana pantja",
+    "namePlaceholder": "Sañäni: Ch'iqa yapu uñjiri",
+    "locationPlaceholder": "Sañäni: Yapu taypi, 3 siqi",
+    "linking": "Chinuski...",
+    "link": "Chinuña",
+    "updated": "Yäna suma machaqachata",
+    "saveError": "Imañana pantja",
+    "configLocationPlaceholder": "Sañäni: Ch'iqa yapu, 3 siqi",
+    "linkDeviceTitle": "Yäna chinuña",
+    "configureDeviceTitle": "Yäna wakichaña",
+    "deviceName": "Yänan sutipa",
+    "assignToCrop": "Yapuru uchaña",
+    "locationOptional": "Cheqa (munasa)",
+    "name": "Suti",
+    "location": "Cheqa",
+    "state": "Kankaña",
+    "pageTitle": "IoT yänaka",
+    "pageSubtitle": "ESP32 yänakama apnaqaña ukat chinuña",
+    "connectNew": "Machaqa chinuña",
+    "new": "Machaqa",
+    "refresh": "Machaqachaña",
+    "loadError": "Yänaka katuqañana pantja",
+    "kpiLinked": "Chinutatanaka",
+    "kpiOnline": "Jichha chinutata",
+    "kpiPending": "Suyt'irinaka",
+    "unlinkTitle": "¿\"{{name}}\" yäna jararañati?",
+    "unlinkText": "Yänaxa \"Suyt'iri\" kankañaru sarani. Nayra ullañanakax imantatawa uñjasini.",
+    "unlinkConfirm": "Jïsa, jararaña",
+    "unlinked": "Yäna jararata",
+    "unlinkError": "Jararañana pantja",
+    "pendingBanner": "{{count}} yäna chinuñ suyt'aski",
+    "tabLinked": "Chinutatanaka ({{count}})",
+    "tabPending": "Suyt'irinaka",
+    "tabPendingCount": "Suyt'irinaka ({{count}})",
+    "loading": "Yänaka katuqasiski...",
+    "emptyLinked": "Jani chinutata yänaka",
+    "emptyLinkedHint": "ESP32-max nayriri kuti chinuqasispax, Suyt'irinakana uñstani, mä yapuru chinuñataki.",
+    "emptyPending": "Jani suyt'iri yänaka",
+    "emptyPendingHint": "Taqi chinutata ESP32-nakax mä yapuruw uchatäxiwa.",
+    "howToConnect": "¿Kunjamsa machaqa ESP32 chinuña?",
+    "connectionSteps": [
+      "/arduino/agrovision_provisioning/ qullqata firmware apayaña Arduino IDE-mpi.",
+      "Munata librerías uchaña: ArduinoJson 6.x, DHT sensor library (Adafruit).",
+      "ESP32 nakhantayaña. \"AgroVision-Setup-XXXXXX\" sutini WiFi chinu uñstayani.",
+      "Jaya arst'awima jan ukax computadorama uka chinuru chinuma (jani jamasa aruni). Portalax pachpaw jist'arani.",
+      "WiFi chinuma ajlliña, jamasa aru ukat servidor URL qillqma, ukat imaña.",
+      "Yänaxa akana \"Suyt'iri\" ukhamaw uñstani: Chinuña limiña uchañataki."
+    ],
+    "reconnectTitle": "Yaqha WiFi chinuru wasitat chinuñataki:",
+    "reconnectText": "ESP32-na BOOT limiñapa 5 sikuntu katuntam, LED jank'aki llijuñkama. Yänaxa yatiyawinakap pichi ukat wakichawi kankañaru kutt'i."
+  },
+  "usbWizard": {
+    "title": "USB-mpi machaqa yäna chinuña",
+    "stepDetect": "Thaqhaña",
+    "stepVerify": "Uñakipaña",
+    "stepWifi": "WiFi",
+    "stepConfigure": "Wakichaña",
+    "beforeYouStart": "Janïr sarantkasin",
+    "beforeYouStartText": "ESP32-ma USB-mpi computadoraru chinuma. LED-axa wali jank'akiw llijuñapa (Setup kankaña). Janitï ukhamäkchi, BOOT 5 s katuntam kutt'ayañataki.",
+    "searching": "Thaqhaski...",
+    "searchDevice": "USB yäna thaqhaña",
+    "noDevices": "Jani ESP32 yänaka jikxataskiti",
+    "noDevicesHint": "Uñakipam USB waskha yatiyawi apayañapa (jani ch'amakiti) ukat CP210x driver uchata kañapa.",
+    "devicesFound": "{{count}} yäna jikxatata:",
+    "showOtherPorts": "Yaqha puertonaka uñjaña ({{count}} juk'ampi)",
+    "deviceDetected": "ESP32 jikxatata",
+    "firmwareInfo": "Firmware v{{version}} — Setup kankaña irnaqaski",
+    "ledBlinking": "LED jank'akiw llijuski: ESP32-xa WiFi wakichawi katuqañatak wakit'atawa.",
+    "selectedPort": "Ajllita puerto:",
+    "scanningWifi": "WiFi chinunaka thaqhaski... (5-10 s jithiskaspa)",
+    "availableNetworks": "Utjir chinunaka ({{count}})",
+    "wifiPassword": "WiFi jamasa aru",
+    "passwordPlaceholder": "Ajllita chinun jamasa arupa",
+    "server": "AgroYachay servidor",
+    "detectingIps": "IP-naka thaqhaski...",
+    "interfacesDetected": "{{count}} interfaz jikxatata",
+    "manualUrl": "Amparampi qillqata URL apnaqaski.",
+    "autoSelection": "Pachpa ajlliwi. Qillqma turkañataki.",
+    "noNetworks": "Jani WiFi chinunaka jikxataskiti.",
+    "retryScan": "Wasitat thaqhaña",
+    "configured": "ESP32 wakichata",
+    "willAppearPending": "Juk'a sikuntunakat akhama uñstani",
+    "willAppearPendingRest": "aka panelana. Listaxa pachpaw machaqachasini.",
+    "pending": "Suyt'iri",
+    "waitingConnection": "ESP32 chinuqasiña suyt'aski...",
+    "sendingConfig": "ESP32-ru wakichawi khitaski...",
+    "back": "Qhiparu",
+    "selectWifi": "WiFi chinu ajlliña",
+    "verifying": "Uñakipaski...",
+    "verifyDevice": "Yäna uñakipaña",
+    "configuring": "Wakichaski...",
+    "configureAndConnect": "Wakichaña ukat chinuña",
+    "backendError": "Backend-mpi jani chinuqasiñjamäkiti",
+    "selectPortFirst": "Nayraqata mä puerto ajlliña",
+    "identifyError": "Yäna uñt'ayañana pantja",
+    "connectionErrorSetup": "Chinuqasiñana pantja. Uñakipam ESP32 Setup kankañana kañapa.",
+    "scanError": "WiFi chinunaka thaqhañana pantja",
+    "scanUsbError": "Thaqhañana pantja. USB chinuqawi uñakipam.",
+    "selectNetwork": "Mä WiFi chinu ajlliña",
+    "serverUrlRequired": "Servidor URL-xa munatawa",
+    "configError": "ESP32 wakichañana pantja",
+    "sendConfigError": "ESP32-ru wakichawi khitañana pantja."
+  },
+  "cropsPanel": {
+    "title": "Yapunaka",
+    "newCrop": "Machaqa yapu",
+    "loading": "Yapunaka katuqasiski...",
+    "loadError": "Yapunaka katuqañana pantja",
+    "statActive": "Jaktir yapunaka",
+    "statArea": "Taqi pampa",
+    "statHealth": "Taypi q'umakankaña",
+    "statGrowing": "Jilaskiwa",
+    "empty": "Jani qillqata yapunaka",
+    "emptyHint": "IoT uñjawimpi nayriri yapuma yapam",
+    "addCrop": "Yapu yapaña",
+    "health": "q'umakankaña",
+    "cropHealth": "Yapun q'umakankañapa",
+    "cycleProgress": "Muyuwin sarantawipa",
+    "area": "Pampa",
+    "daysLeft": "Puchuqi urunaka",
+    "estimatedYield": "Amuyt'ata achu",
+    "iotFactor": "IoT chani",
+    "iotVsOptimal": "IoT kankañanaka vs aski kankaña",
+    "optimalConditions": "Aski kankañanaka — jani yatiyawinaka",
+    "logActivity": "Lurawi qillqaña",
+    "noActivities": "Jani qillqata lurawinaka",
+    "noActivitiesHint": "Alaya limiñanaka apnaqam qillqañataki",
+    "recsFooter": "Jichha pacha IoT ullañanakat apsuta iwxanaka",
+    "tabSensors": "Uñjirinaka",
+    "tabActivities": "Lurawinaka",
+    "tabTips": "Iwxanaka",
+    "cropType": "Yapu kasta",
+    "cycle": "Muyuwi",
+    "temp": "Junt'u",
+    "yield": "Achu",
+    "cropName": "Yapun sutipa *",
+    "variety": "Kasta",
+    "unspecified": "Jani qhanañchata",
+    "areaField": "Pampa (ha) *",
+    "sowingDate": "Yapuñ uru *",
+    "notes": "Qillqanaka (munasa)",
+    "notesPlaceholder": "Uñjatanaka, uraqin kankañapa...",
+    "editCrop": "Askichaña",
+    "update": "Machaqachaña",
+    "createCrop": "Yapu uñstayaña",
+    "activityType": "Lurawi kasta",
+    "activityDescription": "Qhanañchawi (munasa)",
+    "activityPlaceholder": "Sañäni: 20 L sapa aliru, NPK 15-15-15 wanu...",
+    "date": "Uru",
+    "requiredFields": "Suti, pampa ukat yapuñ uru phuqhachaña",
+    "cropUpdated": "Yapu machaqachata",
+    "cropCreated": "Yapu qillqata",
+    "saveError": "Imañana pantja",
+    "deleteTitle": "¿\"{{name}}\" yapu pichañati?",
+    "deleteText": "Yapu ukat taqi yatiyawinakapa pichatani. Aka lurawix jani kutt'ayañjamäkiti.",
+    "deleteConfirm": "Jïsa, pichaña",
+    "cropDeleted": "Yapu pichata",
+    "deleteError": "Pichañana pantja",
+    "activityLogged": "Lurawi qillqata",
+    "deleteActivityTitle": "¿Aka lurawi pichañati?",
+    "sensorTemperature": "Junt'u",
+    "sensorSoilHumidity": "Laq'a juq'u",
+    "sensorPh": "Laq'a pH",
+    "sensorLight": "Qhana",
+    "sensorAirHumidity": "Thaya juq'u",
+    "sensorWind": "Thaya",
+    "stages": {
+      "germination": "Aliñtawi",
+      "vegetative": "Ali jilawi",
+      "flowering": "Panqarawi",
+      "formation": "Achu qalltawi",
+      "ripening": "Puquwi",
+      "readyToHarvest": "Apthapiñatak wakit'ata"
+    },
+    "activityTypes": {
+      "riego": "Qarpawi",
+      "fertilizacion": "Wanuchawi",
+      "fumigacion": "Qullachawi",
+      "aporque": "Jallmawi",
+      "deshierbe": "Qhura apsuwi",
+      "tratamiento": "Qullawi",
+      "observacion": "Uñjawi",
+      "cosecha": "T'aqa apthapiwi"
+    },
+    "alerts": {
+      "frostRisk": "Juyphi axsarawi.",
+      "tempOutOfRange": "Junt'uxa aski cheqat anqanwa.",
+      "urgentIrrigation": "Jank'aki qarpaña.",
+      "humidityOutOfRange": "Juq'uxa juk'ita anqanwa.",
+      "applyLime": "Yapu qhat'awi uchaña.",
+      "applySulphur": "Salliqa uchaña.",
+      "phOutOfRange": "pH-xa juk'ita anqanwa.",
+      "strongWind": "Ch'ama thaya ({{value}} km/h)",
+      "installWindbreaks": "Thaya jark'iri uchaña.",
+      "temperatureLabel": "Junt'u ({{value}} °C)",
+      "soilHumidityLabel": "Laq'a juq'u ({{value}} %)",
+      "phLabel": "pH ({{value}})"
+    },
+    "recommendations": {
+      "frost": "Junt'uxa juk'a chanit aynachanwa — juyphi axsarawi. Agrotextil jan ukax chhijchhi jark'iri llikampi qhuyum.",
+      "heat": "Junt'uxa jach'a chanit alayanwa — junt'u t'aqhisiwi. Qarpawi juk'ampi lurañ.",
+      "coolish": "Junt'uxa juk'ita juk'akiwa. Juk'ampi aynachtchi ukhaxa arum qhuyuwi amuyam.",
+      "dry": "Laq'a juq'uxa wali llakisiwinwa — jichhaki qarpam, jani wañuñapataki.",
+      "wet": "Wali juq'u — qhupa ukat ñusawi axsarawi. Uma mistuwi uñakipam.",
+      "slightlyDry": "Juq'uxa juk'ita juk'akiwa. Jutir horanakana qarpawi wakichaña.",
+      "lowPh": "pH juk'a ({{value}}). Yapu qhat'awi uchaña pH juk'at juk'at aptañataki.",
+      "highPh": "pH jach'a ({{value}}). Salliqa uchaña pH aynachtayañataki.",
+      "wind": "Ch'ama thayanaka. Thaya jark'irinaka uchaña machaqa alinaka jark'aqañataki.",
+      "flowering": "Panqarawi pacha jak'achasiski. Potasio wanu uchaña panqara ch'amañchañataki.",
+      "ripening": "Puquwi pacha. Qarpawi juk'at juk'at pisiptayaña apthapi askiñapataki.",
+      "harvest": "Yapu apthapiñatak wakit'ata. Apthapiwi ukat imawi wakichaña.",
+      "allGood": "Taqi yapun kankañanakapax aski cheqanwa. Nayrjama irnaqaskakim."
+    }
+  },
+  "pests": {
+    "tabImage": "Jamuqampi",
+    "tabAI": "IA jiskt'awi",
+    "tabHistory": "Nayra qillqata",
+    "tabGuide": "Irpiri",
+    "unspecified": "Jani qhanañchata",
+    "notSpecified": "jani qhanañchata",
+    "dropImage": "Mä jamuqa akaru qatatanim",
+    "dropImageHint": "jan ukax limim ajlliñataki · JPG, PNG, WEBP",
+    "or": "jan ukax",
+    "takePhoto": "Jamuqirimpi jamuqa apsuña",
+    "analysingAI": "IA-mpi uñakipaski…",
+    "analysing": "Uñakipaski…",
+    "detect": "Laq'u thaqhaña",
+    "invalidImage": "Aski jamuqa ajlliña",
+    "planError": "Qulla wakichawi jani uñstayañjamäkiti",
+    "selectPhotoFirst": "Nayraqata mä jamuqa ajlliña jan ukax apsuña",
+    "healthyPlant": "Q'uma ali",
+    "detected": "Jikxatata: {{name}}",
+    "detectionError": "Thaqhañana pantja",
+    "analysisError": "IA-mpi jamuqa uñakipañana pantja",
+    "describeMore": "Usu uñachawinaka juk'ampi qhanañchma",
+    "queryError": "Jiskt'awina pantja",
+    "aiConnectionError": "AgroIA-mpi chinuqasiñana pantja",
+    "healthy": "Q'uma",
+    "noDiseaseSigns": "Alixa jani usu uñachawinakani",
+    "noDiseaseSignsHint": "Sapa kuti uñjawi sarantayaskakim.",
+    "description": "Qhanañchawi",
+    "causes": "Kunatsa",
+    "treatment": "Qullawi",
+    "prevention": "Jark'aqawi",
+    "managementPlan": "Qulla wakichawi — AgroIA",
+    "generatingPlan": "AgroIA qulla wakichawi uñstayaski…",
+    "urgencyLevel": "Jank'a kankaña",
+    "assessment": "Chaninchawi",
+    "recommendedProducts": "Iwxata qullanaka",
+    "dose": "Chani",
+    "every": "Sapa",
+    "consultAgronomist": "Yapu yatiñaniru jiskt'am ukhaxa…",
+    "symptomQuery": "Usu uñachawimpi jiskt'awi — AgroIA",
+    "symptomQueryHint": "Kuntix uñjkta uk qhanañchma. AgroIA-xa uñt'ayawi ukat Puno anti patataki qulla wakichawi uñstayani.",
+    "affectedCrop": "Usuta yapu (munasa)",
+    "describeSymptoms": "Usu uñachawinaka qhanañchma",
+    "symptomsPlaceholder": "Sañäni: Ch'uqin laphinakapax q'illu thiyani ch'umpi ch'ikhunakani. Uka ch'ikhunakax jallu qhiparuw uñstawayi. Tunuxa saphipana ch'iyara uñnaqi. Ch'iqa yapuna 20 alinakaruw usuchi.",
+    "moreDetailBetter": "Juk'ampi qhanañchatäni ukhaxa, juk'ampi aski uñt'ayawi",
+    "aiAnalysing": "AgroIA uñakipaski…",
+    "aiResponse": "AgroIA jaysawi",
+    "noDetections": "Jani qillqata thaqhatanaka",
+    "noDetectionsHint": "Thaqhatanakax akan uñstani",
+    "confidence": "Atinisiwi",
+    "commonPests": "Puno anti patana uñt'ata laq'unaka",
+    "loading": "Katuqasiski…",
+    "guideCrops": "Yapunaka",
+    "guideSymptoms": "Usu uñachawinaka",
+    "guideTreatment": "Qullawi",
+    "guidePrevention": "Jark'aqawi",
+    "advancedDiagnosis": "AgroIA-mpi juk'ampi uñt'ayawi",
+    "advancedDiagnosisHint": "Aka irpirina laq'uma jani jikxatasax, usu uñachawinaka qhanañchma jan ukax mä jamuqa apayam IA uñt'ayañapataki.",
+    "region": "Puno, Peru — Anti pata 3800-4500 msnm",
+    "imagePreviewAlt": "Uñakipañ jamuqan nayra uñjawipa",
+    "pageTitle": "Laq'u thaqhawi",
+    "pageSubtitle": "Groq Vision · AgroIA · Anti patataki amuyt'ayiri uñt'ayawi",
+    "cropToAnalyse": "Uñakipañ yapu (munasa)",
+    "selectFile": "Qillqata ajlliña",
+    "newQuery": "Machaqa jiskt'awi"
+  },
+  "prediction": {
+    "title": "Apthapi amuyt'awi",
+    "subtitle": "Amuyt'awi uñakipawi + AgroIA · Puno marka",
+    "newPrediction": "Machaqa amuyt'awi",
+    "tabCalculator": "Jakhuri",
+    "tabHistory": "Nayan yapunakaxa",
+    "cropType": "Yapu kasta",
+    "variety": "Kasta",
+    "cropArea": "Yapu pampa",
+    "hectares": "Hectáreanaka",
+    "analysing": "Uñakipaski…",
+    "generate": "IA-mpi amuyt'awi uñstayaña",
+    "selectCrop": "Mä yapu ajlliña",
+    "selectVariety": "Mä kasta ajlliña",
+    "generated": "Amuyt'awi uñstayata",
+    "generateError": "Amuyt'awi uñstayañana pantja",
+    "totalYield": "Taqi achu",
+    "perHectare": "Sapa hectáreana",
+    "marketPrice": "Qhatu chani",
+    "perKg": "sapa kg",
+    "estimatedIncome": "Amuyt'ata qullqi katuqawi",
+    "total": "taqpacha",
+    "tons": "Tuniladanaka",
+    "scenarioPessimistic": "Juk'a",
+    "scenarioLikely": "Chiqapa",
+    "scenarioOptimistic": "Juk'ampi aski",
+    "confidence": "atinisiwi",
+    "aiRecommendations": "AgroIA iwxanaka",
+    "aiGenerating": "AgroIA iwxanaka uñstayaski…",
+    "noCrops": "Jani qillqata yapunaka",
+    "noCropsHint": "Yapunaka t'aqana yapunaka qillqma, akana amuyt'awinaka uñjañataki",
+    "quickHint": "Qillqata yapunakamat apsuta jank'a amuyt'awinaka",
+    "estimatedYieldShort": "amuyt'ata achu",
+    "estimatedIncomeShort": "amuyt'ata qullqi",
+    "goToCalculator": "Jakhuriru saraña"
+  },
+  "inputs": {
+    "title": "Yanapiri jakhuri",
+    "subtitle": "NPK wanuchawi askichata · Puno 3800–4500 msnm",
+    "print": "Limiña",
+    "newCalculation": "Machaqa jakhuwi",
+    "cropType": "Yapu kasta",
+    "variety": "Kasta",
+    "optional": "(munasa)",
+    "cropArea": "Yapu pampa",
+    "hectares": "Hectáreanaka",
+    "parcelSmall": "Jisk'a yapu",
+    "parcelMedium": "Taypi yapu",
+    "parcelLarge": "Jach'a yapu",
+    "parcelIndustrial": "Jach'a lurawi",
+    "topos": "tupunaka",
+    "acres": "acres",
+    "calculating": "Jakhuski…",
+    "selectCrop": "Mä yapu ajlliña",
+    "done": "Jakhuwi tukuyata",
+    "calcError": "Jakhuñana pantja",
+    "totalInvestment": "taqi qullqi uchawi",
+    "nitrogen": "Nitrógeno (N)",
+    "phosphorus": "Fósforo (P₂O₅)",
+    "potassium": "Potasio (K₂O)",
+    "npkDistribution": "NPK t'aqawi (kg)",
+    "npkProportion": "NPK tupu",
+    "quantityKg": "Qawqha (kg)",
+    "benefits": "Askinakan amuyt'awipa",
+    "estimatedSaving": "Amuyt'ata imawi",
+    "estimatedSavingHint": "Chaninaka 25 % kama pisiptawi",
+    "yieldIncrease": "Achu jilawi",
+    "yieldIncreaseHint": "15 % kama jilawi",
+    "productQuality": "Achun askikankañapa",
+    "productQualityHint": "Wali aski achu",
+    "applicationTips": "Uchawi iwxanaka",
+    "disclaimer": "INIA-na yatiña iwxanakapat ukat Puno anti patan kankañapat apsuta jakhuwinaka.",
+    "optimalAltitude": "Aski alaya kankaña",
+    "fertilisationPlan": "Wanuchawi wakichawi"
+  },
+  "advisory": {
+    "title": "Yatiñani yanapt'awi",
+    "subtitle": "Uñt'ata yapu yatiñaninakampi chinuqasiña · Puno",
+    "request": "Mayiña",
+    "statMyQueries": "Nayan jiskt'awinakaxa",
+    "statExperts": "Utjir yatiñaninaka",
+    "statAnsweredByAI": "IA jaysatanaka",
+    "statResponseTime": "Jaysañ pacha",
+    "statPending": "Suyt'irinaka",
+    "statSatisfaction": "Kusisiwi",
+    "specialtiesTitle": "Nanakan yatiñanakaxa",
+    "specialtiesHint": "Sapa t'aqana uñt'ata yatiñaninaka",
+    "expertsCount": "{{count}} yatiñaninaka",
+    "myRequests": "Nayan mayiwinakaxa",
+    "myRequestsHint": "Jiskt'awinakaman nayra qillqatapa ukat kankañapa",
+    "empty": "Janïra mayiwinaka",
+    "emptyHint": "Anti patat uñt'ata yapu yatiñaninakan yanapt'apa katuqam",
+    "firstQuery": "Nayriri jiskt'awixa lurañ",
+    "aiAnswer": "AgroIA jaysawi",
+    "agronomistAnswer": "Yapu yatiñanin jaysawipa",
+    "aiGenerated": "IA uñstayata jaysawi · Groq llama-3.3-70b",
+    "modalTitle": "Yanapt'awi mayiña",
+    "modalSubtitle": "Mä yatiñanix 12-48 horana jaysätam",
+    "advisoryType": "Yanapt'awi kasta",
+    "priority": "Nayrïri",
+    "problemDescription": "Jan walt'awin qhanañchawipa",
+    "problemPlaceholder": "Jiskt'awima qhanaki qhanañchma: uñjata usu uñachawinaka, usuta yapu, qawqha pacha jan walt'awi, uraqin kankañapa...",
+    "aiAnalysing": "AgroIA uñakipaski…",
+    "aiQuickHelp": "Janïr khitkasin IA-mpi jank'a irpawi katuqaña",
+    "aiPreliminary": "AgroIA irpawi (nayriri)",
+    "aiDisclaimer": "Akax nayriri irpawikiwa. Uñt'ata uñt'ayawitaki, mayiwi yatiñaniru khitam.",
+    "sending": "Khitaski…",
+    "sendToExpert": "Yatiñaniru khitaña",
+    "describeMore": "Jan walt'awi 20 qillqanakat juk'ampimpi qhanañchma irpawi katuqañataki",
+    "aiError": "IA irpawi jani katuqañjamäkiti",
+    "selectType": "Yanapt'awi kasta ajlliña",
+    "describeProblem": "Jan walt'awima qhanañchma",
+    "sent": "Mayiwi suma khitata",
+    "sendError": "Mayiwi khitañana pantja",
+    "yourCrop": "yapupata",
+    "aiPrompt": "Un agricultor de Puno, Perú (altiplano 3800-4500 msnm) consulta sobre {{topic}}:\n\n\"{{problem}}\"\n\nDame una orientación inicial breve en texto plano (sin asteriscos, sin markdown):\n1. Posible diagnóstico o causa del problema\n2. Acciones inmediatas que puede tomar\n3. Si requiere visita de un especialista o puede manejarlo solo\n\nMáximo 5 oraciones en total. Directo y práctico. Responde en español.",
+    "priorities": {
+      "Baja": "Juk'a",
+      "Media": "Taypi",
+      "Alta": "Jach'a",
+      "Urgente": "Jank'a"
+    },
+    "statuses": {
+      "Todas": "Taqi",
+      "Pendiente": "Suyt'iri",
+      "Respondida": "Jaysata",
+      "Resuelta": "Askichata",
+      "En Proceso": "Lurasiskiwa",
+      "En Revision": "Uñakipasiskiwa",
+      "Cancelada": "Jaytata"
+    },
+    "specialties": {
+      "Nutrición Vegetal": {
+        "label": "Ali manq'ayawi",
+        "desc": "Wanuchawi ukat manq'anaka juk'ampi achu utjañapataki."
+      },
+      "Manejo Hídrico": {
+        "label": "Uma apnaqawi",
+        "desc": "Aski qarpaña sistemanaka ukat uma apnaqawi."
+      },
+      "Manejo de Suelos": {
+        "label": "Laq'a apnaqawi",
+        "desc": "Laq'a uñakipawi, achuyawi ukat imawi."
+      },
+      "Control Fitosanitario": {
+        "label": "Laq'u jark'aqawi",
+        "desc": "Laq'unaka ukat usunaka jark'aqawi."
+      },
+      "Análisis Productivo": {
+        "label": "Achu uñakipawi",
+        "desc": "Achunaka chaninchawi ukat askichañ thakhinaka."
+      },
+      "Agricultura Sostenible": {
+        "label": "Wiñay yapuchawi",
+        "desc": "Anti patataki uraqi jark'iri lurawinaka."
+      }
+    },
+    "problemHint": "Juk'amp qhanañchtaxa, juk'amp askiw jaysawix"
+  },
+  "reports": {
+    "title": "Yatiyawinaka",
+    "subtitle": "Yapu achumat PDF ukat Excel yatiyawinaka",
+    "newReport": "Machaqa yatiyawi",
+    "statsGenerated": "Uñstayata yatiyawinaka",
+    "statsCrops": "Qillqata yapunaka",
+    "statsDetections": "Laq'u thaqhatanaka",
+    "statsFormats": "PDF / Excel uñstayata",
+    "availableTypes": "Utjir yatiyawi kastanaka",
+    "availableTypesHint": "Jank'aki uñstayañataki limim",
+    "history": "Yatiyawinakan nayra qillqatapa",
+    "historyHint": "Nayra uñstayata yatiyawinaka",
+    "empty": "Jani uñstayata yatiyawinaka",
+    "emptyHint": "Achuma uñakipañataki nayriri yatiyawima uñstayam",
+    "generateFirst": "Nayriri yatiyawi uñstayaña",
+    "download": "Aynachtayaña",
+    "downloaded": "Yatiyawi aynachtayata",
+    "downloadError": "Yatiyawi aynachtayañana pantja",
+    "generateError": "Yatiyawi uñstayañana pantja",
+    "modalTitle": "Yatiyawi uñstayaña",
+    "generating": "Yatiyawi uñstayaski...",
+    "generatingHint": "Yapu yatiyawinaka lurasiski, juk'a sikuntunak jithiskaspa",
+    "reportType": "Yatiyawi kasta",
+    "outputFormat": "Mistuwi kasta",
+    "pdfHint": "Limiñataki ukat t'aqañataki",
+    "excelHint": "Uñakipañataki ukat askichañataki",
+    "willGenerate": "Aka uñstayasini",
+    "generateAndDownload": "Uñstayaña ukat aynachtayaña",
+    "types": {
+      "Dashboard Ejecutivo": {
+        "label": "Jach'a uñjawi",
+        "desc": "Phuqha yatiyawi: yapunaka, uñjirinaka, yatiyawinaka ukat achu."
+      },
+      "Estado de Cultivos": {
+        "label": "Yapunakan kankañapa",
+        "desc": "Sapa yapun qhana uñakipawipa, sarantawimpi ukat q'umakankañampi."
+      },
+      "Analisis Financiero": {
+        "label": "Qullqi uñakipawi",
+        "desc": "ROI, yanapirinakan chanipa ukat amuyt'ata qullqi katuqawi."
+      },
+      "Impacto Climatico": {
+        "label": "Pacha luräwi",
+        "desc": "Pacha kankañanaka ukat Punona luräwipa."
+      }
+    }
+  },
+  "admin": {
+    "saveChanges": "Turkanaka imaña",
+    "uploading": "Apayaski…",
+    "uploadHint": "Jamuqa apayaña jan ukax akaru qatatanim",
+    "uploadError": "Jamuqa apayañana pantja",
+    "statsError": "Jakhunaka katuqañana pantja",
+    "usersError": "Apnaqirinaka katuqañana pantja",
+    "platformStats": "Sistemana jakhunakapa",
+    "total": "Taqpacha",
+    "active": "Irnaqirinaka",
+    "last30": "Qhipa 30 uru",
+    "last7": "Qhipa 7 uru",
+    "byRole": "Luräwiparjama",
+    "inactiveAccount": "{{count}} jani irnaqir cuenta sistemana",
+    "inactiveAccounts": "{{count}} jani irnaqir cuentanaka sistemana",
+    "recentlyRegistered": "Qhipa qillqt'ayasirinaka",
+    "noRecords": "Jani qillqatanaka",
+    "userManagement": "Apnaqirinaka apnaqawi",
+    "usersCount": "{{count}} apnaqirinaka",
+    "searchPlaceholder": "Sutimpi jan ukax aru jalayirimpi thaqham…",
+    "filterAll": "Taqi",
+    "filterInactive": "Jani irnaqirinaka",
+    "since": "Akat sarapxi",
+    "deactivate": "Jark'aña",
+    "activate": "Jist'araña",
+    "password": "Jamasa aru",
+    "newPasswordPlaceholder": "Machaqa jamasa aru (8 qillqanakat juk'ampi)",
+    "noUsersFound": "Jani apnaqirinaka jikxataskiti",
+    "roleUpdated": "Luräwi machaqachata",
+    "genericError": "Pantja",
+    "minChars": "8 qillqanakat juk'ampi",
+    "passwordUpdated": "Jamasa aru machaqachata",
+    "brandImages": "Marka jamuqanaka",
+    "logoLabel": "Jach'a uñt'ayiri",
+    "logoHint": "Qhana SVG jan ukax PNG, 200×60 px kama",
+    "faviconLabel": "Favicon",
+    "faviconHint": "ICO jan ukax PNG 32×32 px",
+    "institutionLogoLabel": "Yatiña utan uñt'ayiripa",
+    "institutionLogoHint": "Chinuta tantachawin jan ukax jach'a yatiña utan uñt'ayiripa",
+    "coverLabel": "Qhuyu jamuqa (hero)",
+    "coverHint": "Iwxata: 1920×1080 px",
+    "homepageSaved": "Qalltawi jana imata",
+    "saveError": "Imañana pantja",
+    "siteIdentity": "Sistemana uñt'ayawipa",
+    "siteName": "Sistemana sutipa",
+    "tagline": "Tagline",
+    "taglinePlaceholder": "Amuyt'ayiri yapuchawi...",
+    "heroSection": "Hero t'aqa",
+    "heroTitle": "Hero p'iqi",
+    "heroTitleHint": "Jach'a bannerana jach'a qillqa (7 qillqa kama)",
+    "description": "Qhanañchawi",
+    "heroDescriptionPlaceholder": "Yapu apnaqaña sistema...",
+    "ctaButton": "CTA limiña",
+    "ctaPlaceholder": "Jichhat qalltaña",
+    "ecosystemSection": "Ecosistema t'aqa",
+    "titleField": "P'iqi",
+    "ecosystemTitlePlaceholder": "Amuyt'ayiri yapu ecosistema",
+    "ecosystemDescriptionPlaceholder": "Yatiña chinuqtayapxta...",
+    "announcementBanner": "Yatiyawi banner",
+    "showBanner": "Yatiyawi banner uñachayaña",
+    "showBannerHint": "Taqi anqäxa jananakan alayapanwa uñsti",
+    "bannerText": "Bannerana qillqapa",
+    "bannerPlaceholder": "¡Machaqa! Machaqa IoT lurawinaka yant'am",
+    "bannerPreview": "Bannerana nayra uñjawipa…",
+    "navSaved": "Wampuña imata",
+    "navigation": "Wampuña",
+    "navHint": "Jach'a ajlliwin chinunakapa askichaña. Ch'usaka jaytam nayra wampuña apnaqañataki.",
+    "labelPlaceholder": "Unancha",
+    "hrefPlaceholder": "/thakhi jan ukax https://...",
+    "addItem": "Yänaka yapaña",
+    "footerSaved": "Kayu jana imata",
+    "generalInfo": "Taqit yatiyawi",
+    "footerDescriptionPlaceholder": "Yapu apnaqaña sistema...",
+    "institution": "Yatiña uta",
+    "institutionPlaceholder": "Markana jach'a yatiña utapa...",
+    "contactEmail": "Chinuqasiñ aru jalayiri",
+    "copyright": "Copyright",
+    "socialNetworks": "Jaqi masi chinunaka",
+    "systemSaved": "Sistemana wakichawipa imata",
+    "maintenanceMode": "Askichawi kankaña",
+    "enableMaintenance": "Askichawi kankaña jist'araña",
+    "enableMaintenanceHint": "Jani apnaqirinakaru askichawi jana uñachayi",
+    "maintenanceMessage": "Askichawi yatiyawi",
+    "maintenancePlaceholder": "Sistemax askichawinkiwa...",
+    "analytics": "Analytics",
+    "ga4Hint": "Ch'usaka jaytam uñakipawi arkawi jark'añataki",
+    "resetTitle": "¿Wakichawi kutt'ayañati?",
+    "resetText": "Taqi qillqanakax nayra chaninakaparuw kutt'ani. Jamuqanakax jani pichatäkiti.",
+    "resetConfirm": "Jïsa, kutt'ayaña",
+    "resetDone": "Wakichawi kutt'ayata",
+    "resetError": "Kutt'ayañana pantja",
+    "resetSection": "Wakichawi kutt'ayaña",
+    "resetting": "Kutt'ayaski…",
+    "resetDefaults": "Nayra chaninakaru kutt'ayaña",
+    "superAdminPanel": "Jach'a apnaqiri panel",
+    "adminPanel": "Apnaqiri panel",
+    "tabs": {
+      "stats": "Jakhunaka",
+      "users": "Apnaqirinaka",
+      "logo": "Uñt'ayiri",
+      "homepage": "Qalltawi",
+      "nav": "Wampuña",
+      "footer": "Kayu jana",
+      "system": "Sistema",
+      "advanced": "Juk'ampi yatiña"
+    },
+    "roles": {
+      "superadmin": "Jach'a apnaqiri",
+      "admin": "Apnaqiri",
+      "agricultor": "Yapuchiri",
+      "usuario": "Apnaqiri"
+    },
+    "logoAndBrand": "Uñt'ayiri ukat marka",
+    "configError": "Wakichawi katuqañana pantja",
+    "inactiveTag": "JANI IRNAQIRI",
+    "homepageTitle": "Qalltawi Laphi",
+    "footerTitle": "Laphi Kayu",
+    "advancedTitle": "Nayrañchat Wakichawi",
+    "maintenanceWarning": "Kikpa apnaqirinakatakix sistemax jani mantañjamäkaniti"
+  },
+  "landing": {
+    "nav": {
+      "inicio": "Qalltawi",
+      "acerca": "Nanaka",
+      "servicios": "Yanapt'awinaka",
+      "planes": "Wakichawinaka",
+      "testimonios": "Yatiyawinaka",
+      "contactos": "Chinuqasiwi"
+    },
+    "loading": "Katuqasiski",
+    "signIn": "Mantaña",
+    "signInShort": "Mantaña",
+    "footerModules": "T'aqanaka",
+    "footerNavigation": "Wampuña",
+    "footerContact": "Chinuqasiwi",
+    "footerLocation": "Puno, Peru",
+    "sendMessage": "Yatiyawi khitaña",
+    "systemActive": "Sistema irnaqaski",
+    "developedBy": "R. Andre Vilca Solorzano lurata",
+    "copyrightFallback": "© {{year}} {{site}} — Taqi jaqi jark'awinaka imata",
+    "modules": [
+      "IoT yapunaka",
+      "ESP32 uñjirinaka",
+      "Pacha + IA",
+      "Laq'u thaqhawi",
+      "Apthapi amuyt'awi",
+      "PDF/Excel yatiyawinaka"
+    ]
+  },
+  "footer": {
+    "tagline": "Peru yapuchawi amuyt'ayiri yänampi ukat IoT-mpi turkaskapxta",
+    "services": "Yanapt'awinaka",
+    "company": "Tantachawi",
+    "contact": "Chinuqasiwi",
+    "cropManagement": "Yapu apnaqawi",
+    "iotMonitoring": "IoT uñjawi",
+    "weatherMonitoring": "Pacha uñjawi",
+    "pestDetection": "Laq'u thaqhawi",
+    "harvestPrediction": "Apthapi amuyt'awi",
+    "marketplace": "Qhatu",
+    "home": "Qalltawi",
+    "about": "Nanakat",
+    "advisory": "Yatiñani yanapt'awi",
+    "blog": "Blog",
+    "support": "Yanapt'awi",
+    "location": "Puno, Peru",
+    "rights": "© {{year}} AgroYachay. Taqi jaqi jark'awinaka imata."
+  },
+  "siteDefaults": {
+    "site_tagline": "Amuyt'ayiri yapuchawi",
+    "hero_title": "yapuma",
+    "hero_description": "IoT, amuyt'ayiri yänaka ukat amuyt'awi uñakipawi mä sistemakina. Peru jaya markanakataki wakichata, kawkhantix yapuchirix sapakiw irnaqi.",
+    "hero_cta": "Inaki qalltaña",
+    "ecosystem_title": "Taqi kunatix munkta uka mä sistemana",
+    "ecosystem_description": "8 chinutata t'aqanaka, maynit mayni yanapt'asiri. Uñjirin yatiyawipax amuyt'awi askichi, pachax yatiyawinaka yatiyi, IA-x taqi chinuqti.",
+    "footer_description": "IoT, amuyt'ayiri yänaka ukat amuyt'awi uñakipawini yapu sistema. Peru jaya markanakataki wakichata, kawkhantix yapuchirix sapakiw irnaqi ukat yapupa phuqhat apnaqañ muni.",
+    "maintenance_message": "Sistemax askichawinkiwa. Mira, qhipatpach yant'am."
+  },
+  "testimonials": {
+    "heroTitleLine1": "Lurawinakaw",
+    "heroTitleLine2": "sapakiw arsupxi.",
+    "heroDescription": "Akanx AgroYachay yapunakapana apnaqirinakan tupuñ atir lurawinakapaw utjani. Sistemat chiqa yatiyawinaka, jani amuyt'atakiti.",
+    "createAccount": "Inaki cuenta uñstayaña",
+    "contactTeam": "Irnaqir tamampi chinuqasiña",
+    "status": [
+      {
+        "label": "Sistema irnaqaski",
+        "value": "Irnaqaski"
+      },
+      {
+        "label": "Nayriri apnaqirinaka",
+        "value": "Lurasiskiwa"
+      },
+      {
+        "label": "Yänchata yatiyawinaka",
+        "value": "Suyt'iri"
+      },
+      {
+        "label": "Qillqata chiqa yatiyawinaka",
+        "value": "Suyt'iri"
+      }
+    ],
+    "expectedTitle": "Nayraqat aka qillqañ suyt'apxta",
+    "expected": [
+      "Laq'unaka nayrat thaqhasa chhaqhawinaka pisiptayaña",
+      "Laq'a juq'u uñjirinakampi uma imawi",
+      "Apthapi amuyt'awin chiqapa vs chiqa lurawi",
+      "Ch'ama junt'u yatiyawinakaru jaysañ pacha",
+      "Sapa yapuna qullqi jilawi sistema janïri ukat qhipa",
+      "Plant.id v2 t'aqan chiqapa jikxatawipa"
+    ],
+    "beFirst": "Sarnaqawima t'aqir nayriri kam",
+    "emptyTitle": "Janïraw yatiyawinaka yänchatäkiti.",
+    "emptyDescription": "Sistemax jichhakiw qalltawayi. Nayriri yapuchirinakax lurawinakap t'aqapxani ukhaxa, sarnaqawinakapax chiqa yatiyawimpiw akan uñstani, jani amuyunakampikiti.",
+    "whyNoDataTitle": "¿Kunatsa janïra yatiyawinaka utjki?",
+    "whyNoDataDescription": "Akan uñstir yatiyawinakax sistemat chiqa tupunakampiw jutani: tupuqata achu, thaqhata laq'unaka, jakhuta imawinaka. Jani kuns luraskasa.",
+    "beFirstTitle": "¿Nayriri kañ munta?",
+    "beFirstDescription": "Cuentama uñstayam, yapuma chinuma ukat nayriri urut chiqa lurawinaka qillqam.",
+    "contactUs": "Nanakampi chinuqasiña",
+    "metricsTitle": "Tupuñ atir lurawinaka, jani ch'usa arsuwinakakiti.",
+    "metricsDescription": "Sapa jutir yatiyawix aka tupunakat mayni apani, sistemat chiqa yatiyawimpi.",
+    "metrics": [
+      {
+        "symbol": "kg/ha",
+        "label": "Sapa yapuna achu",
+        "desc": "ML amuyt'awi vs qillqata chiqa apthapi"
+      },
+      {
+        "symbol": "%",
+        "label": "Thaqhawina atinisiwi",
+        "desc": "Plant.id v2 usunaka uñt'ayi"
+      },
+      {
+        "symbol": "°C",
+        "label": "Junt'u yatiyawinaka",
+        "desc": "Uñjirin jichha pacha yatiyawipa"
+      },
+      {
+        "symbol": "S/.",
+        "label": "Chaninaka vs qullqi katuqawi",
+        "desc": "Sapa pacha ukat yapuna qullqi yatiyawi"
+      }
+    ],
+    "ctaTitle": "Sarnaqawima t'aqir nayriri kam.",
+    "ctaDescription": "Cuentama uñstayam, yapuma chinuma ukat nayriri urut chiqa lurawinaka qillqam. Yatiwimax yaqha yapuchirinakaruw yanapt'aspa."
+  },
+  "home": {
+    "heroTitleBefore": "Phuqha apnaqawi",
+    "heroTitleAfter": "kawkhants",
+    "viewSystem": "Sistema uñjaña",
+    "demoCard": {
+      "parcel": "Jach'a yapu",
+      "crop": "Ch'uqi yapu — 2.5 ha",
+      "active": "Irnaqaski",
+      "temperature": "Junt'u",
+      "airHumidity": "Thaya juq'u",
+      "soil": "Laq'a",
+      "normal": "Askipa",
+      "optimal": "Wali aski",
+      "irrigate": "Qarpaña",
+      "chartTitle": "Junt'u — qhipa 8 ullañanaka",
+      "aiRecommends": "AgroIA iwxi",
+      "aiMessage": "Laq'a juq'u 42%-na — jichha jaypu qarpawi wakichaña. Amuyt'awi: qhana alaxpacha, jach'a junt'u 17°C."
+    },
+    "features": [
+      {
+        "title": "Yapu apnaqawi",
+        "desc": "10 yapu kasta, phuqha muyuwi wakichatat apthapitkama, lurawinakan ukat yanapirinakan chiqa chaninipa qillqata."
+      },
+      {
+        "title": "ESP32 IoT uñjawi",
+        "desc": "Junt'u, thaya ukat laq'a juq'u sapa 10 s. Pachpa offline buffer. Wakichañ atir kurminakampi yatiyawinaka."
+      },
+      {
+        "title": "Pacha + IA semana wakichawi",
+        "desc": "OpenWeather + Groq yapuma uñakipi ukat qarpaw iwxanaka, juyphi yatiyawi ukat urun lurawinakapa uñstayi."
+      },
+      {
+        "title": "Laq'u thaqhawi",
+        "desc": "Yaput jamuqa → Plant.id usu uñt'ayi → Groq jank'a kankañampi, qullanakampi ukat chiqa chanimpi wakichawi jaysi."
+      },
+      {
+        "title": "Apthapi amuyt'awi",
+        "desc": "scikit-learn kg/ha achu ukat amuyt'ata qullqi jilawi uñjirinakaman chiqa yatiyawipat amuyt'i."
+      },
+      {
+        "title": "Yanapirinaka qhatu",
+        "desc": "Jathanaka, wanunaka ukat yänaka MercadoLibre ukat Amazon-aru chiqa chinumpi. Jani taypi jaqinakani."
+      },
+      {
+        "title": "PDF ukat Excel yatiyawinaka",
+        "desc": "4 kasta: Jach'a, Yapunaka, Qullqi, Pacha. Uñjirinakaman chiqa yatiyawipampi uñstayata siq'inaka."
+      },
+      {
+        "title": "AgroIA yanapiri",
+        "desc": "Llama 3.3 70B-mpi Groq tuqi qhispiyata aruskipawi. Qarpawit, laq'unakat, yapuñat jichha yapuman kankañapampi jaysi."
+      }
+    ],
+    "esp32TitleLine1": "ESP32 irnaqiri",
+    "esp32TitleLine2": "jani unancha utjkipansa",
+    "esp32Description": "DHT11 ukat FC-28 yänani ESP32-xa junt'u, thaya juq'u ukat laq'a juq'u sapa 10 sikuntu tupi. Jani WiFi utjipanxa 10 ullañ bufferana imi ukat wasitat chinuqasipanx apayi. Firmware-xa jumankiwa, Arduino C++ tuqi jist'arata.",
+    "esp32Points": [
+      "Sapa 10 s ullañawi — junt'u + thaya juq'u + laq'a",
+      "Pachpa 10 qillqa offline buffer",
+      "Sapa yaputaki wakichañ atir kurminakampi yatiyawinaka",
+      "NTP UTC-5, Perutaki chiqa pacha unancha"
+    ],
+    "codeReading": "// Sapa 10 s ullañawi",
+    "codePost": "// Backend-aru POST",
+    "codeBuffer": "// Jani WiFi utjipanxa, akana imaña",
+    "aiTitleLine1": "Chiqa yapuma",
+    "aiTitleLine2": "uñt'ir IA",
+    "aiDescription": "Groq llama-3.3-70b yapu jiskt'awinaka jaysi, jaktir yapunakaman, markaman, uñjir yatiyawinakaman ukat urun amuyt'awipan kankañapampi. Janiw inaki chatbot-kiti — yatiwa Punona Ch'uqima utjatapa ukat laq'ax 42%-na kasitapa.",
+    "aiPoints": [
+      "Pacha uñakipawi axsarawimpi ukat laq'u yatiyawimpi",
+      "Laq'u qulla wakichawi qullanakampi ukat chanimpi",
+      "Amuyt'awirjama semana lurawinaka wakichawi",
+      "Qhispiyata aruskipawi: kuna yapu jiskt'awisa"
+    ],
+    "farmer": "Yapuchiri",
+    "chat": [
+      {
+        "q": "¿Kunapachas qarpä?",
+        "a": "Laq'a juq'u 42%-na ukat 3 uru jani jallu amuyt'ata. Qharüru alwa qarpam, 45 minutu ch'aqawimpi."
+      },
+      {
+        "q": "¿Kuns IA thaqhi?",
+        "a": "Phytophthora infestans (qhipa nakhawi) — atinisiwi 87%. Jank'a: 24h. Metalaxil 1.5 g/L uchaña."
+      },
+      {
+        "q": "Aka semana wakichawi",
+        "a": "Pha: wanuchaña. Pch: qarpaña. Ill: qullachañatak aski uru (juk'a thaya, jani jallu)."
+      }
+    ],
+    "howTitle": "4 t'aqana, phuqha apnaqawi",
+    "how": [
+      {
+        "title": "Yapuma qillqam",
+        "desc": "Yapu, pampa ukat cheqa qhanañchma. Sistemax uñjirinaka, kurminaka ukat t'aqanaka wakichi."
+      },
+      {
+        "title": "ESP32 chinuma",
+        "desc": "Firmware uchatawa. Uñjirix sapa 10 s yatiyawi khiti ukat offline pachpa chinuqawimpi irnaqi."
+      },
+      {
+        "title": "IA uñakipawi katuqam",
+        "desc": "Groq pacha, uñjirinaka ukat yapunaka chinuqti, yapumataki sapa iwxanaka jichha pachana churañataki."
+      },
+      {
+        "title": "Yatiyawinaka uñstayam",
+        "desc": "PDF/Excel chiqa siq'inakampi, qullqi uñakipawimpi ukat apthapi amuyt'awimpi. Jichhaki aynachtayaña."
+      }
+    ],
+    "platformTitleLine1": "Phuqha sistema,",
+    "platformTitleLine2": "jani jisk'a app-kiti",
+    "platformDescription": "30+ REST endpoint, 14 tabla PostgreSQL tuqi, JWT uñt'ayawi, servidorana yatiyawi uñstayawi, jichha pacha uñjirinakataki websocket ukat sapa kankañani IA t'aqa.",
+    "technicalDetails": "Yatiña yatiyawinaka uñjaña",
+    "stats": [
+      {
+        "value": "14",
+        "label": "PostgreSQL tablanaka"
+      },
+      {
+        "value": "30+",
+        "label": "REST endpointnaka"
+      },
+      {
+        "value": "4",
+        "label": "Yatiyawi kastanaka"
+      },
+      {
+        "value": "7",
+        "label": "Yanapt'awi t'aqanaka"
+      }
+    ],
+    "ctaTitleLine1": "Nayriri uñjirima chinuma",
+    "ctaTitleLine2": "10 minutut pisina",
+    "ctaDescription": "Jani qullqi qillqatani. Jani uchawini. Cuentama uñstayam, yapuma yapam ukat ESP32-x jichhakiw yatiyawi khitañ qallti.",
+    "ctaPrimary": "Inaki cuenta uñstayaña",
+    "ctaSecondary": "Uñachawi mayiña"
+  },
+  "about": {
+    "heroBefore": "Peru jaya",
+    "heroHighlight": "yapunakataki",
+    "heroAfter": "lurata",
+    "heroDescription": "AgroYachayxa qhana amtampiw yuriwayi: jisk'a yapuchiriru jach'a yapuchawin kikpa yänakapa churaña, jaya qullu ukat yunka markanakaru, chiqa qullqiru ukat juk'a chinuqasiwiru wakichata.",
+    "viewModules": "Sistemat t'aqanakapa uñjaña",
+    "contact": "Chinuqasiña",
+    "problems": [
+      "Jaya yapunaka kawkhantix agrónomox jani puriski",
+      "Laq'unaka qhipat thaqhata jani sapa kuti uñjatäkipana",
+      "Laq'an ukat thayan chiqa kankañapa jani yatiña",
+      "Amuyt'awi nayrat jani yatisa chhaqhawinaka",
+      "Yanapirinakan chiqa chaninakapa jani uñakipasa alaña",
+      "Jani lurawinakan jani chaninakan qillqatapa sapa yapuna"
+    ],
+    "problemsSolved": "AgroYachayx taqi ukanak askichi",
+    "pillarsTitle": "Kunatsa akax irnaqi yaqhax jani irnaqkipana",
+    "pillars": [
+      {
+        "title": "Jani ch'ama unanchani irnaqi",
+        "desc": "ESP32-x ullañanaka kikpa bufferana imi ukat wasitat chinuqasipanx pachpa apayi. Janiw kuna yatiyawis chhaqhkiti WiFi jani utjipansa walja horanaka."
+      },
+      {
+        "title": "IA jani yatiñaninakar ch'amañchasisa",
+        "desc": "Groq llama-3.3-70b qarpawit, laq'unakat ukat wanuchañat jiskt'awinaka jaysi yapuman chiqa kankañapampi. 7 yatiñana yanapt'awi ticket tuqi."
+      },
+      {
+        "title": "Yatiyawinakama, servidormana",
+        "desc": "Taqiw PostgreSQL kikpamana jaki. Jani anqäxa yanapt'awinaka pantjañapataki, chanin alt'añapataki, jani lurawi yatiyawinakama uñacht'añapataki."
+      },
+      {
+        "title": "Peruna alañ atir yänaka",
+        "desc": "ESP32 (~S/.30) + DHT11 (~S/.8) + FC-28 (~S/.5). Taqiw kikpa marka elektróniko qhatunakana jikxatasi. Jani chanini yänaka anqaxat apanisa."
+      }
+    ],
+    "modulesTitle": "11 t'aqa. Taqi chinutata.",
+    "modulesDescription": "Sapa t'aqaw yaqha t'aqanakampi yatiyawi t'aqi. Uñjirinakaw amuyt'awinaka manq'ayi, pachax yatiyawinaka yatiyi ukat IA-x yapuman chiqa kankañapa uñt'i.",
+    "modules": [
+      {
+        "label": "Yapu apnaqawi",
+        "desc": "Phuqha muyuwi Wakichata → Apthapita, 10 kasta"
+      },
+      {
+        "label": "IoT dashboard",
+        "desc": "Jichha pacha ullañanaka, kurmirjama pachpa yatiyawinaka"
+      },
+      {
+        "label": "Pacha + IA semana wakichawi",
+        "desc": "OpenWeather + Groq, sapa urutaki lurawi wakichawi"
+      },
+      {
+        "label": "Laq'u thaqhawi",
+        "desc": "Jamuqa → Plant.id → Groq wakichawi qullampi ukat jank'a kankañampi"
+      },
+      {
+        "label": "Apthapi amuyt'awi",
+        "desc": "scikit-learn kg/ha ukat qullqi jilawi amuyt'i"
+      },
+      {
+        "label": "Sapa yatiñani yanapt'awi",
+        "desc": "7 yatiña, ticket nayrañchatampi ukat kankañapampi"
+      },
+      {
+        "label": "Yanapirinaka qhatu",
+        "desc": "Jathanaka, wanunaka, yänaka — jani alañ chanini"
+      },
+      {
+        "label": "Yanapirinaka jakhuña",
+        "desc": "NPK, uma, laq'u qulla, qura qulla — sapa hectáreana"
+      },
+      {
+        "label": "PDF ukat Excel yatiyawinaka",
+        "desc": "4 kasta uñjirinakamat chiqa siq'inakampi"
+      },
+      {
+        "label": "Bristol almanaque",
+        "desc": "Phaxsirjama yapu lurawinaka wakichaña"
+      },
+      {
+        "label": "AgroIA yanapiri",
+        "desc": "Llama 3.3 70B-mpi qhispiyata aruskipawi, yapuman kankañapampi"
+      }
+    ],
+    "stackTitle": "Chiqa lurawina yänakapa",
+    "stackDescription": "Jani yant'awi framework-nakani. Taqiw yant'ata, qillqata ukat Peruna ukat Latinoamericana jaktir tantachawini.",
+    "stackCategories": [
+      "Backend",
+      "Yatiyawi jach'a imawi",
+      "Frontend",
+      "IoT yänaka",
+      "IA ukat API",
+      "Yatiyawinaka"
+    ],
+    "kitTitleLine1": "ESP32 + uñjirinaka.",
+    "kitTitleLine2": "S/.50 jan puriri kit.",
+    "kitDescription": "DHT11 ukat FC-28-ni ESP32-xa junt'u, thaya juq'u ukat laq'a juq'u sapa 10 sikuntu tupi. Jani WiFi utjipanxa 10 ullañkama bufferana imi ukat wasitat chinuqasipanx pachpa apayi. Firmware-xa Arduino C++ tuqiwa, códigox phuqhat jumankiwa.",
+    "hardware": [
+      "ESP32 DevKit — jach'a apnaqiri WiFi-ni",
+      "DHT11 — junt'u + thaya juq'u (GPIO 15)",
+      "FC-28 — laq'a juq'u analógico (GPIO 34)",
+      "Chinuqasiwi kankaña uñacht'ir LED (GPIO 2)",
+      "NTP UTC-5 chinuqawi (Peru pacha kurmi)",
+      "Sapa 10 sikuntu backend-aru HTTP POST"
+    ],
+    "priceTotal": "Taqpacha",
+    "codeConfig": "// Wakichawi",
+    "codeSensors": "// Uñjirinaka",
+    "codeBuffer": "// Offline buffer",
+    "codeAutoSync": "// pachpa chinuqawi",
+    "codeCalibration": "// FC-28 chiqañchawi",
+    "flowTitleLine1": "Yaputa yatiyawikama,",
+    "flowTitleLine2": "jani sistemat mistusa",
+    "flow": [
+      {
+        "title": "Uñjirix tupi",
+        "desc": "Junt'u, thaya ukat laq'a juq'u sapa 10 s. Jani WiFi utjipanxa, 10 ullañkama kikpa buffer. NTP chiqa pacha unancha."
+      },
+      {
+        "title": "Backend-ax luri",
+        "desc": "Flask POST katuqi, PostgreSQL-ana imi, kurminaka uñakipi ukat jani askïpanx pachpa yatiyawinaka khiti."
+      },
+      {
+        "title": "IA uñakipi",
+        "desc": "Groq junt'u, juq'u, amuyt'awi ukat yapu kasta chinuqti. Qarpaw wakichawi, laq'u yatiyawi ukat urun lurawinakapa uñstayi."
+      },
+      {
+        "title": "Jumaw amtta ukat lurta",
+        "desc": "Dashboard-ax celularmana uñjta. Jamuqampi laq'u thaqhta. Yanapirir jiskt'ta. Yanapt'awi mayta munsta ukhaxa."
+      },
+      {
+        "title": "Yatiyawix wakicht'atawa",
+        "desc": "PDF jan ukax Excel chiqa siq'inakampi: yapunakan kankañapa, qullqi uñakipawi, pachan llamayupa. Mä ñatjañampi aynachtayaña."
+      }
+    ],
+    "ctaTitleLine1": "Sistemax wakicht'atawa.",
+    "ctaTitleLine2": "Yapumasa, ukhamarak.",
+    "ctaDescription": "Cuentama uñstayam, nayriri yapuma qillqam ukat ESP32 chinuma. Jani qullqi qillqatani, jani arustawini. Nayriri urut phuqha apnaqawi.",
+    "ctaPrimary": "Inaki cuenta uñstayaña",
+    "ctaSecondary": "Nanakampi parlaña",
+    "stackTables": "14 tabla",
+    "stackSoilSensor": "FC-28 laq'a"
+  },
+  "services": {
+    "heroTitleLine1": "Mä sistema.",
+    "heroTitleLine2": "Jani kuna inakisa.",
+    "heroDescription": "Sapa t'aqaw yaqha t'aqanakampi chinutäwa. Uñjirin yatiyawipaw amuyt'awinaka manq'ayi, pachax yatiyawinaka yatiyi ukat IA yanapirix yapuman chiqa kankañapa uñt'i.",
+    "createAccount": "Inaki cuenta uñstayaña",
+    "viewPlans": "Wakichawinaka uñjaña",
+    "exploreTitle": "Sapa t'aqa thaqaña",
+    "exploreDescription": "Kuna cartansa ñatjam sapa atiwinaka, API-pa ukat uñstayir yatiyawinakapa uñjañataki.",
+    "closeDetail": "Sapa yatiyawi jist'antaña",
+    "apiEndpoint": "API endpoint",
+    "capabilities": "Sapa atiwinaka",
+    "networkTitle": "T'aqanakax purapaw parlasipxi",
+    "networkDescription": "Chiqa chanix janiw sapa t'aqanakankiti, jan ukasti mayacht'at lurapxi uka yatiyawi sawukankiwa.",
+    "network": [
+      {
+        "title": "Uñjirinaka → Amuyt'awi",
+        "desc": "ESP32 ullañanakax Random Forest modelon mantir tupunakapawa, yapun achupa juk'amp chiqaparu amuyt'añataki."
+      },
+      {
+        "title": "Pacha → Pachpa yatiyawinaka",
+        "desc": "Groq 5 uru amuyt'awi jaktir yapunakamampi chinuqti ukat laq'u yatiyawinaka ukat qarpaw wakichawinaka pachpa khiti."
+      },
+      {
+        "title": "Laq'unaka → Yanapirinaka → Yatiyawi",
+        "desc": "Thaqhawix lurawinaka iwxi, yanapiri jakhuñana qillqasi ukat chanix PDF qullqi jilawi yatiyawinkiw uñsti."
+      }
+    ],
+    "metrics": [
+      {
+        "value": "10",
+        "label": "chinutata t'aqanaka",
+        "sub": "purapa chinutata"
+      },
+      {
+        "value": "14",
+        "label": "PostgreSQL tablanaka",
+        "sub": "phuqha yatiyawi modelo"
+      },
+      {
+        "value": "40+",
+        "label": "REST endpointnaka",
+        "sub": "qillqata API"
+      },
+      {
+        "value": "3",
+        "label": "anqäxa API",
+        "sub": "Groq · Plant.id · OpenWeather"
+      }
+    ],
+    "ctaTitleLine1": "¿Nayriri uñjirima",
+    "ctaTitleLine2": "chinuñ atkasmati?",
+    "ctaDescription": "Yapuma wakichma ukat 10 minutut pisina jichha pacha yatiyawi katuqañ qalltam. Jani qullqi qillqatani, jani arustawini.",
+    "ctaSecondary": "Wakichawinaka ukat chaninaka uñjaña",
+    "items": {
+      "cultivos": {
+        "title": "Yapu apnaqawi",
+        "badge": "Chuyma",
+        "summary": "10 yapun phuqha muyuwipa yapuñat apthapiykama.",
+        "desc": "Yapunaka GPS-mpi, yapu kastampi ukat jach'a urunakampi qillqam. Sistemax lurawinakan qillqatapa, chanini yanapirinaka ukat pachpa amuyt'awinaka apnaqi.",
+        "details": [
+          "10 yapu: Ch'uqi, Tunqu, Trigo, Soja, Arroz, Tomate, Jiwra, Apilla, Habas, Yaqha",
+          "6 kankaña: Wakichata → Apthapita",
+          "Lurawinaka urumpi, kastampi, chanimpi",
+          "Yanapirinaka: NPK, uma, laq'u qulla, jatha",
+          "Nayra achun jakhuñapa"
+        ]
+      },
+      "iot": {
+        "title": "ESP32 IoT uñjawi",
+        "badge": "Yänaka",
+        "summary": "Junt'un, thayan ukat laq'a juq'un pachpa ullañapa sapa 10 s.",
+        "desc": "ESP32 + DHT11 + FC-28 backend-aru yatiyawi khitaski. Kurmirjama pachpa yatiyawinaka, 10 ullañ offline buffer ukat 7 uru nayra siq'inaka.",
+        "details": [
+          "ESP32 DevKit + DHT11 + FC-28",
+          "Kutiwi: sapa 10 sikuntu",
+          "Offline buffer: 10 ullaña jani WiFi-ni",
+          "Junt'urjama ukat juq'urjama yatiyawinaka",
+          "7 uru nayra siq'inaka"
+        ]
+      },
+      "clima": {
+        "title": "Pacha + IA semana wakichawi",
+        "badge": "IA · OpenWeather",
+        "summary": "Jichha pacha amuyt'awi IA uñakipawimpi lurawinaka wakichañataki.",
+        "desc": "OpenWeather + Groq llama-3.3-70b. 5 uru amuyt'awi jaktir yapunakampi chinuqti ukat axsarawi kankaña, aski lurawi ukat semana wakichawi uñstayi.",
+        "details": [
+          "Jichha pacha: junt'u, juq'u, thaya",
+          "Amuyt'awi sapa 3 hora 5 uruna",
+          "IA uñakipawi: axsarawi juk'a/taypi/jach'a/ch'ama",
+          "Urun qarpaw iwxanakapa",
+          "Laq'u yatiyawi pachax laq'unakar yanapt'ipana"
+        ]
+      },
+      "plagas": {
+        "title": "IA laq'u thaqhawi",
+        "badge": "Plant.id v2",
+        "summary": "Yaput mä jamuqa khitasa usunaka uñt'ayi.",
+        "desc": "Plant.id v2 usu uñt'ayi atinisiwi pataka tuqi. Groq apnaqaw wakichawi uñstayi: jank'a kankaña, lurawinaka qullampi ukat orgánico yaqhapa.",
+        "details": [
+          "Plant.id v2 Health Assessment API",
+          "Atinisiwi patakana",
+          "Ch'ama kankaña: juk'a / taypi / ch'ama",
+          "Jank'a: jichhaki / 24h / semana / uñjaña",
+          "Sapa yapun qillqatapa imata jamuqanakampi"
+        ]
+      },
+      "prediccion": {
+        "title": "Apthapi amuyt'awi",
+        "badge": "Machine Learning",
+        "summary": "kg/ha achu ukat qullqi jilawi scikit-learn-mpi amuyt'i.",
+        "desc": "Random Forest pampa, yapu kasta, lurawinakan qillqatapa ukat IoT ullañanaka uñakipi, achu ukat qhatu chanirjama qullqi katuqawi amuyt'añataki.",
+        "details": [
+          "Random Forest modelo — scikit-learn 1.3",
+          "Tupunaka: pampa, yapu, lurawinaka, IoT",
+          "Mistuwi: kg/ha + atinisiwi taypi",
+          "Kikpa marka chanirjama qullqi amuyt'awi",
+          "Amuyt'awinakan qillqatapa vs chiqa lurawi"
+        ]
+      },
+      "asesoria": {
+        "title": "Sapa yatiñani yanapt'awi",
+        "badge": "Ticket sistema",
+        "summary": "7 yatiña kankañarjama ukat nayrañchatarjama arknaqata.",
+        "desc": "Yapu ticket sistema. Apnaqirix jan waltäwi qhanañchi ukat yatiña ukat nayrañchawi ajlli. Apnaqirix email yatiyawimpi jaysi.",
+        "details": [
+          "7 yapu yatiña",
+          "4 nayrañchawi kurmi",
+          "4 kankaña: Suyt'aski → Askichata",
+          "Email yatiyawinaka uñstayipan jan ukax jaysipan"
+        ]
+      },
+      "marketplace": {
+        "title": "Yanapirinaka qhatu",
+        "badge": "Qillqa",
+        "summary": "Jatha, wanu ukat yänaka qillqa uñjañ chaninakampi.",
+        "desc": "Yapu lurawinakan qillqatapa MercadoLibre jan ukax Amazon chinumpi. 5 t'aqa, 12 nayriri lurawi ukat pachpa machaqachañataki scraping t'aqa.",
+        "details": [
+          "5 yanapiri t'aqa",
+          "Sapa jach'a qhatuna uñjañ chani",
+          "12 nayrat uchata lurawinaka",
+          "T'aqarjama suysuña ukat thaqaña"
+        ]
+      },
+      "informes": {
+        "title": "PDF / Excel yatiyawinaka",
+        "badge": "Yatiyawinaka",
+        "summary": "4 kasta yatiyawi servidorana uñstayata chiqa siq'inakampi.",
+        "desc": "ReportLab (PDF) + OpenPyXL (Excel) + Matplotlib uñjirinakat, yapunakat ukat qullqit chiqa siq'inakataki. Kuna pachansa aynachtayañataki imatäpxi.",
+        "details": [
+          "Jach'a Dashboard",
+          "Yapunakan kankañapa lurawinakampi",
+          "Qullqi uñakipawi: chaninaka ukat qullqi katuqawi",
+          "Pachan llamayupa: pacha-achu chinuqasiwi"
+        ]
+      },
+      "insumos": {
+        "title": "Yanapirinaka jakhuña",
+        "badge": "Yanapt'awi",
+        "summary": "Sapa hectáreataki wanu, uma ukat laq'u qulla chiqaparu jakhu.",
+        "desc": "Pampa, yapu kasta ukat munatanaka qillqam. Sistemax qulla chani, chaninaka jakhu ukat sapa pachana chiqa apnaqawi qillqi.",
+        "details": [
+          "NPK, Uma, Laq'u qulla, Qura qulla, Jatha",
+          "Sapa hectáreana jakhuwi + tupu turkawi",
+          "Sapa ukat taqpacha qullachañ chani",
+          "Sapa yapun qullachawinakapa qillqata"
+        ]
+      },
+      "asistente": {
+        "title": "AgroIA yanapiri",
+        "badge": "Groq LLM",
+        "summary": "Peru yapuchawina yatiri Llama 3.3 70B-mpi qhispiyata aruskipawi.",
+        "desc": "Qarpawit, laq'unakat, yapuñat jan ukax kuna yapu arustawit qhispiyata arunkama jiskt'am. Yapunakaman, markaman ukat jichha pacha uñjir yatiyawinakan kankañapa uñt'i.",
+        "details": [
+          "llama-3.3-70b-versatile Groq API tuqi",
+          "Kankaña: jaktir yapunaka, marka, junt'u",
+          "Jaysawinaka kastellanuna qullampi ukat kikpa marka lurawinakampi",
+          "5 uru amuyt'awirjama semana wakichawi"
+        ]
+      }
+    }
+  },
+  "plans": {
+    "heroTitleLine1": "Uñjiri alta.",
+    "heroTitleLine2": "Software-x yapatawa juti.",
+    "heroDescription": "Jani phaxsi phaxsi qullqi mayiwi. Jani phaxsina pagawi. AgroYachay Kit-axa uchañataki wakichata ESP32 yäna ukat mä phuqha mara sistema apani.",
+    "startFree": "Inaki qalltaña",
+    "talkToSales": "Aljirinakampi parlaña",
+    "kitIncludes": "AgroYachay Kit apani",
+    "kitItems": [
+      "5 jaktir yapunaka mayakipacha",
+      "ESP32-mampi jichha pacha IoT uñjawi",
+      "Jani tupuni laq'u thaqhawi Plant.id-mpi",
+      "ML apthapi amuyt'awi (scikit-learn)",
+      "AgroIA yanapiri — Llama 3.3 70B-mpi aruskipawi",
+      "Jani tupuni PDF ukat Excel yatiyawinaka",
+      "Junt'u ukat juq'u kurmirjama yatiyawinaka",
+      "Yapu yanapirinaka qhatu"
+    ],
+    "trialNote": "14 uru inaki yant'awi yapata",
+    "oneTimePayment": "mä kutiki pagawi",
+    "sectionTitle": "Pä wakichawi, mä amtaki.",
+    "sectionDescription": "Inaki qalltam ukat yapuma munipanx jilxattayam. Jani ch'ama astawinakani.",
+    "mostChosen": "Juk'ampi ajllita",
+    "perfectFor": "Askiwa akanakataki",
+    "hardwareIncluded": "Yänaka yapata",
+    "softwareIncluded": "1 mara software yapata",
+    "includes": "Apani",
+    "differentialsTitle": "Chiqa yatiña yänaka. Aski chani.",
+    "differentialsDescription": "Janiw arsuwinaka aljkti. Sapa sistemat lurawipax chiqa lurawinkiwa, uñakipañamataki jist'arata códigompi.",
+    "differentials": [
+      {
+        "title": "Jani arustawini",
+        "desc": "Phaxsi phaxsi. Munsta ukhax jist'antam jani muchañani jani imantata chanini."
+      },
+      {
+        "title": "Jist'arata yänaka",
+        "desc": "Kikpa ESP32-ma apnaqam. Firmware-x jist'aratawa ukat kuna kikpa t'aqampis chinuqasi."
+      },
+      {
+        "title": "Irnaqir IA",
+        "desc": "Groq llama-3.3-70b + Plant.id v2 + scikit-learn chiqa lurawina sarnaqaski, jani arsuwinakakiti."
+      },
+      {
+        "title": "Perutaki lurata",
+        "desc": "Antis yapunakataki wakichata — ch'uqi, jiwra, tunqu — jaya markanakana juk'a chinuqasiwimpi."
+      }
+    ],
+    "faqTitle": "Taqi yatiñamataki",
+    "faqs": [
+      {
+        "q": "¿Kit-ax taqi uchañataki apanicha?",
+        "a": "Jisa. ESP32, DHT11 ukat FC-28 uñjirinaka, ch'ankhanaka ukat jark'ir cajampi juti. USB 5V ch'amakiw munasi (celular phuqhachiri)."
+      },
+      {
+        "q": "¿Kunas nayriri mara qhipax lurasi?",
+        "a": "Yänakax wiñayataki jumankiwa. Sistemax S/ 59-wa payïri marat nayraqataru, IA ukat yatiyawi t'aqanaka apnaqañ munsta ukhaki."
+      },
+      {
+        "q": "¿Inaki wakichawi apnaqirismati jani uñjiri alasa?",
+        "a": "Jisa. Inaki wakichawix yapu apnaqawi, pacha, laq'u thaqhawi ukat yanapiri jakhuña apani. Jichha pacha IoT uñjawikiw chhaqhi."
+      },
+      {
+        "q": "¿Kunjams Kit katuqä?",
+        "a": "Jichhax nanakar chiqpach qillqanisa. Taqi Peru markaru Olva Courier jan ukax Serpost tuqi khitapxta. Puriñ pacha: 3 – 7 irnaqaw uru."
+      },
+      {
+        "q": "¿ESP32 firmware-x jist'aratati?",
+        "a": "Jisa. Códigox jikxatasi ukat jumaw pachpa wakichsma munsta ukhaxa. Kit-ax firmware uchatampi ukat yant'atampi puri."
+      },
+      {
+        "q": "¿Kuna pagaw kastanaks katuqapxta?",
+        "a": "Yape, Plin, BCP/Interbank banku tuqi khitawi. Elektróniko pagaw qillqata churapxta."
+      }
+    ],
+    "ctaTitleLine1": "¿Qalltañ atkasmati?",
+    "ctaTitleLine2": "Yapumaw suyt'ma.",
+    "ctaDescription": "Inaki cuentama uñstayam, nayriri yapuma qillqam ukat jichhatpach chiqa yatiyawinaka uñjam. Jani kuna arustawini.",
+    "ctaPrimary": "Jichhaki inaki qalltaña",
+    "items": {
+      "free": {
+        "name": "Jani uñjirini",
+        "price": "Inaki",
+        "sub": "wiñayataki",
+        "description": "Yapuma apnaqam jani yänakani. Jichhat qalltam.",
+        "perfectFor": "Janïra uñjirini yapuchirinakataki, yatiqirinakataki, yapu irnaqirinakataki.",
+        "cta": "Inaki cuenta uñstayaña",
+        "badgeLabel": "Wiñayataki inaki",
+        "features": [
+          "3 jaktir yapunakkama",
+          "Lurawinakan ukat chaninakan qillqatapa",
+          "Jichha pacha ukat 5 uru amuyt'awi",
+          "IA laq'u thaqhawi (10 sapa phaxsi)",
+          "Yanapirinaka jakhuña",
+          "Bristol yapu almanaque",
+          "Yanapirinaka qhatu",
+          "Jichha pacha IoT uñjawi",
+          "IA apthapi amuyt'awi",
+          "AgroIA yanapiri (aruskipawi)",
+          "PDF ukat Excel yatiyawinaka"
+        ]
+      },
+      "kit": {
+        "name": "AgroYachay Kit",
+        "price": "S/ 129",
+        "sub": "mä kutiki pagawi · 1 mara software yapata",
+        "description": "ESP32 uñjiri + taqi software mä maratki. Jani phaxsi phaxsi pagawimpi.",
+        "perfectFor": "Kuna yapuchirisa. Yänaka mä kutiki alta ukat wakicht'atawa.",
+        "note": "Payïri marat nayraqataru: S/ 59/mara software-takiki",
+        "cta": "Kit-ja mayiña",
+        "badgeLabel": "Juk'ampi aljata",
+        "hardware": [
+          "ESP32 WROOM-32 jisk'a apnaqiri",
+          "DHT11 uñjiri (junt'u + thaya juq'u)",
+          "FC-28 uñjiri (laq'a juq'u)",
+          "Ch'ankhanaka, jark'irinaka ukat jark'ir caja",
+          "Firmware nayrat uchata ukat yant'ata"
+        ],
+        "features": [
+          "Jani tupuni yapunaka",
+          "Jichha pacha IoT uñjawi",
+          "Jani tupuni IA laq'u thaqhawi",
+          "ML apthapi amuyt'awi",
+          "AgroIA yanapiri — qhispiyata aruskipawi",
+          "Jani tupuni PDF ukat Excel yatiyawinaka",
+          "Wakichañ atir kurmirjama yatiyawinaka",
+          "Email yanapt'awi (24 hora jaysawi)"
+        ]
+      }
+    }
+  },
+  "contact": {
+    "heroTitleLine1": "Akankaptw",
+    "heroTitleLine2": "yanapt'añamataki.",
+    "heroDescription": "Uñjirinakat, wakichawinakat jan ukax sistema kunjams uchaña ukat jiskt'awinaka: qillqaña laphimpi chiqpach qillqanipxita.",
+    "channels": [
+      {
+        "title": "Chinuqasiñ qillqaña laphi",
+        "desc": "Jach'a thakhi. 48 horat pisina jaysapxta."
+      },
+      {
+        "title": "Email",
+        "desc": "Wakichawirjama utji. Cuenta jist'arasax wakichasi."
+      },
+      {
+        "title": "Aruskipawi / WhatsApp",
+        "desc": "AgroYachay Kit ukat jach'a lurawinaka. Nayrañchat yanapt'awi."
+      }
+    ],
+    "viewSupportPlans": "Yanapt'awi wakichawinaka uñjaña",
+    "formTitle": "Jan waltäwima yatiyapxita",
+    "formSubtitle": "48 irnaqaw horat pisinaw jaysapxta.",
+    "name": "Suti *",
+    "namePlaceholder": "Sutima",
+    "phone": "Jaya arxatiri",
+    "phonePlaceholder": "+51 999 000 000",
+    "email": "Email *",
+    "emailPlaceholder": "uñacht'awi@correo.com",
+    "subject": "Arustawi",
+    "selectSubject": "Mä arustawi ajllim",
+    "subjects": [
+      "IoT uñjirinakat jiskt'awi",
+      "Wakichawinakat yatiyawi",
+      "Yatiña yanapt'awi",
+      "Jach'a lurawi / tantachawi wakichawi",
+      "Sistemat uñachawipa",
+      "Yaqha"
+    ],
+    "message": "Yatiyawi *",
+    "messagePlaceholder": "Jiskt'awima qhanañchma...",
+    "sending": "Khitaski…",
+    "send": "Yatiyawi khitaña",
+    "responseNote": "48 irnaqaw horat pisinaw jaysapxta.",
+    "requiredFields": "Munat kurminaka phuqhachma",
+    "sent": "Yatiyawix askinjam khitatawa",
+    "supportTitle": "Yanapt'awix wakichawimampiw jilxatti.",
+    "supportDescription": "Sapa wakichawix mayj uñjawi apani. Jach'a irnaqawima ukhaxa, juk'amp jank'akiw jaysawi.",
+    "planPrefix": "Wakichawi",
+    "supportTiers": [
+      {
+        "plan": "Jani uñjirini",
+        "items": [
+          "Chinuqasiñ qillqaña laphi",
+          "48 irnaqaw horana jaysawi",
+          "Yatiña qillqatanaka",
+          "Yatiña jach'a imawi"
+        ]
+      },
+      {
+        "plan": "AgroYachay Kit",
+        "items": [
+          "Taqi nayra utjki uka",
+          "Nayrañchat email yanapt'awi",
+          "24 horana jaysawi",
+          "Uñjiri uchawina yanapt'awi"
+        ]
+      },
+      {
+        "plan": "Jach'a lurawinaka",
+        "items": [
+          "Sapa chani qillqata",
+          "Sapa chinuqasiñ cuenta",
+          "Yatichawi yapata",
+          "Jilxattat yanapt'awi"
+        ]
+      }
+    ],
+    "availabilityTitle": "Sapa kutiw khitis utji.",
+    "generalSupport": "Taqitaki uñjawi",
+    "schedule": [
+      {
+        "day": "Phaxsurut Ñanqurukama",
+        "hours": "8:00 AM – 7:00 PM"
+      },
+      {
+        "day": "Samarurunaka",
+        "hours": "9:00 AM – 2:00 PM"
+      },
+      {
+        "day": "Willkurunaka",
+        "hours": "Jist'antata"
+      }
+    ],
+    "noSchedule": "Jani pacha kurmini",
+    "noScheduleDescription": "Jach'a lurawinakataki ukat tantachawinakataki. Yapux jani suyt'ipanxa, nanakas janiw suyt'apxti.",
+    "priorityItems": [
+      "Nayrañchat jaysawi jani mit'a suyt'asa",
+      "IoT-na yatir irnaqirinakar mantawi",
+      "Jach'a lurawinakataki sapa chinuqasiwi"
+    ],
+    "faqTitle": "Juk'ampi jiskt'apxitu uka.",
+    "faqs": [
+      {
+        "q": "¿Yapujana internet muntti?",
+        "a": "Janiw sapa kutikiti. Uñjirinakax 10 ullañkama offline imi ukat wasitat chinuqasipanx chinuqti."
+      },
+      {
+        "q": "¿Celular jani puriri markanakan irnaqiti?",
+        "a": "Jisa, uñjirinakax amparampi chinuqasa irnaqapxaspa. Kikpa bufferax yatiyawi imi jani WiFi-ni."
+      },
+      {
+        "q": "¿Khitis uñjirinaka uchi?",
+        "a": "Jumaw pachpa lursma. Thakhix mä mayat mayaw qillqata ch'ankha siq'inakampi."
+      },
+      {
+        "q": "¿Yanapt'awix kastellanunti?",
+        "a": "Jisa, Peru markan arunakapa ukat yapunakapa uñt'asa. Inglés arunsa uñjapxta."
+      },
+      {
+        "q": "¿Kunja jank'aki jaysapxta?",
+        "a": "Inaki wakichawi: 48 hora qillqaña laphimpi. AgroYachay Kit: nayrañchat email yanapt'awi. Jach'a lurawinakataki, chiqpach chinuqasipxita."
+      }
+    ],
+    "ctaTitleLine1": "Qillqanipxita.",
+    "ctaTitleLine2": "Jichhürux jaysapxta.",
+    "ctaDescription": "Peru yapuchawi, yapunakapa ukat kankañapa uñt'apxta. Qillqaña laphi apnaqam ukat yapumataki aski thakhi ajllañamataki yanapt'apxäma.",
+    "goToForm": "Qillqaña laphiru saraña"
+  },
+  "almanac": {
+    "moonPhases": {
+      "Luna Nueva": "Machaqa phaxsi",
+      "Cuarto Creciente": "Jilxattir phaxsi",
+      "Luna Llena": "Phuqha phaxsi",
+      "Cuarto Menguante": "Pisiptir phaxsi"
+    },
+    "lunarTips": {
+      "Luna Nueva": "Saphinaka ukat ch'uqi kastanaka yapuña.",
+      "Cuarto Creciente": "Achunakataki ukat laphini alinakataki aski.",
+      "Luna Llena": "Apthapiñataki ukat tantañataki wali aski.",
+      "Cuarto Menguante": "Laq'unaka jark'añataki ukat khuchuñataki aski."
+    },
+    "months": [
+      {
+        "name": "Chinu phaxsi",
+        "weather": "Ch'ama jallu · Juk'a qarpawi",
+        "advice": "Juk'a pacha yapunakataki aski pacha. Pacha jallunaka apnaqaña. Jach'a juq'urjama k'ama jark'aña.",
+        "sowing": [
+          "Tunqu",
+          "Ch'uqi",
+          "Jiwra",
+          "Siwara"
+        ],
+        "harvest": [
+          "Nayriri habas",
+          "Alwirjas"
+        ],
+        "holidays": [
+          "Machaq Mara",
+          "Reyes Magos"
+        ],
+        "weeks": [
+          "Sayt'ata yapunakana laq'u jark'awi",
+          "Jilxattir ch'uqi ukat tunqu qhulliwi",
+          "Wakichata yapunakana jiwra yapuña",
+          "Jallu pisiptipanx yapa qarpawi"
+        ]
+      },
+      {
+        "name": "Anata phaxsi",
+        "weather": "Jach'a jallu · Yapunaka jark'aña",
+        "advice": "Juq'urjama laq'u jark'awi. Aynacha pampanakana uma mistuwi wakichaña. Laphi usunaka uñjaña.",
+        "sowing": [
+          "Trigo",
+          "Siwara",
+          "Achunaka"
+        ],
+        "harvest": [
+          "Nayriri ch'uqi",
+          "Chuqlla"
+        ],
+        "holidays": [
+          "Candelaria Tayka",
+          "San Valentín"
+        ],
+        "weeks": [
+          "K'amanakat nayra qullachawi",
+          "Umat phuqhata pampanakana wachu mistuyawi",
+          "Nayriri chuqlla apthapi",
+          "Jutir pachataki jatha ajlliwi"
+        ]
+      },
+      {
+        "name": "Achuqa phaxsi",
+        "weather": "Jallu tukuwi · Laq'anaka wakichaña",
+        "advice": "Antis yapunakan qhipa yapuñapa. Pachan jach'a apthapipa qalltawi. Piwranaka wakichaña.",
+        "sowing": [
+          "Ulluku",
+          "Apilla",
+          "Isañu"
+        ],
+        "harvest": [
+          "Jiwra",
+          "Kiwicha",
+          "Tunqu"
+        ],
+        "holidays": [
+          "Warmin Urupa",
+          "San José"
+        ],
+        "weeks": [
+          "Jiwra ukat qhipa tunqu apthapi",
+          "Alaya markanakana ulluku ukat apilla yapuña",
+          "Qarpaw jawiranaka pichaña",
+          "Apthapitaki piwranaka wakichaña"
+        ]
+      },
+      {
+        "name": "Qasawi phaxsi",
+        "weather": "Waña pacha · Jach'a apthapi",
+        "advice": "Antis saphi yapunakan apthapi pachapa. Piwra kasta imawi wakichaña. Jatha ajlliwi.",
+        "sowing": [
+          "Habas (2 pachani)"
+        ],
+        "harvest": [
+          "Ch'uqi",
+          "Apilla",
+          "Ulluku",
+          "Isañu"
+        ],
+        "holidays": [
+          "Santa Semana"
+        ],
+        "weeks": [
+          "Ch'uqin ukat saphinakan jach'a apthapipa",
+          "Jatha t'aqawi ukat ajlliwi",
+          "Ch'uñutaki ukat tuntataki ch'uqi wañachawi",
+          "Imawi ukat achu qillqawi"
+        ]
+      },
+      {
+        "name": "Llamayu phaxsi",
+        "weather": "Waña ukat thaya · Aruma juyphi",
+        "advice": "Jiwq'impi jan ukax aruma qarpawimpi juyphit jark'aña. Ch'uñu ukat tunta lurawi. Achunaka wañachawi.",
+        "sowing": [
+          "Thaya pacha trigo"
+        ],
+        "harvest": [
+          "Jiwra",
+          "Qañawa",
+          "Tarwi"
+        ],
+        "holidays": [
+          "Irnaqawin Urupa",
+          "Taykan Urupa"
+        ],
+        "weeks": [
+          "Juyphinakampi ch'uñu ukat tunta lurawi",
+          "Qañawa ukat tarwi apthapi",
+          "Achunaka wañachawi ukat takiwi",
+          "Thaya pacha trigo wakichawi ukat yapuña"
+        ]
+      },
+      {
+        "name": "Mara t'aqa phaxsi",
+        "weather": "Juk'ampi thaya phaxsi · Ch'ama juyphi",
+        "advice": "Yapu samarañ phaxsi. Yänaka askichawi. Achunaka takiwi. Jutir pacha wakichawi.",
+        "sowing": [],
+        "harvest": [
+          "Trigo",
+          "Siwara"
+        ],
+        "holidays": [
+          "Awkin Urupa",
+          "Inti Raymi",
+          "San Pedro ukat San Pablo"
+        ],
+        "weeks": [
+          "Trigo ukat siwara takiwi ukat thayañchawi",
+          "Yänaka ukat utanaka askichawi",
+          "Inti Raymi — phunchawi ukat samarawi",
+          "2026-2027 pacha wakichawi"
+        ]
+      },
+      {
+        "name": "Willka kuti phaxsi",
+        "weather": "Ch'ama thaya · Qhana alaxpacha",
+        "advice": "Uta manqhana almasiga wakichawi. Jutir pachataki laq'a uñakipawi. Yapu yatichawinaka.",
+        "sowing": [
+          "Uta manqhana achunaka"
+        ],
+        "harvest": [
+          "Waña habas"
+        ],
+        "holidays": [
+          "Marka Phunchawinaka"
+        ],
+        "weeks": [
+          "Jutir pachataki laq'a uñakipawi",
+          "Qatatampi lichuwa ukat siwulla almasiga",
+          "Marka Phunchawinaka — phunchawi ukat samarawi",
+          "Ch'uxña wanu laq'aru yapawi"
+        ]
+      },
+      {
+        "name": "Llumpaqa phaxsi",
+        "weather": "Thayanaka · Junt'u qalltawi",
+        "advice": "Laq'anaka manqhat wakichawi. Orgániko wanu yapawi. Jach'a pachataki jathanaka uñakipawi.",
+        "sowing": [
+          "Laq'anaka ch'amampi wakichawi"
+        ],
+        "harvest": [],
+        "holidays": [
+          "Asunción Tayka"
+        ],
+        "weeks": [
+          "Laq'anaka manqhat kutkatawi",
+          "Orgániko wanu ukat compost yapawi",
+          "Jathanaka ajlliwi ukat qullachawi",
+          "Patanaka lurawi ukat askichawi"
+        ]
+      },
+      {
+        "name": "Sata phaxsi",
+        "weather": "Panqara pacha · Maynit mayni jallu",
+        "advice": "Jach'a yapuña qalltawi. Manqha wanu uchawi. Jallunaka janïr jutkipan qarpaw sistema uñjaña.",
+        "sowing": [
+          "Ch'uqi (jach'a pacha)",
+          "Tunqu",
+          "Jiwra"
+        ],
+        "harvest": [],
+        "holidays": [
+          "Qillqa Yatiqawin Urupa"
+        ],
+        "weeks": [
+          "Jach'a yapunakana ch'uqi yapuña",
+          "Taypi markanakana tunqu yapuña",
+          "NPK manqha wanuchawi",
+          "Qarpaw sistema uchawi ukat uñakipawi"
+        ]
+      },
+      {
+        "name": "Taypi sata phaxsi",
+        "weather": "Kutir jallu · Aski junt'u",
+        "advice": "Wakichata yapuñanaka arkaña. Sayt'ata yapunakana qura jark'awi. Ch'uqin nayriri qhulliwipa.",
+        "sowing": [
+          "Habas",
+          "Alwirjas",
+          "Trigo"
+        ],
+        "harvest": [],
+        "holidays": [
+          "Angamos Nuwasiwi",
+          "Criolla Q'uchu"
+        ],
+        "weeks": [
+          "Habas ukat alwirjas yapuña",
+          "Yapunakana nayriri qura apsuwi",
+          "Machaqat mistur ch'uqin nayriri qhulliwipa",
+          "Tunquna laq'unaka nayrat jark'awi"
+        ]
+      },
+      {
+        "name": "Lapaka phaxsi",
+        "weather": "Ch'ama jallu · Chhijchhinaka",
+        "advice": "Yapunaka qhulliwi. Yapa wanuchawi. Chhijchhirjama ch'ama laq'u uñjawi.",
+        "sowing": [
+          "Siwara",
+          "Uywataki awina"
+        ],
+        "harvest": [
+          "Ch'uxña habas",
+          "Ch'uxña alwirjas"
+        ],
+        "holidays": [
+          "Taqi Santonaka",
+          "Jiwatanakan Urupa"
+        ],
+        "weeks": [
+          "Ch'uqin ukat tunqun payïri qhulliwipa",
+          "Laphi wanu uchawi",
+          "Ch'uxña habas ukat alwirjas apthapi",
+          "Chhijchhi uñjawi ukat jark'ir qatanaka"
+        ]
+      },
+      {
+        "name": "Jallu qallta phaxsi",
+        "weather": "Ch'ama jallu · Jallu junt'u pacha",
+        "advice": "Ch'ama laq'u jark'awi. Junt'u pacha apthapitaki utanaka wakichaña. Qarpawix jani munaskiti.",
+        "sowing": [
+          "Tunqun qhipa yapuñanakapa"
+        ],
+        "harvest": [
+          "Nayriri ch'uqi",
+          "Achunaka"
+        ],
+        "holidays": [
+          "Inmaculada Concepción",
+          "Navidad"
+        ],
+        "weeks": [
+          "Ch'uqina k'ama ukat mildiu jark'awi",
+          "Nayriri achunaka apthapi",
+          "Navidad — phunchawi ukat samarawi",
+          "Pacha jakhuwi ukat 2027 wakichawi"
+        ]
+      }
+    ],
+    "crops": {
+      "Papa": {
+        "name": "Ch'uqi",
+        "family": "Solanaceae",
+        "altitude": "3200-4100 msnm",
+        "duration": "6-8 phaxsi",
+        "irrigation": "450-600 mm",
+        "spacing": "90×30 cm",
+        "depth": "12 cm",
+        "desc": "Altiplanon jach'a yapupa. Peruna 3000 kastat juk'ampi. Kikpa kastanakax juyphi atipapxi.",
+        "varieties": [
+          "Huayro",
+          "Imilla Negra",
+          "Ccompis",
+          "Única",
+          "Canchan",
+          "Yungay"
+        ]
+      },
+      "Quinua": {
+        "name": "Jiwra",
+        "family": "Amaranthaceae",
+        "altitude": "3000-4000 msnm",
+        "duration": "5-8 phaxsi",
+        "irrigation": "300-500 mm",
+        "spacing": "40×25 cm",
+        "depth": "2 cm",
+        "desc": "Antis jach'a manq'a phuqha proteínani. Wañaru, juyphiru ukat jayuru atipi. Jaqinakan jark'awipa.",
+        "varieties": [
+          "Salcedo INIA",
+          "Kancolla",
+          "Blanca de Juli",
+          "Rosada de Huancané",
+          "Negra Collana"
+        ]
+      },
+      "Maíz": {
+        "name": "Tunqu",
+        "family": "Poaceae",
+        "altitude": "2800-3500 msnm",
+        "duration": "5-7 phaxsi",
+        "irrigation": "500-800 mm",
+        "spacing": "80×40 cm",
+        "depth": "5 cm",
+        "desc": "Nayra antis yapu. Ch'iyara tunqux wali aski manq'awa. Puno manq'an saphipa.",
+        "varieties": [
+          "Ch'iyara tunqu",
+          "Janq'u chuqlla",
+          "Kancha",
+          "Kulli"
+        ]
+      },
+      "Cañihua": {
+        "name": "Qañawa",
+        "family": "Amaranthaceae",
+        "altitude": "3800-4500 msnm",
+        "duration": "6-7 phaxsi",
+        "irrigation": "350-400 mm",
+        "spacing": "30×20 cm",
+        "depth": "1 cm",
+        "desc": "Jiwrat juk'ampi ch'amani. Wali aski manq'a. 4500 msnm-kama jilxatti, kawkhantix yaqha yapunakax jani jilxattki.",
+        "varieties": [
+          "Cupi",
+          "Illimani",
+          "Ramis"
+        ]
+      },
+      "Habas": {
+        "name": "Habas",
+        "family": "Fabaceae",
+        "altitude": "3000-4000 msnm",
+        "duration": "5-7 phaxsi",
+        "irrigation": "350-500 mm",
+        "spacing": "60×30 cm",
+        "depth": "5 cm",
+        "desc": "Nitrógeno katjir leguminosa. Laq'an ch'amapa askichi. Ch'uxña ukat waña manq'asi.",
+        "varieties": [
+          "IPA Gloriabamba",
+          "San Isidro",
+          "Copacabana"
+        ]
+      },
+      "Oca": {
+        "name": "Apilla",
+        "family": "Oxalidaceae",
+        "altitude": "3200-4000 msnm",
+        "duration": "7-8 phaxsi",
+        "irrigation": "600-700 mm",
+        "spacing": "60×30 cm",
+        "depth": "8 cm",
+        "desc": "Antis kikpa saphi manq'a walja oxalatoni. Ch'uqit arkir payïri.",
+        "varieties": [
+          "Huari",
+          "Pauccar",
+          "Chullpi"
+        ]
+      },
+      "Olluco": {
+        "name": "Ulluku",
+        "family": "Basellaceae",
+        "altitude": "3000-4200 msnm",
+        "duration": "7-9 phaxsi",
+        "irrigation": "600-800 mm",
+        "spacing": "60×30 cm",
+        "depth": "8 cm",
+        "desc": "Wali aski antis saphi manq'a. Walja umani. Altiplano manq'ana wali chanini.",
+        "varieties": [
+          "Wila shungu",
+          "Q'illu",
+          "Janq'u"
+        ]
+      },
+      "Tarwi": {
+        "name": "Tarwi",
+        "family": "Fabaceae",
+        "altitude": "2800-3800 msnm",
+        "duration": "6-8 phaxsi",
+        "irrigation": "400-600 mm",
+        "spacing": "50×30 cm",
+        "depth": "4 cm",
+        "desc": "Sojat juk'ampi proteínani leguminosa. Thayat nitrógeno katji. K'arqhawipa apsuñawa.",
+        "varieties": [
+          "INIA 450",
+          "Quillahuaman",
+          "Andenes"
+        ]
+      },
+      "Trigo": {
+        "name": "Trigo",
+        "family": "Poaceae",
+        "altitude": "2800-3800 msnm",
+        "duration": "5-6 phaxsi",
+        "irrigation": "350-500 mm",
+        "spacing": "15×15 cm",
+        "depth": "3 cm",
+        "desc": "Kikpa manq'atataki ukat aljañataki chanini achu. Aski umampi mistur laq'a ukat neutro pH muni.",
+        "varieties": [
+          "Centenario",
+          "INIA 414",
+          "Andino"
+        ]
+      },
+      "Cebada": {
+        "name": "Siwara",
+        "family": "Poaceae",
+        "altitude": "3000-4200 msnm",
+        "duration": "4-6 phaxsi",
+        "irrigation": "300-450 mm",
+        "spacing": "20×15 cm",
+        "depth": "4 cm",
+        "desc": "Altiplano kankañaru juk'ampi yatxatata achu. Jaqi manq'ana, uywa manq'ana ukat k'usa lurawina apnaqasi.",
+        "varieties": [
+          "INIA 416",
+          "Quirusillas",
+          "UNA 80"
+        ]
+      }
+    },
+    "title": "Bristol Almanaque",
+    "subtitle": "Antis altiplano yapu ukat phaxsi qillqa",
+    "print": "Ch'iqhitayaña",
+    "export": "Apsuña",
+    "searchPlaceholder": "Taqi phaxsinakana yapu thaqam… (ch'uqi, jiwra, tunqu)",
+    "viewMonthly": "Phaxsirjama",
+    "viewGantt": "Gantt",
+    "viewCrops": "Yapunaka",
+    "viewStats": "Uñakipawi",
+    "weekdays": [
+      "Wil",
+      "Pha",
+      "Sax",
+      "Pch",
+      "Ill",
+      "Ñan",
+      "Sam"
+    ],
+    "shortMonths": [
+      "Chi",
+      "Ana",
+      "Ach",
+      "Qas",
+      "Lla",
+      "Mar",
+      "Wil",
+      "Llu",
+      "Sat",
+      "Tay",
+      "Lap",
+      "Jal"
+    ],
+    "moonPhasesOf": "{{month}} phaxsi kankañanaka",
+    "sowing": "Yapuña",
+    "harvest": "Apthapi",
+    "sowingCount": "{{count}} iwxat yapu",
+    "noSowing": "Janiw yapuñ pachäkiti",
+    "harvestCount": "{{count}} apthapiñ yapu",
+    "noHarvest": "Janiw apthapiñ pachäkiti",
+    "weatherAndAdvice": "Pacha ukat iwxa",
+    "tempMin": "Juk'a junt'u",
+    "tempMax": "Jach'a junt'u",
+    "rain": "Jallu",
+    "weeklyActivities": "Semanarjama lurawinaka",
+    "weeklyActivitiesSub": "Yapu irnaqawinakan qillqatapa",
+    "week": "Semana",
+    "holidays": "Phunchawinaka",
+    "holidaysCount": "{{count}} chanini uru",
+    "lunarGuide": "Phaxsi kankañarjama yapuñ yatichawi",
+    "lunarGuideSub": "Bristol Almanaque — antis yapu yatiña",
+    "ganttTitle": "Gantt — 2026 mara yapuña ukat apthapi",
+    "ganttSub": "Ch'uxña = yapuña · Naranja = apthapi · Phaxsi uñjañataki ñatjam",
+    "legendSowing": "Yapuña",
+    "legendHarvest": "Apthapi",
+    "legendBoth": "Yapuña ukat apthapi",
+    "legendNone": "Jani lurawini",
+    "backToCrops": "Taqi yapunakaru kutt'aña",
+    "altitude": "Alaya kankaña",
+    "duration": "Pacha",
+    "irrigation": "Qarpawi",
+    "spacing": "Jaya kankaña",
+    "depth": "Manqha kankaña",
+    "sowingMonths": "Yapuñ phaxsinaka",
+    "harvestMonths": "Apthapiñ phaxsinaka",
+    "mainVarieties": "Jach'a kastanaka",
+    "statSowingCrops": "Yapuñ yapunaka",
+    "statHarvestCrops": "Apthapiñ yapunaka",
+    "statMonthsWithSowing": "Yapuñani phaxsinaka",
+    "statMoonPhases": "Phaxsi kankañanaka",
+    "uniqueVarieties": "sapa kastanaka",
+    "of12Months": "12 phaxsit",
+    "recordedIn2026": "2026 marana qillqata",
+    "monthlyActivity": "Phaxsirjama yapu lurawi",
+    "monthlyActivitySub": "Sapa phaxsina yapuñ ukat apthapiñ yapunakan jakhuñapa",
+    "rainfall": "2026 phaxsirjama jallu",
+    "rainfallSub": "Puno markataki nayra amuyt'ata · mm",
+    "rainLegend": "Jallu (mm)",
+    "allSowingCrops": "Taqi yapuñ yapunaka",
+    "allHarvestCrops": "Taqi apthapiñ yapunaka",
+    "almanacVarieties": "2026 almanaquen kastanakapa",
+    "fullTable": "2026 yapunakan phuqha mara tablapa",
+    "fullTableSub": "Yapuña · Apthapi · Sapa phaxsina phaxsi kankañanaka",
+    "tableHeaders": [
+      "Phaxsi",
+      "Junt'u",
+      "Jallu",
+      "Yapuña",
+      "Apthapi",
+      "Phaxsinaka"
+    ],
+    "exportTitle": "BRISTOL ALMANAQUE 2026",
+    "exportSowing": "YAPUÑA",
+    "exportHarvest": "APTHAPI",
+    "exportWeather": "PACHA",
+    "exportAdvice": "IWXA",
+    "exportWeekly": "SEMANA LURAWINAKA",
+    "exportMoon": "PHAXSI KANKAÑANAKA",
+    "exportDay": "Uru",
+    "today": "Jichhüru",
+    "moonPhase": "Phaxsi kankaña",
+    "holiday": "Phunchawi",
+    "noSowingScheduled": "Aka phaxsitaki jani wakichata yapuñanaka.",
+    "noHarvestScheduled": "Aka phaxsitaki jani wakichata apthapinaka.",
+    "sowingMonthsCount": "{{count}} yapuñ phaxsi",
+    "harvestMonthsCount": "{{count}} apthapiñ phaxsi"
   }
 }

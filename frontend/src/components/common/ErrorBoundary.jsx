@@ -1,6 +1,9 @@
 import React from 'react';
+import LanguageContext, { DEFAULT_TEXTS } from '../../context/LanguageContext';
 
 class ErrorBoundary extends React.Component {
+  static contextType = LanguageContext;
+
   constructor(props) {
     super(props);
     this.state = { hasError: false };
@@ -22,6 +25,8 @@ class ErrorBoundary extends React.Component {
   render() {
     if (!this.state.hasError) return this.props.children;
 
+    const t = this.context?.t || ((key) => DEFAULT_TEXTS[key] || key);
+
     return (
       <div className="min-h-[100dvh] flex items-center justify-center px-6 bg-gray-50 dark:bg-gray-950">
         <div className="w-full max-w-md text-center rounded-2xl p-1.5 bg-white/70 dark:bg-white/[0.04] ring-1 ring-black/5 dark:ring-white/10">
@@ -31,16 +36,16 @@ class ErrorBoundary extends React.Component {
                 <path d="M12 9v4M12 17h.01M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </div>
-            <h1 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">Algo salió mal</h1>
+            <h1 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">{t('errors.title')}</h1>
             <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
-              Ocurrió un error inesperado. Puedes volver al inicio e intentarlo de nuevo.
+              {t('errors.description')}
             </p>
             <button
               type="button"
               onClick={this.handleReload}
               className="mt-7 inline-flex h-11 items-center justify-center rounded-full bg-emerald-600 px-7 text-sm font-semibold text-white transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:bg-emerald-500 active:scale-[0.98]"
             >
-              Volver al inicio
+              {t('errors.backHome')}
             </button>
           </div>
         </div>

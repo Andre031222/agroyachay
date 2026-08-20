@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import { invalidateSystemConfigCache } from '../../hooks/useSystemConfig';
 import { notify, confirmAction } from '../../utils/swal';
+import { useLanguage } from '../../context/LanguageContext';
 import { superadminAPI, API_URL as API } from '../../services/api';
 
 const Icons = {
@@ -76,15 +77,20 @@ const Toggle = ({ label, checked, onChange, description }) => (
   </div>
 );
 
-const SaveBtn = ({ loading, onClick, label = 'Guardar cambios' }) => (
+const SaveBtn = ({ loading, onClick, label }) => {
+  const { t } = useLanguage();
+  const text = label || t('admin.saveChanges');
+
+  return (
   <button type="button" onClick={onClick} disabled={loading}
     className="flex items-center gap-2 px-6 h-11 bg-emerald-600 hover:bg-emerald-500 disabled:opacity-60 text-white text-sm font-semibold rounded-full transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.98]">
     {loading
-      ? <><span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /><span>Guardando…</span></>
-      : <><Icons.Check /><span>{label}</span></>
+      ? <><span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /><span>{t('account.saving')}</span></>
+      : <><Icons.Check /><span>{text}</span></>
     }
   </button>
-);
+  );
+};
 
 const SectionCard = ({ title, children, accent }) => (
   <div className={`rounded-2xl p-1.5 ring-1 ${
@@ -103,6 +109,7 @@ const SectionCard = ({ title, children, accent }) => (
 );
 
 const ImageUploader = ({ configKey, label, hint, currentUrl }) => {
+  const { t } = useLanguage();
   const [uploading, setUploading] = useState(false);
   const [preview, setPreview] = useState(currentUrl);
   const [dragging, setDragging] = useState(false);
@@ -115,7 +122,7 @@ const ImageUploader = ({ configKey, label, hint, currentUrl }) => {
       setPreview(`${API}/public/config/image/${configKey}?t=${Date.now()}`);
       invalidateSystemConfigCache();
       notify.success(`${label} actualizado`);
-    } catch { notify.error('Error al subir imagen'); }
+    } catch { notify.error(t('admin.uploadError')); }
     finally { setUploading(false); }
   };
 
@@ -142,7 +149,7 @@ const ImageUploader = ({ configKey, label, hint, currentUrl }) => {
         }`}
       >
         <Icons.Upload />
-        {uploading ? 'Subiendo…' : 'Subir imagen o arrastra aquí'}
+        {uploading ? t('admin.uploading') : t('admin.uploadHint')}
         <input type="file" accept="image/*,.ico,.svg" className="hidden" onChange={e => upload(e.target.files[0])} disabled={uploading} />
       </label>
     </div>
@@ -166,13 +173,14 @@ const ROLE_AVATAR = {
 };
 
 const StatsTab = () => {
+  const { t } = useLanguage();
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     superadminAPI.getUsers()
       .then(({ data }) => { if (data.success) setUsers(data.data.users); })
-      .catch(() => notify.error('Error cargando estadísticas'))
+      .catch(() => notify.error(t('admin.statsError')))
       .finally(() => setLoading(false));
   }, []);
 
@@ -193,15 +201,15 @@ const StatsTab = () => {
     .slice(0, 8);
 
   const summary = [
-    { label: 'Total', value: users.length, color: 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300' },
-    { label: 'Activos', value: active,    color: 'bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-300' },
-    { label: 'Últimos 30 días', value: last30, color: 'bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300' },
-    { label: 'Últimos 7 días', value: last7,  color: 'bg-violet-50 dark:bg-violet-900/20 text-violet-700 dark:text-violet-300' },
+    { label: t('admin.total'), value: users.length, color: 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300' },
+    { label: t('admin.active'), value: active,    color: 'bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-300' },
+    { label: t('admin.last30'), value: last30, color: 'bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300' },
+    { label: t('admin.last7'), value: last7,  color: 'bg-violet-50 dark:bg-violet-900/20 text-violet-700 dark:text-violet-300' },
   ];
 
   return (
     <div className="space-y-5">
-      <h2 className="font-display text-lg font-bold tracking-tight text-gray-900 dark:text-white">Estadísticas de Plataforma</h2>
+      <h2 className="font-display text-lg font-bold tracking-tight text-gray-900 dark:text-white">{t('admin.platformStats')}</h2>
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
         {summary.map(s => (
@@ -212,24 +220,24 @@ const StatsTab = () => {
         ))}
       </div>
 
-      <SectionCard title="Por Rol" accent>
+      <SectionCard title={t('admin.byRole')} accent>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
           {ROLES.map(r => (
             <div key={r} className={`text-center py-4 rounded-xl text-sm ${ROLE_BADGE[r]}`}>
               <p className="font-display text-2xl font-bold tracking-tight">{byRole[r] || 0}</p>
-              <p className="text-[10px] font-bold uppercase tracking-wide mt-1">{r}</p>
+              <p className="text-[10px] font-bold uppercase tracking-wide mt-1">{t(`admin.roles.${r}`)}</p>
             </div>
           ))}
         </div>
         {inactive > 0 && (
           <div className="flex items-center gap-2 text-xs text-red-500 dark:text-red-400 bg-red-50 dark:bg-red-900/20 ring-1 ring-red-500/15 rounded-xl px-4 py-2.5">
             <span className="w-2 h-2 rounded-full bg-red-500 shrink-0" />
-            {inactive} {inactive === 1 ? 'cuenta inactiva' : 'cuentas inactivas'} en el sistema
+            {inactive === 1 ? t('admin.inactiveAccount', { count: inactive }) : t('admin.inactiveAccounts', { count: inactive })}
           </div>
         )}
       </SectionCard>
 
-      <SectionCard title="Últimos Registrados">
+      <SectionCard title={t('admin.recentlyRegistered')}>
         <div className="space-y-2">
           {recent.map(u => (
             <div key={u.id} className="flex items-center gap-3 p-3 rounded-xl bg-gray-50/80 dark:bg-white/[0.04] ring-1 ring-black/5 dark:ring-white/10">
@@ -242,7 +250,7 @@ const StatsTab = () => {
               </div>
               <div className="text-right shrink-0">
                 <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${ROLE_BADGE[u.rol] || ROLE_BADGE.usuario}`}>
-                  {u.rol?.toUpperCase()}
+                  {t(`admin.roles.${u.rol}`).toUpperCase()}
                 </span>
                 <p className="text-[10px] text-gray-400 dark:text-gray-500 mt-1">
                   {u.fecha_registro ? new Date(u.fecha_registro).toLocaleDateString('es-PE') : '—'}
@@ -251,7 +259,7 @@ const StatsTab = () => {
             </div>
           ))}
           {recent.length === 0 && (
-            <p className="text-sm text-gray-400 dark:text-gray-500 text-center py-8">Sin registros</p>
+            <p className="text-sm text-gray-400 dark:text-gray-500 text-center py-8">{t('admin.noRecords')}</p>
           )}
         </div>
       </SectionCard>
@@ -260,6 +268,7 @@ const StatsTab = () => {
 };
 
 const UsersTab = ({ isSuperAdmin }) => {
+  const { t, formatDate } = useLanguage();
   const { user: me } = useAuth();
   const [users, setUsers]     = useState([]);
   const [loading, setLoading] = useState(true);
@@ -273,7 +282,7 @@ const UsersTab = ({ isSuperAdmin }) => {
     try {
       const { data } = await superadminAPI.getUsers();
       if (data.success) setUsers(data.data.users);
-    } catch { notify.error('Error cargando usuarios'); }
+    } catch { notify.error(t('admin.usersError')); }
     finally { setLoading(false); }
   }, []);
 
@@ -290,9 +299,9 @@ const UsersTab = ({ isSuperAdmin }) => {
   const changeRole = async (id, rol) => {
     try {
       await superadminAPI.changeRole(id, rol);
-      notify.success('Rol actualizado');
+      notify.success(t('admin.roleUpdated'));
       load();
-    } catch (e) { notify.error(e.response?.data?.message || 'Error'); }
+    } catch (e) { notify.error(e.response?.data?.message || t('admin.genericError')); }
   };
 
   const toggleActive = async (id) => {
@@ -300,17 +309,17 @@ const UsersTab = ({ isSuperAdmin }) => {
       const { data } = await superadminAPI.toggleActive(id);
       notify.success(data.message);
       load();
-    } catch { notify.error('Error'); }
+    } catch { notify.error(t('admin.genericError')); }
   };
 
   const resetPassword = async (id) => {
-    if (!newPwd || newPwd.length < 8) return notify.error('Mínimo 8 caracteres');
+    if (!newPwd || newPwd.length < 8) return notify.error(t('admin.minChars'));
     try {
       await superadminAPI.resetPassword(id, newPwd);
-      notify.success('Contraseña actualizada');
+      notify.success(t('admin.passwordUpdated'));
       setEditPwd(null);
       setNewPwd('');
-    } catch (e) { notify.error(e.response?.data?.message || 'Error'); }
+    } catch (e) { notify.error(e.response?.data?.message || t('admin.genericError')); }
   };
 
   const stats = { total: users.length, inactivos: users.filter(u => !u.activo).length };
@@ -327,19 +336,19 @@ const UsersTab = ({ isSuperAdmin }) => {
   if (loading) return <Spinner />;
 
   const filterOptions = [
-    { key: 'all',        label: 'Todos',      n: stats.total,      color: 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300' },
-    { key: 'superadmin', label: 'SuperAdmin', n: stats.superadmin, color: 'bg-purple-50 dark:bg-purple-900/20 text-purple-700 dark:text-purple-300' },
-    { key: 'admin',      label: 'Admin',      n: stats.admin,      color: 'bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300' },
-    { key: 'agricultor', label: 'Agricultor', n: stats.agricultor, color: 'bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-300' },
-    { key: 'inactivo',   label: 'Inactivos',  n: stats.inactivos,  color: 'bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400' },
+    { key: 'all',        label: t('admin.filterAll'), n: stats.total,      color: 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300' },
+    { key: 'superadmin', label: t('admin.roles.superadmin'), n: stats.superadmin, color: 'bg-purple-50 dark:bg-purple-900/20 text-purple-700 dark:text-purple-300' },
+    { key: 'admin',      label: t('admin.roles.admin'), n: stats.admin,      color: 'bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300' },
+    { key: 'agricultor', label: t('admin.roles.agricultor'), n: stats.agricultor, color: 'bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-300' },
+    { key: 'inactivo',   label: t('admin.filterInactive'), n: stats.inactivos,  color: 'bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400' },
   ];
 
   return (
     <div className="space-y-5">
       <div className="flex items-center justify-between">
-        <h2 className="font-display text-lg font-bold tracking-tight text-gray-900 dark:text-white">Gestión de Usuarios</h2>
+        <h2 className="font-display text-lg font-bold tracking-tight text-gray-900 dark:text-white">{t('admin.userManagement')}</h2>
         <span className="text-xs font-semibold text-gray-500 dark:text-gray-400 bg-gray-50/80 dark:bg-white/[0.04] ring-1 ring-black/5 dark:ring-white/10 px-3 py-1.5 rounded-full">
-          {stats.total} usuarios
+          {t('admin.usersCount', { count: stats.total })}
         </span>
       </div>
 
@@ -360,7 +369,7 @@ const UsersTab = ({ isSuperAdmin }) => {
 
       <div className="relative">
         <svg className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Buscar por nombre o email…"
+        <input value={search} onChange={e => setSearch(e.target.value)} placeholder={t('admin.searchPlaceholder')}
           className={fieldClass + ' pl-10'}
         />
       </div>
@@ -379,11 +388,11 @@ const UsersTab = ({ isSuperAdmin }) => {
                 <div className="flex items-center gap-2 flex-wrap">
                   <p className="font-semibold text-sm text-gray-900 dark:text-white truncate">{u.nombre}</p>
                   <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${ROLE_BADGE[u.rol] || ROLE_BADGE.usuario}`}>
-                    {u.rol?.toUpperCase()}
+                    {t(`admin.roles.${u.rol}`).toUpperCase()}
                   </span>
                   {!u.activo && (
                     <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-red-100 text-red-600 dark:bg-red-900/30 dark:text-red-400 border border-red-200 dark:border-red-800/40">
-                      INACTIVO
+                      {t('admin.inactiveTag')}
                     </span>
                   )}
                   {me?.id === u.id && (
@@ -394,7 +403,7 @@ const UsersTab = ({ isSuperAdmin }) => {
                 </div>
                 <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5 truncate">{u.email}</p>
                 <p className="text-[11px] text-gray-400 dark:text-gray-500 mt-0.5">
-                  Desde {u.fecha_registro ? new Date(u.fecha_registro).toLocaleDateString('es-PE') : '—'}
+                  {t('admin.since')} {u.fecha_registro ? formatDate(u.fecha_registro) : '—'}
                 </p>
               </div>
 
@@ -402,7 +411,7 @@ const UsersTab = ({ isSuperAdmin }) => {
                 <div className="flex items-center gap-2 flex-wrap shrink-0">
                   <select value={u.rol} onChange={e => changeRole(u.id, e.target.value)}
                     className="text-xs px-2.5 py-1.5 rounded-lg bg-gray-50/80 dark:bg-white/[0.04] ring-1 ring-black/5 dark:ring-white/10 text-gray-700 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-emerald-500/60 outline-none cursor-pointer">
-                    {rolesAllowed.map(r => <option key={r} value={r}>{r}</option>)}
+                    {rolesAllowed.map(r => <option key={r} value={r}>{t(`admin.roles.${r}`)}</option>)}
                   </select>
                   <button onClick={() => toggleActive(u.id)}
                     className={`text-xs px-3 py-1.5 rounded-full font-semibold transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.98] ${
@@ -410,11 +419,11 @@ const UsersTab = ({ isSuperAdmin }) => {
                         ? 'bg-red-50 text-red-600 hover:bg-red-100 dark:bg-red-900/20 dark:text-red-400 dark:hover:bg-red-900/30'
                         : 'bg-emerald-50 text-emerald-600 hover:bg-emerald-100 dark:bg-emerald-900/20 dark:text-emerald-400 dark:hover:bg-emerald-900/30'
                     }`}>
-                    {u.activo ? 'Desactivar' : 'Activar'}
+                    {u.activo ? t('admin.deactivate') : t('admin.activate')}
                   </button>
                   <button onClick={() => setEditPwd(editPwd === u.id ? null : u.id)}
                     className="flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-full font-semibold bg-gray-50/80 dark:bg-white/[0.04] text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-white/[0.08] ring-1 ring-black/5 dark:ring-white/10 transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.98]">
-                    <Icons.Lock /> Contraseña
+                    <Icons.Lock /> {t('admin.password')}
                   </button>
                 </div>
               )}
@@ -425,7 +434,7 @@ const UsersTab = ({ isSuperAdmin }) => {
                 <div className="flex items-center gap-2">
                   <div className="relative flex-1">
                     <input type={showPwd ? 'text' : 'password'} value={newPwd} onChange={e => setNewPwd(e.target.value)}
-                      placeholder="Nueva contraseña (mín. 8 caracteres)"
+                      placeholder={t('admin.newPasswordPlaceholder')}
                       className={fieldClass + ' pr-10'}
                     />
                     <button onClick={() => setShowPwd(!showPwd)} type="button"
@@ -435,11 +444,11 @@ const UsersTab = ({ isSuperAdmin }) => {
                   </div>
                   <button onClick={() => resetPassword(u.id)}
                     className="px-4 h-10 text-xs font-semibold bg-emerald-600 text-white rounded-full hover:bg-emerald-500 transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.98]">
-                    Guardar
+                    {t('common.save')}
                   </button>
                   <button onClick={() => { setEditPwd(null); setNewPwd(''); }}
                     className="px-3 h-10 text-xs text-gray-500 dark:text-gray-400 rounded-full hover:bg-gray-100 dark:hover:bg-white/[0.06] transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]">
-                    Cancelar
+                    {t('common.cancel')}
                   </button>
                 </div>
               </div>
@@ -450,7 +459,7 @@ const UsersTab = ({ isSuperAdmin }) => {
         {filtered.length === 0 && (
           <div className="text-center py-16 text-gray-400 dark:text-gray-600">
             <Icons.Users2 />
-            <p className="mt-3 text-sm font-medium">No se encontraron usuarios</p>
+            <p className="mt-3 text-sm font-medium">{t('admin.noUsersFound')}</p>
           </div>
         )}
       </div>
@@ -458,19 +467,24 @@ const UsersTab = ({ isSuperAdmin }) => {
   );
 };
 
-const LogoTab = ({ cfg }) => (
+const LogoTab = ({ cfg }) => {
+  const { t } = useLanguage();
+
+  return (
   <div className="space-y-5">
-    <h2 className="font-display text-lg font-bold tracking-tight text-gray-900 dark:text-white">Logo y Marca</h2>
-    <SectionCard title="Imágenes de Marca" accent>
-      <ImageUploader configKey="logo" label="Logo principal" hint="SVG o PNG transparente, mín. 200×60px" currentUrl={cfg.logo ? `${API}/public/config/image/logo` : null} />
-      <ImageUploader configKey="favicon" label="Favicon" hint="ICO o PNG 32×32px" currentUrl={cfg.favicon ? `${API}/public/config/image/favicon` : null} />
-      <ImageUploader configKey="institution_logo" label="Logo de institución" hint="Logo de la organización o universidad asociada" currentUrl={cfg.institution_logo ? `${API}/public/config/image/institution_logo` : null} />
-      <ImageUploader configKey="cover_image" label="Imagen de portada (hero)" hint="Recomendado: 1920×1080px" currentUrl={cfg.cover_image ? `${API}/public/config/image/cover_image` : null} />
+    <h2 className="font-display text-lg font-bold tracking-tight text-gray-900 dark:text-white">{t('admin.logoAndBrand')}</h2>
+    <SectionCard title={t('admin.brandImages')} accent>
+      <ImageUploader configKey="logo" label={t('admin.logoLabel')} hint={t('admin.logoHint')} currentUrl={cfg.logo ? `${API}/public/config/image/logo` : null} />
+      <ImageUploader configKey="favicon" label={t('admin.faviconLabel')} hint={t('admin.faviconHint')} currentUrl={cfg.favicon ? `${API}/public/config/image/favicon` : null} />
+      <ImageUploader configKey="institution_logo" label={t('admin.institutionLogoLabel')} hint={t('admin.institutionLogoHint')} currentUrl={cfg.institution_logo ? `${API}/public/config/image/institution_logo` : null} />
+      <ImageUploader configKey="cover_image" label={t('admin.coverLabel')} hint={t('admin.coverHint')} currentUrl={cfg.cover_image ? `${API}/public/config/image/cover_image` : null} />
     </SectionCard>
   </div>
-);
+  );
+};
 
 const HomepageTab = ({ cfg }) => {
+  const { t } = useLanguage();
   const [form, setForm] = useState({
     site_name:             cfg.site_name || '',
     site_tagline:          cfg.site_tagline || '',
@@ -491,38 +505,38 @@ const HomepageTab = ({ cfg }) => {
     try {
       await superadminAPI.saveConfig({ ...form, announcement_enabled: String(form.announcement_enabled) });
       invalidateSystemConfigCache();
-      notify.success('Página de inicio guardada');
-    } catch { notify.error('Error al guardar'); }
+      notify.success(t('admin.homepageSaved'));
+    } catch { notify.error(t('admin.saveError')); }
     finally { setSaving(false); }
   };
 
   return (
     <div className="space-y-5">
-      <h2 className="font-display text-lg font-bold tracking-tight text-gray-900 dark:text-white">Página de Inicio</h2>
+      <h2 className="font-display text-lg font-bold tracking-tight text-gray-900 dark:text-white">{t('admin.homepageTitle')}</h2>
 
-      <SectionCard title="Identidad del sitio">
+      <SectionCard title={t('admin.siteIdentity')}>
         <div className="grid sm:grid-cols-2 gap-4">
-          <Input label="Nombre del sitio" value={form.site_name} onChange={set('site_name')} placeholder="AgroYachay" />
-          <Input label="Tagline" value={form.site_tagline} onChange={set('site_tagline')} placeholder="Agricultura inteligente..." />
+          <Input label={t('admin.siteName')} value={form.site_name} onChange={set('site_name')} placeholder="AgroYachay" />
+          <Input label={t('admin.tagline')} value={form.site_tagline} onChange={set('site_tagline')} placeholder={t('admin.taglinePlaceholder')} />
         </div>
       </SectionCard>
 
-      <SectionCard title="Sección Hero">
-        <Input label="Título hero" value={form.hero_title} onChange={set('hero_title')} maxLength={7} placeholder="Agro" hint="Texto grande del banner principal (máx 7 caracteres)" />
-        <Textarea label="Descripción" value={form.hero_description} onChange={set('hero_description')} placeholder="Plataforma de gestión agrícola..." />
-        <Input label="Botón CTA" value={form.hero_cta} onChange={set('hero_cta')} placeholder="Comenzar ahora" />
+      <SectionCard title={t('admin.heroSection')}>
+        <Input label={t('admin.heroTitle')} value={form.hero_title} onChange={set('hero_title')} maxLength={7} placeholder="Agro" hint={t('admin.heroTitleHint')} />
+        <Textarea label={t('admin.description')} value={form.hero_description} onChange={set('hero_description')} placeholder={t('admin.heroDescriptionPlaceholder')} />
+        <Input label={t('admin.ctaButton')} value={form.hero_cta} onChange={set('hero_cta')} placeholder={t('admin.ctaPlaceholder')} />
       </SectionCard>
 
-      <SectionCard title="Sección Ecosistema">
-        <Input label="Título" value={form.ecosystem_title} onChange={set('ecosystem_title')} placeholder="Ecosistema Agrícola Inteligente" />
-        <Textarea label="Descripción" value={form.ecosystem_description} onChange={set('ecosystem_description')} placeholder="Conectamos tecnología..." />
+      <SectionCard title={t('admin.ecosystemSection')}>
+        <Input label={t('admin.titleField')} value={form.ecosystem_title} onChange={set('ecosystem_title')} placeholder={t('admin.ecosystemTitlePlaceholder')} />
+        <Textarea label={t('admin.description')} value={form.ecosystem_description} onChange={set('ecosystem_description')} placeholder={t('admin.ecosystemDescriptionPlaceholder')} />
       </SectionCard>
 
-      <SectionCard title="Banner de Anuncio">
-        <Toggle label="Mostrar banner de anuncio" description="Aparece en la parte superior de todas las páginas públicas" checked={form.announcement_enabled} onChange={set('announcement_enabled')} />
+      <SectionCard title={t('admin.announcementBanner')}>
+        <Toggle label={t('admin.showBanner')} description={t('admin.showBannerHint')} checked={form.announcement_enabled} onChange={set('announcement_enabled')} />
         {form.announcement_enabled && (
           <>
-            <Input label="Texto del banner" value={form.announcement_text} onChange={set('announcement_text')} placeholder="¡Novedad! Prueba nuestras nuevas funciones IoT" />
+            <Input label={t('admin.bannerText')} value={form.announcement_text} onChange={set('announcement_text')} placeholder={t('admin.bannerPlaceholder')} />
             <div>
               <label className="block text-[11px] font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-1.5">Color del banner</label>
               <div className="flex items-center gap-3">
@@ -534,7 +548,7 @@ const HomepageTab = ({ cfg }) => {
             </div>
             <div className="rounded-xl overflow-hidden ring-1 ring-black/5 dark:ring-white/10">
               <div className="text-center py-2 px-4 text-sm font-semibold text-white" style={{ backgroundColor: form.announcement_color }}>
-                {form.announcement_text || 'Vista previa del banner…'}
+                {form.announcement_text || t('admin.bannerPreview')}
               </div>
               <div className="p-3 bg-gray-50/80 dark:bg-white/[0.04]">
                 <span className="text-xs text-gray-500 dark:text-gray-400">Vista previa en tiempo real</span>
@@ -550,6 +564,7 @@ const HomepageTab = ({ cfg }) => {
 };
 
 const NavTab = ({ cfg }) => {
+  const { t } = useLanguage();
   const [items, setItems] = useState(() => { try { return JSON.parse(cfg.nav_items || '[]'); } catch { return []; } });
   const [saving, setSaving] = useState(false);
 
@@ -558,26 +573,26 @@ const NavTab = ({ cfg }) => {
     try {
       await superadminAPI.saveConfig({ nav_items: JSON.stringify(items) });
       invalidateSystemConfigCache();
-      notify.success('Navegación guardada');
-    } catch { notify.error('Error al guardar'); }
+      notify.success(t('admin.navSaved'));
+    } catch { notify.error(t('admin.saveError')); }
     finally { setSaving(false); }
   };
 
   return (
     <div className="space-y-5">
-      <h2 className="font-display text-lg font-bold tracking-tight text-gray-900 dark:text-white">Navegación</h2>
+      <h2 className="font-display text-lg font-bold tracking-tight text-gray-900 dark:text-white">{t('admin.navigation')}</h2>
       <SectionCard>
         <p className="text-xs text-gray-500 dark:text-gray-400 bg-blue-50 dark:bg-blue-900/20 ring-1 ring-blue-500/15 rounded-xl px-3 py-2">
-          Personaliza los links del menú principal. Deja vacío para usar la navegación por defecto.
+          {t('admin.navHint')}
         </p>
         <div className="space-y-2">
           {items.map((item, i) => (
             <div key={i} className="flex items-center gap-2">
               <div className="flex items-center justify-center w-7 h-7 rounded-lg bg-gray-50/80 dark:bg-white/[0.04] ring-1 ring-black/5 dark:ring-white/10 text-xs font-bold text-gray-400 shrink-0">{i + 1}</div>
               <input value={item.label} onChange={e => setItems(items.map((x, j) => j === i ? { ...x, label: e.target.value } : x))}
-                placeholder="Etiqueta" className={fieldClass + ' flex-1'} />
+                placeholder={t('admin.labelPlaceholder')} className={fieldClass + ' flex-1'} />
               <input value={item.href} onChange={e => setItems(items.map((x, j) => j === i ? { ...x, href: e.target.value } : x))}
-                placeholder="/ruta o https://..." className={fieldClass + ' flex-1'} />
+                placeholder={t('admin.hrefPlaceholder')} className={fieldClass + ' flex-1'} />
               <button onClick={() => setItems(items.filter((_, j) => j !== i))} className="p-2 text-red-400 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]">
                 <Icons.Trash />
               </button>
@@ -585,7 +600,7 @@ const NavTab = ({ cfg }) => {
           ))}
           <button onClick={() => setItems([...items, { label: '', href: '' }])}
             className="flex items-center gap-2 text-sm text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 font-semibold transition-colors">
-            <Icons.Plus /> Agregar item
+            <Icons.Plus /> {t('admin.addItem')}
           </button>
         </div>
       </SectionCard>
@@ -595,6 +610,7 @@ const NavTab = ({ cfg }) => {
 };
 
 const FooterTab = ({ cfg }) => {
+  const { t } = useLanguage();
   const [form, setForm] = useState({
     footer_description: cfg.footer_description || '',
     footer_institution: cfg.footer_institution || '',
@@ -613,23 +629,23 @@ const FooterTab = ({ cfg }) => {
     try {
       await superadminAPI.saveConfig(form);
       invalidateSystemConfigCache();
-      notify.success('Pie de página guardado');
-    } catch { notify.error('Error al guardar'); }
+      notify.success(t('admin.footerSaved'));
+    } catch { notify.error(t('admin.saveError')); }
     finally { setSaving(false); }
   };
 
   return (
     <div className="space-y-5">
-      <h2 className="font-display text-lg font-bold tracking-tight text-gray-900 dark:text-white">Pie de Página</h2>
-      <SectionCard title="Información General">
-        <Textarea label="Descripción" value={form.footer_description} onChange={set('footer_description')} placeholder="Sistema de gestión agrícola..." />
+      <h2 className="font-display text-lg font-bold tracking-tight text-gray-900 dark:text-white">{t('admin.footerTitle')}</h2>
+      <SectionCard title={t('admin.generalInfo')}>
+        <Textarea label={t('admin.description')} value={form.footer_description} onChange={set('footer_description')} placeholder={t('admin.footerDescriptionPlaceholder')} />
         <div className="grid sm:grid-cols-2 gap-4">
-          <Input label="Institución" value={form.footer_institution} onChange={set('footer_institution')} placeholder="Universidad Nacional..." />
-          <Input label="Email de contacto" value={form.footer_contact} onChange={set('footer_contact')} type="email" placeholder="contacto@agroyachay.pe" />
+          <Input label={t('admin.institution')} value={form.footer_institution} onChange={set('footer_institution')} placeholder={t('admin.institutionPlaceholder')} />
+          <Input label={t('admin.contactEmail')} value={form.footer_contact} onChange={set('footer_contact')} type="email" placeholder="contacto@agroyachay.pe" />
         </div>
-        <Input label="Copyright" value={form.footer_copyright} onChange={set('footer_copyright')} placeholder={`© ${new Date().getFullYear()} AgroYachay`} />
+        <Input label={t('admin.copyright')} value={form.footer_copyright} onChange={set('footer_copyright')} placeholder={`© ${new Date().getFullYear()} AgroYachay`} />
       </SectionCard>
-      <SectionCard title="Redes Sociales">
+      <SectionCard title={t('admin.socialNetworks')}>
         <div className="grid sm:grid-cols-2 gap-4">
           <Input label="Twitter / X" value={form.social_twitter} onChange={set('social_twitter')} placeholder="https://twitter.com/..." />
           <Input label="Facebook" value={form.social_facebook} onChange={set('social_facebook')} placeholder="https://facebook.com/..." />
@@ -643,6 +659,7 @@ const FooterTab = ({ cfg }) => {
 };
 
 const SystemTab = ({ cfg }) => {
+  const { t } = useLanguage();
   const [form, setForm] = useState({
     maintenance_mode:    cfg.maintenance_mode === 'true',
     maintenance_message: cfg.maintenance_message || '',
@@ -656,25 +673,25 @@ const SystemTab = ({ cfg }) => {
     try {
       await superadminAPI.saveConfig({ ...form, maintenance_mode: String(form.maintenance_mode) });
       invalidateSystemConfigCache();
-      notify.success('Configuración del sistema guardada');
-    } catch { notify.error('Error al guardar'); }
+      notify.success(t('admin.systemSaved'));
+    } catch { notify.error(t('admin.saveError')); }
     finally { setSaving(false); }
   };
 
   return (
     <div className="space-y-5">
       <h2 className="font-display text-lg font-bold tracking-tight text-gray-900 dark:text-white">Sistema</h2>
-      <SectionCard title="Modo Mantenimiento">
-        <Toggle label="Activar modo mantenimiento" description="Muestra una página de mantenimiento a usuarios no-admin" checked={form.maintenance_mode} onChange={set('maintenance_mode')} />
+      <SectionCard title={t('admin.maintenanceMode')}>
+        <Toggle label={t('admin.enableMaintenance')} description={t('admin.enableMaintenanceHint')} checked={form.maintenance_mode} onChange={set('maintenance_mode')} />
         {form.maintenance_mode && (
           <div className="p-4 bg-amber-50 dark:bg-amber-900/20 ring-1 ring-amber-500/20 rounded-2xl space-y-3">
-            <p className="text-xs font-bold text-amber-700 dark:text-amber-400">El sitio estará inaccesible para usuarios regulares</p>
-            <Textarea label="Mensaje de mantenimiento" value={form.maintenance_message} onChange={set('maintenance_message')} rows={2} placeholder="El sistema está en mantenimiento..." />
+            <p className="text-xs font-bold text-amber-700 dark:text-amber-400">{t('admin.maintenanceWarning')}</p>
+            <Textarea label={t('admin.maintenanceMessage')} value={form.maintenance_message} onChange={set('maintenance_message')} rows={2} placeholder={t('admin.maintenancePlaceholder')} />
           </div>
         )}
       </SectionCard>
-      <SectionCard title="Analytics">
-        <Input label="Google Analytics GA4 ID" value={form.ga4_id} onChange={set('ga4_id')} placeholder="G-XXXXXXXXXX" hint="Deja vacío para deshabilitar el seguimiento analítico" />
+      <SectionCard title={t('admin.analytics')}>
+        <Input label="Google Analytics GA4 ID" value={form.ga4_id} onChange={set('ga4_id')} placeholder="G-XXXXXXXXXX" hint={t('admin.ga4Hint')} />
       </SectionCard>
       <div className="flex justify-end"><SaveBtn loading={saving} onClick={save} /></div>
     </div>
@@ -682,13 +699,14 @@ const SystemTab = ({ cfg }) => {
 };
 
 const AdvancedTab = () => {
+  const { t } = useLanguage();
   const [resetting, setResetting] = useState(false);
 
   const doReset = async () => {
     const ok = await confirmAction({
-      title: '¿Restablecer configuración?',
-      text: 'Todos los textos volverán a sus valores por defecto. Las imágenes no se eliminan.',
-      confirmText: 'Sí, restablecer',
+      title: t('admin.resetTitle'),
+      text: t('admin.resetText'),
+      confirmText: t('admin.resetConfirm'),
       danger: true,
     });
     if (!ok) return;
@@ -696,21 +714,21 @@ const AdvancedTab = () => {
     try {
       await superadminAPI.resetConfig();
       invalidateSystemConfigCache();
-      notify.success('Configuración restablecida');
-    } catch { notify.error('Error al restablecer'); }
+      notify.success(t('admin.resetDone'));
+    } catch { notify.error(t('admin.resetError')); }
     finally { setResetting(false); }
   };
 
   return (
     <div className="space-y-5">
-      <h2 className="font-display text-lg font-bold tracking-tight text-gray-900 dark:text-white">Configuración Avanzada</h2>
-      <SectionCard title="Restablecer configuración">
+      <h2 className="font-display text-lg font-bold tracking-tight text-gray-900 dark:text-white">{t('admin.advancedTitle')}</h2>
+      <SectionCard title={t('admin.resetSection')}>
         <p className="text-sm text-gray-600 dark:text-gray-400">
           Restablece todos los textos a sus valores por defecto. Las imágenes subidas <strong className="text-gray-800 dark:text-gray-200">no se eliminan</strong>.
         </p>
         <button onClick={doReset} disabled={resetting}
           className="px-6 h-11 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 ring-1 ring-red-500/20 text-sm font-semibold rounded-full hover:bg-red-100 dark:hover:bg-red-900/30 disabled:opacity-60 transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.98]">
-          {resetting ? 'Restableciendo…' : 'Restablecer valores por defecto'}
+          {resetting ? t('admin.resetting') : t('admin.resetDefaults')}
         </button>
       </SectionCard>
     </div>
@@ -718,22 +736,23 @@ const AdvancedTab = () => {
 };
 
 const TABS_SUPERADMIN = [
-  { id: 'stats',    label: 'Estadísticas', Icon: Icons.BarChart },
-  { id: 'users',    label: 'Usuarios',     Icon: Icons.Users    },
-  { id: 'logo',     label: 'Logo',         Icon: Icons.Image    },
-  { id: 'homepage', label: 'Inicio',       Icon: Icons.Home     },
-  { id: 'nav',      label: 'Navegación',   Icon: Icons.Nav      },
-  { id: 'footer',   label: 'Footer',       Icon: Icons.Footer   },
-  { id: 'system',   label: 'Sistema',      Icon: Icons.Cog      },
-  { id: 'advanced', label: 'Avanzado',     Icon: Icons.Tool     },
+  { id: 'stats',    labelKey: 'admin.tabs.stats', Icon: Icons.BarChart },
+  { id: 'users',    labelKey: 'admin.tabs.users', Icon: Icons.Users },
+  { id: 'logo',     labelKey: 'admin.tabs.logo', Icon: Icons.Image },
+  { id: 'homepage', labelKey: 'admin.tabs.homepage', Icon: Icons.Home },
+  { id: 'nav',      labelKey: 'admin.tabs.nav', Icon: Icons.Nav },
+  { id: 'footer',   labelKey: 'admin.tabs.footer', Icon: Icons.Footer },
+  { id: 'system',   labelKey: 'admin.tabs.system', Icon: Icons.Cog },
+  { id: 'advanced', labelKey: 'admin.tabs.advanced', Icon: Icons.Tool },
 ];
 
 const TABS_ADMIN = [
-  { id: 'stats', label: 'Estadísticas', Icon: Icons.BarChart },
-  { id: 'users', label: 'Usuarios',     Icon: Icons.Users    },
+  { id: 'stats', labelKey: 'admin.tabs.stats', Icon: Icons.BarChart },
+  { id: 'users', labelKey: 'admin.tabs.users', Icon: Icons.Users },
 ];
 
 const AdminPanel = () => {
+  const { t } = useLanguage();
   const { user } = useAuth();
   const isSuperAdmin = user?.rol === 'superadmin';
   const TABS = isSuperAdmin ? TABS_SUPERADMIN : TABS_ADMIN;
@@ -752,7 +771,7 @@ const AdminPanel = () => {
           setCfg(flat);
         }
       })
-      .catch(() => notify.error('Error cargando configuración'))
+      .catch(() => notify.error(t('admin.configError')))
       .finally(() => setCfgLoading(false));
   }, [isSuperAdmin]);
 
@@ -782,7 +801,7 @@ const AdminPanel = () => {
         </div>
         <div className="min-w-0 flex-1">
           <h1 className="font-display text-2xl font-bold tracking-tight text-gray-900 dark:text-white leading-tight">
-            {isSuperAdmin ? 'Panel SuperAdmin' : 'Panel Admin'}
+            {isSuperAdmin ? t('admin.superAdminPanel') : t('admin.adminPanel')}
           </h1>
         </div>
         <span className={`shrink-0 text-[10px] font-bold px-3 py-1.5 rounded-full tracking-[0.18em] uppercase ring-1 ${
@@ -790,12 +809,12 @@ const AdminPanel = () => {
             ? 'bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 ring-purple-500/20'
             : 'bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 ring-blue-500/20'
         }`}>
-          {user?.rol}
+          {t(`admin.roles.${user?.rol}`)}
         </span>
       </div>
 
       <div className="flex gap-1 flex-wrap bg-black/[0.03] dark:bg-white/[0.04] p-1.5 rounded-full ring-1 ring-black/5 dark:ring-white/10">
-        {TABS.map(({ id, label, Icon }) => (
+        {TABS.map(({ id, labelKey, Icon }) => (
           <button key={id} onClick={() => setActiveTab(id)}
             className={`flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-semibold transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] touch-manipulation active:scale-[0.98] ${
               activeTab === id
@@ -804,7 +823,7 @@ const AdminPanel = () => {
             }`}
           >
             <Icon />
-            <span className="hidden sm:inline">{label}</span>
+            <span className="hidden sm:inline">{t(labelKey)}</span>
           </button>
         ))}
       </div>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Mail, Phone, MapPin, Sprout } from 'lucide-react';
+import { useLanguage } from '../../context/LanguageContext';
 
 const linkClass =
   'group inline-flex items-center gap-2.5 text-sm text-emerald-100/55 ' +
@@ -15,6 +16,8 @@ const chipClass =
   'transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:bg-emerald-500/15 hover:ring-emerald-300/30 hover:text-emerald-100 hover:-translate-y-0.5';
 
 const Footer = () => {
+  const { t } = useLanguage();
+
   return (
     <footer className="relative mt-auto overflow-hidden bg-[#04140d] text-white">
       <div
@@ -41,49 +44,49 @@ const Footer = () => {
               <h3 className="text-2xl font-bold tracking-tight text-white">AgroYachay</h3>
             </div>
             <p className="text-sm leading-relaxed text-emerald-100/55">
-              Transformando la agricultura peruana con tecnología inteligente e IoT
+              {t('footer.tagline')}
             </p>
           </div>
 
           <div>
             <h4 className="text-sm font-semibold text-white">
-              Servicios
+              {t('footer.services')}
             </h4>
             <ul className="mt-5 space-y-3">
               <li>
                 <Link to="/cultivos" className={linkClass}>
                   <span className={dotClass}></span>
-                  Gestión de Cultivos
+                  {t('footer.cropManagement')}
                 </Link>
               </li>
               <li>
                 <Link to="/monitoreo" className={linkClass}>
                   <span className={dotClass}></span>
-                  Monitoreo IoT
+                  {t('footer.iotMonitoring')}
                 </Link>
               </li>
               <li>
                 <Link to="/clima" className={linkClass}>
                   <span className={dotClass}></span>
-                  Monitoreo Climático
+                  {t('footer.weatherMonitoring')}
                 </Link>
               </li>
               <li>
                 <Link to="/plagas" className={linkClass}>
                   <span className={dotClass}></span>
-                  Detección de Plagas
+                  {t('footer.pestDetection')}
                 </Link>
               </li>
               <li>
                 <Link to="/prediccion" className={linkClass}>
                   <span className={dotClass}></span>
-                  Predicción de Cosechas
+                  {t('footer.harvestPrediction')}
                 </Link>
               </li>
               <li>
                 <Link to="/marketplace" className={linkClass}>
                   <span className={dotClass}></span>
-                  Marketplace
+                  {t('footer.marketplace')}
                 </Link>
               </li>
             </ul>
@@ -91,37 +94,37 @@ const Footer = () => {
 
           <div>
             <h4 className="text-sm font-semibold text-white">
-              Empresa
+              {t('footer.company')}
             </h4>
             <ul className="mt-5 space-y-3">
               <li>
                 <Link to="/dashboard" className={linkClass}>
                   <span className={dotClass}></span>
-                  Inicio
+                  {t('footer.home')}
                 </Link>
               </li>
               <li>
                 <a href="#acerca" className={linkClass}>
                   <span className={dotClass}></span>
-                  Acerca de Nosotros
+                  {t('footer.about')}
                 </a>
               </li>
               <li>
                 <Link to="/asesoria" className={linkClass}>
                   <span className={dotClass}></span>
-                  Asesoría Especializada
+                  {t('footer.advisory')}
                 </Link>
               </li>
               <li>
                 <a href="#blog" className={linkClass}>
                   <span className={dotClass}></span>
-                  Blog
+                  {t('footer.blog')}
                 </a>
               </li>
               <li>
                 <a href="#soporte" className={linkClass}>
                   <span className={dotClass}></span>
-                  Soporte
+                  {t('footer.support')}
                 </a>
               </li>
             </ul>
@@ -129,7 +132,7 @@ const Footer = () => {
 
           <div>
             <h4 className="text-sm font-semibold text-white">
-              Contacto
+              {t('footer.contact')}
             </h4>
             <ul className="mt-5 space-y-3">
               <li className="flex items-start gap-3">
@@ -164,7 +167,7 @@ const Footer = () => {
                 </span>
                 <div className="pt-1.5">
                   <span className="text-sm text-emerald-100/55">
-                    Puno, Perú
+                    {t('footer.location')}
                   </span>
                 </div>
               </li>
@@ -175,7 +178,7 @@ const Footer = () => {
 
         <div className="mt-14 flex flex-col items-center gap-4 border-t border-white/10 pt-8 sm:flex-row sm:justify-between">
           <p className="text-xs text-emerald-100/40">
-            © 2025 AgroYachay. Todos los derechos reservados.
+            {t('footer.rights', { year: new Date().getFullYear() })}
           </p>
         </div>
       </div>
