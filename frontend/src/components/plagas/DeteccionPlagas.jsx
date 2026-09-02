@@ -136,7 +136,7 @@ const DeteccionPlagas = () => {
     if (cultivo) fd.append('cultivo_id', cultivo);
     if (cultivoObj) fd.append('cultivo_nombre', cultivoObj.tipo_cultivo);
     try {
-      const res = await plagasAPI.detectarConGroq(fd);
+      const res = await plagasAPI.detectarVision(fd);
       if (res.data.success) {
         setDetection(res.data.data);
         callGroqPlan(res.data.data, cultivoObj?.tipo_cultivo || '');

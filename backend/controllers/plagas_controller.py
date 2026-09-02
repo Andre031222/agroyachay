@@ -112,8 +112,8 @@ def detectar_plaga():
             connection.close()
 
 
-@plagas_bp.route('/detectar-groq', methods=['POST'])
-def detectar_con_groq():
+@plagas_bp.route('/detectar-vision', methods=['POST'])
+def detectar_vision():
     connection = None
     try:
         if 'imagen' not in request.files:

@@ -95,7 +95,7 @@ export const plagasAPI = {
     headers: { 'Content-Type': 'multipart/form-data' },
     timeout: 60_000,
   }),
-  detectarConGroq:(formData)   => api.post('/plagas/detectar-groq', formData, { headers: { 'Content-Type': 'multipart/form-data' }, timeout: 60_000 }),
+  detectarVision: (formData)   => api.post('/plagas/detectar-vision', formData, { headers: { 'Content-Type': 'multipart/form-data' }, timeout: 60_000 }),
   consejoPlagaIA: (data)       => api.post('/plagas/consejo-ia', data, { timeout: 30_000 }),
   getBiblioteca:  ()           => api.get('/plagas/biblioteca'),
   getDetecciones: ()           => api.get('/plagas/detecciones'),

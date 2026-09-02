@@ -47,7 +47,7 @@ definitions in [`backend/app/routes/`](../backend/app/routes/).
 ```
 → stores the reading and evaluates threshold alerts.
 
-### `POST /api/plagas/detectar-groq`  *(JWT; multipart)*
+### `POST /api/plagas/detectar-vision`  *(JWT; multipart)*
 Form field `imagen` = leaf/plant photo. Runs the self-hosted open vision model
 (qwen2.5-VL via Ollama) and returns a structured verdict:
 ```json

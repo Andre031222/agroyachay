@@ -15,6 +15,7 @@ Internet ──443──► Nginx ──┬── /            → static React 
 
 - Linux server (tested on Debian 12)
 - Python ≥ 3.9, Node.js ≥ 18, PostgreSQL ≥ 14, Nginx, certbot
+- [Ollama](https://ollama.com) for the self-hosted vision model (see §2b)
 - A domain/subdomain pointing to the server, and a Groq + OpenWeather API key
 
 ## 1. PostgreSQL — database and app user
@@ -38,6 +39,14 @@ python3 -m venv venv
 Create `/opt/apps/agroyachay/.env` (chmod 600) with `DB_*`, `SECRET_KEY`,
 `JWT_SECRET_KEY`, `GROQ_API_KEY`, `OPENWEATHER_API_KEY`, `FRONTEND_URL`,
 `CORS_ORIGINS=https://your.domain`, and `ADMIN_EMAIL`/`ADMIN_PASSWORD`.
+
+For the self-hosted pest/disease vision model, also set:
+
+```bash
+VISION_ENGINE=ollama                 # 'ollama' (self-hosted) or 'groq' (fallback)
+OLLAMA_URL=http://127.0.0.1:11434    # local Ollama daemon
+OLLAMA_VISION_MODEL=qwen2.5vl:3b     # Apache-2.0 open vision model
+```
 
 Initialise the schema (creates tables, indexes and the superadmin):
 
@@ -71,6 +80,30 @@ WantedBy=multi-user.target
 sudo systemctl daemon-reload && sudo systemctl enable --now agroyachay
 curl http://127.0.0.1:9001/health     # {"status":"healthy"}
 ```
+
+## 2b. Local vision model (Ollama)
+
+The pest/disease diagnosis runs on a self-hosted, open vision model served by
+Ollama, so leaf images are processed on-device and never sent to a third party.
+Install the daemon and pull the model once:
+
+```bash
+# install Ollama (Linux)
+curl -fsSL https://ollama.com/install.sh | sh
+sudo systemctl enable --now ollama        # serves on 127.0.0.1:11434
+
+# pull the Apache-2.0 vision model used by AgroYachay (~3.2 GB)
+ollama pull qwen2.5vl:3b
+
+# quick check
+curl http://127.0.0.1:11434/api/tags       # lists the installed model
+```
+
+The backend reads `VISION_ENGINE`, `OLLAMA_URL` and `OLLAMA_VISION_MODEL` from
+the `.env` above. The engine is model-agnostic: a larger model (e.g.
+`qwen2.5vl:7b`) can be used on a GPU host by changing `OLLAMA_VISION_MODEL`.
+On a CPU-only server the diagnosis endpoint (`POST /api/plagas/detectar-vision`)
+takes longer per image; a GPU host is recommended for interactive latency.
 
 ## 3. Frontend (static build)
 
