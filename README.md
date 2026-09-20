@@ -13,7 +13,7 @@
   <a href="https://doi.org/10.5281/zenodo.20829992"><img src="https://img.shields.io/badge/DOI-10.5281%2Fzenodo.20829992-1d4ed8?style=for-the-badge"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-2E7D32?style=for-the-badge"></a>
   <a href="https://agroyachay.ginit.dev"><img src="https://img.shields.io/badge/Live%20Demo-agroyachay.ginit.dev-0F2444?style=for-the-badge&logo=googlechrome&logoColor=white"></a>
-  <img src="https://img.shields.io/badge/SoftwareX-in%20preparation-616161?style=for-the-badge">
+  <a href="https://doi.org/10.1016/j.softx.2026.103037"><img src="https://img.shields.io/badge/SoftwareX-in%20press-1d4ed8?style=for-the-badge"></a>
   <a href="https://github.com/Andre031222/agrocommish"><img src="https://img.shields.io/badge/Companion-AgroCommish-8E24AA?style=for-the-badge&logo=github&logoColor=white"></a>
 </p>
 
@@ -274,13 +274,28 @@ hardware, with no per-seat licensing.
 
 ## Citation
 
-If you use this software, please cite:
+If you use this software, please cite the article:
 
 ```bibtex
-@software{vilca2026agroyachay,
-  author  = {Torres Cruz, Fred and Vilca Solorzano, Richar Andre and
-             Yana Yucra, Dina Maribel and Iba{\~n}ez Quispe, Vladimiro and
-             Fuentes Navarro, Eduardo Leuman},
+@article{vilca2026agroyachay,
+  author  = {Torres-Cruz, Fred and Vilca-Solorzano, Richar Andre and
+             Yana-Yucra, Dina Maribel and Iba{\~n}ez-Quispe, Vladimiro and
+             Fuentes-Navarro, Eduardo Leuman},
+  title   = {AgroYachay: An open-source IoT and large-language-model platform
+             supporting agronomic and economic decision-making for Andean smallholders},
+  journal = {SoftwareX},
+  year    = {2026},
+  doi     = {10.1016/j.softx.2026.103037}
+}
+```
+
+The exact software version is archived on Zenodo:
+
+```bibtex
+@software{vilca2026agroyachay_sw,
+  author  = {Torres-Cruz, Fred and Vilca-Solorzano, Richar Andre and
+             Yana-Yucra, Dina Maribel and Iba{\~n}ez-Quispe, Vladimiro and
+             Fuentes-Navarro, Eduardo Leuman},
   title   = {AgroYachay: An open-source IoT and large-language-model platform
              supporting agronomic and economic decision-making for Andean smallholders},
   year    = {2026},

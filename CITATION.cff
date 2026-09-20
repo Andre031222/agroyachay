@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-message: "If you use this software, please cite it as below."
+message: "If you use this software, please cite the article (preferred-citation below)."
 title: "AgroYachay: An open-source IoT and large-language-model platform supporting agronomic and economic decision-making for Andean smallholders"
 type: software
 version: 1.0.1
@@ -8,27 +8,27 @@ license: MIT
 repository-code: "https://github.com/Andre031222/agroyachay"
 doi: "10.5281/zenodo.20829992"
 authors:
-  - family-names: "Torres Cruz"
+  - family-names: "Torres-Cruz"
     given-names: "Fred"
     email: "20260957@lamolina.pe"
     orcid: "https://orcid.org/0000-0003-0834-6834"
     affiliation: "Doctoral Program in Sustainable Agriculture, Universidad Nacional Agraria La Molina, Lima, Peru"
-  - family-names: "Vilca Solorzano"
+  - family-names: "Vilca-Solorzano"
     given-names: "Richar Andre"
     email: "andrevilcasolorzano@gmail.com"
     orcid: "https://orcid.org/0009-0003-2385-5263"
     affiliation: "Universidad Nacional del Altiplano, Puno, Peru"
-  - family-names: "Yana Yucra"
+  - family-names: "Yana-Yucra"
     given-names: "Dina Maribel"
     email: "maribelbel201314@gmail.com"
     orcid: "https://orcid.org/0009-0003-6218-2735"
     affiliation: "Universidad Nacional del Altiplano, Puno, Peru"
-  - family-names: "Ibañez Quispe"
+  - family-names: "Ibañez-Quispe"
     given-names: "Vladimiro"
     email: "vibanez@unap.edu.pe"
     orcid: "https://orcid.org/0000-0002-0277-4945"
     affiliation: "Universidad Nacional del Altiplano, Puno, Peru"
-  - family-names: "Fuentes Navarro"
+  - family-names: "Fuentes-Navarro"
     given-names: "Eduardo Leuman"
     email: "efuentes@lamolina.edu.pe"
     orcid: "https://orcid.org/0000-0001-9351-9853"
@@ -41,3 +41,20 @@ keywords:
   - decision support system
   - Andean smallholder farming
   - ESP32
+preferred-citation:
+  type: article
+  title: "AgroYachay: An open-source IoT and large-language-model platform supporting agronomic and economic decision-making for Andean smallholders"
+  journal: "SoftwareX"
+  year: 2026
+  doi: "10.1016/j.softx.2026.103037"
+  authors:
+    - family-names: "Torres-Cruz"
+      given-names: "Fred"
+    - family-names: "Vilca-Solorzano"
+      given-names: "Richar Andre"
+    - family-names: "Yana-Yucra"
+      given-names: "Dina Maribel"
+    - family-names: "Ibañez-Quispe"
+      given-names: "Vladimiro"
+    - family-names: "Fuentes-Navarro"
+      given-names: "Eduardo Leuman"
