@@ -13,7 +13,7 @@
   <a href="https://doi.org/10.5281/zenodo.20829992"><img src="https://img.shields.io/badge/DOI-10.5281%2Fzenodo.20829992-1d4ed8?style=for-the-badge"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-2E7D32?style=for-the-badge"></a>
   <a href="https://agroyachay.ginit.dev"><img src="https://img.shields.io/badge/Live%20Demo-agroyachay.ginit.dev-0F2444?style=for-the-badge&logo=googlechrome&logoColor=white"></a>
-  <a href="https://doi.org/10.1016/j.softx.2026.103037"><img src="https://img.shields.io/badge/SoftwareX-in%20press-1d4ed8?style=for-the-badge"></a>
+  <a href="https://doi.org/10.1016/j.softx.2026.103037"><img src="https://img.shields.io/badge/SoftwareX%20DOI-10.1016%2Fj.softx.2026.103037-1d4ed8?style=for-the-badge"></a>
   <a href="https://github.com/Andre031222/agrocommish"><img src="https://img.shields.io/badge/Companion-AgroCommish-8E24AA?style=for-the-badge&logo=github&logoColor=white"></a>
 </p>
 
@@ -29,14 +29,14 @@
     <b>AgroYachay</b> (<i>yachay</i> — &ldquo;knowledge&rdquo; in Quechua) turns low-cost
     <b>ESP32</b> telemetry into agronomic and economic decisions for Andean smallholders:<br>
     real-time monitoring, <b>LLM</b> pest diagnosis, conversational agronomy, and
-    yield-&amp;-revenue forecasting &mdash; in a trilingual
-    <b>Spanish / Quechua / Aymara</b> interface.
+    yield-&amp;-revenue forecasting &mdash; in a multilingual
+    <b>Spanish / Quechua / Aymara / English</b> interface.
   </em>
 </p>
 
 <p align="center">
   <a href="https://github.com/Andre031222/agroyachay">
-    <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=600&size=18&duration=2800&pause=900&color=2E7D32&center=true&vCenter=true&width=820&lines=ESP32+telemetry+-%3E+agronomic+%26+economic+decisions;LLM+vision+-%3E+pest+%2F+disease+diagnosis+with+local+treatments;transparent+yield+%26+revenue+estimation;trilingual+UI+-%3E+Spanish+%2F+Quechua+%2F+Aymara;cloud+counterpart+of+AgroCommish">
+    <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=600&size=18&duration=2800&pause=900&color=2E7D32&center=true&vCenter=true&width=820&lines=ESP32+telemetry+-%3E+agronomic+%26+economic+decisions;LLM+vision+-%3E+pest+%2F+disease+diagnosis+with+local+treatments;transparent+yield+%26+revenue+estimation;multilingual+UI+-%3E+Spanish+%2F+Quechua+%2F+Aymara+%2F+English;cloud+counterpart+of+AgroCommish">
   </a>
 </p>
 
@@ -67,7 +67,7 @@
 | Name | Affiliation |
 | --- | --- |
 | Fred Torres-Cruz | Doctoral Program in Sustainable Agriculture, Universidad Nacional Agraria La Molina, Lima, Peru |
-| Richar Andre Vilca-Solorzano <sub>✉ corresponding</sub> | Department of Statistical and Informatics Engineering, Universidad Nacional del Altiplano (UNAP), Puno, Peru |
+| Richar Andre Vilca-Solorzano <sub>corresponding author</sub> | Department of Statistical and Informatics Engineering, Universidad Nacional del Altiplano (UNAP), Puno, Peru |
 | Dina Maribel Yana-Yucra | Department of Statistical and Informatics Engineering, Universidad Nacional del Altiplano (UNAP), Puno, Peru |
 | Vladimiro Ibañez-Quispe | Department of Statistical and Informatics Engineering, Universidad Nacional del Altiplano (UNAP), Puno, Peru |
 | Eduardo Leuman Fuentes-Navarro | Faculty of Animal Science, Universidad Nacional Agraria La Molina, Lima, Peru |
@@ -94,7 +94,7 @@ agronomic assistant and forecast-driven activity planning, with locally
 available treatments. A
 transparent factor model couples crop phenology, climate and parcel area with
 regional market prices to estimate yield, revenue and confidence, and the system
-exports PDF/Excel reports. The interface is trilingual (Spanish, Quechua, Aymara).
+exports PDF/Excel reports. The interface is multilingual (Spanish, Quechua, Aymara, English).
 
 AgroYachay is the cloud counterpart of the **[AgroCommish](https://github.com/Andre031222/agrocommish)**
 commissioning tool, which manufactures and provisions the ESP32 nodes; together
@@ -114,7 +114,7 @@ agriculture.
 | Forecast planning | Turns current conditions and the 5-day OpenWeather forecast into a risk level, weekly activity plan and optimal-day recommendations |
 | Yield &amp; revenue estimation | Transparent multiplicative factor model (climate × phenology × area) × regional price → projected tonnage, expected revenue and a confidence score; no training data required |
 | Reporting | Executive, crop-status, financial and climate-impact reports as styled PDF (ReportLab) and Excel (OpenPyXL) |
-| Trilingual UI | Runtime locale dictionaries for Spanish (`es`), Quechua (`qu`) and Aymara (`ay`) |
+| Multilingual UI | Runtime locale dictionaries for Spanish (`es`), Quechua (`qu`), Aymara (`ay`) and English (`en`) |
 | Security | JWT auth (Flask-JWT-Extended) with bcrypt hashing and optional Google OAuth |
 
 ---
