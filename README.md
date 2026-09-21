@@ -14,6 +14,7 @@
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-2E7D32?style=for-the-badge"></a>
   <a href="https://agroyachay.ginit.dev"><img src="https://img.shields.io/badge/Live%20Demo-agroyachay.ginit.dev-0F2444?style=for-the-badge&logo=googlechrome&logoColor=white"></a>
   <a href="https://doi.org/10.1016/j.softx.2026.103037"><img src="https://img.shields.io/badge/SoftwareX%20DOI-10.1016%2Fj.softx.2026.103037-1d4ed8?style=for-the-badge"></a>
+  <a href="https://www.scimagojr.com/journalsearch.php?q=SoftwareX"><img src="https://img.shields.io/badge/Scopus-Q2-F39C12?style=for-the-badge"></a>
   <a href="https://github.com/Andre031222/agrocommish"><img src="https://img.shields.io/badge/Companion-AgroCommish-8E24AA?style=for-the-badge&logo=github&logoColor=white"></a>
 </p>
 
