@@ -36,6 +36,11 @@
 </p>
 
 <p align="center">
+  <b>🌟 Officially published as a peer-reviewed research article in <a href="https://doi.org/10.1016/j.softx.2026.103037"><em>SoftwareX</em> (Elsevier, Scopus Q2)</a>.</b><br>
+  This repository contains the complete open-source implementation of the application.
+</p>
+
+<p align="center">
   <a href="https://github.com/Andre031222/agroyachay">
     <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=600&size=18&duration=2800&pause=900&color=2E7D32&center=true&vCenter=true&width=820&lines=ESP32+telemetry+-%3E+agronomic+%26+economic+decisions;LLM+vision+-%3E+pest+%2F+disease+diagnosis+with+local+treatments;transparent+yield+%26+revenue+estimation;multilingual+UI+-%3E+Spanish+%2F+Quechua+%2F+Aymara+%2F+English;cloud+counterpart+of+AgroCommish">
   </a>
