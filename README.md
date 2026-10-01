@@ -316,6 +316,11 @@ Citation metadata is also available in [`CITATION.cff`](CITATION.cff)
 
 ---
 
+
+## Acknowledgments
+
+This open-source implementation was developed independently with a new architecture (IoT + LLM stack). We gratefully acknowledge the FINESI course project team whose early agro-IoT concept and title informed this line of work, including Flor, Sebastián, Yeferson Dariun Laura Livise, and the other classmates who contributed to that group presentation. Any remaining errors are ours alone.
+
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
