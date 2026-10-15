@@ -50,7 +50,7 @@ async fn ensure_database(url: &str) {
             let duplicate = error
                 .as_database_error()
                 .and_then(|db| db.code())
-                .is_some_and(|code| code == "42P04");
+                .is_some_and(|code| code == "42P04" || code == "23505");
             assert!(duplicate, "could not create test database: {error}");
         }
     }
