@@ -1,101 +1,19 @@
-# === Herramientas de IA / asistentes (no se versionan) ===
-.claude/
-.agents/
-CLAUDE.md
-skills-lock.json
-
-# === Secretos y configuración local ===
 .env
 .env.*
 !.env.example
-appsettings.local.json
-appsettings.Production.json
-appsettings.Staging.json
-client_secret*.json
-*.pem
-*.key
-*.pfx
-secrets.json
 
-# === Node.js ===
 node_modules/
-.pnpm-store/
-dist/
-build/
-frontend/build/
 .next/
 .turbo/
 *.tsbuildinfo
-npm-debug.log*
-pnpm-debug.log*
-.cache/
-coverage/
-.nyc_output/
-
-# === Python ===
-__pycache__/
-*.py[cod]
-venv/
-.venv/
-env/
-*.egg-info/
-.pytest_cache/
-.mypy_cache/
-
-# === Java / Maven ===
+next-env.d.ts
 target/
-*.class
-.mvn/wrapper/maven-wrapper.jar
 
-# === .NET / C# ===
-bin/
-obj/
-.vs/
-*.user
-*.suo
-packages/
-*.nupkg
-
-# === Ejecutables / binarios grandes descargados (no son código fuente) ===
-*.exe
-*.msi
-*.zip
-*.7z
-
-# === Logs y temporales ===
-*.log
-logs/
-*.tmp
-*.bak
-
-# === Runtime generado ===
-QRCodes/
-FaceData/
-Photos/
-Uploads/
 uploads/
-Backups/
-minio-data/
-minio/data/
-
-# === Editores / SO ===
-.vscode/
-.idea/
-.DS_Store
-Thumbs.db
-desktop.ini
-*.swp
-
-# === Versiones anteriores (locales, fuera del repositorio) ===
-versiones/
-
-# === Credenciales locales ===
-clavedegoogle.js
-
-# === Modelos GGUF locales (llama.cpp) ===
 deploy/models/
 *.gguf
 
-# === Material de producción de videos (las copias para la web están en web/public/videos) ===
-/Videos/
-/creative-resources/
+*.log
+.DS_Store
+.vscode/
+.idea/
