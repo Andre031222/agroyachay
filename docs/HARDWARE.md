@@ -1,10 +1,10 @@
 # Hardware setup: ESP32 + DHT11 + FC-28
 
-> Spanish version: [`HARDWARE_SETUP.es.md`](HARDWARE_SETUP.es.md)
+> Spanish version: [`HARDWARE.es.md`](HARDWARE.es.md)
 
 This guide covers the AgroYachay sensing node: parts, wiring, firmware, configuration
 and calibration. To try the node without hardware, use the
-[Wokwi simulation](simulation/README.md).
+[Wokwi simulation](../simulation/README.md).
 
 ## Components
 
@@ -37,7 +37,7 @@ finds them and stores them in NVS.
 
 ## Firmware
 
-Source: [`firmware/agroyachay-node/agroyachay-node.ino`](firmware/agroyachay-node/agroyachay-node.ino)
+Source: [`firmware/agroyachay-node/agroyachay-node.ino`](../firmware/agroyachay-node/agroyachay-node.ino)
 with `portal_html.h` (captive portal page).
 
 > **Moved in v3.** Until v1.0.1 the sketch was
@@ -147,7 +147,7 @@ the stored credentials and returns to setup mode.
 ```
 
 Endpoint: `POST /api/sensores/lectura`, no authentication. The full contract is
-in [`docs/API.md`](docs/API.md).
+in [`docs/API.md`](API.md).
 
 ## DHT11 calibration
 

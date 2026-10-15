@@ -171,7 +171,7 @@ Computed, not static text:
 
 ## 7. AI layer
 
-- One OpenAI-compatible chat client (`POST {base}/v1/chat/completions`, optional bearer key from `LLAMACPP_API_KEY`) serves every engine. Any server that implements that API works; two are documented in [`deploy/llama-cpp.md`](../deploy/llama-cpp.md):
+- One OpenAI-compatible chat client (`POST {base}/v1/chat/completions`, optional bearer key from `LLAMACPP_API_KEY`) serves every engine. Any server that implements that API works; two are documented in [`docs/DEPLOYMENT.md`, Appendix B](DEPLOYMENT.md#appendix-b-local-language-and-vision-models):
   - **llama.cpp** `llama-server`, used in development: Qwen3-4B-Instruct-2507 Q4_K_M for text on `:8081` (alias `qwen3-4b-instruct`) and Qwen2.5-VL-3B-Instruct Q4_K_M with its f16 mmproj for vision on `:8082` (alias `qwen2.5-vl-3b`).
   - **Ollama**'s OpenAI endpoint, used by the reference production server: one Ollama at `http://127.0.0.1:11434` with `qwen2.5:3b` for text and `qwen2.5vl:3b` for vision. Photos are reduced to `VISION_MAX_SIDE` pixels on the longest side before inference (the stored original is untouched), which keeps CPU-only triage near one minute.
 - The variable names keep the `LLAMACPP_` prefix whatever the server: `LLAMACPP_TEXT_URL`, `LLAMACPP_VISION_URL`, `LLAMACPP_TEXT_MODEL`, `LLAMACPP_VISION_MODEL`. A trailing `/v1` in the URL is accepted. Availability is checked with `GET {url}/health` and, when that fails (Ollama has no `/health`), `GET {url}/v1/models`; 3 s timeout.
@@ -273,7 +273,7 @@ Images live in `web/public/images/` with fixed names and are credited in `web/pu
 
 ## 10. Environment
 
-API (`api/.env` in development; `/opt/apps/rust/agroyachay/api.env` in the reference production deployment). Values below are those of production; defaults and the full list are in [`api/README.md`](../api/README.md).
+API (`api/.env` in development; `/opt/apps/rust/agroyachay/api.env` in the reference production deployment). Values below are those of production; defaults and the full list are in [`DEPLOYMENT.md`, Appendix A](DEPLOYMENT.md#appendix-a-environment-variables-api).
 
 ```
 DATABASE_URL=postgres://agroyachay:***@127.0.0.1:5432/agroyachay

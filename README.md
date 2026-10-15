@@ -84,7 +84,7 @@ flowchart LR
 | Database | PostgreSQL 17 (14 or newer works); schema in SQLx migrations | `api/migrations/` |
 | Sensing node | ESP32 DevKit v1, DHT11, FC-28; contract unchanged since v1 | `firmware/agroyachay-node/` |
 | Simulation | Wokwi browser simulation of the node | `simulation/` |
-| Language models | Qwen2.5-VL-3B-Instruct (vision; the model validated in the article) and a text model, through llama.cpp or Ollama; Groq optional for text | `deploy/llama-cpp.md` |
+| Language models | Qwen2.5-VL-3B-Instruct (vision; the model validated in the article) and a text model, through llama.cpp or Ollama; Groq optional for text | `docs/DEPLOYMENT.md` (Appendix B) |
 | Commissioning | [AgroCommish](https://github.com/Andre031222/agrocommish) desktop tool | separate repository |
 
 The binding description of the contract, data model and conventions is
@@ -176,8 +176,8 @@ LLAMACPP_VISION_MODEL=qwen2.5vl:3b
 ```
 
 GGUF downloads, flags and Ollama notes are in
-[`deploy/llama-cpp.md`](deploy/llama-cpp.md); every variable is listed in
-[`api/README.md`](api/README.md). A single-host stack with Docker Compose is
+[`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md#appendix-b-local-language-and-vision-models); every variable is listed in
+[Appendix A](docs/DEPLOYMENT.md#appendix-a-environment-variables-api). A single-host stack with Docker Compose is
 in [`deploy/docker-compose.yml`](deploy/docker-compose.yml), and the
 production procedure in [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md).
 
@@ -224,11 +224,8 @@ can be exercised end to end without hardware with the
 - [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md): contract, data model, AI layer, web design rules
 - [`docs/API.md`](docs/API.md): REST API reference
 - [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md): production deployment (Debian 12, nginx, systemd)
-- [`docs/RELEASE_AND_HISTORY.md`](docs/RELEASE_AND_HISTORY.md): versions, tags and DOIs
-- [`docs/TUTORIAL_SCRIPT.es.md`](docs/TUTORIAL_SCRIPT.es.md): long-form tutorial script (Spanish)
-- [`api/README.md`](api/README.md) and [`web/README.md`](web/README.md): running each part, environment variables
-- [`deploy/llama-cpp.md`](deploy/llama-cpp.md): local models with llama.cpp or Ollama
-- [`HARDWARE_SETUP.md`](HARDWARE_SETUP.md): wiring, firmware, calibration ([Spanish](HARDWARE_SETUP.es.md))
+- [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md): production deployment, local models (llama.cpp or Ollama) and every environment variable
+- [`docs/HARDWARE.md`](docs/HARDWARE.md): wiring, firmware, calibration ([Spanish](docs/HARDWARE.es.md))
 - [`simulation/README.md`](simulation/README.md): Wokwi simulation of the node
 
 ## Version 1 and version 3
@@ -243,9 +240,8 @@ Version 3 keeps the scientific content of the article (sensing node and
 telemetry contract, yield and revenue model, local vision triage with
 Qwen2.5-VL-3B, four-language interface) and replaces the implementation.
 Version 2 was an internal prototype that was never released, so the public
-version numbers go from 1.0.1 to 3.0.0 on purpose. The rules that keep the
-published references valid are in
-[`docs/RELEASE_AND_HISTORY.md`](docs/RELEASE_AND_HISTORY.md).
+version numbers go from 1.0.1 to 3.0.0 on purpose. The tags `v1.0.0` and
+`v1.0.1` and their Zenodo records are never moved or rewritten.
 
 The pest triage figures reported in the article (Qwen2.5-VL-3B on 509 images:
 sensitivity 100 %, specificity 62 %, macro-F1 0.55) are the reason the

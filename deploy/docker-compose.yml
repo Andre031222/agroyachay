@@ -4,7 +4,7 @@
 #   cp .env.example .env    # then edit the secrets
 #   docker compose up -d --build
 #   docker compose --profile llm up -d        # optional local models (llama.cpp),
-#                                             # GGUF files in deploy/models (see llama-cpp.md)
+#                                             # GGUF files in deploy/models (see docs/DEPLOYMENT.md, Appendix B)
 #
 # Web: http://localhost:3010   API: http://localhost:9001/api/health
 
