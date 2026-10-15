@@ -1,0 +1,9 @@
+WEBVTT
+
+1
+00:00:00.250 --> 00:00:03.539
+Three low-cost sensors connect to the ESP32.
+
+2
+00:00:03.539 --> 00:00:09.950
+The DHT11 reads the air, the probe reads the soil, and the ESP32 sends it all by Wi-Fi.

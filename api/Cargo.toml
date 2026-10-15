@@ -1,0 +1,40 @@
+[package]
+name = "agroyachay-api"
+version = "3.0.0"
+edition = "2024"
+description = "AgroYachay API: IoT and LLM decision support for Andean smallholders"
+license = "MIT"
+publish = false
+
+[dependencies]
+async-trait = "0.1"
+axum = { version = "0.8", features = ["multipart", "macros"] }
+base64 = "0.23"
+bcrypt = "0.19"
+chrono = { version = "0.4", features = ["serde"] }
+dotenvy = "0.15"
+image = { version = "0.25", default-features = false, features = ["jpeg", "png", "webp"] }
+jsonwebtoken = { version = "11", features = ["rust_crypto"] }
+lettre = { version = "0.11.23", default-features = false, features = ["builder", "smtp-transport", "pool", "hostname", "tokio1-rustls", "aws-lc-rs", "rustls-platform-verifier"] }
+rand = "0.10.3"
+reqwest = { version = "0.13", default-features = false, features = ["json", "query", "rustls"] }
+rust_xlsxwriter = "0.99"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+sha2 = "0.11.1"
+sqlx = { version = "0.9", default-features = false, features = ["runtime-tokio", "tls-rustls", "postgres", "chrono", "json", "migrate", "macros"] }
+thiserror = "2"
+tokio = { version = "1", features = ["full"] }
+tower = "0.5"
+tower-http = { version = "0.7", features = ["cors", "trace", "limit"] }
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+uuid = { version = "1", features = ["v4"] }
+
+[dev-dependencies]
+http-body-util = "0.1"
+tower = { version = "0.5", features = ["util"] }
+
+[profile.release]
+lto = "thin"
+strip = true

@@ -1,0 +1,9 @@
+WEBVTT
+
+1
+00:00:00.250 --> 00:00:02.484
+El ESP32 es el cerebro del nodo.
+
+2
+00:00:02.484 --> 00:00:08.698
+Lee cada sensor, procesa los datos, y los envía por wifi a AgroYachay cada diez segundos.

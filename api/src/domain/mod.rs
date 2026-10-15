@@ -1,0 +1,12 @@
+pub mod agro_weather;
+pub mod ai_schema;
+pub mod almanac;
+pub mod astronomy;
+pub mod emails;
+pub mod inputs;
+pub mod prompts;
+pub mod roles;
+pub mod species;
+pub mod telemetry;
+pub mod thresholds;
+pub mod yield_model;

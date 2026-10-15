@@ -1,0 +1,13 @@
+WEBVTT
+
+1
+00:00:00.250 --> 00:00:02.919
+El DHT11 mide la temperatura del aire.
+
+2
+00:00:02.919 --> 00:00:04.956
+Su rejilla protege el sensor.
+
+3
+00:00:04.956 --> 00:00:09.381
+También mide la humedad relativa, y envía ambos datos al ESP32.

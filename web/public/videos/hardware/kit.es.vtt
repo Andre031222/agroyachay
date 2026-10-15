@@ -1,0 +1,9 @@
+WEBVTT
+
+1
+00:00:00.250 --> 00:00:04.118
+Tres sensores de bajo costo se conectan directo al ESP32.
+
+2
+00:00:04.118 --> 00:00:09.615
+El DHT11 mide el aire, la sonda mide el suelo, y el ESP32 lo envía todo por wifi.

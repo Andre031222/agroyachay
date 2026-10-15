@@ -1,0 +1,111 @@
+# AgroYachay 3 — single-host stack for evaluation and small deployments.
+#
+#   cd deploy
+#   cp .env.example .env    # then edit the secrets
+#   docker compose up -d --build
+#   docker compose --profile llm up -d        # optional local models (llama.cpp),
+#                                             # GGUF files in deploy/models (see llama-cpp.md)
+#
+# Web: http://localhost:3010   API: http://localhost:9001/api/health
+
+name: agroyachay
+
+services:
+  db:
+    image: postgres:17
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: agroyachay
+      POSTGRES_USER: agroyachay
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in deploy/.env}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "127.0.0.1:5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U agroyachay -d agroyachay"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  api:
+    build:
+      context: ../api
+      dockerfile: ../deploy/docker/api.Dockerfile
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgres://agroyachay:${POSTGRES_PASSWORD}@db:5432/agroyachay
+      JWT_SECRET: ${JWT_SECRET:?set JWT_SECRET in deploy/.env}
+      PORT: "9001"
+      PUBLIC_URL: ${PUBLIC_URL:-http://localhost:3010}
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:3010}
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:-}
+      LLM_PROVIDER: ${LLM_PROVIDER:-llamacpp}
+      LLAMACPP_TEXT_URL: ${LLAMACPP_TEXT_URL:-http://llm-text:8080}
+      LLAMACPP_VISION_URL: ${LLAMACPP_VISION_URL:-http://llm-vision:8080}
+      LLAMACPP_TEXT_MODEL: ${LLAMACPP_TEXT_MODEL:-qwen3-4b-instruct}
+      LLAMACPP_VISION_MODEL: ${LLAMACPP_VISION_MODEL:-qwen2.5-vl-3b}
+      GROQ_API_KEY: ${GROQ_API_KEY:-}
+      GROQ_MODEL: ${GROQ_MODEL:-openai/gpt-oss-120b}
+      UPLOAD_DIR: /app/uploads
+      ADMIN_EMAIL: ${ADMIN_EMAIL:-}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-}
+      SUPERADMIN_EMAILS: ${SUPERADMIN_EMAILS:-}
+      SMTP_HOST: ${SMTP_HOST:-}
+      SMTP_PORT: ${SMTP_PORT:-587}
+      SMTP_USERNAME: ${SMTP_USERNAME:-}
+      SMTP_PASSWORD: ${SMTP_PASSWORD:-}
+      SMTP_FROM: ${SMTP_FROM:-AgroYachay <no-reply@ginit.dev>}
+    volumes:
+      - uploads:/app/uploads
+    ports:
+      - "9001:9001"
+
+  web:
+    build:
+      context: ../web
+      dockerfile: ../deploy/docker/web.Dockerfile
+      args:
+        API_PROXY_TARGET: http://api:9001
+        NEXT_PUBLIC_GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:-}
+    restart: unless-stopped
+    depends_on:
+      - api
+    ports:
+      - "3010:3010"
+
+  llm-text:
+    image: ghcr.io/ggml-org/llama.cpp:server
+    profiles: ["llm"]
+    restart: unless-stopped
+    command: >
+      -m /models/Qwen3-4B-Instruct-2507-Q4_K_M.gguf
+      --alias qwen3-4b-instruct
+      --host 0.0.0.0 --port 8080
+      -c 8192 --parallel 2 --jinja --no-webui
+    volumes:
+      - ./models:/models:ro
+    ports:
+      - "127.0.0.1:8081:8080"
+
+  llm-vision:
+    image: ghcr.io/ggml-org/llama.cpp:server
+    profiles: ["llm"]
+    restart: unless-stopped
+    command: >
+      -m /models/Qwen2.5-VL-3B-Instruct-Q4_K_M.gguf
+      --mmproj /models/mmproj-Qwen2.5-VL-3B-Instruct-f16.gguf
+      --alias qwen2.5-vl-3b
+      --host 0.0.0.0 --port 8080
+      -c 8192 --parallel 1 --jinja --no-webui
+    volumes:
+      - ./models:/models:ro
+    ports:
+      - "127.0.0.1:8082:8080"
+
+volumes:
+  pgdata:
+  uploads:

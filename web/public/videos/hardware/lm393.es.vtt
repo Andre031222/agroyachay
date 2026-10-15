@@ -1,0 +1,9 @@
+WEBVTT
+
+1
+00:00:00.250 --> 00:00:05.561
+La placa comparadora LM393 convierte la señal del sensor en una lectura limpia.
+
+2
+00:00:05.561 --> 00:00:09.594
+Su perilla ajusta la sensibilidad, antes de llegar al ESP32.

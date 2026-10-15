@@ -1,34 +1,43 @@
 cff-version: 1.2.0
-message: "If you use this software, please cite the article (preferred-citation below)."
+message: "If you use this software, please cite the article in preferred-citation. To refer to a specific code version, cite the software DOI."
 title: "AgroYachay: An open-source IoT and large-language-model platform supporting agronomic and economic decision-making for Andean smallholders"
+abstract: "AgroYachay (yachay, 'knowledge' in Quechua) turns low-cost ESP32 telemetry into agronomic and economic decisions for Andean smallholders: real-time monitoring with alerts, pest and disease triage with a locally hosted vision model, conversational agronomy, a computed agricultural almanac, and transparent yield and revenue estimation, in a Spanish, English, Quechua and Aymara interface. Version 3.0.0 is a rewrite of the platform (Rust API, Next.js web application, PostgreSQL, local open models served through an OpenAI-compatible server such as llama.cpp or Ollama). The version described in SoftwareX 36 (2026) 103037 is v1.0.1, archived at Zenodo (doi:10.5281/zenodo.20829992). Version 2 was an internal prototype and was not released."
 type: software
-version: 1.0.1
-date-released: 2026-07-15
+version: 3.0.0
+date-released: 2026-10-15
 license: MIT
 repository-code: "https://github.com/Andre031222/agroyachay"
+url: "https://agroyachay.ginit.dev"
 doi: "10.5281/zenodo.20829992"
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.20829992"
+    description: "Zenodo archive of the software (v1.0.1, cited in the article)"
+  - type: doi
+    value: "10.1016/j.softx.2026.103037"
+    description: "SoftwareX article describing AgroYachay v1.0.1"
 authors:
-  - family-names: "Torres-Cruz"
+  - family-names: "Torres Cruz"
     given-names: "Fred"
     email: "20260957@lamolina.pe"
     orcid: "https://orcid.org/0000-0003-0834-6834"
     affiliation: "Doctoral Program in Sustainable Agriculture, Universidad Nacional Agraria La Molina, Lima, Peru"
-  - family-names: "Vilca-Solorzano"
+  - family-names: "Vilca Solorzano"
     given-names: "Richar Andre"
     email: "andrevilcasolorzano@gmail.com"
     orcid: "https://orcid.org/0009-0003-2385-5263"
     affiliation: "Universidad Nacional del Altiplano, Puno, Peru"
-  - family-names: "Yana-Yucra"
+  - family-names: "Yana Yucra"
     given-names: "Dina Maribel"
     email: "maribelbel201314@gmail.com"
     orcid: "https://orcid.org/0009-0003-6218-2735"
     affiliation: "Universidad Nacional del Altiplano, Puno, Peru"
-  - family-names: "Ibañez-Quispe"
+  - family-names: "Ibañez Quispe"
     given-names: "Vladimiro"
     email: "vibanez@unap.edu.pe"
     orcid: "https://orcid.org/0000-0002-0277-4945"
     affiliation: "Universidad Nacional del Altiplano, Puno, Peru"
-  - family-names: "Fuentes-Navarro"
+  - family-names: "Fuentes Navarro"
     given-names: "Eduardo Leuman"
     email: "efuentes@lamolina.edu.pe"
     orcid: "https://orcid.org/0000-0001-9351-9853"
@@ -41,20 +50,41 @@ keywords:
   - decision support system
   - Andean smallholder farming
   - ESP32
+  - Quechua
+  - Aymara
+  - llama.cpp
 preferred-citation:
   type: article
   title: "AgroYachay: An open-source IoT and large-language-model platform supporting agronomic and economic decision-making for Andean smallholders"
   journal: "SoftwareX"
+  volume: 36
+  start: 103037
   year: 2026
   doi: "10.1016/j.softx.2026.103037"
+  url: "https://doi.org/10.1016/j.softx.2026.103037"
   authors:
-    - family-names: "Torres-Cruz"
-      given-names: "Fred"
-    - family-names: "Vilca-Solorzano"
-      given-names: "Richar Andre"
-    - family-names: "Yana-Yucra"
-      given-names: "Dina Maribel"
-    - family-names: "Ibañez-Quispe"
-      given-names: "Vladimiro"
-    - family-names: "Fuentes-Navarro"
-      given-names: "Eduardo Leuman"
+      - family-names: "Torres Cruz"
+        given-names: "Fred"
+        email: "20260957@lamolina.pe"
+        orcid: "https://orcid.org/0000-0003-0834-6834"
+        affiliation: "Doctoral Program in Sustainable Agriculture, Universidad Nacional Agraria La Molina, Lima, Peru"
+      - family-names: "Vilca Solorzano"
+        given-names: "Richar Andre"
+        email: "andrevilcasolorzano@gmail.com"
+        orcid: "https://orcid.org/0009-0003-2385-5263"
+        affiliation: "Universidad Nacional del Altiplano, Puno, Peru"
+      - family-names: "Yana Yucra"
+        given-names: "Dina Maribel"
+        email: "maribelbel201314@gmail.com"
+        orcid: "https://orcid.org/0009-0003-6218-2735"
+        affiliation: "Universidad Nacional del Altiplano, Puno, Peru"
+      - family-names: "Ibañez Quispe"
+        given-names: "Vladimiro"
+        email: "vibanez@unap.edu.pe"
+        orcid: "https://orcid.org/0000-0002-0277-4945"
+        affiliation: "Universidad Nacional del Altiplano, Puno, Peru"
+      - family-names: "Fuentes Navarro"
+        given-names: "Eduardo Leuman"
+        email: "efuentes@lamolina.edu.pe"
+        orcid: "https://orcid.org/0000-0001-9351-9853"
+        affiliation: "Faculty of Animal Science, Universidad Nacional Agraria La Molina, Lima, Peru"

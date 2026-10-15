@@ -1,0 +1,13 @@
+WEBVTT
+
+1
+00:00:00.250 --> 00:00:02.789
+The DHT11 measures air temperature.
+
+2
+00:00:02.789 --> 00:00:05.400
+Its vented case protects the sensor.
+
+3
+00:00:05.400 --> 00:00:09.679
+It also reads humidity, and sends both values to the ESP32.

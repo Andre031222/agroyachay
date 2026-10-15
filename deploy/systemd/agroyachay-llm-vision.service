@@ -1,0 +1,35 @@
+[Unit]
+Description=AgroYachay vision model (llama.cpp llama-server, Qwen2.5-VL-3B-Instruct)
+Documentation=https://github.com/ggml-org/llama.cpp/blob/master/docs/multimodal.md
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=llama
+Group=llama
+WorkingDirectory=/var/lib/llama
+ExecStart=/opt/llama.cpp/bin/llama-server \
+    -m /var/lib/llama/models/Qwen2.5-VL-3B-Instruct-Q4_K_M.gguf \
+    --mmproj /var/lib/llama/models/mmproj-Qwen2.5-VL-3B-Instruct-f16.gguf \
+    --alias qwen2.5-vl-3b \
+    --host 127.0.0.1 --port 8082 \
+    -c 8192 --parallel 1 --jinja \
+    --no-webui
+Restart=on-failure
+RestartSec=5
+LimitNOFILE=65536
+
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadOnlyPaths=/var/lib/llama/models
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+LockPersonality=true
+
+[Install]
+WantedBy=multi-user.target

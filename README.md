@@ -1,330 +1,306 @@
-<!-- ============================================================
-     HERO HEADER
-     ============================================================ -->
 <div align="center">
 
-<img src="https://raw.githubusercontent.com/Andre031222/agroyachay/main/frontend/public/favicon-512.png" height="100" alt="AgroYachay logo"/>
+<img src="web/public/brand/agroyachay-mark-256.png" alt="AgroYachay" width="112" height="112">
 
 # AgroYachay
 
-### Open-source IoT &amp; Large-Language-Model platform supporting agronomic and economic decision-making for Andean smallholders
+### An open-source IoT and large-language-model platform supporting agronomic and economic decision-making for Andean smallholders
 
-<p>
-  <a href="https://doi.org/10.5281/zenodo.20829992"><img src="https://img.shields.io/badge/DOI-10.5281%2Fzenodo.20829992-1d4ed8?style=for-the-badge"></a>
-  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-2E7D32?style=for-the-badge"></a>
-  <a href="https://agroyachay.ginit.dev"><img src="https://img.shields.io/badge/Live%20Demo-agroyachay.ginit.dev-0F2444?style=for-the-badge&logo=googlechrome&logoColor=white"></a>
-  <a href="https://doi.org/10.1016/j.softx.2026.103037"><img src="https://img.shields.io/badge/SoftwareX%20DOI-10.1016%2Fj.softx.2026.103037-1d4ed8?style=for-the-badge"></a>
-  <a href="https://www.scimagojr.com/journalsearch.php?q=21100422153&tip=sid&clean=0"><img src="https://img.shields.io/badge/SCIMAGO_Verified-Scopus_Q2-F39C12?style=for-the-badge"></a>
-  <a href="https://github.com/Andre031222/agrocommish"><img src="https://img.shields.io/badge/Companion-AgroCommish-8E24AA?style=for-the-badge&logo=github&logoColor=white"></a>
-</p>
+<a href="https://doi.org/10.1016/j.softx.2026.103037"><img src="https://img.shields.io/badge/SoftwareX_DOI-10.1016%2Fj.softx.2026.103037-1d4ed8?style=for-the-badge" alt="SoftwareX DOI"></a>
+<a href="https://doi.org/10.5281/zenodo.20829992"><img src="https://img.shields.io/badge/DOI-10.5281%2Fzenodo.20829992-1d4ed8?style=for-the-badge" alt="Zenodo DOI"></a>
+<a href="https://www.scimagojr.com/journalsearch.php?q=21100422153&tip=sid&clean=0"><img src="https://img.shields.io/badge/SCImago-Scopus_Q2-F39C12?style=for-the-badge" alt="SCImago Scopus Q2"></a>
+<br>
+<a href="https://agroyachay.ginit.dev"><img src="https://img.shields.io/badge/Live-agroyachay.ginit.dev-0F2444?style=for-the-badge" alt="Live instance"></a>
+<a href="https://agroyachay.ginit.dev/guide"><img src="https://img.shields.io/badge/Video_guide-12_%C3%97_20_s-0F2444?style=for-the-badge" alt="Video guide"></a>
+<a href="https://github.com/Andre031222/agrocommish"><img src="https://img.shields.io/badge/Companion-AgroCommish-7B2CBF?style=for-the-badge" alt="AgroCommish"></a>
+<a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-2E7D32?style=for-the-badge" alt="MIT licence"></a>
 
-<p>
-  <a href="https://github.com/Andre031222/agroyachay/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/Andre031222/agroyachay/ci.yml?style=flat-square&label=CI"></a>
-  <img src="https://img.shields.io/badge/Python-3.9%2B-64748b?style=flat-square&logo=python&logoColor=white">
-  <img src="https://img.shields.io/badge/React-18-38bdf8?style=flat-square&logo=react&logoColor=white">
-  <img src="https://img.shields.io/badge/PostgreSQL-14%2B-336791?style=flat-square&logo=postgresql&logoColor=white">
-</p>
-
-<p align="center">
-  <em>
-    <b>AgroYachay</b> (<i>yachay</i> — &ldquo;knowledge&rdquo; in Quechua) turns low-cost
-    <b>ESP32</b> telemetry into agronomic and economic decisions for Andean smallholders:<br>
-    real-time monitoring, <b>LLM</b> pest diagnosis, conversational agronomy, and
-    yield-&amp;-revenue forecasting &mdash; in a multilingual
-    <b>Spanish / Quechua / Aymara / English</b> interface.
-  </em>
-</p>
-
-<p align="center">
-  <b>🌟 Officially published as a peer-reviewed research article in <a href="https://doi.org/10.1016/j.softx.2026.103037"><em>SoftwareX</em> (Elsevier, Scopus Q2)</a>.</b><br>
-  This repository contains the complete open-source implementation of the application.
-</p>
-
-<p align="center">
-  <a href="https://github.com/Andre031222/agroyachay">
-    <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=600&size=18&duration=2800&pause=900&color=2E7D32&center=true&vCenter=true&width=820&lines=ESP32+telemetry+-%3E+agronomic+%26+economic+decisions;LLM+vision+-%3E+pest+%2F+disease+diagnosis+with+local+treatments;transparent+yield+%26+revenue+estimation;multilingual+UI+-%3E+Spanish+%2F+Quechua+%2F+Aymara+%2F+English;cloud+counterpart+of+AgroCommish">
-  </a>
-</p>
+<a href="https://github.com/Andre031222/agroyachay/actions/workflows/ci.yml"><img src="https://github.com/Andre031222/agroyachay/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
+<img src="https://img.shields.io/badge/version-3.0.0-248a3d" alt="Version 3.0.0">
+<img src="https://img.shields.io/badge/Rust-Axum_0.8-b7410e?logo=rust&logoColor=white" alt="Rust">
+<img src="https://img.shields.io/badge/Next.js-16-000000?logo=nextdotjs&logoColor=white" alt="Next.js 16">
+<img src="https://img.shields.io/badge/PostgreSQL-17-336791?logo=postgresql&logoColor=white" alt="PostgreSQL 17">
+<img src="https://img.shields.io/badge/models-llama.cpp_%7C_Ollama-555555" alt="llama.cpp or Ollama">
+<img src="https://img.shields.io/badge/ES_%7C_QU_%7C_AY_%7C_EN-4_languages-248a3d" alt="Four languages">
 
 </div>
 
----
+AgroYachay (*yachay*, "knowledge" in Quechua) turns readings from low-cost
+ESP32 field nodes into agronomic and economic decisions for smallholders in the
+Peruvian and Bolivian highlands. It combines real-time monitoring, local
+weather, a computed agricultural almanac, pest and disease triage from a photo
+with a locally hosted vision model, input costing and a transparent yield and
+revenue model, in Spanish, English, Quechua and Aymara. Version 3.0.0 is a
+rewrite of the platform described in the SoftwareX article: a Rust API, a
+Next.js web application, PostgreSQL, and open models served by any
+OpenAI-compatible server (llama.cpp or Ollama).
 
-## Tech stack
+## What it does
 
-<div align="center">
-  <img height="46" alt="Python"     src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg">
-  <img height="46" alt="Flask"      src="https://raw.githubusercontent.com/devicons/devicon/master/icons/flask/flask-original.svg">
-  <img height="46" alt="PostgreSQL" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original.svg">
-  <img height="46" alt="React"      src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg">
-  <img height="46" alt="JavaScript" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg">
-  <img height="46" alt="TailwindCSS" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/tailwindcss/tailwindcss-original.svg">
-  <img height="46" alt="Vite"       src="https://raw.githubusercontent.com/devicons/devicon/master/icons/vitejs/vitejs-original.svg">
-  <img height="46" alt="Arduino"    src="https://raw.githubusercontent.com/devicons/devicon/master/icons/arduino/arduino-original.svg">
-  &nbsp;
-  <img src="https://img.shields.io/badge/Groq_LLM-F55036?style=flat-square&logo=groq&logoColor=white">
-  <img src="https://img.shields.io/badge/OpenWeather-EB6E4B?style=flat-square&logo=openweathermap&logoColor=white">
-</div>
+- **Monitoring**: air temperature, air humidity and soil moisture from each
+  node, per-device thresholds, alerts (including an offline alert), and a
+  plain-language verdict on every metric.
+- **Weather**: Open-Meteo forecast for the user's location (browser
+  geolocation or place search) with frost risk, spray windows, reference
+  evapotranspiration and a weekly activity plan written by the text model.
+- **Almanac**: moon phases, sunrise and sunset, and the Andean agricultural
+  calendar, computed for the user's coordinates; moon-related practices are
+  labelled as traditional knowledge, not agronomic evidence.
+- **Pest triage**: the vision model identifies the problem in a photo, the text
+  model explains it and proposes a management plan. Every result carries the
+  note that it is a first check, not a final diagnosis.
+- **Inputs and yield**: N-P-K, seed, lime and labour with costs from an
+  editable product catalogue; yield and revenue from the article's Eq. 1 with
+  every factor shown in plain words.
+- **Advisory and reports**: an assistant that knows the user's crops and
+  readings, requests to a human agronomist, a printable report and `.xlsx`
+  downloads.
+- **Accounts**: e-mail and password or Google sign-in, password recovery by
+  e-mail, roles `farmer`, `admin` and `superadmin`, and an audit log
+  (bitácora) of every sensitive action.
 
----
-
-## Authors
-
-| Name | Affiliation |
-| --- | --- |
-| Fred Torres-Cruz | Doctoral Program in Sustainable Agriculture, Universidad Nacional Agraria La Molina, Lima, Peru |
-| Richar Andre Vilca-Solorzano <sub>corresponding author</sub> | Department of Statistical and Informatics Engineering, Universidad Nacional del Altiplano (UNAP), Puno, Peru |
-| Dina Maribel Yana-Yucra | Department of Statistical and Informatics Engineering, Universidad Nacional del Altiplano (UNAP), Puno, Peru |
-| Vladimiro Ibañez-Quispe | Department of Statistical and Informatics Engineering, Universidad Nacional del Altiplano (UNAP), Puno, Peru |
-| Eduardo Leuman Fuentes-Navarro | Faculty of Animal Science, Universidad Nacional Agraria La Molina, Lima, Peru |
-
----
-
-## Overview
-
-Deploying low-cost agricultural IoT is now economically feasible, but reviews of
-the field consistently report that the harder, recurring gap is the *last mile*
-between raw telemetry and a decision a smallholder can act on. A node reporting
-"soil moisture 18 %" does not tell a Quechua-speaking potato grower at 3,800 m
-whether to irrigate today, whether the leaf spots on a plant are late blight, or
-whether the season will pay for its inputs.
-
-**AgroYachay** closes that loop. It is an open-source web platform that turns
-low-cost ESP32 telemetry into actionable agronomic and economic decisions for
-Andean smallholders. ESP32 nodes streaming air temperature/humidity (DHT11) and
-soil moisture (FC-28) feed a Flask/PostgreSQL backend and a React dashboard with
-threshold alerts. Pest/disease diagnosis runs **on-device** through a
-self-hosted open vision model (qwen2.5-VL via Ollama), so images are never sent
-to a third-party API; a cloud text LLM adds a context-aware conversational
-agronomic assistant and forecast-driven activity planning, with locally
-available treatments. A
-transparent factor model couples crop phenology, climate and parcel area with
-regional market prices to estimate yield, revenue and confidence, and the system
-exports PDF/Excel reports. The interface is multilingual (Spanish, Quechua, Aymara, English).
-
-AgroYachay is the cloud counterpart of the **[AgroCommish](https://github.com/Andre031222/agrocommish)**
-commissioning tool, which manufactures and provisions the ESP32 nodes; together
-they form an open, reproducible *device-to-decision* pipeline for low-resource
-agriculture.
-
----
-
-## Key Features
-
-| Module | Function |
-| --- | --- |
-| Real-time monitoring | Ingests ESP32 readings, links devices to crops/users, stores time series, renders live temperature, air- and soil-humidity charts (Recharts) |
-| Threshold alerts | Per-sensor configurable limits raise frost, drought and water-logging alerts |
-| LLM pest/disease diagnosis | Upload a leaf photo → vision LLM returns a structured verdict (disease, confidence, severity) and a Peru-specific management plan with product doses and an organic alternative |
-| Conversational agronomy | Context-aware assistant answers free-form questions conditioned on the farmer's crops, region and latest sensor values |
-| Forecast planning | Turns current conditions and the 5-day OpenWeather forecast into a risk level, weekly activity plan and optimal-day recommendations |
-| Yield &amp; revenue estimation | Transparent multiplicative factor model (climate × phenology × area) × regional price → projected tonnage, expected revenue and a confidence score; no training data required |
-| Reporting | Executive, crop-status, financial and climate-impact reports as styled PDF (ReportLab) and Excel (OpenPyXL) |
-| Multilingual UI | Runtime locale dictionaries for Spanish (`es`), Quechua (`qu`), Aymara (`ay`) and English (`en`) |
-| Security | JWT auth (Flask-JWT-Extended) with bcrypt hashing and optional Google OAuth |
-
----
+A public [video guide](https://agroyachay.ginit.dev/guide) shows each module
+in twelve 20-second videos.
 
 ## Architecture
 
-AgroYachay follows a three-tier edge–cloud architecture:
-
-```text
-ESP32 (DHT11 + FC-28)  ──WiFi/HTTP(JSON)──►  Flask 3 backend  ──►  PostgreSQL 17
-   (commissioned by                          │  controllers + services
-    AgroCommish)                             │  ├─ groq_service   (LLM)
-                                             │  └─ weather_service (OpenWeather)
-                                             ▼
-                                   React 18 SPA (Tailwind + Recharts)
-                                   JWT-secured REST API
+```mermaid
+flowchart LR
+    node["ESP32 node"] -- "POST /api/sensores/lectura<br/>(HTTP or HTTPS)" --> nginx
+    commish["AgroCommish"] -- "login, verification" --> nginx
+    browser["Browser"] -- HTTPS --> nginx
+    nginx -- "/api/*" --> api["API<br/>Rust, Axum"]
+    nginx -- "everything else" --> web["Web<br/>Next.js"]
+    api --> db[("PostgreSQL")]
+    api -- "/v1/chat/completions" --> llm["OpenAI-compatible model server<br/>llama.cpp or Ollama"]
+    api --> meteo["Open-Meteo"]
+    api -. "optional, text only" .-> groq["Groq"]
 ```
 
-- **Backend** — Flask 3 (~7,300 LOC): request controllers (`auth`, `sensores`,
-  `cultivos`, `plagas`, `clima`, `asistente`, `superadmin`), feature route
-  modules (`prediccion`, `asesoria`, `informes`, `insumos`, `marketplace`),
-  SQLAlchemy models, and a service layer. State persists in PostgreSQL across
-  15 normalised tables.
-- **Frontend** — React 18 SPA (~13,000 LOC) with Tailwind CSS, Recharts and an
-  Axios REST client.
-- **Intelligence layer** — self-hosted open vision model (Ollama) for pest
-  diagnosis (on-device, private) plus a cloud text LLM; OpenWeather API for
-  current conditions and forecast.
+| Component | Technology | Folder |
+|---|---|---|
+| API | Rust (edition 2024), Axum 0.8, SQLx 0.9, Tokio | `api/` |
+| Web application | Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS 4 | `web/` |
+| Database | PostgreSQL 17 (14 or newer works); schema in SQLx migrations | `api/migrations/` |
+| Sensing node | ESP32 DevKit v1, DHT11, FC-28; contract unchanged since v1 | `firmware/agroyachay-node/` |
+| Simulation | Wokwi browser simulation of the node | `simulation/` |
+| Language models | Qwen2.5-VL-3B-Instruct (vision; the model validated in the article) and a text model, through llama.cpp or Ollama; Groq optional for text | `deploy/llama-cpp.md` |
+| Commissioning | [AgroCommish](https://github.com/Andre031222/agrocommish) desktop tool | separate repository |
 
----
+The binding description of the contract, data model and conventions is
+[`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
 
-## Screenshots
+## Repository layout
 
-<div align="center">
-<img src="docs/img/dashboard.png" width="82%" alt="Real-time monitoring dashboard"/>
-<br/><sub><b>Real-time monitoring</b> — live air/soil series, KPI cards and threshold alerts</sub>
-<br/><br/>
-<img src="docs/img/pest-diagnosis.png" width="82%" alt="LLM pest/disease diagnosis"/>
-<br/><sub><b>LLM pest/disease diagnosis</b> — structured verdict + Peru-specific management plan</sub>
-<br/><br/>
-<img src="docs/img/yield-prediction.png" width="82%" alt="Yield and revenue estimation"/>
-<br/><sub><b>Yield &amp; revenue estimation</b> — projected tonnage, expected revenue and confidence</sub>
-</div>
-
----
-
-## Repository Structure
-
-```text
-.
-├── backend/                      # Flask 3 + SQLAlchemy + PostgreSQL
-│   ├── main.py                   # app entry point (WSGI: main:app)
-│   ├── controllers/              # auth, sensores, cultivos, plagas, clima, asistente, superadmin
-│   ├── app/
-│   │   ├── routes/               # prediccion, asesoria, informes, insumos, marketplace
-│   │   ├── models/               # SQLAlchemy models
-│   │   ├── services/             # groq_service, weather_service, ml_prediccion
-│   │   └── utils/                # PDF/Excel reports, email
-│   ├── migrations/               # SQL schema + advanced-features migrations
-│   ├── scripts/setup_postgres.py # one-shot DB bootstrap (tables, indexes, admin)
-│   ├── tests/                    # pytest suite
-│   └── requirements.txt
-├── frontend/                     # React 18 + Vite + Tailwind
-│   ├── src/                      # components, pages, context, locales (es/qu/ay)
-│   ├── public/
-│   └── package.json
-├── arduino/                      # ESP32 firmware (companion: AgroCommish)
-├── HARDWARE_SETUP.md             # wiring (ESP32 + DHT11 + FC-28)
-├── CITATION.cff
-└── LICENSE
+```
+api/          Rust service: REST API, telemetry ingestion, models, reports, SQL migrations
+web/          Next.js landing page, video guide and application
+firmware/     ESP32 node firmware (Arduino sketch)
+simulation/   Wokwi simulation of the node, no hardware needed
+deploy/       nginx, systemd, Docker Compose, model servers, v1 → v3 data migration
+docs/         architecture, API reference, deployment, release policy, tutorial script
 ```
 
----
+## Quick start (development)
 
-## Installation
+Requirements: Rust 1.88 or newer, Node.js 22 or newer with pnpm
+(`corepack enable`), PostgreSQL 14 or newer, and optionally llama.cpp or
+Ollama for the AI features.
 
-Requires **Python ≥ 3.9**, **Node.js ≥ 18** and **PostgreSQL ≥ 14**.
-
-### 1. Backend
+**1. Database.** The role needs `CREATEDB` only for the integration tests,
+which create `agroyachay_test`.
 
 ```bash
-cd backend
-python -m venv .venv && . .venv/bin/activate      # Windows: .venv\Scripts\activate
-pip install -r requirements.txt
-cp .env.example .env                              # then fill in DB + API keys
-
-# Bootstrap the database (tables, indexes, superadmin).
-# Set ADMIN_EMAIL / ADMIN_PASSWORD first; otherwise a random password is printed.
-python scripts/setup_postgres.py
-
-python main.py                                    # serves on http://localhost:5000
+psql -U postgres -c "CREATE ROLE agroyachay LOGIN PASSWORD 'agroyachay' CREATEDB;"
+psql -U postgres -c "CREATE DATABASE agroyachay OWNER agroyachay;"
 ```
 
-Required environment variables (see [`backend/.env.example`](backend/.env.example)):
-`DB_*`, `SECRET_KEY`, `JWT_SECRET_KEY`, `GROQ_API_KEY`, `OPENWEATHER_API_KEY`,
-and optional `GOOGLE_CLIENT_ID` / `PLANT_ID_API_KEY`.
-
-### 2. Frontend
+**2. API** (port 5000; migrations run on start-up and a superadmin is created
+from `ADMIN_EMAIL`/`ADMIN_PASSWORD` if none exists).
 
 ```bash
-cd frontend
-npm install            # or: pnpm install
-npm run dev            # development server
-npm run build          # production build → frontend/build
+cd api
+cat > .env <<'EOF'
+DATABASE_URL=postgres://agroyachay:agroyachay@127.0.0.1:5432/agroyachay
+JWT_SECRET=dev-only-secret-change-me
+PORT=5000
+PUBLIC_URL=http://localhost:3000
+CORS_ORIGINS=http://localhost:3000
+ADMIN_EMAIL=admin@example.org
+ADMIN_PASSWORD=change-me-now
+LLM_PROVIDER=llamacpp
+LLAMACPP_TEXT_URL=http://127.0.0.1:8081
+LLAMACPP_VISION_URL=http://127.0.0.1:8082
+LLAMACPP_TEXT_MODEL=qwen3-4b-instruct
+LLAMACPP_VISION_MODEL=qwen2.5-vl-3b
+EOF
+cargo run
+curl -s http://127.0.0.1:5000/api/health
 ```
 
-Set `VITE_API_URL` (and optional `VITE_GOOGLE_CLIENT_ID`) in `frontend/.env`
-(see [`frontend/.env.example`](frontend/.env.example)). For a same-origin
-deployment, point the web server's `/api/*` to the backend and serve the build
-statically.
+On macOS the AirPlay receiver may already hold port 5000. Use another port
+(`PORT=9001 cargo run`) and point the web proxy at it in step 3.
 
-### 3. Firmware
+**3. Web** (<http://localhost:3000>; requests to `/api` are forwarded to
+`API_PROXY_TARGET`, default `http://127.0.0.1:5000`).
 
-The ESP32 firmware and the full flashing/provisioning workflow are provided by
-the companion tool **[AgroCommish](https://github.com/Andre031222/agrocommish)**.
-Wiring is documented in [`HARDWARE_SETUP.md`](HARDWARE_SETUP.md).
+```bash
+cd web
+pnpm install
+pnpm dev                                            # API on :5000
+API_PROXY_TARGET=http://127.0.0.1:9001 pnpm dev     # API on :9001
+```
 
----
+**4. Models** (optional; without them the API still runs, `/api/health`
+reports `llm` and `vision` as `unavailable` and AI endpoints answer `503`).
+Either two llama.cpp servers, as in the `.env` above:
 
-### Production deployment
+```bash
+llama-server -m Qwen3-4B-Instruct-2507-Q4_K_M.gguf --alias qwen3-4b-instruct \
+  --host 127.0.0.1 --port 8081 -c 8192 --jinja
+llama-server -m Qwen2.5-VL-3B-Instruct-Q4_K_M.gguf \
+  --mmproj mmproj-Qwen2.5-VL-3B-Instruct-f16.gguf --alias qwen2.5-vl-3b \
+  --host 127.0.0.1 --port 8082 -c 8192 --jinja
+```
 
-For a production setup (Gunicorn + Nginx + PostgreSQL, same-origin, HTTPS), see
-**[`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md)** — the guide behind the live demo at
-[agroyachay.ginit.dev](https://agroyachay.ginit.dev).
+or one Ollama server for both roles, with these lines in `api/.env`:
 
----
+```bash
+ollama pull qwen2.5vl:3b
+ollama pull qwen2.5:3b
+# api/.env
+LLAMACPP_TEXT_URL=http://127.0.0.1:11434
+LLAMACPP_VISION_URL=http://127.0.0.1:11434
+LLAMACPP_TEXT_MODEL=qwen2.5:3b
+LLAMACPP_VISION_MODEL=qwen2.5vl:3b
+```
+
+GGUF downloads, flags and Ollama notes are in
+[`deploy/llama-cpp.md`](deploy/llama-cpp.md); every variable is listed in
+[`api/README.md`](api/README.md). A single-host stack with Docker Compose is
+in [`deploy/docker-compose.yml`](deploy/docker-compose.yml), and the
+production procedure in [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md).
+
+## Compatibility with flashed devices
+
+Nodes flashed and configured with AgroCommish for v1 need no change. These
+requests keep the v1 paths and payloads on the same domain,
+`agroyachay.ginit.dev`:
+
+| Caller | Request |
+|---|---|
+| ESP32 firmware | `POST /api/sensores/lectura`, also accepted over plain HTTP |
+| AgroCommish verification | `GET /api/sensores/lecturas-recientes?esp32_id=…` |
+| AgroCommish activation | `POST /api/auth/login` with `{username\|email, password}` |
+| AgroCommish hand-off | the browser opens `/auto-login#token=…&redirect=devices` |
+
+Plain HTTP stays open for ingestion because the firmware has no CA bundle and
+does not follow redirects. A node that reports an unknown `esp32_id` appears in
+**Devices** as pending until a user claims it. In development the API listens
+on port 5000, which is also the port AgroCommish proposes for a LAN server
+(`http://<lan-ip>:5000/api/sensores/lectura`).
 
 ## Tests
 
 ```bash
-cd backend && python -m pytest          # 26 tests (hardware-free)
-cd ../frontend && npm run test:run      # 13 tests (Vitest)
+cd api
+cargo test --lib                              # unit tests, no database or models needed
+cargo test                                    # also integration tests (needs PostgreSQL)
+cargo clippy --all-targets -- -D warnings
+
+cd web
+pnpm lint                                     # ESLint and tsc --noEmit
+pnpm i18n:check                               # the four locale files share one key set
+pnpm build
 ```
 
----
+The integration tests (`api/tests/`) use `TEST_DATABASE_URL`, or
+`DATABASE_URL` with the database name replaced by `agroyachay_test`. The node
+can be exercised end to end without hardware with the
+[Wokwi simulation](simulation/README.md).
 
 ## Documentation
 
-- [`HARDWARE_SETUP.md`](HARDWARE_SETUP.md) — wiring, firmware, calibration ([Spanish](HARDWARE_SETUP.es.md))
-- [`docs/API.md`](docs/API.md) — REST API reference
-- [`wokwi/README.md`](wokwi/README.md) — run the sensing node in the browser, **no hardware needed**
-- [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) — production deployment guide
+- [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md): contract, data model, AI layer, web design rules
+- [`docs/API.md`](docs/API.md): REST API reference
+- [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md): production deployment (Debian 12, nginx, systemd)
+- [`docs/RELEASE_AND_HISTORY.md`](docs/RELEASE_AND_HISTORY.md): versions, tags and DOIs
+- [`docs/TUTORIAL_SCRIPT.es.md`](docs/TUTORIAL_SCRIPT.es.md): long-form tutorial script (Spanish)
+- [`api/README.md`](api/README.md) and [`web/README.md`](web/README.md): running each part, environment variables
+- [`deploy/llama-cpp.md`](deploy/llama-cpp.md): local models with llama.cpp or Ollama
+- [`HARDWARE_SETUP.md`](HARDWARE_SETUP.md): wiring, firmware, calibration ([Spanish](HARDWARE_SETUP.es.md))
+- [`simulation/README.md`](simulation/README.md): Wokwi simulation of the node
 
----
+## Version 1 and version 3
 
-## Companion Ecosystem
+The version described in the SoftwareX article is **AgroYachay v1.0.1** (Flask
+API, React web). Its code stays available, unchanged, at tag
+[`v1.0.1`](https://github.com/Andre031222/agroyachay/releases/tag/v1.0.1) and in
+the immutable Zenodo record
+[10.5281/zenodo.20829992](https://doi.org/10.5281/zenodo.20829992).
 
-| Project | Role | Reference |
-| --- | --- | --- |
-| **[AgroCommish](https://github.com/Andre031222/agrocommish)** | Manufactures and commissions ESP32 sensor nodes (detect → flash → provision → verify → activate) | [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.20655610-1d4ed8?style=flat-square)](https://doi.org/10.5281/zenodo.20655610) |
-| **AgroYachay** (this repo) | Cloud decision platform: monitoring, LLM agronomy, yield/revenue, reports | [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.20829992-1d4ed8?style=flat-square)](https://doi.org/10.5281/zenodo.20829992) |
+Version 3 keeps the scientific content of the article (sensing node and
+telemetry contract, yield and revenue model, local vision triage with
+Qwen2.5-VL-3B, four-language interface) and replaces the implementation.
+Version 2 was an internal prototype that was never released, so the public
+version numbers go from 1.0.1 to 3.0.0 on purpose. The rules that keep the
+published references valid are in
+[`docs/RELEASE_AND_HISTORY.md`](docs/RELEASE_AND_HISTORY.md).
 
-Together they form a complete open device-to-decision pipeline on commodity
-hardware, with no per-seat licensing.
+The pest triage figures reported in the article (Qwen2.5-VL-3B on 509 images:
+sensitivity 100 %, specificity 62 %, macro-F1 0.55) are the reason the
+application presents every result as a first check to be confirmed in the
+field.
 
----
+## How to cite
 
-## Citation
-
-If you use this software, please cite the article:
+Please cite the article:
 
 ```bibtex
-@article{vilca2026agroyachay,
+@article{torrescruz2026agroyachay,
   author  = {Torres-Cruz, Fred and Vilca-Solorzano, Richar Andre and
              Yana-Yucra, Dina Maribel and Iba{\~n}ez-Quispe, Vladimiro and
              Fuentes-Navarro, Eduardo Leuman},
-  title   = {AgroYachay: An open-source IoT and large-language-model platform
-             supporting agronomic and economic decision-making for Andean smallholders},
+  title   = {{AgroYachay}: An open-source {IoT} and large-language-model platform
+             supporting agronomic and economic decision-making for {Andean} smallholders},
   journal = {SoftwareX},
+  volume  = {36},
+  pages   = {103037},
   year    = {2026},
   doi     = {10.1016/j.softx.2026.103037}
 }
 ```
 
-The exact software version is archived on Zenodo:
+To refer to the code, cite the software archive,
+[doi:10.5281/zenodo.20829992](https://doi.org/10.5281/zenodo.20829992)
+(v1.0.1; later releases are added as new versions of the same Zenodo record).
+GitHub's "Cite this repository" button reads [`CITATION.cff`](CITATION.cff).
 
-```bibtex
-@software{vilca2026agroyachay_sw,
-  author  = {Torres-Cruz, Fred and Vilca-Solorzano, Richar Andre and
-             Yana-Yucra, Dina Maribel and Iba{\~n}ez-Quispe, Vladimiro and
-             Fuentes-Navarro, Eduardo Leuman},
-  title   = {AgroYachay: An open-source IoT and large-language-model platform
-             supporting agronomic and economic decision-making for Andean smallholders},
-  year    = {2026},
-  version = {1.0.1},
-  doi     = {10.5281/zenodo.20829992},
-  url     = {https://github.com/Andre031222/agroyachay}
-}
-```
+## Authors
 
-Citation metadata is also available in [`CITATION.cff`](CITATION.cff)
-(GitHub: "Cite this repository").
+Authors of the work described in the article:
 
----
+| Author | Affiliation |
+|---|---|
+| Fred Torres-Cruz | Doctoral Program in Sustainable Agriculture, Universidad Nacional Agraria La Molina, Peru |
+| Richar Andre Vilca-Solorzano (corresponding) | Dept. of Statistical and Informatics Engineering, Universidad Nacional del Altiplano (UNAP), Puno, Peru |
+| Dina Maribel Yana-Yucra | Universidad Nacional del Altiplano (UNAP), Puno, Peru |
+| Vladimiro Ibañez-Quispe | Universidad Nacional del Altiplano (UNAP), Puno, Peru |
+| Eduardo Leuman Fuentes-Navarro | Faculty of Animal Science, Universidad Nacional Agraria La Molina, Peru |
 
+AgroYachay 3 was written by, and is maintained by, Richar Andre
+Vilca-Solorzano ([@Andre031222](https://github.com/Andre031222)). Issues and
+pull requests are welcome on
+[GitHub](https://github.com/Andre031222/agroyachay).
 
 ## Acknowledgments
 
-This open-source implementation was developed independently with a new architecture (IoT + LLM stack). We gratefully acknowledge the FINESI course project team whose early agro-IoT concept and title informed this line of work, including Flor, Sebastián, Yeferson Dariun Laura Livise, and the other classmates who contributed to that group presentation. 
+This open-source implementation was developed independently with a new architecture (IoT + LLM stack). We gratefully acknowledge the FINESI course project team whose early agro-IoT concept and title informed this line of work, including Flor, Sebastián, Yeferson Dariun Laura Livise, and the other classmates who contributed to that group presentation.
 
-## License
+## Licence
 
-This project is licensed under the [MIT License](LICENSE).
-
-<div align="center">
-<sub>Built for Andean smallholder agriculture · Universidad Nacional del Altiplano (UNAP), Puno, Peru</sub>
-</div>
+Source code: MIT License, see [`LICENSE`](LICENSE). Photographs in
+`web/public/images/` keep their own licences, listed in
+[`CREDITS.md`](web/public/images/CREDITS.md). The hardware explainer clips use
+AI-generated footage and synthetic narration, and are labelled as such in the
+application.

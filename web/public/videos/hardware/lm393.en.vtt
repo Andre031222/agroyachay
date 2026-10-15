@@ -1,0 +1,9 @@
+WEBVTT
+
+1
+00:00:00.250 --> 00:00:04.562
+The LM393 board turns the sensor signal into a clean reading.
+
+2
+00:00:04.562 --> 00:00:09.722
+Its small dial sets the sensitivity, before the signal reaches the ESP32.

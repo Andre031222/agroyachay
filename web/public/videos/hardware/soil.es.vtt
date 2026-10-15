@@ -1,0 +1,9 @@
+WEBVTT
+
+1
+00:00:00.250 --> 00:00:03.497
+La sonda de humedad se entierra cerca de las raíces.
+
+2
+00:00:03.497 --> 00:00:07.930
+Le dice al ESP32 qué tan húmedo está el suelo, para saber cuándo regar.

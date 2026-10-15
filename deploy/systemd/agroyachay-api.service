@@ -1,0 +1,20 @@
+[Unit]
+Description=AgroYachay 3 API (Rust, Axum)
+After=network.target postgresql.service ollama.service
+Wants=postgresql.service
+
+[Service]
+User=andre
+Group=andre
+WorkingDirectory=/opt/apps/rust/agroyachay
+EnvironmentFile=/opt/apps/rust/agroyachay/api.env
+ExecStart=/opt/apps/rust/agroyachay/bin/agroyachay-api
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ReadWritePaths=/opt/apps/rust/agroyachay/uploads /opt/apps/rust/agroyachay/logs
+
+[Install]
+WantedBy=multi-user.target
